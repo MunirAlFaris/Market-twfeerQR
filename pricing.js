@@ -491,7 +491,7 @@ pdfHTML += '<div class="sheet"><table class="pdf-table">';    for (let row = 0; 
   pdfHTML += `</body></html>`;
   return pdfHTML;
 }
-
+  
 // ————————————————————————————————————————————————————————————————
 // معاينة PDF داخل الصفحة
 // ————————————————————————————————————————————————————————————————
@@ -512,26 +512,28 @@ function generatePDF() {
 // ————————————————————————————————————————————————————————————————
 // توليد PDF متعدد الصفحات (مُجزأ صفحة-صفحة)
 // ————————————————————————————————————————————————————————————————
+// يصوّر كل صفحة (ورقة) مع الهوامش الحقيقية
 async function renderIframePagesToPdf(iframeDoc, scaleForMobile = false) {
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF('p', 'mm', 'a4');
 
-  const tables = Array.from(iframeDoc.querySelectorAll('.pdf-table'));
-  const scale = scaleForMobile ? 1.4 : 2; // أقل على الجوال لتقليل الذاكرة
+  // ✱ المهم: نصوّر .sheet وليس .pdf-table
+  const sheets = Array.from(iframeDoc.querySelectorAll('.sheet'));
+  const scale = scaleForMobile ? 1.2 : 2;
 
-  for (let i = 0; i < tables.length; i++) {
-    const canvas = await html2canvas(tables[i], {
+  for (let i = 0; i < sheets.length; i++) {
+    const canvas = await html2canvas(sheets[i], {
       scale,
       useCORS: true,
       backgroundColor: '#ffffff',
       allowTaint: true
     });
-    const imgData = canvas.toDataURL('image/jpeg', 0.95);
-    const imgWidth = 210;             // A4 width (mm)
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-    if (i > 0) pdf.addPage();
-    pdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight);
+    const imgData = canvas.toDataURL('image/jpeg', 0.95);
+
+    // نرسم الصورة على كامل A4 (الهامش ضمن الـsheet نفسه)
+    if (i > 0) pdf.addPage('a4', 'p');
+    pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297); // عرض 210mm × ارتفاع 297mm
   }
   return pdf;
 }
