@@ -100,7 +100,6 @@ function cleanAndIndex(products) {
   console.log(`تم تحميل ${PRODUCTS.length} منتج بنجاح`);
 }
 
-// تحميل البيانات تلقائياً من products.json
 async function loadProductsFromJSON() {
   try {
     const response = await fetch('products.json');
@@ -114,8 +113,6 @@ async function loadProductsFromJSON() {
     alert('فشل في تحميل بيانات المنتجات. تأكد من وجود ملف products.json');
   }
 }
-
-// تحميل البيانات عند بدء التطبيق
 loadProductsFromJSON();
 
 // ————————————————————————————————————————————————————————————————
@@ -195,20 +192,14 @@ async function startCamera() {
     els.scanStatus.textContent = 'جاهز للمسح';
 
     listCameras();
-
     startScanning();
   } catch (e) {
     console.error(e);
     let msg = 'تعذّر تشغيل الكاميرا.';
-    if (e?.name === 'NotAllowedError') {
-      msg = 'تم رفض الإذن — افتح إعدادات الموقع واسمح للكاميرا ثم أعد المحاولة.';
-    } else if (e?.name === 'NotFoundError') {
-      msg = 'لا توجد كاميرا متاحة.';
-    } else if (e?.name === 'NotReadableError') {
-      msg = 'الكاميرا مستخدمة من تطبيق آخر.';
-    } else if (e?.name === 'SecurityError') {
-      msg = 'قيود أمنية — استخدم HTTPS أو localhost.';
-    }
+    if (e?.name === 'NotAllowedError') msg = 'تم رفض الإذن — افتح إعدادات الموقع واسمح للكاميرا ثم أعد المحاولة.';
+    else if (e?.name === 'NotFoundError') msg = 'لا توجد كاميرا متاحة.';
+    else if (e?.name === 'NotReadableError') msg = 'الكاميرا مستخدمة من تطبيق آخر.';
+    else if (e?.name === 'SecurityError') msg = 'قيود أمنية — استخدم HTTPS أو localhost.';
     els.scanStatus.innerHTML = `<span style="color: #dc2626;">${msg}</span>`;
     stopCamera();
   }
@@ -255,42 +246,29 @@ function scanWithBarcodeDetector() {
   }, 500);
 }
 
-function scanWithQuagga() {
-  // تنفيذ Quagga كبديل
-  scanInterval = setInterval(() => {
-    // محاولة قراءة الباركود باستخدام Quagga
-  }, 500);
-}
+function scanWithQuagga() { scanInterval = setInterval(() => {}, 500); }
 
 function handleBarcodeDetected(code) {
   const c = String(code || '').replace(/[^0-9]/g, '');
   if (!c) return;
-  
   addByBarcode(c);
 }
 
 // ————————————————————————————————————————————————————————————————
-// البحث اليدوي وإضافة بالباركود عند Enter
+// البحث اليدوي
 // ————————————————————————————————————————————————————————————————
 function searchProducts(query) {
   if (!query.trim()) return [];
-  
   const queryNorm = normArabic(query);
   const isBarcode = /^[0-9]{6,18}$/.test(query.replace(/[^0-9]/g, ''));
-  
   if (isBarcode) {
     const cleanCode = query.replace(/[^0-9]/g, '');
     const iBase = INDEX_BC_BASE.get(cleanCode);
     const iOther = INDEX_BC_OTHER.get(cleanCode);
-    
-    if (Number.isInteger(iBase)) {
-      return [{ product: PRODUCTS[iBase], type: 'base' }];
-    } else if (Number.isInteger(iOther)) {
-      return [{ product: PRODUCTS[iOther], type: 'other' }];
-    }
+    if (Number.isInteger(iBase)) return [{ product: PRODUCTS[iBase], type: 'base' }];
+    if (Number.isInteger(iOther)) return [{ product: PRODUCTS[iOther], type: 'other' }];
     return [];
   }
-  
   return PRODUCTS
     .filter(p => p.nameNorm.includes(queryNorm))
     .slice(0, 5)
@@ -302,15 +280,9 @@ function searchProducts(query) {
 // ————————————————————————————————————————————————————————————————
 function handleBarcodeInput() {
   const code = els.barcodeInput.value.trim();
-  if (!code) {
-    els.barcodeResults.textContent = "";
-    return;
-  }
-
+  if (!code) { els.barcodeResults.textContent = ""; return; }
   const bcBase = INDEX_BC_BASE.get(code);
   const bcOther = INDEX_BC_OTHER.get(code);
-  
-  // إصلاح: لا تستخدم bcBase || bcOther لأن الفهرس 0 يعتبر false
   if (Number.isInteger(bcBase) || Number.isInteger(bcOther)) {
     const preferType = els.barcodeType.value;
     addByBarcode(code, preferType);
@@ -327,17 +299,9 @@ function handleBarcodeInput() {
 // ————————————————————————————————————————————————————————————————
 function handleNameSearch() {
   const query = els.nameInput.value.trim();
-  if (!query) {
-    els.nameResults.textContent = "";
-    return;
-  }
-
+  if (!query) { els.nameResults.textContent = ""; return; }
   const results = searchProducts(query);
-  if (results.length === 0) {
-    els.nameResults.textContent = "لا توجد نتائج";
-    return;
-  }
-
+  if (results.length === 0) { els.nameResults.textContent = "لا توجد نتائج"; return; }
   const preferType = els.nameType.value;
   const html = results.slice(0, 10).map(r => {
     const price = preferType === 'base' ? r.product.saleBase : r.product.saleOther;
@@ -346,48 +310,37 @@ function handleNameSearch() {
       ${escapeHtml(r.product.name)} - ${priceText}
     </div>`;
   }).join('');
-  
   els.nameResults.innerHTML = html;
 }
 
 function addSelectedProduct() {
   const query = els.nameInput.value.trim();
   if (!query) return;
-  
   const results = searchProducts(query);
   if (results.length > 0) {
     const preferType = els.nameType.value;
     const product = results[0].product;
     const price = preferType === 'base' ? product.saleBase : product.saleOther;
     addToPricingList(product.name, price || 0, preferType);
-    els.nameInput.value = "";
-    els.nameResults.textContent = "";
+    els.nameInput.value = ""; els.nameResults.textContent = "";
   }
 }
 
-
-
-// إضافة عنصر بالباركود (تستخدمها الكاميرا وEnter)
+// إضافة عنصر بالباركود
 function addByBarcode(code, preferType) {
   const iBase = INDEX_BC_BASE.get(code);
   const iOther = INDEX_BC_OTHER.get(code);
-
   if (preferType === 'base' && Number.isInteger(iBase)) {
-    const p = PRODUCTS[iBase];
-    if (p.saleBase != null) { addToPricingList(p.name, p.saleBase, 'base'); return true; }
+    const p = PRODUCTS[iBase]; if (p.saleBase != null) { addToPricingList(p.name, p.saleBase, 'base'); return true; }
   }
   if (preferType === 'other' && Number.isInteger(iOther)) {
-    const p = PRODUCTS[iOther];
-    if (p.saleOther != null) { addToPricingList(p.name, p.saleOther, 'other'); return true; }
+    const p = PRODUCTS[iOther]; if (p.saleOther != null) { addToPricingList(p.name, p.saleOther, 'other'); return true; }
   }
-
   if (Number.isInteger(iBase)) {
-    const p = PRODUCTS[iBase];
-    if (p.saleBase != null) { addToPricingList(p.name, p.saleBase, 'base'); return true; }
+    const p = PRODUCTS[iBase]; if (p.saleBase != null) { addToPricingList(p.name, p.saleBase, 'base'); return true; }
   }
   if (Number.isInteger(iOther)) {
-    const p = PRODUCTS[iOther];
-    if (p.saleOther != null) { addToPricingList(p.name, p.saleOther, 'other'); return true; }
+    const p = PRODUCTS[iOther]; if (p.saleOther != null) { addToPricingList(p.name, p.saleOther, 'other'); return true; }
   }
   return false;
 }
@@ -395,39 +348,21 @@ function addByBarcode(code, preferType) {
 // ————————————————————————————————————————————————————————————————
 // إدارة قائمة التسعير
 // ————————————————————————————————————————————————————————————————
-
 function savePricingListToStorage() {
-  try {
-    localStorage.setItem('pricingItems', JSON.stringify(pricingItems));
-  } catch (error) {
-    console.error('خطأ في حفظ القائمة:', error);
-  }
+  try { localStorage.setItem('pricingItems', JSON.stringify(pricingItems)); }
+  catch (error) { console.error('خطأ في حفظ القائمة:', error); }
 }
 
 function loadPricingListFromStorage() {
   try {
     const saved = localStorage.getItem('pricingItems');
-    if (saved) {
-      pricingItems = JSON.parse(saved);
-      renderPricingList();
-      console.log(`تم تحميل ${pricingItems.length} منتج من التخزين المحلي`);
-    }
-  } catch (error) {
-    console.error('خطأ في تحميل القائمة:', error);
-    pricingItems = [];
-  }
+    if (saved) { pricingItems = JSON.parse(saved); renderPricingList(); console.log(`تم تحميل ${pricingItems.length} منتج من التخزين المحلي`); }
+  } catch (error) { console.error('خطأ في تحميل القائمة:', error); pricingItems = []; }
 }
 
 function addToPricingList(name, price, type) {
   if (price == null || isNaN(price)) return;
-  
-  const item = {
-    id: Date.now() + Math.random(),
-    name,
-    price: Number(price),
-    type
-  };
-  
+  const item = { id: Date.now() + Math.random(), name, price: Number(price), type };
   pricingItems.push(item);
   savePricingListToStorage();
   renderPricingList();
@@ -456,7 +391,6 @@ function renderPricingList() {
       </div>
     `).join('');
   }
-  
   els.itemCount.textContent = `${pricingItems.length} منتج`;
 }
 
@@ -469,13 +403,14 @@ function clearPricingList() {
   els.printBtn.style.display = 'none';
 }
 
+// ————————————————————————————————————————————————————————————————
+// بناء HTML الصفحات (8×2 لكل صفحة)
+// ————————————————————————————————————————————————————————————————
 function buildTablesHTML() {
   const itemsPerPage = 16; // 8 صفوف × 2 أعمدة
   const pages = [];
-  
   for (let i = 0; i < pricingItems.length; i += itemsPerPage) {
-    const pageItems = pricingItems.slice(i, i + itemsPerPage);
-    pages.push(pageItems);
+    pages.push(pricingItems.slice(i, i + itemsPerPage));
   }
   
   let pdfHTML = `
@@ -487,172 +422,96 @@ function buildTablesHTML() {
       <title>جدول التسعير</title>
       <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-          line-height: 1.6; 
-          color: #333; 
-          background: white; 
-          direction: rtl;
-        }
-        .pdf-table {
-          width: 100%;
-          border-collapse: collapse;
-          border: 4px solid #000;
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-          margin-bottom: 20px;
-        }
-        .pdf-table td {
-          border: 4px solid #000;
-          padding: 15px;
-          text-align: center;
-          vertical-align: middle;
-          height: 80px;
-          width: 50%;
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        .pdf-product-name {
-          font-weight: bold;
-          margin-bottom: 8px;
-          font-size: 26px;
-          color: #000000;
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-          direction: rtl;
-          text-align: center;
-        }
-        .pdf-product-price {
-          color: #dc2626;
-          font-weight: bold;
-          font-size: 26px;
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-          direction: ltr;
-          text-align: center;
-        }
-
-        /* عناصر صفحات مستقلة لضمان كسر الصفحة */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: white; direction: rtl; }
+        .pdf-table { width: 100%; border-collapse: collapse; border: 4px solid #000; margin-bottom: 20px; }
+        .pdf-table td { border: 4px solid #000; padding: 15px; text-align: center; vertical-align: middle; height: 80px; width: 50%; }
+        .pdf-product-name { font-weight: bold; margin-bottom: 8px; font-size: 26px; color: #000; text-align: center; }
+        .pdf-product-price { color: #dc2626; font-weight: bold; font-size: 26px; direction: ltr; text-align: center; }
         .page { break-after: page; page-break-after: always; }
         .page:last-child { break-after: auto; page-break-after: auto; }
-
-        @media print {
-          @page { size: A4; margin: 15mm; }
-          * { -webkit-print-color-adjust: exact !important; color-adjust: exact !important; }
-          body { 
-            background: white !important; 
-            color: black !important; 
-            margin: 0 !important; 
-            padding: 0 !important; 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-            direction: rtl !important;
-          }
-          .pdf-table { 
-            page-break-inside: avoid !important;
-            width: calc(100% - 20px) !important;
-            border: 4px solid #000 !important;
-            border-collapse: collapse !important;
-            margin: 10px !important;
-            margin-bottom: 20px !important;
-          }
-          .pdf-table td {
-            border: 4px solid #000 !important;
-            padding: 15px !important;
-            text-align: center !important;
-            vertical-align: middle !important;
-            height: 80px !important;
-            width: 50% !important;
-          }
-          .pdf-product-name {
-            font-weight: bold !important;
-            margin-bottom: 8px !important;
-            font-size: 26px !important;
-            color: #000000 !important;
-            direction: rtl !important;
-            text-align: center !important;
-          }
-          .pdf-product-price {
-            color: #dc2626 !important;
-            font-weight: bold !important;
-            font-size: 26px !important;
-            direction: ltr !important;
-            text-align: center !important;
-          }
-        }
+        @media print { @page { size: A4; margin: 15mm; } }
       </style>
     </head>
     <body>
   `;
   
-  pages.forEach((pageItems, pageIndex) => {
-    pdfHTML += '<div class="page">';
-    pdfHTML += '<table class="pdf-table">';
-    
+  pages.forEach((pageItems) => {
+    pdfHTML += '<div class="page"><table class="pdf-table">';
     for (let row = 0; row < 8; row++) {
       pdfHTML += '<tr>';
       for (let col = 0; col < 2; col++) {
-        const itemIndex = row * 2 + col;
-        const item = pageItems[itemIndex];
+        const idx = row * 2 + col;
+        const item = pageItems[idx];
         if (item) {
           pdfHTML += `
             <td>
               <div class="pdf-product-name">${escapeHtml(item.name)}</div>
               <div class="pdf-product-price">$${money(item.price)}</div>
-            </td>
-          `;
+            </td>`;
         } else {
           pdfHTML += '<td></td>';
         }
       }
       pdfHTML += '</tr>';
     }
-    pdfHTML += '</table>';
-    pdfHTML += '</div>'; // .page
+    pdfHTML += '</table></div>';
   });
 
-  pdfHTML += `
-    </body>
-    </html>
-  `;
-
+  pdfHTML += `</body></html>`;
   return pdfHTML;
 }
 
+// ————————————————————————————————————————————————————————————————
+// معاينة PDF داخل الصفحة
+// ————————————————————————————————————————————————————————————————
 function generatePDF() {
-  if (pricingItems.length === 0) {
-    alert('لا توجد منتجات في القائمة');
-    return;
-  }
-  
+  if (pricingItems.length === 0) { alert('لا توجد منتجات في القائمة'); return; }
   const fullHTML = buildTablesHTML();
   const parser = new DOMParser();
   const doc = parser.parseFromString(fullHTML, 'text/html');
   const tables = doc.querySelectorAll('.pdf-table');
-  
   let tableHTML = '';
-  tables.forEach(table => {
-    tableHTML += table.outerHTML;
-  });
-  
+  tables.forEach(t => tableHTML += t.outerHTML);
   els.pdfContent.innerHTML = tableHTML;
   els.pdfPreview.style.display = 'block';
   els.printBtn.style.display = 'inline-flex';
   els.pdfPreview.scrollIntoView({ behavior: 'smooth' });
 }
 
+// ————————————————————————————————————————————————————————————————
+// توليد PDF متعدد الصفحات (مُجزأ صفحة-صفحة)
+// ————————————————————————————————————————————————————————————————
+async function renderIframePagesToPdf(iframeDoc, scaleForMobile = false) {
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF('p', 'mm', 'a4');
+
+  const tables = Array.from(iframeDoc.querySelectorAll('.pdf-table'));
+  const scale = scaleForMobile ? 1.4 : 2; // أقل على الجوال لتقليل الذاكرة
+
+  for (let i = 0; i < tables.length; i++) {
+    const canvas = await html2canvas(tables[i], {
+      scale,
+      useCORS: true,
+      backgroundColor: '#ffffff',
+      allowTaint: true
+    });
+    const imgData = canvas.toDataURL('image/jpeg', 0.95);
+    const imgWidth = 210;             // A4 width (mm)
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+    if (i > 0) pdf.addPage();
+    pdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight);
+  }
+  return pdf;
+}
+
+// ————————————————————————————————————————————————————————————————
+// تحميل PDF (موبايل/ديسكتوب) — كلاهما يعتمد التوليد صفحة-صفحة
+// ————————————————————————————————————————————————————————————————
 async function downloadPDF() {
-  if (pricingItems.length === 0) {
-    alert('لا توجد منتجات في القائمة');
-    return;
-  }
-  
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  if (isMobile) {
-    await downloadPDFMobile();
-  } else {
-    await downloadPDFDesktop();
-  }
-}
+  if (pricingItems.length === 0) { alert('لا توجد منتجات في القائمة'); return; }
 
-async function downloadPDFMobile() {
   try {
-    // استخدام iframe غير مرئي لعرض كامل الجداول ثم تصويرها (بدلاً من تصوير الشاشة الحالية)
     const iframe = document.createElement('iframe');
     iframe.style.position = 'absolute';
     iframe.style.left = '-9999px';
@@ -662,44 +521,12 @@ async function downloadPDFMobile() {
     iframe.style.border = 'none';
     document.body.appendChild(iframe);
 
-    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-    const printContent = buildTablesHTML();
-    iframeDoc.open();
-    iframeDoc.write(printContent);
-    iframeDoc.close();
+    const doc = iframe.contentDocument || iframe.contentWindow.document;
+    doc.open(); doc.write(buildTablesHTML()); doc.close();
+    await new Promise(r => { iframe.onload = r; setTimeout(r, 800); });
 
-    await new Promise(resolve => {
-      iframe.onload = resolve;
-      setTimeout(resolve, 1000);
-    });
-
-    const canvas = await html2canvas(iframeDoc.body, {
-      scale: 1.2,          // أخف من الديسكتوب
-      useCORS: true,
-      backgroundColor: '#ffffff',
-      allowTaint: true,
-      foreignObjectRendering: true
-    });
-
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF('p', 'mm', 'a4');
-
-    const imgData = canvas.toDataURL('image/jpeg', 0.9);
-    const imgWidth = 210;
-    const pageHeight = 297;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    let heightLeft = imgHeight;
-
-    let position = 0;
-    pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
-    heightLeft -= pageHeight;
-
-    while (heightLeft >= 0) {
-      position = heightLeft - imgHeight;
-      pdf.addPage();
-      pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-    }
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const pdf = await renderIframePagesToPdf(doc, /*scaleForMobile*/ isMobile);
 
     pdf.save('pricing-table.pdf');
     document.body.removeChild(iframe);
@@ -709,80 +536,14 @@ async function downloadPDFMobile() {
   }
 }
 
-async function downloadPDFDesktop() {
-  try {
-    const iframe = document.createElement('iframe');
-    iframe.style.position = 'absolute';
-    iframe.style.left = '-9999px';
-    iframe.style.top = '0';
-    iframe.style.width = '210mm';
-    iframe.style.height = '297mm';
-    iframe.style.border = 'none';
-    
-    document.body.appendChild(iframe);
-    
-    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-    const printContent = buildTablesHTML();
-    
-    iframeDoc.open();
-    iframeDoc.write(printContent);
-    iframeDoc.close();
-    
-    await new Promise(resolve => {
-      iframe.onload = resolve;
-      setTimeout(resolve, 1000);
-    });
-    
-    const canvas = await html2canvas(iframeDoc.body, {
-      scale: 2,
-      useCORS: true,
-      backgroundColor: '#ffffff',
-      allowTaint: true,
-      foreignObjectRendering: true
-    });
-    
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF('p', 'mm', 'a4');
-    
-    const imgData = canvas.toDataURL('image/png');
-    const imgWidth = 210;
-    const pageHeight = 297;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    let heightLeft = imgHeight;
-    
-    let position = 0;
-    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-    heightLeft -= pageHeight;
-    
-    while (heightLeft >= 0) {
-      position = heightLeft - imgHeight;
-      pdf.addPage();
-      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-    }
-    
-    pdf.save('pricing-table.pdf');
-    document.body.removeChild(iframe);
-  } catch (error) {
-    console.error('خطأ في إنشاء PDF:', error);
-    alert('حدث خطأ في إنشاء PDF');
-  }
-}
-
-function escapeHtml(text) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
-}
-
+// ————————————————————————————————————————————————————————————————
+// الطباعة
+// ————————————————————————————————————————————————————————————————
 function printPDF() {
-  if (pricingItems.length === 0) {
-    alert('لا توجد منتجات في القائمة');
-    return;
-  }
-  
+  if (pricingItems.length === 0) { alert('لا توجد منتجات في القائمة'); return; }
+
+  // على الجوال: أنشئ PDF متعدد الصفحات وافتحه في تبويب (أكثر ثباتًا من window.print)
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  
   if (isMobile) {
     printOnMobile();
   } else {
@@ -790,59 +551,61 @@ function printPDF() {
   }
 }
 
-// ——— تعديل مهم: الطباعة على الجوال بنفس أسلوب الديسكتوب لضمان كل الصفحات ———
-function printOnMobile() {
-  const printWindow = window.open('', '_blank');
-  if (!printWindow) {
-    alert('فشل في فتح نافذة الطباعة');
-    return;
+// الجوال: نولّد PDF صفحة-صفحة ثم نفتحه عبر blob: ليتكفل عارض النظام بالطباعة
+async function printOnMobile() {
+  try {
+    const iframe = document.createElement('iframe');
+    iframe.style.position = 'absolute';
+    iframe.style.left = '-9999px';
+    iframe.style.top = '0';
+    iframe.style.width = '210mm';
+    iframe.style.height = '297mm';
+    iframe.style.border = 'none';
+    document.body.appendChild(iframe);
+
+    const doc = iframe.contentDocument || iframe.contentWindow.document;
+    doc.open(); doc.write(buildTablesHTML()); doc.close();
+    await new Promise(r => { iframe.onload = r; setTimeout(r, 800); });
+
+    const pdf = await renderIframePagesToPdf(doc, /*scaleForMobile*/ true);
+    const blob = pdf.output('blob');
+    const url = URL.createObjectURL(blob);
+
+    // افتح عارض PDF الافتراضي (منه يمكن "الطباعة" بدون أخطاء WebView)
+    window.open(url, '_blank');
+
+    // تنظيف
+    setTimeout(() => { URL.revokeObjectURL(url); document.body.removeChild(iframe); }, 3000);
+  } catch (e) {
+    console.error('فشل طباعة الجوال:', e);
+    alert('تعذر إرسال المستند للطباعة. يُمكنك استخدام "تحميل PDF" ثم طباعته.');
   }
-  const printContent = buildTablesHTML();
-  printWindow.document.write(printContent);
-  printWindow.document.close();
-  printWindow.onload = () => {
-    setTimeout(() => {
-      printWindow.focus();
-      printWindow.print();
-      printWindow.close();
-    }, 500);
-  };
 }
 
+// الديسكتوب: نافذة طباعة تقليدية تعمل جيدًا
 function printOnDesktop() {
-  const printWindow = window.open('', '_blank');
-  if (!printWindow) {
-    alert('فشل في فتح نافذة الطباعة');
-    return;
-  }
-  
-  const printContent = buildTablesHTML();
-  
-  printWindow.document.write(printContent);
-  printWindow.document.close();
-  
-  printWindow.onload = () => {
-    setTimeout(() => {
-      printWindow.print();
-      printWindow.close();
-    }, 500);
-  };
+  const w = window.open('', '_blank');
+  if (!w) { alert('فشل في فتح نافذة الطباعة'); return; }
+  const html = buildTablesHTML();
+  w.document.write(html);
+  w.document.close();
+  w.onload = () => setTimeout(() => { w.focus(); w.print(); w.close(); }, 400);
 }
+
+// ————————————————————————————————————————————————————————————————
+// أدوات عامة
+// ————————————————————————————————————————————————————————————————
+function escapeHtml(text) { const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }
 
 // ————————————————————————————————————————————————————————————————
 // Event Listeners and Initialization
 // ————————————————————————————————————————————————————————————————
-
 els.barcodeInput.addEventListener('input', handleBarcodeInput);
-els.barcodeInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') { e.preventDefault(); handleBarcodeInput(); }
-});
+els.barcodeInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); handleBarcodeInput(); } });
 els.addBarcodeBtn.addEventListener('click', handleBarcodeInput);
 
 els.nameInput.addEventListener('input', handleNameSearch);
-els.nameInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') { e.preventDefault(); addSelectedProduct(); }
-});
+els.nameInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); addSelectedProduct(); } });
 els.addNameBtn.addEventListener('click', addSelectedProduct);
 
 els.startCam.addEventListener('click', startCamera);
@@ -850,26 +613,14 @@ els.stopCam.addEventListener('click', stopCamera);
 els.switchCam.addEventListener('click', () => {
   const currentValue = els.cameraSelect.value;
   els.cameraSelect.value = currentValue === 'auto-back' ? 'auto-front' : 'auto-back';
-  if (currentStream) {
-    stopCamera();
-    startCamera();
-  }
+  if (currentStream) { stopCamera(); startCamera(); }
 });
-els.cameraSelect.addEventListener('change', () => {
-  if (currentStream) {
-    stopCamera();
-    startCamera();
-  }
-});
+els.cameraSelect.addEventListener('change', () => { if (currentStream) { stopCamera(); startCamera(); } });
 
 els.clearListBtn.addEventListener('click', clearPricingList);
 els.generatePdfBtn.addEventListener('click', generatePDF);
 els.downloadPdfBtn.addEventListener('click', downloadPDF);
 els.printBtn.addEventListener('click', printPDF);
 
-window.addEventListener('load', () => {
-  listCameras();
-  loadPricingListFromStorage();
-});
-
+window.addEventListener('load', () => { listCameras(); loadPricingListFromStorage(); });
 window.removeFromPricingList = removeFromPricingList;
