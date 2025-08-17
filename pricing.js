@@ -656,6 +656,82 @@ async function downloadPDF() {
     alert('لا توجد منتجات في القائمة');
     return;
   }
+  
+  // Check if mobile device
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  
+  if (isMobile) {
+    await downloadPDFMobile();
+  } else {
+    await downloadPDFDesktop();
+  }
+}
+
+async function downloadPDFMobile() {
+  try {
+    // Show loading indicator
+    const loadingDiv = document.createElement('div');
+    loadingDiv.innerHTML = 'جاري إنشاء PDF...';
+    loadingDiv.style.position = 'fixed';
+    loadingDiv.style.top = '50%';
+    loadingDiv.style.left = '50%';
+    loadingDiv.style.transform = 'translate(-50%, -50%)';
+    loadingDiv.style.padding = '20px';
+    loadingDiv.style.backgroundColor = 'rgba(0,0,0,0.8)';
+    loadingDiv.style.color = 'white';
+    loadingDiv.style.borderRadius = '10px';
+    loadingDiv.style.zIndex = '10000';
+    loadingDiv.style.fontSize = '18px';
+    document.body.appendChild(loadingDiv);
+    
+    // Create PDF with mobile-optimized settings
+    const canvas = await html2canvas(document.body, {
+      scale: 1, // Lower scale for mobile performance
+      useCORS: true,
+      backgroundColor: '#ffffff',
+      allowTaint: true,
+      width: window.innerWidth,
+      height: window.innerHeight
+    });
+    
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    
+    const imgData = canvas.toDataURL('image/jpeg', 0.8); // Use JPEG for smaller file size
+    const imgWidth = 210;
+    const pageHeight = 297;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    
+    pdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight);
+    
+    // For mobile, try to use Web Share API if available
+    if (navigator.share && navigator.canShare) {
+      const pdfBlob = pdf.output('blob');
+      const file = new File([pdfBlob], 'pricing-table.pdf', { type: 'application/pdf' });
+      
+      if (navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          title: 'جدول التسعير',
+          text: 'جدول التسعير PDF',
+          files: [file]
+        });
+      } else {
+        // Fallback to download
+        pdf.save('pricing-table.pdf');
+      }
+    } else {
+      // Fallback to download
+      pdf.save('pricing-table.pdf');
+    }
+    
+    document.body.removeChild(loadingDiv);
+  } catch (error) {
+    console.error('خطأ في إنشاء PDF:', error);
+    alert('حدث خطأ في إنشاء PDF');
+  }
+}
+
+async function downloadPDFDesktop() {
   try {
     // Create a temporary iframe for better Arabic rendering
     const iframe = document.createElement('iframe');
@@ -729,6 +805,60 @@ function printPDF() {
     return;
   }
   
+  // Check if mobile device
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  
+  if (isMobile) {
+    // Mobile-friendly print approach
+    printOnMobile();
+  } else {
+    // Desktop print approach
+    printOnDesktop();
+  }
+}
+
+function printOnMobile() {
+  // Create a temporary div with the content
+  const printDiv = document.createElement('div');
+  printDiv.innerHTML = buildTablesHTML();
+  printDiv.style.position = 'fixed';
+  printDiv.style.top = '0';
+  printDiv.style.left = '0';
+  printDiv.style.width = '100%';
+  printDiv.style.height = '100%';
+  printDiv.style.backgroundColor = 'white';
+  printDiv.style.zIndex = '9999';
+  printDiv.style.overflow = 'auto';
+  
+  // Add close button
+  const closeBtn = document.createElement('button');
+  closeBtn.innerHTML = '✕ إغلاق';
+  closeBtn.style.position = 'fixed';
+  closeBtn.style.top = '10px';
+  closeBtn.style.right = '10px';
+  closeBtn.style.padding = '10px 15px';
+  closeBtn.style.backgroundColor = '#dc2626';
+  closeBtn.style.color = 'white';
+  closeBtn.style.border = 'none';
+  closeBtn.style.borderRadius = '5px';
+  closeBtn.style.fontSize = '16px';
+  closeBtn.style.zIndex = '10000';
+  closeBtn.style.cursor = 'pointer';
+  
+  closeBtn.onclick = () => {
+    document.body.removeChild(printDiv);
+  };
+  
+  printDiv.appendChild(closeBtn);
+  document.body.appendChild(printDiv);
+  
+  // Trigger print after a short delay
+  setTimeout(() => {
+    window.print();
+  }, 500);
+}
+
+function printOnDesktop() {
   // Create a new window for printing with proper Arabic rendering
   const printWindow = window.open('', '_blank');
   if (!printWindow) {
