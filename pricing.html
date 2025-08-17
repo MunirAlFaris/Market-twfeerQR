@@ -178,28 +178,46 @@
       
       <hr style="border:0;border-top:1px solid var(--border); margin:16px 0;">
       
-      <h3>٢) البحث اليدوي</h3>
+      <h3>٢) البحث بالباركود</h3>
       <div class="search-section">
-        <label for="searchInput">ابحث بالاسم أو الباركود</label>
+        <label for="barcodeInput">أدخل الباركود</label>
         <div class="search-row">
-          <input id="searchInput" type="search" placeholder="اكتب اسم المنتج أو الباركود..." />
-          <select id="priceType">
+          <input id="barcodeInput" type="text" placeholder="اكتب الباركود..." />
+          <select id="barcodeType">
             <option value="base">السعر الأساسي</option>
             <option value="other">السعر الآخر</option>
           </select>
-          <button class="btn success" id="addManualBtn">إضافة</button>
+          <button class="btn success" id="addBarcodeBtn">إضافة</button>
         </div>
-        <div class="hint" style="margin-top:6px">💡 اكتب الباركود واضغط Enter للإضافة مباشرةً</div>
+        <div class="hint" style="margin-top:6px">💡 اضغط Enter للإضافة مباشرةً</div>
       </div>
       
-      <div id="searchResults" class="hint"></div>
+      <div id="barcodeResults" class="hint"></div>
+      
+      <hr style="border:0;border-top:1px solid var(--border); margin:16px 0;">
+      
+      <h3>٣) البحث بالاسم</h3>
+      <div class="search-section">
+        <label for="nameInput">ابحث بالاسم</label>
+        <div class="search-row">
+          <input id="nameInput" type="search" placeholder="اكتب اسم المنتج..." />
+          <select id="nameType">
+            <option value="base">السعر الأساسي</option>
+            <option value="other">السعر الآخر</option>
+          </select>
+          <button class="btn success" id="addNameBtn">إضافة</button>
+        </div>
+        <div class="hint" style="margin-top:6px">💡 اختر من النتائج أدناه</div>
+      </div>
+      
+      <div id="nameResults" class="hint"></div>
       
 
     </section>
 
     <!-- قسم قائمة التسعير -->
     <section class="card">
-      <h3>٣) قائمة التسعير</h3>
+      <h3>٤) قائمة التسعير</h3>
       <div class="toolbar" style="margin-bottom: 12px;">
         <button id="clearListBtn" class="btn btn-danger">
           <i class="fas fa-trash"></i>

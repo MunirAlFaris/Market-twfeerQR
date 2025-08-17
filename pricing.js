@@ -40,10 +40,14 @@ const els = {
   video: document.getElementById('video'),
   cameraSelect: document.getElementById('cameraSelect'),
   scanStatus: document.getElementById('scanStatus'),
-  searchInput: document.getElementById('searchInput'),
-  priceType: document.getElementById('priceType'),
-  addManualBtn: document.getElementById('addManualBtn'),
-  searchResults: document.getElementById('searchResults'),
+  barcodeInput: document.getElementById('barcodeInput'),
+  barcodeType: document.getElementById('barcodeType'),
+  addBarcodeBtn: document.getElementById('addBarcodeBtn'),
+  barcodeResults: document.getElementById('barcodeResults'),
+  nameInput: document.getElementById('nameInput'),
+  nameType: document.getElementById('nameType'),
+  addNameBtn: document.getElementById('addNameBtn'),
+  nameResults: document.getElementById('nameResults'),
   pricingList: document.getElementById('pricingList'),
   clearListBtn: document.getElementById('clearListBtn'),
   generatePdfBtn: document.getElementById('generatePdfBtn'),
@@ -298,43 +302,75 @@ function searchProducts(query) {
     .map(p => ({ product: p, type: 'name' }));
 }
 
-// تجميع منطق الإضافة اليدوية في دالة واحدة
-function handleManualInput() {
-  const query = els.searchInput.value.trim();
-  const priceType = els.priceType.value; // base | other
-  if (!query) return;
-
-  const digits = query.replace(/[^0-9]/g, '');
-  const looksLikeBarcode = digits.length >= 6 && digits.length <= 18;
-
-  if (looksLikeBarcode) {
-    // إضافة مباشرة بالباركود
-    const added = addByBarcode(digits, priceType);
-    if (added) {
-      els.searchInput.value = '';
-      els.searchResults.textContent = '';
-    } else {
-      els.searchResults.textContent = 'لم يُعثر على منتج لهذا الباركود';
-    }
+// ————————————————————————————————————————————————————————————————
+// البحث بالباركود
+// ————————————————————————————————————————————————————————————————
+function handleBarcodeInput() {
+  const code = els.barcodeInput.value.trim();
+  if (!code) {
+    els.barcodeResults.textContent = "";
     return;
   }
 
-  // بحث بالاسم
-  const results = searchProducts(query);
-  if (results.length > 0) {
-    const product = results[0].product;
-    const price = priceType === 'base' ? product.saleBase : product.saleOther;
-    if (price != null) {
-      addToPricingList(product.name, price, priceType);
-      els.searchInput.value = '';
-      els.searchResults.textContent = '';
-    } else {
-      els.searchResults.textContent = 'السعر المحدد غير متاح لهذا المنتج';
-    }
+  const bcBase = INDEX_BC_BASE.get(code);
+  const bcOther = INDEX_BC_OTHER.get(code);
+  
+  if (bcBase || bcOther) {
+    const preferType = els.barcodeType.value;
+    addByBarcode(code, preferType);
+    els.barcodeInput.value = "";
+    els.barcodeResults.textContent = "تم إضافة المنتج بنجاح";
+    setTimeout(() => els.barcodeResults.textContent = "", 2000);
   } else {
-    els.searchResults.textContent = 'لم يُعثر على المنتج';
+    els.barcodeResults.textContent = "الباركود غير موجود";
   }
 }
+
+// ————————————————————————————————————————————————————————————————
+// البحث بالاسم
+// ————————————————————————————————————————————————————————————————
+function handleNameSearch() {
+  const query = els.nameInput.value.trim();
+  if (!query) {
+    els.nameResults.textContent = "";
+    return;
+  }
+
+  const results = searchProducts(query);
+  if (results.length === 0) {
+    els.nameResults.textContent = "لا توجد نتائج";
+    return;
+  }
+
+  // عرض النتائج
+  const preferType = els.nameType.value;
+  const html = results.slice(0, 10).map(r => {
+    const price = preferType === 'base' ? r.product.saleBase : r.product.saleOther;
+    const priceText = price ? money(price) : "غير متوفر";
+    return `<div class="search-result" onclick="addToPricingList('${escapeHtml(r.product.name)}', ${price || 0}, '${preferType}'); els.nameInput.value=''; els.nameResults.textContent='';">
+      ${escapeHtml(r.product.name)} - ${priceText}
+    </div>`;
+  }).join('');
+  
+  els.nameResults.innerHTML = html;
+}
+
+function addSelectedProduct() {
+  const query = els.nameInput.value.trim();
+  if (!query) return;
+  
+  const results = searchProducts(query);
+  if (results.length > 0) {
+    const preferType = els.nameType.value;
+    const product = results[0].product;
+    const price = preferType === 'base' ? product.saleBase : product.saleOther;
+    addToPricingList(product.name, price || 0, preferType);
+    els.nameInput.value = "";
+    els.nameResults.textContent = "";
+  }
+}
+
+
 
 // إضافة عنصر بالباركود (تستخدمها الكاميرا وEnter)
 function addByBarcode(code, preferType) {
@@ -502,7 +538,7 @@ function buildTablesHTML() {
           text-align: center;
         }
         @media print {
-          @page { size: A4; margin: 10mm; }
+          @page { size: A4; margin: 15mm; }
           * { -webkit-print-color-adjust: exact !important; color-adjust: exact !important; }
           body { 
             background: white !important; 
@@ -514,9 +550,11 @@ function buildTablesHTML() {
           }
           .pdf-table { 
             page-break-inside: avoid !important;
-            width: 100% !important;
+            width: calc(100% - 20px) !important;
             border: 4px solid #000 !important;
             border-collapse: collapse !important;
+            margin: 10px !important;
+            margin-bottom: 20px !important;
           }
           .pdf-table td {
             border: 4px solid #000 !important;
@@ -716,27 +754,19 @@ function printPDF() {
 // Event Listeners and Initialization
 // ————————————————————————————————————————————————————————————————
 
-// Search input event listeners
-els.searchInput.addEventListener('input', (e) => {
-  const results = searchProducts(e.target.value);
-  if (results.length > 0) {
-    els.searchResults.innerHTML = results.map(r => 
-      `<div>📦 ${r.product.name} - ${r.type === 'base' ? 'أساسي' : r.type === 'other' ? 'آخر' : 'منتج'}</div>`
-    ).join('');
-  } else if (e.target.value.trim()) {
-    els.searchResults.textContent = 'لا توجد نتائج';
-  } else {
-    els.searchResults.textContent = '';
-  }
+// Barcode input event listeners
+els.barcodeInput.addEventListener('input', handleBarcodeInput);
+els.barcodeInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') { e.preventDefault(); handleBarcodeInput(); }
 });
+els.addBarcodeBtn.addEventListener('click', handleBarcodeInput);
 
-// ✅ الإضافة عند الضغط على Enter
-els.searchInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') { e.preventDefault(); handleManualInput(); }
+// Name search event listeners
+els.nameInput.addEventListener('input', handleNameSearch);
+els.nameInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') { e.preventDefault(); addSelectedProduct(); }
 });
-
-// زر الإضافة اليدوية يستخدم نفس الدالة
-els.addManualBtn.addEventListener('click', handleManualInput);
+els.addNameBtn.addEventListener('click', addSelectedProduct);
 
 // Camera controls
 els.startCam.addEventListener('click', startCamera);
