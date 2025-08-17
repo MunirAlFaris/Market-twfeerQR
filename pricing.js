@@ -159,7 +159,6 @@ async function listCameras() {
 }
 
 async function startCamera() {
-  // فحص السياق والأذونات قبل الطلب لتجنّب NotAllowedError المتكرر
   const isSecure = window.isSecureContext || location.hostname === 'localhost';
   if (!isSecure) {
     els.scanStatus.innerHTML = '<span style="color: #dc2626;">الرجاء فتح الصفحة عبر HTTPS أو localhost للسماح بالوصول للكاميرا.</span>';
@@ -175,7 +174,6 @@ async function startCamera() {
     const sel = els.cameraSelect.value;
     let constraints = { audio: false, video: {} };
     
-    // تحديد قيود الكاميرا بناءً على الاختيار
     if (sel === 'auto-back') {
       constraints.video = { facingMode: { ideal: 'environment' } };
     } else if (sel === 'auto-front') {
@@ -183,11 +181,9 @@ async function startCamera() {
     } else if (sel && sel !== 'auto-back' && sel !== 'auto-front') {
       constraints.video = { deviceId: { exact: sel } };
     } else {
-      // افتراضي: الكاميرا الخلفية
       constraints.video = { facingMode: { ideal: 'environment' } };
     }
 
-    // إيقاف أي بث سابق
     stopCamera();
 
     currentStream = await navigator.mediaDevices.getUserMedia(constraints);
@@ -198,7 +194,6 @@ async function startCamera() {
     els.switchCam.disabled = false;
     els.scanStatus.textContent = 'جاهز للمسح';
 
-    // بعد منح الإذن تصبح أسماء الكاميرات ظاهرة
     listCameras();
 
     startScanning();
@@ -315,7 +310,8 @@ function handleBarcodeInput() {
   const bcBase = INDEX_BC_BASE.get(code);
   const bcOther = INDEX_BC_OTHER.get(code);
   
-  if (bcBase || bcOther) {
+  // إصلاح: لا تستخدم bcBase || bcOther لأن الفهرس 0 يعتبر false
+  if (Number.isInteger(bcBase) || Number.isInteger(bcOther)) {
     const preferType = els.barcodeType.value;
     addByBarcode(code, preferType);
     els.barcodeInput.value = "";
@@ -342,7 +338,6 @@ function handleNameSearch() {
     return;
   }
 
-  // عرض النتائج
   const preferType = els.nameType.value;
   const html = results.slice(0, 10).map(r => {
     const price = preferType === 'base' ? r.product.saleBase : r.product.saleOther;
@@ -377,7 +372,6 @@ function addByBarcode(code, preferType) {
   const iBase = INDEX_BC_BASE.get(code);
   const iOther = INDEX_BC_OTHER.get(code);
 
-  // تفضيل النوع المختار إن وُجد
   if (preferType === 'base' && Number.isInteger(iBase)) {
     const p = PRODUCTS[iBase];
     if (p.saleBase != null) { addToPricingList(p.name, p.saleBase, 'base'); return true; }
@@ -387,7 +381,6 @@ function addByBarcode(code, preferType) {
     if (p.saleOther != null) { addToPricingList(p.name, p.saleOther, 'other'); return true; }
   }
 
-  // وإلا اختر الموجود
   if (Number.isInteger(iBase)) {
     const p = PRODUCTS[iBase];
     if (p.saleBase != null) { addToPricingList(p.name, p.saleBase, 'base'); return true; }
@@ -403,7 +396,6 @@ function addByBarcode(code, preferType) {
 // إدارة قائمة التسعير
 // ————————————————————————————————————————————————————————————————
 
-// حفظ القائمة في localStorage
 function savePricingListToStorage() {
   try {
     localStorage.setItem('pricingItems', JSON.stringify(pricingItems));
@@ -412,7 +404,6 @@ function savePricingListToStorage() {
   }
 }
 
-// تحميل القائمة من localStorage
 function loadPricingListFromStorage() {
   try {
     const saved = localStorage.getItem('pricingItems');
@@ -479,7 +470,6 @@ function clearPricingList() {
 }
 
 function buildTablesHTML() {
-  // إنشاء جداول بـ 8 صفوف و 2 أعمدة
   const itemsPerPage = 16; // 8 صفوف × 2 أعمدة
   const pages = [];
   
@@ -537,6 +527,11 @@ function buildTablesHTML() {
           direction: ltr;
           text-align: center;
         }
+
+        /* عناصر صفحات مستقلة لضمان كسر الصفحة */
+        .page { break-after: page; page-break-after: always; }
+        .page:last-child { break-after: auto; page-break-after: auto; }
+
         @media print {
           @page { size: A4; margin: 15mm; }
           * { -webkit-print-color-adjust: exact !important; color-adjust: exact !important; }
@@ -586,21 +581,14 @@ function buildTablesHTML() {
   `;
   
   pages.forEach((pageItems, pageIndex) => {
-    if (pageIndex > 0) {
-      pdfHTML += '<div style="page-break-before: always;"></div>';
-    }
-    
+    pdfHTML += '<div class="page">';
     pdfHTML += '<table class="pdf-table">';
     
-    // إنشاء 8 صفوف
     for (let row = 0; row < 8; row++) {
       pdfHTML += '<tr>';
-      
-      // عمودين في كل صف
       for (let col = 0; col < 2; col++) {
         const itemIndex = row * 2 + col;
         const item = pageItems[itemIndex];
-        
         if (item) {
           pdfHTML += `
             <td>
@@ -612,11 +600,10 @@ function buildTablesHTML() {
           pdfHTML += '<td></td>';
         }
       }
-      
       pdfHTML += '</tr>';
     }
-    
     pdfHTML += '</table>';
+    pdfHTML += '</div>'; // .page
   });
 
   pdfHTML += `
@@ -633,7 +620,6 @@ function generatePDF() {
     return;
   }
   
-  // Extract only the table content from the full HTML
   const fullHTML = buildTablesHTML();
   const parser = new DOMParser();
   const doc = parser.parseFromString(fullHTML, 'text/html');
@@ -647,7 +633,6 @@ function generatePDF() {
   els.pdfContent.innerHTML = tableHTML;
   els.pdfPreview.style.display = 'block';
   els.printBtn.style.display = 'inline-flex';
-  // التمرير إلى المعاينة
   els.pdfPreview.scrollIntoView({ behavior: 'smooth' });
 }
 
@@ -657,9 +642,7 @@ async function downloadPDF() {
     return;
   }
   
-  // Check if mobile device
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  
   if (isMobile) {
     await downloadPDFMobile();
   } else {
@@ -669,62 +652,57 @@ async function downloadPDF() {
 
 async function downloadPDFMobile() {
   try {
-    // Show loading indicator
-    const loadingDiv = document.createElement('div');
-    loadingDiv.innerHTML = 'جاري إنشاء PDF...';
-    loadingDiv.style.position = 'fixed';
-    loadingDiv.style.top = '50%';
-    loadingDiv.style.left = '50%';
-    loadingDiv.style.transform = 'translate(-50%, -50%)';
-    loadingDiv.style.padding = '20px';
-    loadingDiv.style.backgroundColor = 'rgba(0,0,0,0.8)';
-    loadingDiv.style.color = 'white';
-    loadingDiv.style.borderRadius = '10px';
-    loadingDiv.style.zIndex = '10000';
-    loadingDiv.style.fontSize = '18px';
-    document.body.appendChild(loadingDiv);
-    
-    // Create PDF with mobile-optimized settings
-    const canvas = await html2canvas(document.body, {
-      scale: 1, // Lower scale for mobile performance
+    // استخدام iframe غير مرئي لعرض كامل الجداول ثم تصويرها (بدلاً من تصوير الشاشة الحالية)
+    const iframe = document.createElement('iframe');
+    iframe.style.position = 'absolute';
+    iframe.style.left = '-9999px';
+    iframe.style.top = '0';
+    iframe.style.width = '210mm';
+    iframe.style.height = '297mm';
+    iframe.style.border = 'none';
+    document.body.appendChild(iframe);
+
+    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+    const printContent = buildTablesHTML();
+    iframeDoc.open();
+    iframeDoc.write(printContent);
+    iframeDoc.close();
+
+    await new Promise(resolve => {
+      iframe.onload = resolve;
+      setTimeout(resolve, 1000);
+    });
+
+    const canvas = await html2canvas(iframeDoc.body, {
+      scale: 1.2,          // أخف من الديسكتوب
       useCORS: true,
       backgroundColor: '#ffffff',
       allowTaint: true,
-      width: window.innerWidth,
-      height: window.innerHeight
+      foreignObjectRendering: true
     });
-    
+
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF('p', 'mm', 'a4');
-    
-    const imgData = canvas.toDataURL('image/jpeg', 0.8); // Use JPEG for smaller file size
+
+    const imgData = canvas.toDataURL('image/jpeg', 0.9);
     const imgWidth = 210;
     const pageHeight = 297;
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    
-    pdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight);
-    
-    // For mobile, try to use Web Share API if available
-    if (navigator.share && navigator.canShare) {
-      const pdfBlob = pdf.output('blob');
-      const file = new File([pdfBlob], 'pricing-table.pdf', { type: 'application/pdf' });
-      
-      if (navigator.canShare({ files: [file] })) {
-        await navigator.share({
-          title: 'جدول التسعير',
-          text: 'جدول التسعير PDF',
-          files: [file]
-        });
-      } else {
-        // Fallback to download
-        pdf.save('pricing-table.pdf');
-      }
-    } else {
-      // Fallback to download
-      pdf.save('pricing-table.pdf');
+    let heightLeft = imgHeight;
+
+    let position = 0;
+    pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
+    heightLeft -= pageHeight;
+
+    while (heightLeft >= 0) {
+      position = heightLeft - imgHeight;
+      pdf.addPage();
+      pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
     }
-    
-    document.body.removeChild(loadingDiv);
+
+    pdf.save('pricing-table.pdf');
+    document.body.removeChild(iframe);
   } catch (error) {
     console.error('خطأ في إنشاء PDF:', error);
     alert('حدث خطأ في إنشاء PDF');
@@ -733,7 +711,6 @@ async function downloadPDFMobile() {
 
 async function downloadPDFDesktop() {
   try {
-    // Create a temporary iframe for better Arabic rendering
     const iframe = document.createElement('iframe');
     iframe.style.position = 'absolute';
     iframe.style.left = '-9999px';
@@ -751,10 +728,9 @@ async function downloadPDFDesktop() {
     iframeDoc.write(printContent);
     iframeDoc.close();
     
-    // Wait for fonts and content to load
     await new Promise(resolve => {
       iframe.onload = resolve;
-      setTimeout(resolve, 1000); // fallback timeout
+      setTimeout(resolve, 1000);
     });
     
     const canvas = await html2canvas(iframeDoc.body, {
@@ -769,8 +745,8 @@ async function downloadPDFDesktop() {
     const pdf = new jsPDF('p', 'mm', 'a4');
     
     const imgData = canvas.toDataURL('image/png');
-    const imgWidth = 210; // A4 width in mm
-    const pageHeight = 297; // A4 height in mm
+    const imgWidth = 210;
+    const pageHeight = 297;
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
     let heightLeft = imgHeight;
     
@@ -805,61 +781,35 @@ function printPDF() {
     return;
   }
   
-  // Check if mobile device
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   
   if (isMobile) {
-    // Mobile-friendly print approach
     printOnMobile();
   } else {
-    // Desktop print approach
     printOnDesktop();
   }
 }
 
+// ——— تعديل مهم: الطباعة على الجوال بنفس أسلوب الديسكتوب لضمان كل الصفحات ———
 function printOnMobile() {
-  // Create a temporary div with the content
-  const printDiv = document.createElement('div');
-  printDiv.innerHTML = buildTablesHTML();
-  printDiv.style.position = 'fixed';
-  printDiv.style.top = '0';
-  printDiv.style.left = '0';
-  printDiv.style.width = '100%';
-  printDiv.style.height = '100%';
-  printDiv.style.backgroundColor = 'white';
-  printDiv.style.zIndex = '9999';
-  printDiv.style.overflow = 'auto';
-  
-  // Add close button
-  const closeBtn = document.createElement('button');
-  closeBtn.innerHTML = '✕ إغلاق';
-  closeBtn.style.position = 'fixed';
-  closeBtn.style.top = '10px';
-  closeBtn.style.right = '10px';
-  closeBtn.style.padding = '10px 15px';
-  closeBtn.style.backgroundColor = '#dc2626';
-  closeBtn.style.color = 'white';
-  closeBtn.style.border = 'none';
-  closeBtn.style.borderRadius = '5px';
-  closeBtn.style.fontSize = '16px';
-  closeBtn.style.zIndex = '10000';
-  closeBtn.style.cursor = 'pointer';
-  
-  closeBtn.onclick = () => {
-    document.body.removeChild(printDiv);
+  const printWindow = window.open('', '_blank');
+  if (!printWindow) {
+    alert('فشل في فتح نافذة الطباعة');
+    return;
+  }
+  const printContent = buildTablesHTML();
+  printWindow.document.write(printContent);
+  printWindow.document.close();
+  printWindow.onload = () => {
+    setTimeout(() => {
+      printWindow.focus();
+      printWindow.print();
+      printWindow.close();
+    }, 500);
   };
-  
-  printDiv.appendChild(closeBtn);
-  document.body.appendChild(printDiv);
-  
-  // Trigger print after a short delay
-  setTimeout(() => {
-    window.print();
-  }, 500);
 }
 
 function printOnDesktop() {
-  // Create a new window for printing with proper Arabic rendering
   const printWindow = window.open('', '_blank');
   if (!printWindow) {
     alert('فشل في فتح نافذة الطباعة');
@@ -871,7 +821,6 @@ function printOnDesktop() {
   printWindow.document.write(printContent);
   printWindow.document.close();
   
-  // Wait for content to load then print
   printWindow.onload = () => {
     setTimeout(() => {
       printWindow.print();
@@ -884,21 +833,18 @@ function printOnDesktop() {
 // Event Listeners and Initialization
 // ————————————————————————————————————————————————————————————————
 
-// Barcode input event listeners
 els.barcodeInput.addEventListener('input', handleBarcodeInput);
 els.barcodeInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') { e.preventDefault(); handleBarcodeInput(); }
 });
 els.addBarcodeBtn.addEventListener('click', handleBarcodeInput);
 
-// Name search event listeners
 els.nameInput.addEventListener('input', handleNameSearch);
 els.nameInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') { e.preventDefault(); addSelectedProduct(); }
 });
 els.addNameBtn.addEventListener('click', addSelectedProduct);
 
-// Camera controls
 els.startCam.addEventListener('click', startCamera);
 els.stopCam.addEventListener('click', stopCamera);
 els.switchCam.addEventListener('click', () => {
@@ -916,17 +862,14 @@ els.cameraSelect.addEventListener('change', () => {
   }
 });
 
-// PDF controls
 els.clearListBtn.addEventListener('click', clearPricingList);
 els.generatePdfBtn.addEventListener('click', generatePDF);
 els.downloadPdfBtn.addEventListener('click', downloadPDF);
 els.printBtn.addEventListener('click', printPDF);
 
-// تهيئة الكاميرات وتحميل القائمة عند التحميل
 window.addEventListener('load', () => {
   listCameras();
   loadPricingListFromStorage();
 });
 
-// جعل الدوال متاحة عالمياً
 window.removeFromPricingList = removeFromPricingList;
