@@ -409,93 +409,50 @@
 
       try {
         els.scanStatus.textContent = 'جارِ تشغيل الكاميرا…';
+        const sel = els.cameraSelect.value;
+        let constraints = { audio: false, video: {} };
         
+        // تحديد قيود الكاميرا بناءً على الاختيار
+        if (sel === 'auto-back') {
+          constraints.video = { facingMode: { ideal: 'environment' } };
+        } else if (sel === 'auto-front') {
+          constraints.video = { facingMode: { ideal: 'user' } };
+        } else if (sel && sel !== 'auto-back' && sel !== 'auto-front') {
+          constraints.video = { deviceId: { exact: sel } };
+        } else {
+          // افتراضي: الكاميرا الخلفية
+          constraints.video = { facingMode: { ideal: 'environment' } };
+        }
+
         // إيقاف أي بث سابق
         stopCamera();
-        
-        // تحديد قيود الكاميرا مع تحسينات للموبايل
-        const selectedValue = els.cameraSelect.value;
-        let constraints = { 
-          audio: false, 
-          video: {
-            width: { ideal: 1280, max: 1920 },
-            height: { ideal: 720, max: 1080 },
-            frameRate: { ideal: 30, max: 60 }
-          }
-        };
-        
-        if (selectedValue === 'auto-back') {
-          constraints.video.facingMode = { ideal: 'environment' };
-        } else if (selectedValue === 'auto-front') {
-          constraints.video.facingMode = { ideal: 'user' };
-        } else if (selectedValue && selectedValue !== 'auto-back' && selectedValue !== 'auto-front') {
-          constraints.video.deviceId = { exact: selectedValue };
-        } else {
-          // افتراضي: الكاميرا الخلفية للموبايل
-          constraints.video.facingMode = { ideal: 'environment' };
-        }
-        
-        // طلب الأذونات أولاً (مهم للموبايل)
-        try {
-          await navigator.mediaDevices.getUserMedia({ video: true });
-        } catch (permErr) {
-          throw permErr;
-        }
-        
-        // الآن طلب الكاميرا بالقيود المحددة
+
         currentStream = await navigator.mediaDevices.getUserMedia(constraints);
         els.video.srcObject = currentStream;
-        
-        // إعدادات إضافية للموبايل
-        els.video.setAttribute('playsinline', true);
-        els.video.setAttribute('webkit-playsinline', true);
-        els.video.muted = true;
-        
-        // تشغيل الفيديو مع معالجة أخطاء الموبايل
-        const playPromise = els.video.play();
-        if (playPromise !== undefined) {
-          await playPromise;
-        }
-        
-        els.startCam.disabled = true;
+        await els.video.play();
+        els.startCam.disabled = true; 
         els.stopCam.disabled = false;
         els.switchCam.disabled = false;
         els.scanStatus.textContent = 'جاهز للمسح';
-        
+
         // بعد منح الإذن تصبح أسماء الكاميرات ظاهرة
         listCameras();
-        
+
         startScanning();
-      } catch (err) {
-        console.error('خطأ في تشغيل الكاميرا:', err);
-        if (err.name === 'NotAllowedError') {
-          els.scanStatus.innerHTML = '<span style="color: #dc2626;">تم رفض الوصول للكاميرا. الرجاء الضغط على "السماح" عند ظهور الطلب.</span>';
-        } else if (err.name === 'NotFoundError') {
-          els.scanStatus.innerHTML = '<span style="color: #dc2626;">لم يتم العثور على كاميرا متاحة.</span>';
-        } else if (err.name === 'OverconstrainedError') {
-          // محاولة مع قيود أبسط للموبايل
-          try {
-            const simpleConstraints = {
-              audio: false,
-              video: { facingMode: { ideal: 'environment' } }
-            };
-            currentStream = await navigator.mediaDevices.getUserMedia(simpleConstraints);
-            els.video.srcObject = currentStream;
-            els.video.setAttribute('playsinline', true);
-            els.video.muted = true;
-            await els.video.play();
-            
-            els.startCam.disabled = true;
-            els.stopCam.disabled = false;
-            els.switchCam.disabled = false;
-            els.scanStatus.textContent = 'جاهز للمسح (وضع بسيط)';
-            startScanning();
-          } catch (simpleErr) {
-            els.scanStatus.innerHTML = '<span style="color: #dc2626;">فشل تشغيل الكاميرا: ' + simpleErr.message + '</span>';
-          }
-        } else {
-          els.scanStatus.innerHTML = '<span style="color: #dc2626;">فشل تشغيل الكاميرا: ' + err.message + '</span>';
+      } catch (e) {
+        console.error(e);
+        let msg = 'تعذّر تشغيل الكاميرا.';
+        if (e?.name === 'NotAllowedError') {
+          msg = 'تم رفض الإذن — افتح إعدادات الموقع واسمح للكاميرا ثم أعد المحاولة.';
+        } else if (e?.name === 'NotFoundError') {
+          msg = 'لا توجد كاميرا متاحة.';
+        } else if (e?.name === 'NotReadableError') {
+          msg = 'الكاميرا مستخدمة من تطبيق آخر.';
+        } else if (e?.name === 'SecurityError') {
+          msg = 'قيود أمنية — استخدم HTTPS أو localhost.';
         }
+        els.scanStatus.innerHTML = `<span style="color: #dc2626;">${msg}</span>`;
+        stopCamera();
       }
     }
 
