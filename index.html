@@ -79,6 +79,171 @@
     .env { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .tests { font-size: 13px; }
     .tests pre { background: #0b1324; border: 1px solid var(--border); border-radius: 10px; padding: 10px; overflow: auto; }
+    
+    /* Modal Dialog Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    
+    .modal-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .modal-dialog {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      max-width: 90vw;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+    
+    .modal-overlay.show .modal-dialog {
+      transform: scale(1);
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .modal-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0;
+      color: var(--accent);
+    }
+    
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--muted);
+      padding: 4px;
+      border-radius: 4px;
+      transition: background-color 0.2s ease;
+    }
+    
+    .modal-close:hover {
+      background-color: var(--border);
+      color: var(--text);
+    }
+    
+    .modal-body {
+      font-size: 14px;
+    }
+    
+    .product-details {
+      display: grid;
+      gap: 12px;
+    }
+    
+    .product-name {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    
+    .product-category {
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    
+    .price-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    
+    .price-row:last-child {
+      margin-bottom: 0;
+    }
+    
+    .price-label {
+      font-weight: 500;
+      color: var(--text);
+    }
+    
+    .price-value {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+    
+    .barcode-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    
+    .barcode-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    
+    .barcode-row:last-child {
+      margin-bottom: 0;
+    }
+    
+    .barcode-label {
+      font-weight: 500;
+      color: var(--text);
+    }
+    
+    .barcode-value {
+      font-family: 'Courier New', monospace;
+      background: var(--bg);
+      padding: 4px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      font-size: 13px;
+    }
+    
+    .detected-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 500;
+      margin-top: 8px;
+    }
   </style>
 </head>
 <body>
@@ -159,6 +324,7 @@
         <div class="toolbar" style="margin-bottom: 8px;">
           <button class="btn accent" id="startCam">تشغيل القارئ</button>
           <button class="btn" id="stopCam" disabled>إيقاف</button>
+          <button class="btn ghost" id="switchCam" disabled>🔄 تبديل الكاميرا</button>
           <button class="btn ghost" id="focusCode">↪︎ إدخال باركود يدوي</button>
           <select id="cameraSelect" title="اختيار الكاميرا"></select>
           <span id="scanStatus" class="hint"></span>
@@ -180,6 +346,19 @@
       </div>
     </section>
   </main>
+
+  <!-- Modal Dialog for Product Details -->
+  <div id="productModal" class="modal-overlay">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title">تفاصيل المنتج</h3>
+        <button class="modal-close" id="closeModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="modalContent" class="product-details"></div>
+      </div>
+    </div>
+  </div>
 
   <!-- مكتبة Quagga2 (احتياط عند غياب BarcodeDetector) -->
   <script src="https://unpkg.com/@ericblade/quagga2/dist/quagga.min.js"></script>
@@ -230,6 +409,7 @@
       results: document.getElementById('results'),
       startCam: document.getElementById('startCam'),
       stopCam: document.getElementById('stopCam'),
+      switchCam: document.getElementById('switchCam'),
       focusCode: document.getElementById('focusCode'),
       video: document.getElementById('video'),
       cameraSelect: document.getElementById('cameraSelect'),
@@ -241,7 +421,10 @@
       envQ: document.getElementById('envQ'),
       runTests: document.getElementById('runTests'),
       testsOut: document.getElementById('testsOut'),
-      testsStatus: document.getElementById('testsStatus')
+      testsStatus: document.getElementById('testsStatus'),
+      productModal: document.getElementById('productModal'),
+      closeModal: document.getElementById('closeModal'),
+      modalContent: document.getElementById('modalContent')
     };
 
     // ————————————————————————————————————————————————————————————————
@@ -439,6 +622,61 @@
       return wrap;
     }
 
+    // Modal functions
+    function showModal() {
+      els.productModal.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function hideModal() {
+      els.productModal.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    function showProductModal(product, detectedKind = null, detectedCode = null) {
+      const rate = USD_TRY;
+      const tryBase = rate && product.saleBase != null ? (product.saleBase * rate) : null;
+      const tryOther = rate && product.saleOther != null ? (product.saleOther * rate) : null;
+      const bcsBase = product.baseBCs.join('، ');
+      const bcsOther = product.otherBCs.join('، ');
+
+      const detectedBadge = detectedCode ? 
+        `<div class="detected-badge">تم اكتشاف الباركود: ${detectedCode} (وحدة ${detectedKind === 'base' ? 'أساسية' : 'أخرى'})</div>` : '';
+
+      els.modalContent.innerHTML = `
+        <div class="product-name">${product.name}</div>
+        <div class="product-category">${product.cat || 'غير محدد'}</div>
+        ${detectedBadge}
+        
+        <div class="price-section">
+          <h4 style="margin: 0 0 12px 0; color: var(--text);">الأسعار</h4>
+          <div class="price-row">
+            <span class="price-label">سعر الوحدة الأساسية:</span>
+            <span class="price-value">$${money(product.saleBase)}${rate ? ` · ₺${money(tryBase)}` : ''}</span>
+          </div>
+          <div class="price-row">
+            <span class="price-label">سعر الوحدة الأخرى:</span>
+            <span class="price-value">$${money(product.saleOther)}${rate ? ` · ₺${money(tryOther)}` : ''}</span>
+          </div>
+          ${product.rel ? `<div class="price-row"><span class="price-label">معامل التحويل:</span><span class="price-value">${product.rel}</span></div>` : ''}
+        </div>
+        
+        <div class="barcode-section">
+          <h4 style="margin: 0 0 12px 0; color: var(--text);">الباركود</h4>
+          <div class="barcode-row">
+            <span class="barcode-label">باركود الوحدة الأساسية:</span>
+            <span class="barcode-value">${bcsBase || '—'}</span>
+          </div>
+          <div class="barcode-row">
+            <span class="barcode-label">باركود الوحدة الأخرى:</span>
+            <span class="barcode-value">${bcsOther || '—'}</span>
+          </div>
+        </div>
+      `;
+      
+      showModal();
+    }
+
     function showOneByBarcode(code) {
       const c = String(code || '').replace(/[^0-9]/g, '');
       if (!c) return;
@@ -449,8 +687,7 @@
       else if (Number.isInteger(iOther)) { p = PRODUCTS[iOther]; kind = 'other'; }
 
       if (p) {
-        els.results.innerHTML = '';
-        els.results.appendChild(renderCard(p, kind, c));
+        showProductModal(p, kind, c);
       } else {
         els.results.innerHTML = `<div class="hint">لم يُعثر على منتج يطابق الباركود <span class="mono">${c}</span>.</div>`;
       }
@@ -487,12 +724,39 @@
         const devices = await navigator.mediaDevices.enumerateDevices();
         const vids = devices.filter(d => d.kind === 'videoinput');
         els.cameraSelect.innerHTML = '';
+        
+        // إضافة خيار تلقائي للكاميرا الخلفية
+        const autoOpt = document.createElement('option');
+        autoOpt.value = 'auto-back';
+        autoOpt.textContent = 'الكاميرا الخلفية (تلقائي)';
+        els.cameraSelect.appendChild(autoOpt);
+        
+        const frontOpt = document.createElement('option');
+        frontOpt.value = 'auto-front';
+        frontOpt.textContent = 'الكاميرا الأمامية (تلقائي)';
+        els.cameraSelect.appendChild(frontOpt);
+        
         vids.forEach((d, i) => {
           const opt = document.createElement('option');
           opt.value = d.deviceId;
-          opt.textContent = d.label || (i === 0 ? 'الكاميرا ١' : `الكاميرا ${i+1}`);
+          // تحسين تسمية الكاميرات
+          let label = d.label;
+          if (!label) {
+            label = `الكاميرا ${i + 1}`;
+          } else {
+            // إضافة مؤشرات للكاميرا الأمامية/الخلفية
+            if (label.toLowerCase().includes('front') || label.toLowerCase().includes('user')) {
+              label += ' (أمامية)';
+            } else if (label.toLowerCase().includes('back') || label.toLowerCase().includes('rear') || label.toLowerCase().includes('environment')) {
+              label += ' (خلفية)';
+            }
+          }
+          opt.textContent = label;
           els.cameraSelect.appendChild(opt);
         });
+        
+        // تحديد الكاميرا الخلفية كافتراضية
+        els.cameraSelect.value = 'auto-back';
       } catch (e) { /* تجاهل */ }
     }
 
@@ -510,9 +774,20 @@
 
       try {
         els.scanStatus.textContent = 'جارِ تشغيل الكاميرا…';
-        const constraints = { audio: false, video: { facingMode: { ideal: 'environment' } } };
         const sel = els.cameraSelect.value;
-        if (sel) constraints.video.deviceId = { exact: sel };
+        let constraints = { audio: false, video: {} };
+        
+        // تحديد قيود الكاميرا بناءً على الاختيار
+        if (sel === 'auto-back') {
+          constraints.video = { facingMode: { ideal: 'environment' } };
+        } else if (sel === 'auto-front') {
+          constraints.video = { facingMode: { ideal: 'user' } };
+        } else if (sel && sel !== 'auto-back' && sel !== 'auto-front') {
+          constraints.video = { deviceId: { exact: sel } };
+        } else {
+          // افتراضي: الكاميرا الخلفية
+          constraints.video = { facingMode: { ideal: 'environment' } };
+        }
 
         // إيقاف أي بث سابق
         stopCamera();
@@ -520,7 +795,9 @@
         stream = await navigator.mediaDevices.getUserMedia(constraints);
         els.video.srcObject = stream;
         await els.video.play();
-        els.startCam.disabled = true; els.stopCam.disabled = false;
+        els.startCam.disabled = true; 
+        els.stopCam.disabled = false;
+        els.switchCam.disabled = false;
         els.scanStatus.textContent = 'جاهز للمسح';
 
         // بعد منح الإذن تصبح أسماء الكاميرات ظاهرة
@@ -556,7 +833,9 @@
       try { els.video.pause(); } catch{}
       try { stream?.getTracks?.().forEach(t => t.stop()); } catch{}
       stream = null;
-      els.startCam.disabled = false; els.stopCam.disabled = true;
+      els.startCam.disabled = false; 
+      els.stopCam.disabled = true;
+      els.switchCam.disabled = true;
     }
 
     async function scanWithBarcodeDetector() {
@@ -606,6 +885,43 @@
     els.startCam.addEventListener('click', async () => { await listCameras(); startCamera(); });
     els.stopCam.addEventListener('click', stopCamera);
     els.focusCode.addEventListener('click', () => els.qCode.focus());
+    
+    // إضافة مستمع لتبديل الكاميرا
+    els.switchCam.addEventListener('click', () => {
+      if (stream) {
+        // تبديل بين الكاميرا الأمامية والخلفية
+        const currentValue = els.cameraSelect.value;
+        if (currentValue === 'auto-back') {
+          els.cameraSelect.value = 'auto-front';
+        } else {
+          els.cameraSelect.value = 'auto-back';
+        }
+        startCamera();
+      }
+    });
+    
+    // إضافة مستمع لتغيير الكاميرا
+    els.cameraSelect.addEventListener('change', () => {
+      if (stream) {
+        // إعادة تشغيل الكاميرا بالكاميرا المختارة
+        startCamera();
+      }
+    });
+    
+    // Modal event listeners
+    els.closeModal.addEventListener('click', hideModal);
+    els.productModal.addEventListener('click', (e) => {
+      if (e.target === els.productModal) {
+        hideModal();
+      }
+    });
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && els.productModal.classList.contains('show')) {
+        hideModal();
+      }
+    });
 
     // ————————————————————————————————————————————————————————————————
     // ٦) اختبارات (Test Cases) — تُشغّل داخل المتصفح
