@@ -396,36 +396,106 @@
     }
 
     async function startCamera() {
+      // فحص السياق والأذونات قبل الطلب لتجنّب NotAllowedError المتكرر
+      const isSecure = window.isSecureContext || location.hostname === 'localhost';
+      if (!isSecure) {
+        els.scanStatus.innerHTML = '<span style="color: #dc2626;">الرجاء فتح الصفحة عبر HTTPS أو localhost للسماح بالوصول للكاميرا.</span>';
+        return;
+      }
+      if (!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) {
+        els.scanStatus.innerHTML = '<span style="color: #dc2626;">المتصفح لا يدعم كاميرا الويب.</span>';
+        return;
+      }
+
       try {
+        els.scanStatus.textContent = 'جارِ تشغيل الكاميرا…';
+        
+        // إيقاف أي بث سابق
+        stopCamera();
+        
+        // تحديد قيود الكاميرا مع تحسينات للموبايل
         const selectedValue = els.cameraSelect.value;
-        let constraints;
+        let constraints = { 
+          audio: false, 
+          video: {
+            width: { ideal: 1280, max: 1920 },
+            height: { ideal: 720, max: 1080 },
+            frameRate: { ideal: 30, max: 60 }
+          }
+        };
         
         if (selectedValue === 'auto-back') {
-          constraints = {
-            video: { facingMode: { ideal: 'environment' } }
-          };
+          constraints.video.facingMode = { ideal: 'environment' };
         } else if (selectedValue === 'auto-front') {
-          constraints = {
-            video: { facingMode: { ideal: 'user' } }
-          };
+          constraints.video.facingMode = { ideal: 'user' };
+        } else if (selectedValue && selectedValue !== 'auto-back' && selectedValue !== 'auto-front') {
+          constraints.video.deviceId = { exact: selectedValue };
         } else {
-          constraints = {
-            video: { deviceId: { exact: selectedValue } }
-          };
+          // افتراضي: الكاميرا الخلفية للموبايل
+          constraints.video.facingMode = { ideal: 'environment' };
         }
         
+        // طلب الأذونات أولاً (مهم للموبايل)
+        try {
+          await navigator.mediaDevices.getUserMedia({ video: true });
+        } catch (permErr) {
+          throw permErr;
+        }
+        
+        // الآن طلب الكاميرا بالقيود المحددة
         currentStream = await navigator.mediaDevices.getUserMedia(constraints);
         els.video.srcObject = currentStream;
+        
+        // إعدادات إضافية للموبايل
+        els.video.setAttribute('playsinline', true);
+        els.video.setAttribute('webkit-playsinline', true);
+        els.video.muted = true;
+        
+        // تشغيل الفيديو مع معالجة أخطاء الموبايل
+        const playPromise = els.video.play();
+        if (playPromise !== undefined) {
+          await playPromise;
+        }
         
         els.startCam.disabled = true;
         els.stopCam.disabled = false;
         els.switchCam.disabled = false;
-        els.scanStatus.textContent = 'جاري المسح...';
+        els.scanStatus.textContent = 'جاهز للمسح';
+        
+        // بعد منح الإذن تصبح أسماء الكاميرات ظاهرة
+        listCameras();
         
         startScanning();
       } catch (err) {
         console.error('خطأ في تشغيل الكاميرا:', err);
-        els.scanStatus.textContent = 'فشل تشغيل الكاميرا';
+        if (err.name === 'NotAllowedError') {
+          els.scanStatus.innerHTML = '<span style="color: #dc2626;">تم رفض الوصول للكاميرا. الرجاء الضغط على "السماح" عند ظهور الطلب.</span>';
+        } else if (err.name === 'NotFoundError') {
+          els.scanStatus.innerHTML = '<span style="color: #dc2626;">لم يتم العثور على كاميرا متاحة.</span>';
+        } else if (err.name === 'OverconstrainedError') {
+          // محاولة مع قيود أبسط للموبايل
+          try {
+            const simpleConstraints = {
+              audio: false,
+              video: { facingMode: { ideal: 'environment' } }
+            };
+            currentStream = await navigator.mediaDevices.getUserMedia(simpleConstraints);
+            els.video.srcObject = currentStream;
+            els.video.setAttribute('playsinline', true);
+            els.video.muted = true;
+            await els.video.play();
+            
+            els.startCam.disabled = true;
+            els.stopCam.disabled = false;
+            els.switchCam.disabled = false;
+            els.scanStatus.textContent = 'جاهز للمسح (وضع بسيط)';
+            startScanning();
+          } catch (simpleErr) {
+            els.scanStatus.innerHTML = '<span style="color: #dc2626;">فشل تشغيل الكاميرا: ' + simpleErr.message + '</span>';
+          }
+        } else {
+          els.scanStatus.innerHTML = '<span style="color: #dc2626;">فشل تشغيل الكاميرا: ' + err.message + '</span>';
+        }
       }
     }
 
