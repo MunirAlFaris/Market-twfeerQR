@@ -422,8 +422,8 @@ function buildTablesHTML() {
       <title>جدول التسعير</title>
       <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: white; direction: rtl; padding: 40mm }
-        .pdf-table { width: 100%; border-collapse: collapse; border: 4px solid #000; margin-bottom: 20px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: white; direction: rtl; }
+        .pdf-table { width: 100%; border-collapse: collapse; border: 4px solid #000; margin: 30px; }
         .pdf-table td { border: 4px solid #000; padding: 15px; text-align: center; vertical-align: middle; height: 80px; width: 50%; }
         .pdf-product-name { font-weight: bold; margin-bottom: 8px; font-size: 26px; color: #000; text-align: center; }
         .pdf-product-price { color: #dc2626; font-weight: bold; font-size: 26px; direction: ltr; text-align: center; }
