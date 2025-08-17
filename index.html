@@ -622,6 +622,55 @@
       return wrap;
     }
 
+    // Audio feedback functions
+    function playSuccessSound() {
+      try {
+        // Create a pleasant success sound
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+        oscillator.frequency.setValueAtTime(1000, audioContext.currentTime + 0.1);
+        oscillator.type = 'sine';
+        
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.3);
+      } catch (e) {
+        console.log('Audio not supported');
+      }
+    }
+
+    function playErrorSound() {
+      try {
+        // Create an error sound
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(300, audioContext.currentTime);
+        oscillator.frequency.setValueAtTime(200, audioContext.currentTime + 0.1);
+        oscillator.type = 'sawtooth';
+        
+        gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.4);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.4);
+      } catch (e) {
+        console.log('Audio not supported');
+      }
+    }
+
     // Modal functions
     function showModal() {
       els.productModal.classList.add('show');
@@ -633,7 +682,28 @@
       document.body.style.overflow = '';
     }
 
-    function showProductModal(product, detectedKind = null, detectedCode = null) {
+    function showNotFoundModal(barcode) {
+      els.modalContent.innerHTML = `
+        <div style="text-align: center; padding: 20px;">
+          <div style="font-size: 48px; margin-bottom: 16px;">❌</div>
+          <div class="product-name" style="color: var(--danger);">المنتج غير موجود</div>
+          <div class="product-category">لم يتم العثور على منتج يطابق هذا الباركود</div>
+          <div class="detected-badge" style="background: var(--danger); margin-top: 16px;">
+            الباركود المكتشف: ${barcode}
+          </div>
+          <div style="margin-top: 20px; padding: 16px; background: var(--card); border-radius: 12px; border: 1px solid var(--border);">
+            <div style="color: var(--muted); font-size: 14px;">
+              تأكد من أن الباركود صحيح أو أن المنتج موجود في قاعدة البيانات
+            </div>
+          </div>
+        </div>
+      `;
+       
+       playErrorSound();
+       showModal();
+     }
+
+     function showProductModal(product, detectedKind = null, detectedCode = null) {
       const rate = USD_TRY;
       const tryBase = rate && product.saleBase != null ? (product.saleBase * rate) : null;
       const tryOther = rate && product.saleOther != null ? (product.saleOther * rate) : null;
@@ -673,25 +743,26 @@
           </div>
         </div>
       `;
-      
-      showModal();
+       
+       playSuccessSound();
+       showModal();
     }
 
     function showOneByBarcode(code) {
-      const c = String(code || '').replace(/[^0-9]/g, '');
-      if (!c) return;
-      const iBase = INDEX_BC_BASE.get(c);
-      const iOther = INDEX_BC_OTHER.get(c);
-      let p = null, kind = null;
-      if (Number.isInteger(iBase)) { p = PRODUCTS[iBase]; kind = 'base'; }
-      else if (Number.isInteger(iOther)) { p = PRODUCTS[iOther]; kind = 'other'; }
+       const c = String(code || '').replace(/[^0-9]/g, '');
+       if (!c) return;
+       const iBase = INDEX_BC_BASE.get(c);
+       const iOther = INDEX_BC_OTHER.get(c);
+       let p = null, kind = null;
+       if (Number.isInteger(iBase)) { p = PRODUCTS[iBase]; kind = 'base'; }
+       else if (Number.isInteger(iOther)) { p = PRODUCTS[iOther]; kind = 'other'; }
 
-      if (p) {
-        showProductModal(p, kind, c);
-      } else {
-        els.results.innerHTML = `<div class="hint">لم يُعثر على منتج يطابق الباركود <span class="mono">${c}</span>.</div>`;
-      }
-    }
+       if (p) {
+         showProductModal(p, kind, c);
+       } else {
+         showNotFoundModal(c);
+       }
+     }
 
     // ————————————————————————————————————————————————————————————————
     // ٥) التشخيص + قارئ الكاميرا — إصلاح NotAllowedError
