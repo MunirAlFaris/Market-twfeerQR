@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>قارئ باركود + بحث — ماركت توفير</title>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --card: #111a2b;
+      --muted: #8aa0c5;
+      --text: #e8f0ff;
+      --accent: #4cc9f0;
+      --accent-2: #22c55e;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --border: #1f2b44;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: radial-gradient(1200px 600px at 80% -10%, #0f1b36 0%, var(--bg) 60%);
+      color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Kufi Arabic", "Noto Sans Arabic", Tahoma, Arial, sans-serif;
+    }
+    header { padding: 20px 16px; border-bottom: 1px solid var(--border); position: sticky; top: 0; backdrop-filter: blur(8px); background: linear-gradient( to bottom, rgba(11,18,32,.9), rgba(11,18,32,.6)); z-index: 10; }
+    .title { font-size: 20px; font-weight: 700; letter-spacing: .3px; }
+    .subtitle { color: var(--muted); font-size: 13px; margin-top: 4px; }
+
+    main { max-width: 1280px; margin: 0 auto; padding: 20px 16px 100px; display: grid; grid-template-columns: 380px 1fr; gap: 16px; }
+    @media (max-width: 980px) { main { grid-template-columns: 1fr; } }
+
+    .card { background: linear-gradient(180deg, rgba(27,42,73,.55), rgba(17,26,43,.55)); border: 1px solid var(--border); border-radius: 16px; padding: 14px; box-shadow: 0 10px 30px rgba(0,0,0,.25) inset; }
+    .card h3 { margin: 0 0 10px; font-size: 16px; }
+    .hint { color: var(--muted); font-size: 12px; }
+
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    .row > *, .row-3 > * { min-width: 0; }
+
+    label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+    input[type="text"], input[type="number"], input[type="search"], select {
+      width: 100%; padding: 12px 12px; border-radius: 12px; border: 1px solid var(--border); background: #0b1324; color: var(--text);
+      outline: none; transition: border .2s ease, box-shadow .2s ease;
+    }
+    input::placeholder { color: #6b7fa7; }
+    input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(76,201,240,.15); }
+
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 12px; border: 1px solid var(--border); background: #0b1324; color: var(--text); border-radius: 12px; cursor: pointer; font-weight: 600; }
+    .btn.primary { background: linear-gradient(180deg, #0f2740, #0c2036); border-color: #1d3557; }
+    .btn.accent { background: linear-gradient(180deg, #0f2d42, #0b2436); border-color: #123044; color: #c9f1ff; }
+    .btn.success { background: linear-gradient(180deg, #0f3a2b, #0b2f22); border-color: #144232; color: #dbffef; }
+    .btn.ghost { background: transparent; }
+    .btn:disabled { opacity: .55; cursor: not-allowed; }
+
+    .toolbar { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .results { display: grid; gap: 10px; max-height: 60vh; overflow: auto; padding-right: 2px; }
+    .prod { background: linear-gradient(180deg, rgba(33, 53, 88, .5), rgba(17, 26, 43, .6)); border: 1px solid var(--border); border-radius: 14px; padding: 12px; }
+    .prod h4 { margin: 0 0 6px; font-size: 16px; }
+    .prod small { color: var(--muted); }
+
+    .kv { display: grid; grid-template-columns: max-content 1fr; gap: 0 10px; margin-top: 6px; font-size: 13px; }
+    .kv div:nth-child(odd) { color: #9db4df; }
+    .price { display: inline-flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 10px; border: 1px dashed var(--border); }
+
+    .badge { display: inline-block; padding: 3px 8px; border-radius: 999px; font-size: 11px; border: 1px solid var(--border); color: #b8d5ff; background: rgba(28,48,83,.55); }
+    .badge.green { color: #cffce6; background: rgba(22,52,40,.55); border-color: #1a4534; }
+    .badge.yellow { color: #fff1c2; background: rgba(63,49,17,.55); border-color: #6b5213; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Noto Sans Mono", monospace; }
+
+    .video-wrap { position: relative; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); background: #000; }
+    video { width: 100%; height: auto; display: block; }
+    .scan-overlay { position: absolute; inset: 0; border: 2px dashed rgba(255,255,255,.25); border-radius: 12px; margin: 10% 10%; pointer-events: none; }
+
+    .footer { margin-top: 10px; font-size: 12px; color: var(--muted); }
+    .spacer { height: 6px; }
+    .ok { color: var(--accent-2); }
+    .warn { color: var(--warning); }
+    .err { color: var(--danger); }
+    .env { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .tests { font-size: 13px; }
+    .tests pre { background: #0b1324; border: 1px solid var(--border); border-radius: 10px; padding: 10px; overflow: auto; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title">🛒 قارئ باركود + بحث — ماركت توفير</div>
+    <div class="subtitle">اقرأ باركود الكاميرا أو ابحث بالاسم/الباركود، واعرض السعر بالدولار والليرة التركية (مع تحديث تلقائي لسعر الصرف وقابل للتعديل اليدوي).</div>
+  </header>
+
+  <main>
+    <!-- الشريط الجانبي: تحميل البيانات + سعر الصرف + أدوات البحث السريع + تشخيص البيئة -->
+    <section class="card">
+      <h3>١) تحميل ملف المنتجات (JSON)</h3>
+      <div class="row">
+        <div>
+          <label for="file">ارفع ملف المنتجات (الذي زوّدتني به)</label>
+          <input type="file" id="file" accept=".json,application/json" />
+        </div>
+        <div>
+          <label>حالة الملف</label>
+          <div id="fileStatus" class="badge">لم تُحمَّل بيانات بعد</div>
+        </div>
+      </div>
+      <div class="spacer"></div>
+      <div class="hint">يدعم التطبيق شكلين: <span class="mono">[ {...}, {...} ]</span> أو كائن يحوي مصفوفة فيها الحقول <span class="mono">ITEM_NAME_AR, SALE_PRICE_BASE, ...</span></div>
+
+      <hr style="border:0;border-top:1px solid var(--border); margin:12px 0;">
+
+      <h3>٢) سعر الصرف (USD → TRY)</h3>
+      <div class="row">
+        <div>
+          <label for="rate">سعر الصرف الحالي (قابل للتعديل)</label>
+          <input id="rate" type="number" inputmode="decimal" step="0.0001" placeholder="مثال: 34.20"/>
+        </div>
+        <div>
+          <label>تحديث تلقائي</label>
+          <div class="toolbar">
+            <button class="btn success" id="fetchRateBtn">جلب من الإنترنت</button>
+            <span id="rateStatus" class="hint"></span>
+          </div>
+        </div>
+      </div>
+
+      <hr style="border:0;border-top:1px solid var(--border); margin:12px 0;">
+
+      <h3>٣) بحث سريع</h3>
+      <div class="row">
+        <div>
+          <label for="qName">ابحث بالاسم</label>
+          <input id="qName" type="search" placeholder="اكتب جزءاً من اسم المنتج…" />
+        </div>
+        <div>
+          <label for="qCode">ابحث بالباركود</label>
+          <input id="qCode" type="search" inputmode="numeric" placeholder="أدخل/الصق الباركود…" />
+        </div>
+      </div>
+      <div class="footer">تلميح: اضغط بطاقة المنتج لنسخ السعر. لاستخدام الكاميرا، يلزم HTTPS أو <span class="mono">localhost</span>.</div>
+
+      <hr style="border:0;border-top:1px solid var(--border); margin:12px 0;">
+
+      <h3>٤) تشخيص البيئة</h3>
+      <div class="env">
+        <div>السياق آمن (HTTPS): <span id="envSecure" class="badge"></span></div>
+        <div>يدعم الكاميرا: <span id="envCam" class="badge"></span></div>
+        <div>BarcodeDetector: <span id="envBD" class="badge"></span></div>
+        <div>Quagga2 جاهزة: <span id="envQ" class="badge"></span></div>
+      </div>
+    </section>
+
+    <!-- المحتوى الرئيسي: عارض النتائج + الكاميرا + الاختبارات -->
+    <section style="display: grid; gap: 16px;">
+      <div class="card">
+        <h3>٥) نتائج البحث</h3>
+        <div id="results" class="results"></div>
+      </div>
+
+      <div class="card">
+        <h3>٦) قارئ الباركود عبر الكاميرا</h3>
+        <div class="toolbar" style="margin-bottom: 8px;">
+          <button class="btn accent" id="startCam">تشغيل القارئ</button>
+          <button class="btn" id="stopCam" disabled>إيقاف</button>
+          <button class="btn ghost" id="focusCode">↪︎ إدخال باركود يدوي</button>
+          <select id="cameraSelect" title="اختيار الكاميرا"></select>
+          <span id="scanStatus" class="hint"></span>
+        </div>
+        <div class="video-wrap">
+          <video id="video" playsinline></video>
+          <div class="scan-overlay"></div>
+        </div>
+        <div class="footer">إذا ظهر خطأ <span class="mono">NotAllowedError</span> فتأكد من منح إذن الكاميرا ومن تشغيل الصفحة عبر HTTPS أو <span class="mono">localhost</span>، ثم أعد المحاولة.</div>
+      </div>
+
+      <div class="card tests">
+        <h3>٧) اختبارات تلقائية (Test Cases)</h3>
+        <div class="toolbar">
+          <button class="btn" id="runTests">تشغيل الاختبارات</button>
+          <span id="testsStatus" class="hint"></span>
+        </div>
+        <pre id="testsOut">— لم تُشغّل الاختبارات بعد —</pre>
+      </div>
+    </section>
+  </main>
+
+  <!-- مكتبة Quagga2 (احتياط عند غياب BarcodeDetector) -->
+  <script src="https://unpkg.com/@ericblade/quagga2/dist/quagga.min.js"></script>
+
+  <script>
+    // ————————————————————————————————————————————————————————————————
+    // أدوات مساعدة (تنميط نص عربي / باركود)
+    // ————————————————————————————————————————————————————————————————
+    const normArabic = (s = "") => s
+      .toString()
+      .replace(/\u0640/g, "")
+      .replace(/[\u0622\u0623\u0625]/g, "ا")
+      .replace(/\u0629/g, "ه")
+      .replace(/\u0649/g, "ي")
+      .replace(/[\u0610-\u061A\u064B-\u065F\u0670-\u0673]/g, "")
+      .trim();
+
+    const parseBarcodes = (val) => {
+      if (!val) return [];
+      return String(val)
+        .split(/[,|\n]/)
+        .map(x => x.trim())
+        .filter(Boolean)
+        .map(x => x.replace(/\s+/g, ""))
+        .map(x => x.replace(/[^0-9]/g, ""))
+        .filter(x => x.length >= 6 && x.length <= 18);
+    };
+
+    const money = (n) => (n == null || isNaN(n)) ? "—" : Number(n).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    // ————————————————————————————————————————————————————————————————
+    // حالة التطبيق
+    // ————————————————————————————————————————————————————————————————
+    let PRODUCTS_RAW = [];
+    let PRODUCTS = [];
+    let INDEX_NAME = [];
+    let INDEX_BC_BASE = new Map();
+    let INDEX_BC_OTHER = new Map();
+    let USD_TRY = null;
+
+    const els = {
+      file: document.getElementById('file'),
+      fileStatus: document.getElementById('fileStatus'),
+      rate: document.getElementById('rate'),
+      rateStatus: document.getElementById('rateStatus'),
+      qName: document.getElementById('qName'),
+      qCode: document.getElementById('qCode'),
+      results: document.getElementById('results'),
+      startCam: document.getElementById('startCam'),
+      stopCam: document.getElementById('stopCam'),
+      focusCode: document.getElementById('focusCode'),
+      video: document.getElementById('video'),
+      cameraSelect: document.getElementById('cameraSelect'),
+      scanStatus: document.getElementById('scanStatus'),
+      fetchRateBtn: document.getElementById('fetchRateBtn'),
+      envSecure: document.getElementById('envSecure'),
+      envCam: document.getElementById('envCam'),
+      envBD: document.getElementById('envBD'),
+      envQ: document.getElementById('envQ'),
+      runTests: document.getElementById('runTests'),
+      testsOut: document.getElementById('testsOut'),
+      testsStatus: document.getElementById('testsStatus')
+    };
+
+    // ————————————————————————————————————————————————————————————————
+    // ١) تحميل ملف JSON واستخراج المنتجات
+    // ————————————————————————————————————————————————————————————————
+    function extractProducts(json) {
+      if (Array.isArray(json)) return json;
+      for (const k of Object.keys(json)) {
+        const v = json[k];
+        if (Array.isArray(v) && v.length && typeof v[0] === 'object') {
+          if ('ITEM_NAME_AR' in v[0]) return v;
+        }
+      }
+      return [];
+    }
+
+    function cleanAndIndex(products) {
+      PRODUCTS = products.map((p, i) => {
+        const name = (p.ITEM_NAME_AR ?? p.name ?? "").toString();
+        const cat = (p.CATEGORY_AR ?? p.category ?? "").toString();
+        const saleBase = (p.SALE_PRICE_BASE ?? p.PRICE_BASE_UNIT ?? null);
+        const saleOther = (p.SALE_PRICE_OTHER ?? p.PRICE_BIG_UNIT ?? null);
+        const baseBCs = parseBarcodes(p.BASE_UNIT_BARCODES ?? p.BASE_BARCODES ?? p.BARCODES_BASE);
+        const otherBCs = parseBarcodes(p.OTHER_UNIT_BARCODES ?? p.LESS_UNIT_BARCODES ?? p.BARCODES_OTHER);
+        const rel = (p.RELATION_FACTOR ?? p.SMALL_TO_BIG_FACTOR ?? null);
+        return {
+          _i: i,
+          name,
+          nameNorm: normArabic(name),
+          cat,
+          catNorm: normArabic(cat),
+          saleBase: saleBase != null ? Number(saleBase) : null,
+          saleOther: saleOther != null ? Number(saleOther) : null,
+          baseBCs,
+          otherBCs,
+          rel: rel != null ? Number(rel) : null
+        };
+      });
+
+      INDEX_NAME = PRODUCTS.map((p, i) => ({ key: p.nameNorm + ' ' + p.catNorm, idx: i }));
+      INDEX_BC_BASE = new Map();
+      INDEX_BC_OTHER = new Map();
+      PRODUCTS.forEach((p, i) => {
+        p.baseBCs.forEach(bc => INDEX_BC_BASE.set(bc, i));
+        p.otherBCs.forEach(bc => INDEX_BC_OTHER.set(bc, i));
+      });
+
+      els.fileStatus.textContent = `تم التحميل: ${PRODUCTS.length.toLocaleString('ar-EG')} منتج`;
+      els.fileStatus.className = 'badge green';
+      renderResults(PRODUCTS.slice(0, 50), { reason: 'init' });
+    }
+
+    els.file.addEventListener('change', async (e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      try {
+        const txt = await file.text();
+        let json;
+        try { json = JSON.parse(txt); }
+        catch (err) {
+          const repaired = txt.trim().startsWith('{') && txt.includes('\"ITEM_NAME_AR\"') && txt.includes('[')
+            ? JSON.parse(txt.replace(/^[^{]*({[\s\S]*})[^}]*$/m, '$1'))
+            : JSON.parse(`[${txt.split(/\n+/).filter(Boolean).join(',')}]`);
+          json = repaired;
+        }
+        const products = extractProducts(json);
+        if (!products.length) throw new Error('تعذر العثور على مصفوفة منتجات صالحة داخل الملف.');
+        PRODUCTS_RAW = products;
+        cleanAndIndex(products);
+      } catch (err) {
+        console.error(err);
+        els.fileStatus.textContent = 'فشل التحميل — تحقق من بنية الملف';
+        els.fileStatus.className = 'badge yellow';
+        alert('حدث خطأ أثناء قراءة الملف: ' + err.message);
+      }
+    });
+
+    // ————————————————————————————————————————————————————————————————
+    // ٢) سعر الصرف (جلب تلقائي + إدخال يدوي)
+    // ————————————————————————————————————————————————————————————————
+    async function fetchRate() {
+      els.rateStatus.textContent = '… جارِ الجلب';
+      try {
+        const res = await fetch('https://api.exchangerate.host/latest?base=USD&symbols=TRY');
+        const data = await res.json();
+        const r = data?.rates?.TRY;
+        if (!r) throw new Error('لا توجد قيمة TRY');
+        USD_TRY = Number(r);
+        els.rate.value = USD_TRY.toFixed(4);
+        els.rateStatus.innerHTML = `<span class="ok">تم التحديث</span> (${new Date().toLocaleString('ar')})`;
+      } catch (e) {
+        console.warn(e);
+        els.rateStatus.innerHTML = '<span class="warn">تعذّر الجلب — أدخل السعر يدوياً</span>';
+      }
+    }
+
+    els.fetchRateBtn.addEventListener('click', fetchRate);
+    els.rate.addEventListener('input', () => {
+      const v = Number(els.rate.value);
+      USD_TRY = isFinite(v) && v > 0 ? v : null;
+      if (lastRender) renderResults(lastRender.items, { reason: 'rate-change' });
+    });
+
+    fetchRate();
+
+    // ————————————————————————————————————————————————————————————————
+    // ٣) بحث بالاسم/الباركود
+    // ————————————————————————————————————————————————————————————————
+    let searchDebounce;
+    els.qName.addEventListener('input', () => {
+      clearTimeout(searchDebounce);
+      searchDebounce = setTimeout(() => doSearch(), 120);
+    });
+    els.qCode.addEventListener('input', () => {
+      clearTimeout(searchDebounce);
+      searchDebounce = setTimeout(() => doSearch(), 120);
+    });
+
+    function doSearch() {
+      const nameQ = normArabic(els.qName.value || "");
+      const codeQ = (els.qCode.value || "").replace(/[^0-9]/g, "");
+      if (!PRODUCTS.length) return;
+
+      let res = PRODUCTS;
+
+      if (nameQ) {
+        res = INDEX_NAME
+          .filter(x => x.key.includes(nameQ))
+          .slice(0, 400)
+          .map(x => PRODUCTS[x.idx]);
+      }
+
+      if (codeQ) {
+        const iBase = INDEX_BC_BASE.get(codeQ);
+        const iOther = INDEX_BC_OTHER.get(codeQ);
+        const arr = [];
+        if (Number.isInteger(iBase)) arr.push(PRODUCTS[iBase]);
+        if (Number.isInteger(iOther) && iOther !== iBase) arr.push(PRODUCTS[iOther]);
+        if (!arr.length) {
+          const hasCode = (p) => p.baseBCs.includes(codeQ) || p.otherBCs.includes(codeQ);
+          res = res.filter(hasCode);
+        } else {
+          res = arr;
+        }
+      }
+
+      if (!nameQ && !codeQ) res = PRODUCTS.slice(0, 50);
+      renderResults(res.slice(0, 200), { reason: 'search' });
+    }
+
+    // ————————————————————————————————————————————————————————————————
+    // ٤) عرض النتائج
+    // ————————————————————————————————————————————————————————————————
+    let lastRender = null;
+
+    function renderResults(items, ctx = {}) {
+      lastRender = { items, ctx };
+      els.results.innerHTML = '';
+      if (!items.length) {
+        els.results.innerHTML = `<div class="hint">لا نتائج — غيّر كلمات البحث أو تأكد من تحميل الملف.</div>`;
+        return;
+      }
+      const frag = document.createDocumentFragment();
+      items.forEach(p => frag.appendChild(renderCard(p)));
+      els.results.appendChild(frag);
+    }
+
+    function renderCard(p, highlightKind = null, detectedCode = null) {
+      const rate = USD_TRY;
+      const tryBase = rate && p.saleBase != null ? (p.saleBase * rate) : null;
+      const tryOther = rate && p.saleOther != null ? (p.saleOther * rate) : null;
+      const bcsBase = p.baseBCs.join('، ');
+      const bcsOther = p.otherBCs.join('، ');
+
+      const wrap = document.createElement('div');
+      wrap.className = 'prod';
+      wrap.innerHTML = `
+        <h4 title="${p.name}">${p.name}</h4>
+        <div class="hint">${p.cat || '—'} ${p.rel ? `<span class="badge">العلاقة: ${p.rel}</span>` : ''}
+          ${highlightKind ? ` <span class="badge ${highlightKind==='base' ? 'green' : 'yellow'}">وحدة ${highlightKind==='base' ? 'أساسية' : 'أخرى'}${detectedCode?` — <span class=\"mono\">${detectedCode}</span>`:''}</span>` : ''}
+        </div>
+        <div class="kv">
+          <div>سعر الأساسية:</div>
+          <div><span class="price">$${money(p.saleBase)}${rate?` · ₺${money(tryBase)}`:''}</span></div>
+          <div>سعر الأخرى:</div>
+          <div><span class="price">$${money(p.saleOther)}${rate?` · ₺${money(tryOther)}`:''}</span></div>
+          <div>باركود الأساسية:</div><div class="mono">${bcsBase || '—'}</div>
+          <div>باركود الأخرى:</div><div class="mono">${bcsOther || '—'}</div>
+        </div>
+      `;
+      wrap.addEventListener('click', () => {
+        const txt = `${p.name} — الأساسية: $${money(p.saleBase)}${USD_TRY?` (₺${money(tryBase)})`:''} — الأخرى: $${money(p.saleOther)}${USD_TRY?` (₺${money(tryOther)})`:''}`;
+        navigator.clipboard?.writeText(txt);
+      });
+      return wrap;
+    }
+
+    function showOneByBarcode(code) {
+      const c = String(code || '').replace(/[^0-9]/g, '');
+      if (!c) return;
+      const iBase = INDEX_BC_BASE.get(c);
+      const iOther = INDEX_BC_OTHER.get(c);
+      let p = null, kind = null;
+      if (Number.isInteger(iBase)) { p = PRODUCTS[iBase]; kind = 'base'; }
+      else if (Number.isInteger(iOther)) { p = PRODUCTS[iOther]; kind = 'other'; }
+
+      if (p) {
+        els.results.innerHTML = '';
+        els.results.appendChild(renderCard(p, kind, c));
+      } else {
+        els.results.innerHTML = `<div class="hint">لم يُعثر على منتج يطابق الباركود <span class="mono">${c}</span>.</div>`;
+      }
+    }
+
+    // ————————————————————————————————————————————————————————————————
+    // ٥) التشخيص + قارئ الكاميرا — إصلاح NotAllowedError
+    // ————————————————————————————————————————————————————————————————
+    function updateEnvBadges() {
+      const isSecure = window.isSecureContext || location.hostname === 'localhost';
+      els.envSecure.textContent = isSecure ? 'نعم' : 'لا (استخدم HTTPS أو localhost)';
+      els.envSecure.className = 'badge ' + (isSecure ? 'green' : 'yellow');
+
+      const cam = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+      els.envCam.textContent = cam ? 'نعم' : 'غير مدعوم';
+      els.envCam.className = 'badge ' + (cam ? 'green' : 'yellow');
+
+      const bd = 'BarcodeDetector' in window;
+      els.envBD.textContent = bd ? 'نعم' : 'لا';
+      els.envBD.className = 'badge ' + (bd ? 'green' : '');
+
+      const q = !!window.Quagga;
+      els.envQ.textContent = q ? 'نعم' : 'لا';
+      els.envQ.className = 'badge ' + (q ? 'green' : '');
+    }
+
+    updateEnvBadges();
+
+    let stream = null;
+    let scanTimer = null;
+
+    async function listCameras() {
+      try {
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        const vids = devices.filter(d => d.kind === 'videoinput');
+        els.cameraSelect.innerHTML = '';
+        vids.forEach((d, i) => {
+          const opt = document.createElement('option');
+          opt.value = d.deviceId;
+          opt.textContent = d.label || (i === 0 ? 'الكاميرا ١' : `الكاميرا ${i+1}`);
+          els.cameraSelect.appendChild(opt);
+        });
+      } catch (e) { /* تجاهل */ }
+    }
+
+    async function startCamera() {
+      // فحص السياق والأذونات قبل الطلب لتجنّب NotAllowedError المتكرر
+      const isSecure = window.isSecureContext || location.hostname === 'localhost';
+      if (!isSecure) {
+        els.scanStatus.innerHTML = '<span class="warn">الرجاء فتح الصفحة عبر HTTPS أو localhost للسماح بالوصول للكاميرا.</span>';
+        return;
+      }
+      if (!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) {
+        els.scanStatus.innerHTML = '<span class="err">المتصفح لا يدعم كاميرا الويب.</span>';
+        return;
+      }
+
+      try {
+        els.scanStatus.textContent = 'جارِ تشغيل الكاميرا…';
+        const constraints = { audio: false, video: { facingMode: { ideal: 'environment' } } };
+        const sel = els.cameraSelect.value;
+        if (sel) constraints.video.deviceId = { exact: sel };
+
+        // إيقاف أي بث سابق
+        stopCamera();
+
+        stream = await navigator.mediaDevices.getUserMedia(constraints);
+        els.video.srcObject = stream;
+        await els.video.play();
+        els.startCam.disabled = true; els.stopCam.disabled = false;
+        els.scanStatus.textContent = 'جاهز للمسح';
+
+        // بعد منح الإذن تصبح أسماء الكاميرات ظاهرة
+        listCameras();
+
+        if ('BarcodeDetector' in window) {
+          scanWithBarcodeDetector();
+        } else if (window.Quagga) {
+          scanWithQuagga();
+        } else {
+          els.scanStatus.innerHTML = '<span class="warn">لا تتوفر آلية مسح؛ أدخل الباركود يدوياً.</span>';
+        }
+      } catch (e) {
+        console.error(e);
+        let msg = 'تعذّر تشغيل الكاميرا.';
+        if (e?.name === 'NotAllowedError') {
+          msg = 'تم رفض الإذن — افتح إعدادات الموقع واسمح للكاميرا ثم أعد المحاولة.';
+        } else if (e?.name === 'NotFoundError') {
+          msg = 'لا توجد كاميرا متاحة.';
+        } else if (e?.name === 'NotReadableError') {
+          msg = 'الكاميرا مستخدمة من تطبيق آخر.';
+        } else if (e?.name === 'SecurityError') {
+          msg = 'قيود أمنية — استخدم HTTPS أو localhost.';
+        }
+        els.scanStatus.innerHTML = `<span class="err">${msg}</span>`;
+        stopCamera();
+      }
+    }
+
+    function stopCamera() {
+      try { scanTimer && clearInterval(scanTimer); scanTimer = null; } catch{}
+      try { window.Quagga?.stop?.(); } catch{}
+      try { els.video.pause(); } catch{}
+      try { stream?.getTracks?.().forEach(t => t.stop()); } catch{}
+      stream = null;
+      els.startCam.disabled = false; els.stopCam.disabled = true;
+    }
+
+    async function scanWithBarcodeDetector() {
+      const detector = new BarcodeDetector({ formats: ['ean_13','ean_8','upc_a','upc_e','code_128'] });
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+
+      scanTimer = setInterval(async () => {
+        if (!stream) return;
+        const v = els.video;
+        if (!v.videoWidth) return;
+        canvas.width = v.videoWidth; canvas.height = v.videoHeight;
+        ctx.drawImage(v, 0, 0, canvas.width, canvas.height);
+        try {
+          const bits = await detector.detect(canvas);
+          if (bits && bits.length) {
+            const code = (bits[0].rawValue || '').replace(/[^0-9]/g, '');
+            if (code) {
+              els.scanStatus.innerHTML = `تم التقاط: <span class="mono">${code}</span>`;
+              showOneByBarcode(code);
+            }
+          }
+        } catch (e) { /* تجاهل */ }
+      }, 220);
+    }
+
+    function scanWithQuagga() {
+      const target = document.querySelector('.video-wrap');
+      Quagga.init({
+        inputStream: { type: 'LiveStream', target, constraints: { facingMode: 'environment' } },
+        decoder: { readers: ['ean_reader','ean_8_reader','upc_reader','upc_e_reader','code_128_reader'] },
+        locate: true
+      }, (err) => {
+        if (err) { console.error(err); els.scanStatus.innerHTML = '<span class="err">فشل تهيئة Quagga</span>'; return; }
+        Quagga.start();
+        els.scanStatus.textContent = 'جارِ المسح…';
+        Quagga.onDetected(res => {
+          const code = (res?.codeResult?.code || '').replace(/[^0-9]/g, '');
+          if (code) {
+            els.scanStatus.innerHTML = `تم التقاط: <span class="mono">${code}</span>`;
+            showOneByBarcode(code);
+          }
+        });
+      });
+    }
+
+    els.startCam.addEventListener('click', async () => { await listCameras(); startCamera(); });
+    els.stopCam.addEventListener('click', stopCamera);
+    els.focusCode.addEventListener('click', () => els.qCode.focus());
+
+    // ————————————————————————————————————————————————————————————————
+    // ٦) اختبارات (Test Cases) — تُشغّل داخل المتصفح
+    // ————————————————————————————————————————————————————————————————
+    function runTests() {
+      const out = [];
+      function ok(name, cond, details='') { out.push(`${cond?'✅':'❌'} ${name}${details?` — ${details}:`:''} ${cond?'PASS':'FAIL'}`); }
+      try {
+        // T1: parseBarcodes يجب أن يبقي الأصفار البادئة وينظف الرموز
+        const t1in = ' 0896 8612 0226 , 000123 , abc , 12x34 ';
+        const t1 = parseBarcodes(t1in);
+        ok('T1 parseBarcodes length>=2', t1.length >= 2, JSON.stringify(t1));
+        ok('T1 leading zeros kept', t1.includes('000123'));
+
+        // T2: normArabic يزيل التشكيل والتطويل
+        const t2 = normArabic('إختبارـــةً');
+        ok('T2 normArabic basic', t2 === 'اختباره', t2);
+
+        // T3: فهرسة الاسم — يجب أن يجد عينة "اندومي"
+        const sample = PRODUCTS.find(p => p.name.includes('اندومي'));
+        ok('T3 sample exists', !!sample);
+
+        // T4: مطابقة باركود الأخرى لعينة موجودة (من SAMPLE)
+        const iOther = INDEX_BC_OTHER.get('089686120226');
+        ok('T4 other barcode maps', Number.isInteger(iOther));
+
+        // T5: حساب تحويل العملة
+        const rate = 30.5; const usd = 10; const tryv = usd * rate; ok('T5 currency calc', tryv === 305);
+
+        els.testsOut.textContent = out.join('\n');
+        els.testsStatus.innerHTML = '<span class="ok">اكتملت الاختبارات</span>';
+      } catch (e) {
+        els.testsOut.textContent = 'خطأ في الاختبارات: ' + e.message;
+        els.testsStatus.innerHTML = '<span class="err">فشل الاختبارات</span>';
+      }
+    }
+
+    els.runTests.addEventListener('click', runTests);
+
+    // ————————————————————————————————————————————————————————————————
+    // ٧) تحميل تلقائي لملف products.json عند بدء التطبيق
+    // ————————————————————————————————————————————————————————————————
+    async function loadDefaultProducts() {
+      try {
+        els.fileStatus.textContent = 'جارِ تحميل البيانات التلقائية...';
+        els.fileStatus.className = 'badge';
+        
+        const response = await fetch('./products.json');
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
+        const json = await response.json();
+        const products = extractProducts(json);
+        
+        if (!products.length) {
+          throw new Error('تعذر العثور على مصفوفة منتجات صالحة داخل الملف.');
+        }
+        
+        PRODUCTS_RAW = products;
+        cleanAndIndex(products);
+        
+        console.log(`تم تحميل ${products.length} منتج بنجاح من products.json`);
+      } catch (err) {
+        console.warn('فشل تحميل products.json:', err);
+        
+        // في حالة فشل التحميل، استخدم البيانات النموذجية
+        const SAMPLE = [
+          { ITEM_NAME_AR: 'مثال — مرتديلا 200غ', CATEGORY_AR: 'غذائية', SALE_PRICE_BASE: 11, SALE_PRICE_OTHER: 0.46, BASE_UNIT_BARCODES: '', OTHER_UNIT_BARCODES: '8684252325238', RELATION_FACTOR: 24 },
+          { ITEM_NAME_AR: 'مثال — اندومي 75غ', CATEGORY_AR: 'غذائية', SALE_PRICE_BASE: 10, SALE_PRICE_OTHER: 0.25, BASE_UNIT_BARCODES: '', OTHER_UNIT_BARCODES: '089686120226', RELATION_FACTOR: 40 }
+        ];
+        cleanAndIndex(SAMPLE);
+        
+        els.fileStatus.textContent = 'تم تحميل بيانات نموذجية (فشل تحميل products.json)';
+        els.fileStatus.className = 'badge yellow';
+      }
+    }
+    
+    // تحميل البيانات عند بدء التطبيق
+    loadDefaultProducts();
+  </script>
+</body>
+</html>
