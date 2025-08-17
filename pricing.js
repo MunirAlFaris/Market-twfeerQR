@@ -420,24 +420,55 @@ function buildTablesHTML() {
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>جدول التسعير</title>
-      <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: white; direction: rtl; }
-        .pdf-table { width: 100%; border-collapse: collapse; border: 4px solid #000; margin: 30px; }
-        .pdf-table td { border: 4px solid #000; padding: 15px; text-align: center; vertical-align: middle; height: 80px; width: 50%; }
-        .pdf-product-name { font-weight: bold; margin-bottom: 8px; font-size: 26px; color: #000; text-align: center; }
-        .pdf-product-price { color: #dc2626; font-weight: bold; font-size: 26px; direction: ltr; text-align: center; }
-        .page { break-after: page; page-break-after: always; }
-        .page:last-child { break-after: auto; page-break-after: auto; }
-        @media print { @page { size: A4; margin: 15mm; } }
-      </style>
-    </head>
+    <style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Arial, Tahoma, sans-serif; background:#fff; direction: rtl; }
+
+  /* نلغي هوامش الطابعة الافتراضية ونضبط الحجم على A4 */
+  @media print { @page { size: A4; margin: 0; } }
+
+  /* ورقة A4 بمليمترات + حواف/هوامش مثل الوورد عبر padding */
+  .sheet {
+    width: 210mm;
+    height: 297mm;
+    padding: 15mm 12mm 15mm 12mm; /* أعلى يمين أسفل يسار (هذه هي الهوامش الفعلية) */
+    margin: 0 auto;
+    page-break-after: always;
+    display: flex;
+    align-items: stretch;
+  }
+
+  /* الجدول داخل الورقة يملأ المساحة المتاحة بعد الهوامش */
+  .pdf-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 4px solid #000;
+    table-layout: fixed;
+  }
+  .pdf-table td {
+    border: 4px solid #000;
+    height: 80px;        /* 8 صفوف واضحة */
+    width: 50%;          /* عمودان */
+    padding: 12px;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .pdf-product-name { font-weight: 700; font-size: 26px; color:#000; margin-bottom: 6px; }
+  .pdf-product-price { font-weight: 700; font-size: 26px; color:#dc2626; direction:ltr; }
+
+  /* نفس الأبعاد في الطباعة */
+  @media print {
+    html, body { width: 210mm; height: auto; }
+    .sheet { width: 210mm; height: 297mm; padding: 15mm 12mm; }
+    .pdf-table, .pdf-table td { border-width: 4px; }
+  }
+</style>pdf-tablead>
     <body>
   `;
   
   pages.forEach((pageItems) => {
-    pdfHTML += '<div class="page"><table class="pdf-table">';
-    for (let row = 0; row < 8; row++) {
+pdfHTML += '<div class="sheet"><table class="pdf-table">';    for (let row = 0; row < 8; row++) {
       pdfHTML += '<tr>';
       for (let col = 0; col < 2; col++) {
         const idx = row * 2 + col;
