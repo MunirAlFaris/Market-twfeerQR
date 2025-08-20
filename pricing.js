@@ -24,6 +24,29 @@ const parseBarcodes = (val) => {
 const money = (n) => (n == null || isNaN(n)) ? "—" : Number(n).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
 // ————————————————————————————————————————————————————————————————
+// إعداد Appwrite
+// ————————————————————————————————————————————————————————————————
+const { Client, Databases, ID } = Appwrite;
+
+// إعداد عميل Appwrite باستخدام ملف الإعداد
+const config = window.APPWRITE_CONFIG || {
+  ENDPOINT: 'https://fra.cloud.appwrite.io/v1',
+  PROJECT_ID: '68a6505a000ae3ad9653',
+  DATABASE_ID: '68a6506b001e531fdcce',
+  COLLECTION_ID: '68a650740005dbb4117a'
+};
+
+const client = new Client()
+    .setEndpoint(config.ENDPOINT)
+    .setProject(config.PROJECT_ID);
+
+const databases = new Databases(client);
+
+// معرفات قاعدة البيانات والمجموعة
+const DATABASE_ID = config.DATABASE_ID;
+const COLLECTION_ID = config.COLLECTION_ID;
+
+// ————————————————————————————————————————————————————————————————
 // حالة التطبيق
 // ————————————————————————————————————————————————————————————————
 let PRODUCTS = [];
@@ -346,8 +369,95 @@ function addByBarcode(code, preferType) {
 }
 
 // ————————————————————————————————————————————————————————————————
-// إدارة قائمة التسعير
+// وظائف قاعدة البيانات Appwrite
 // ————————————————————————————————————————————————————————————————
+async function initializeAppwrite() {
+  try {
+    // تحقق من وجود قاعدة البيانات والمجموعة
+    console.log('تهيئة Appwrite...');
+    await loadPricingItemsFromDatabase();
+  } catch (error) {
+    console.error('خطأ في تهيئة Appwrite:', error);
+    // في حالة الخطأ، استخدم التخزين المحلي كبديل
+    loadPricingListFromStorage();
+  }
+}
+
+async function savePricingItemToDatabase(item) {
+  try {
+    const document = await databases.createDocument(
+      DATABASE_ID,
+      COLLECTION_ID,
+      ID.unique(),
+      {
+        name: item.name,
+        price: item.price,
+        type: item.type,
+        created_at: new Date().toISOString()
+      }
+    );
+    return document;
+  } catch (error) {
+    console.error('خطأ في حفظ المنتج:', error);
+    throw error;
+  }
+}
+
+async function updatePricingItemInDatabase(documentId, updates) {
+  try {
+    const document = await databases.updateDocument(
+      DATABASE_ID,
+      COLLECTION_ID,
+      documentId,
+      updates
+    );
+    return document;
+  } catch (error) {
+    console.error('خطأ في تحديث المنتج:', error);
+    throw error;
+  }
+}
+
+async function deletePricingItemFromDatabase(documentId) {
+  try {
+    await databases.deleteDocument(
+      DATABASE_ID,
+      COLLECTION_ID,
+      documentId
+    );
+  } catch (error) {
+    console.error('خطأ في حذف المنتج:', error);
+    throw error;
+  }
+}
+
+async function loadPricingItemsFromDatabase() {
+  try {
+    const response = await databases.listDocuments(
+      DATABASE_ID,
+      COLLECTION_ID
+    );
+    
+    pricingItems = response.documents.map(doc => ({
+      id: doc.$id,
+      name: doc.name,
+      price: doc.price,
+      type: doc.type,
+      documentId: doc.$id
+    }));
+    
+    renderPricingList();
+    console.log(`تم تحميل ${pricingItems.length} منتج من قاعدة البيانات`);
+  } catch (error) {
+    console.error('خطأ في تحميل المنتجات:', error);
+    throw error;
+  }
+}
+
+// ————————————————————————————————————————————————————————————————
+// إدارة قائمة التسعير (محدثة لاستخدام Appwrite)
+// ————————————————————————————————————————————————————————————————
+// وظائف التخزين المحلي (كبديل احتياطي)
 function savePricingListToStorage() {
   try { localStorage.setItem('pricingItems', JSON.stringify(pricingItems)); }
   catch (error) { console.error('خطأ في حفظ القائمة:', error); }
@@ -360,18 +470,63 @@ function loadPricingListFromStorage() {
   } catch (error) { console.error('خطأ في تحميل القائمة:', error); pricingItems = []; }
 }
 
-function addToPricingList(name, price, type) {
+// وظائف إدارة قائمة التسعير المحدثة
+async function addToPricingList(name, price, type) {
   if (price == null || isNaN(price)) return;
-  const item = { id: Date.now() + Math.random(), name, price: Number(price), type };
-  pricingItems.push(item);
-  savePricingListToStorage();
-  renderPricingList();
+  
+  const item = { name, price: Number(price), type };
+  
+  try {
+    // حفظ في قاعدة البيانات
+    const document = await savePricingItemToDatabase(item);
+    
+    // إضافة إلى القائمة المحلية
+    const newItem = {
+      id: document.$id,
+      name: document.name,
+      price: document.price,
+      type: document.type,
+      documentId: document.$id
+    };
+    
+    pricingItems.push(newItem);
+    renderPricingList();
+    
+    // حفظ احتياطي في التخزين المحلي
+    savePricingListToStorage();
+  } catch (error) {
+    console.error('خطأ في إضافة المنتج:', error);
+    // في حالة الخطأ، استخدم التخزين المحلي
+    const fallbackItem = { id: Date.now() + Math.random(), name, price: Number(price), type };
+    pricingItems.push(fallbackItem);
+    savePricingListToStorage();
+    renderPricingList();
+  }
 }
 
-function removeFromPricingList(id) {
-  pricingItems = pricingItems.filter(item => item.id !== id);
-  savePricingListToStorage();
-  renderPricingList();
+async function removeFromPricingList(id) {
+  const item = pricingItems.find(item => item.id === id);
+  if (!item) return;
+  
+  try {
+    // حذف من قاعدة البيانات
+    if (item.documentId) {
+      await deletePricingItemFromDatabase(item.documentId);
+    }
+    
+    // حذف من القائمة المحلية
+    pricingItems = pricingItems.filter(item => item.id !== id);
+    renderPricingList();
+    
+    // تحديث التخزين المحلي
+    savePricingListToStorage();
+  } catch (error) {
+    console.error('خطأ في حذف المنتج:', error);
+    // في حالة الخطأ، احذف من القائمة المحلية فقط
+    pricingItems = pricingItems.filter(item => item.id !== id);
+    savePricingListToStorage();
+    renderPricingList();
+  }
 }
 
 function renderPricingList() {
@@ -381,12 +536,13 @@ function renderPricingList() {
     els.pricingList.innerHTML = pricingItems.map(item => `
       <div class="pricing-item">
         <div>
-          <div class="product-name">${item.name}</div>
+          <div class="product-name" id="name-${item.id}" onclick="editItemName('${item.id}')" style="cursor: pointer; border-bottom: 1px dashed #ccc;">${item.name}</div>
           <div class="hint">${item.type === 'base' ? 'سعر أساسي' : 'سعر آخر'}</div>
         </div>
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <div class="product-price">$${money(item.price)}</div>
-          <button class="remove-btn" onclick="removeFromPricingList(${item.id})">حذف</button>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <div class="product-price" id="price-${item.id}" onclick="editItemPrice('${item.id}')" style="cursor: pointer; border-bottom: 1px dashed #ccc;">$${money(item.price)}</div>
+          <button class="edit-btn" onclick="showEditOptions('${item.id}')" style="background: #4CAF50; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 12px;">تعديل</button>
+          <button class="remove-btn" onclick="removeFromPricingList('${item.id}')">حذف</button>
         </div>
       </div>
     `).join('');
@@ -394,13 +550,86 @@ function renderPricingList() {
   els.itemCount.textContent = `${pricingItems.length} منتج`;
 }
 
-function clearPricingList() {
+async function clearPricingList() {
+  try {
+    // حذف جميع العناصر من قاعدة البيانات
+    for (const item of pricingItems) {
+      if (item.documentId) {
+        await deletePricingItemFromDatabase(item.documentId);
+      }
+    }
+  } catch (error) {
+    console.error('خطأ في حذف العناصر من قاعدة البيانات:', error);
+  }
+  
   pricingItems = [];
   savePricingListToStorage();
   renderPricingList();
   els.pdfPreview.style.display = 'none';
   els.pdfContent.innerHTML = '';
   els.printBtn.style.display = 'none';
+}
+
+// وظائف التعديل
+function showEditOptions(itemId) {
+  const item = pricingItems.find(item => item.id === itemId);
+  if (!item) return;
+  
+  const options = confirm('اختر نوع التعديل:\nموافق = تعديل الاسم\nإلغاء = تعديل السعر');
+  
+  if (options) {
+    editItemName(itemId);
+  } else {
+    editItemPrice(itemId);
+  }
+}
+
+function editItemName(itemId) {
+  const item = pricingItems.find(item => item.id === itemId);
+  if (!item) return;
+  
+  const newName = prompt('أدخل الاسم الجديد:', item.name);
+  if (newName && newName.trim() && newName.trim() !== item.name) {
+    updatePricingItem(itemId, { name: newName.trim() });
+  }
+}
+
+function editItemPrice(itemId) {
+  const item = pricingItems.find(item => item.id === itemId);
+  if (!item) return;
+  
+  const newPrice = prompt('أدخل السعر الجديد:', item.price);
+  if (newPrice && !isNaN(newPrice) && Number(newPrice) !== item.price) {
+    updatePricingItem(itemId, { price: Number(newPrice) });
+  }
+}
+
+async function updatePricingItem(itemId, updates) {
+  const item = pricingItems.find(item => item.id === itemId);
+  if (!item) return;
+  
+  try {
+    // تحديث في قاعدة البيانات
+    if (item.documentId) {
+      await updatePricingItemInDatabase(item.documentId, updates);
+    }
+    
+    // تحديث في القائمة المحلية
+    Object.assign(item, updates);
+    renderPricingList();
+    
+    // تحديث التخزين المحلي
+    savePricingListToStorage();
+    
+    console.log('تم تحديث المنتج بنجاح');
+  } catch (error) {
+    console.error('خطأ في تحديث المنتج:', error);
+    // في حالة الخطأ، قم بالتحديث محلياً فقط
+    Object.assign(item, updates);
+    renderPricingList();
+    savePricingListToStorage();
+    alert('تم التحديث محلياً فقط بسبب خطأ في الاتصال');
+  }
 }
 
 // ————————————————————————————————————————————————————————————————
@@ -655,5 +884,14 @@ els.generatePdfBtn.addEventListener('click', generatePDF);
 els.downloadPdfBtn.addEventListener('click', downloadPDF);
 els.printBtn.addEventListener('click', printPDF);
 
-window.addEventListener('load', () => { listCameras(); loadPricingListFromStorage(); });
+window.addEventListener('load', () => { 
+  listCameras(); 
+  initializeAppwrite(); // استخدام Appwrite بدلاً من التخزين المحلي
+});
+
+// إضافة الوظائف إلى النطاق العام
 window.removeFromPricingList = removeFromPricingList;
+window.showEditOptions = showEditOptions;
+window.editItemName = editItemName;
+window.editItemPrice = editItemPrice;
+window.updatePricingItem = updatePricingItem;
