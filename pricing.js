@@ -271,10 +271,54 @@ function scanWithBarcodeDetector() {
 
 function scanWithQuagga() { scanInterval = setInterval(() => {}, 500); }
 
+function playBeepSound() {
+  try {
+    // إنشاء صوت تنبيه باستخدام Web Audio API
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    // إعداد الصوت
+    oscillator.frequency.setValueAtTime(800, audioContext.currentTime); // تردد 800 هرتز
+    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime); // مستوى الصوت
+    
+    // تشغيل الصوت لمدة 200 مللي ثانية
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.2);
+  } catch (error) {
+    console.log('تعذر تشغيل صوت التنبيه:', error);
+  }
+}
+
 function handleBarcodeDetected(code) {
   const c = String(code || '').replace(/[^0-9]/g, '');
   if (!c) return;
+  
+  // إيقاف القراءة المتكررة
+  if (scanInterval) {
+    clearInterval(scanInterval);
+    scanInterval = null;
+  }
+  
+  // تشغيل صوت التنبيه
+  playBeepSound();
+  
+  // تحديث حالة المسح
+  els.scanStatus.innerHTML = `<span style="color: #16a34a;">✅ تم قراءة الباركود: ${c}</span>`;
+  
+  // إضافة المنتج
   addByBarcode(c);
+  
+  // إعادة تشغيل المسح بعد ثانيتين
+  setTimeout(() => {
+    if (currentStream && !scanInterval) {
+      startScanning();
+      els.scanStatus.textContent = 'جاهز للمسح';
+    }
+  }, 2000);
 }
 
 // ————————————————————————————————————————————————————————————————
@@ -508,6 +552,10 @@ async function removeFromPricingList(id) {
   const item = pricingItems.find(item => item.id === id);
   if (!item) return;
   
+  // تأكيد الحذف
+  const confirmDelete = confirm(`هل أنت متأكد من حذف "${item.name}" من القائمة؟`);
+  if (!confirmDelete) return;
+  
   try {
     // حذف من قاعدة البيانات
     if (item.documentId) {
@@ -551,6 +599,16 @@ function renderPricingList() {
 }
 
 async function clearPricingList() {
+  // التحقق من وجود عناصر في القائمة
+  if (pricingItems.length === 0) {
+    alert('القائمة فارغة بالفعل!');
+    return;
+  }
+  
+  // تأكيد مسح القائمة
+  const confirmClear = confirm(`هل أنت متأكد من مسح جميع المنتجات (${pricingItems.length} منتج) من القائمة؟\n\nهذا الإجراء لا يمكن التراجع عنه.`);
+  if (!confirmClear) return;
+  
   try {
     // حذف جميع العناصر من قاعدة البيانات
     for (const item of pricingItems) {
