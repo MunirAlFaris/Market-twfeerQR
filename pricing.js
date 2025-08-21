@@ -53,6 +53,7 @@ let PRODUCTS = [];
 let INDEX_BC_BASE = new Map();
 let INDEX_BC_OTHER = new Map();
 let pricingItems = [];
+let stickerItems = [];
 let currentStream = null;
 let scanInterval = null;
 
@@ -73,12 +74,27 @@ const els = {
   nameResults: document.getElementById('nameResults'),
   pricingList: document.getElementById('pricingList'),
   clearListBtn: document.getElementById('clearListBtn'),
+  templateSelect: document.getElementById('templateSelect'),
+  manualProductSection: document.getElementById('manualProductSection'),
+  manualProductName: document.getElementById('manualProductName'),
+  manualProductBarcode: document.getElementById('manualProductBarcode'),
+  manualProductPrice: document.getElementById('manualProductPrice'),
+  manualProductQuantity: document.getElementById('manualProductQuantity'),
+  addManualProductBtn: document.getElementById('addManualProductBtn'),
   generatePdfBtn: document.getElementById('generatePdfBtn'),
   downloadPdfBtn: document.getElementById('downloadPdfBtn'),
   printBtn: document.getElementById('printBtn'),
   itemCount: document.getElementById('itemCount'),
   pdfPreview: document.getElementById('pdfPreview'),
-  pdfContent: document.getElementById('pdfContent')
+  pdfContent: document.getElementById('pdfContent'),
+  stickerList: document.getElementById('stickerList'),
+  stickerItems: document.getElementById('stickerItems'),
+  clearStickersBtn: document.getElementById('clearStickersBtn'),
+  generateStickersBtn: document.getElementById('generateStickersBtn'),
+  downloadStickersBtn: document.getElementById('downloadStickersBtn'),
+  printStickersBtn: document.getElementById('printStickersBtn'),
+  stickerCount: document.getElementById('stickerCount'),
+  stickerSizeSelect: document.getElementById('stickerSizeSelect')
 };
 
 // ————————————————————————————————————————————————————————————————
@@ -515,10 +531,10 @@ function loadPricingListFromStorage() {
 }
 
 // وظائف إدارة قائمة التسعير المحدثة
-async function addToPricingList(name, price, type) {
+async function addToPricingList(name, price, type, barcode = null) {
   if (price == null || isNaN(price)) return;
   
-  const item = { name, price: Number(price), type };
+  const item = { name, price: Number(price), type, barcode };
   
   try {
     // حفظ في قاعدة البيانات
@@ -530,6 +546,7 @@ async function addToPricingList(name, price, type) {
       name: document.name,
       price: document.price,
       type: document.type,
+      barcode: document.barcode,
       documentId: document.$id
     };
     
@@ -541,7 +558,7 @@ async function addToPricingList(name, price, type) {
   } catch (error) {
     console.error('خطأ في إضافة المنتج:', error);
     // في حالة الخطأ، استخدم التخزين المحلي
-    const fallbackItem = { id: Date.now() + Math.random(), name, price: Number(price), type };
+    const fallbackItem = { id: Date.now() + Math.random(), name, price: Number(price), type, barcode };
     pricingItems.push(fallbackItem);
     savePricingListToStorage();
     renderPricingList();
@@ -586,6 +603,12 @@ function renderPricingList() {
         <div>
           <div class="product-name" id="name-${item.id}" onclick="editItemName('${item.id}')" style="cursor: pointer; border-bottom: 1px dashed #ccc;">${item.name}</div>
           <div class="hint">${item.type === 'base' ? 'سعر أساسي' : 'سعر آخر'}</div>
+          ${item.barcode ? `<div class="barcode-display" style="font-size: 12px; color: #666; margin-top: 4px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span>الباركود: ${item.barcode}</span>
+              <div style="width: 60px; height: 20px;">${generateBarcodeSVG(item.barcode)}</div>
+            </div>
+          </div>` : ''}
         </div>
         <div style="display: flex; align-items: center; gap: 8px;">
           <div class="product-price" id="price-${item.id}" onclick="editItemPrice('${item.id}')" style="cursor: pointer; border-bottom: 1px dashed #ccc;">$${money(item.price)}</div>
@@ -691,15 +714,140 @@ async function updatePricingItem(itemId, updates) {
 }
 
 // ————————————————————————————————————————————————————————————————
-// بناء HTML الصفحات (8×2 لكل صفحة)
+// إضافة منتج يدوي للملصقات
 // ————————————————————————————————————————————————————————————————
-function buildTablesHTML() {
-  const itemsPerPage = 16; // 8 صفوف × 2 أعمدة
+function addManualProduct() {
+  const name = els.manualProductName.value.trim();
+  const barcode = els.manualProductPrice.value.trim(); // استخدام حقل السعر كباركود
+  const quantity = parseInt(els.manualProductQuantity.value) || 1;
+  
+  if (!name) {
+    alert('يرجى إدخال اسم المنتج');
+    return;
+  }
+  
+  if (!barcode) {
+    alert('يرجى إدخال الباركود');
+    return;
+  }
+  
+  // إضافة المنتج إلى قائمة التسعير مع الباركود (سعر افتراضي 0)
+  addToPricingList(name, 0, 'manual', barcode);
+  
+  // إضافة المنتج بالكمية المطلوبة إلى قائمة الملصقات
+  for (let i = 0; i < quantity; i++) {
+    addToStickerList(name, barcode);
+  }
+  
+  // مسح الحقول
+  els.manualProductName.value = '';
+  els.manualProductPrice.value = '';
+  els.manualProductQuantity.value = '1';
+  
+  console.log(`تم إضافة ${quantity} ملصق للمنتج: ${name} مع الباركود: ${barcode}`);
+}
+
+// ————————————————————————————————————————————————————————————————
+// نظام الملصقات
+// ————————————————————————————————————————————————————————————————
+function addToStickerList(name, barcode) {
+  const sticker = {
+    id: Date.now() + Math.random(),
+    name: name,
+    barcode: barcode,
+    timestamp: new Date().toISOString()
+  };
+  
+  stickerItems.push(sticker);
+  renderStickerList();
+  saveStickerListToStorage();
+  
+  // إظهار قائمة الملصقات
+  els.stickerList.style.display = 'block';
+}
+
+function renderStickerList() {
+  if (stickerItems.length === 0) {
+    els.stickerItems.innerHTML = '<div class="hint" style="padding: 20px; text-align: center;">لا توجد ملصقات في القائمة</div>';
+    els.stickerCount.textContent = '0 ملصق';
+    return;
+  }
+  
+  const html = stickerItems.map(sticker => `
+    <div class="sticker-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px; border: 1px solid var(--border); border-radius: 4px; margin-bottom: 4px; background: var(--card);">
+      <div>
+        <strong>${sticker.name}</strong><br>
+        <small style="color: #666;">الباركود: ${sticker.barcode}</small>
+      </div>
+      <button onclick="removeFromStickerList('${sticker.id}')" class="btn btn-danger" style="padding: 4px 8px; font-size: 12px;">
+        <i class="fas fa-trash"></i>
+      </button>
+    </div>
+  `).join('');
+  
+  els.stickerItems.innerHTML = html;
+  els.stickerCount.textContent = `${stickerItems.length} ملصق`;
+}
+
+function removeFromStickerList(id) {
+  stickerItems = stickerItems.filter(sticker => sticker.id != id);
+  renderStickerList();
+  saveStickerListToStorage();
+  
+  if (stickerItems.length === 0) {
+    els.stickerList.style.display = 'none';
+  }
+}
+
+function clearStickerList() {
+  if (stickerItems.length === 0) return;
+  
+  if (confirm('هل أنت متأكد من مسح جميع الملصقات؟')) {
+    stickerItems = [];
+    renderStickerList();
+    saveStickerListToStorage();
+    els.stickerList.style.display = 'none';
+  }
+}
+
+function saveStickerListToStorage() {
+  localStorage.setItem('stickerItems', JSON.stringify(stickerItems));
+}
+
+function loadStickerListFromStorage() {
+  const saved = localStorage.getItem('stickerItems');
+  if (saved) {
+    stickerItems = JSON.parse(saved);
+    if (stickerItems.length > 0) {
+      renderStickerList();
+      els.stickerList.style.display = 'block';
+    }
+  }
+}
+
+// ————————————————————————————————————————————————————————————————
+// بناء HTML الصفحات
+// ————————————————————————————————————————————————————————————————
+function buildTablesHTML(template = 'standard') {
+  // للملصقات: إنشاء صفحة منفصلة لكل منتج
+  if (template === 'sticker-3x4' || template === 'sticker-3x2') {
+    return buildStickerPagesHTML(template);
+  }
+  
+  // للقوالب العادية: استخدام الجدول
+  let itemsPerPage, cols, rowsPerPage, cellHeight, cellWidth;
+  
+  cols = 2;
+  rowsPerPage = template === 'barcode' ? 6 : 8;
+  itemsPerPage = cols * rowsPerPage;
+  cellHeight = template === 'barcode' ? '120px' : '80px';
+  cellWidth = '50%';
+  
   const pages = [];
   for (let i = 0; i < pricingItems.length; i += itemsPerPage) {
     pages.push(pricingItems.slice(i, i + itemsPerPage));
   }
-  
+
   let pdfHTML = `
     <!DOCTYPE html>
     <html dir="rtl" lang="ar">
@@ -734,8 +882,8 @@ function buildTablesHTML() {
   }
   .pdf-table td {
     border: 4px solid #000;
-    height: 80px;        /* 8 صفوف واضحة */
-    width: 50%;          /* عمودان */
+    height: ${cellHeight};
+    width: ${cellWidth};
     padding: 12px;
     text-align: center;
     vertical-align: middle;
@@ -743,6 +891,10 @@ function buildTablesHTML() {
 
   .pdf-product-name { font-weight: 700; font-size: 26px; color:#000; margin-bottom: 6px; }
   .pdf-product-price { font-weight: 700; font-size: 26px; color:#dc2626; direction:ltr; }
+  .pdf-price-barcode-row { display: flex; align-items: center; justify-content: space-arround; }
+  .pdf-price-barcode-row .pdf-product-price { margin: 0; flex: 1; }
+  .pdf-barcode { flex: 1; text-align: center; }
+  .pdf-barcode svg { max-width: 100%; height: 35px; }
 
   /* نفس الأبعاد في الطباعة */
   @media print {
@@ -750,22 +902,21 @@ function buildTablesHTML() {
     .sheet { width: 210mm; height: 297mm; padding: 15mm 12mm; }
     .pdf-table, .pdf-table td { border-width: 4px; }
   }
-</style>pdf-tablead>
+</style>
+    </head>
     <body>
   `;
   
   pages.forEach((pageItems) => {
-pdfHTML += '<div class="sheet"><table class="pdf-table">';    for (let row = 0; row < 8; row++) {
+    pdfHTML += '<div class="sheet"><table class="pdf-table">';
+    
+    for (let row = 0; row < rowsPerPage; row++) {
       pdfHTML += '<tr>';
-      for (let col = 0; col < 2; col++) {
-        const idx = row * 2 + col;
+      for (let col = 0; col < cols; col++) {
+        const idx = row * cols + col;
         const item = pageItems[idx];
         if (item) {
-          pdfHTML += `
-            <td>
-              <div class="pdf-product-name">${escapeHtml(item.name)}</div>
-              <div class="pdf-product-price">$${money(item.price)}</div>
-            </td>`;
+          pdfHTML += buildCellHTML(item, template);
         } else {
           pdfHTML += '<td></td>';
         }
@@ -778,13 +929,200 @@ pdfHTML += '<div class="sheet"><table class="pdf-table">';    for (let row = 0; 
   pdfHTML += `</body></html>`;
   return pdfHTML;
 }
+
+// دالة جديدة لإنشاء صفحات الملصقات
+function buildStickerPagesHTML(template) {
+  // تحديد أبعاد الملصق حسب القالب (بالإنش ثم تحويل للمليمتر)
+  // 4x3 inches = 101.6mm x 76.2mm
+  // 3x2 inches = 76.2mm x 50.8mm
+  const stickerWidth = template === 'sticker-4x3' ? '101.6mm' : '76.2mm';
+  const stickerHeight = template === 'sticker-4x3' ? '76.2mm' : '50.8mm';
+  
+  let pdfHTML = `
+    <!DOCTYPE html>
+    <html dir="rtl" lang="ar">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>ملصقات الباركود</title>
+    <style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Arial, Tahoma, sans-serif; background:#fff; direction: rtl; margin: 0; padding: 0; }
+
+  @media print { @page { size: ${stickerWidth} ${stickerHeight}; margin: 0; } }
+
+  .sticker-page {
+    width: ${stickerWidth};
+    height: ${stickerHeight};
+    margin: 3mm;
+    page-break-after: always;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4.8mm; /* 3/16 inch safety margin = 4.76mm */
+    border: 2px solid #000;
+    background: white;
+    box-sizing: border-box;
+  }
+
+  .sticker-page:last-child {
+    page-break-after: avoid;
+  }
+
+  .sticker-product-name {
+    font-weight: bold;
+    font-size: ${template === 'sticker-4x3' ? '16px' : '12px'};
+    color: #000;
+    text-align: center;
+    word-wrap: break-word;
+    line-height: 1.1;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+  }
+
+  .sticker-barcode {
+    text-align: center;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: ${template === 'sticker-4x3' ? '25mm' : '18mm'};
+  }
+
+  .sticker-barcode svg {
+    max-width: 100%;
+    height: auto;
+    max-height: ${template === 'sticker-4x3' ? '25mm' : '18mm'};
+  }
+
+  @media print {
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    
+    .sticker-page {
+      width: ${stickerWidth};
+      height: ${stickerHeight};
+      margin: 0;
+      border: 1px solid #000;
+      page-break-inside: avoid;
+    }
+  }
+</style>
+    </head>
+    <body>
+  `;
+  
+  // إنشاء صفحة منفصلة لكل منتج
+  stickerItems.forEach((sticker, index) => {
+    const barcodeSVG = generateBarcodeSVG(sticker.barcode);
+    
+    pdfHTML += `
+      <div class="sticker-page">
+        <div class="sticker-product-name">${sticker.name}</div>
+        <div class="sticker-barcode">${barcodeSVG}</div>
+      </div>
+    `;
+  });
+
+  pdfHTML += `</body></html>`;
+  return pdfHTML;
+}
+
+// ————————————————————————————————————————————————————————————————
+// بناء محتوى الخلية حسب القالب
+// ————————————————————————————————————————————————————————————————
+function buildCellHTML(item, template) {
+  const productName = escapeHtml(item.name);
+  const productPrice = `$${money(item.price)}`;
+  
+  switch (template) {
+    case 'simple':
+      return `
+        <td>
+          <div class="pdf-product-name">${productName}</div>
+          <div class="pdf-product-price">${productPrice}</div>
+        </td>`;
+    
+    case 'barcode':
+      const barcode = generateBarcodeSVG(item.id || item.name);
+      return `
+        <td>
+          <div class="pdf-product-name">${productName}</div>
+          <div class="pdf-price-barcode-row"
+            style="display: flex; align-items: center; justify-content: space-around;"
+          >
+            <div class="pdf-barcode">${barcode}</div>
+            <div class="pdf-product-price">${productPrice}</div>
+          </div>
+        </td>`;
+    
+
+    
+    case 'standard':
+    default:
+      return `
+        <td>
+          <div class="pdf-product-name">${productName}</div>
+          <div class="pdf-product-price">${productPrice}</div>
+        </td>`;
+  }
+}
+
+// ————————————————————————————————————————————————————————————————
+// توليد باركود SVG
+// ————————————————————————————————————————————————————————————————
+function generateBarcodeSVG(data) {
+  // تنظيف البيانات وتحويلها لرقم
+  const cleanData = String(data).replace(/[^0-9]/g, '') || '123456789';
+  const barcodeData = cleanData.padStart(12, '0').substring(0, 12);
+  
+  // نمط باركود بسيط (Code 128 مبسط) - محسن للطباعة
+  const bars = [];
+  for (let i = 0; i < barcodeData.length; i++) {
+    const digit = parseInt(barcodeData[i]);
+    // كل رقم يمثل بنمط من الخطوط
+    const pattern = [
+      '3211', '2221', '2122', '1411', '1132',
+      '1231', '1114', '1312', '1213', '3112'
+    ][digit];
+    
+    for (let j = 0; j < pattern.length; j++) {
+      const width = parseInt(pattern[j]) * 2; // زيادة العرض للوضوح
+      const isBlack = j % 2 === 0;
+      bars.push({ width, isBlack });
+    }
+  }
+  
+  // بناء SVG محسن للطباعة عالية الجودة
+  let x = 0;
+  let barsHTML = '';
+  bars.forEach(bar => {
+    if (bar.isBlack) {
+      barsHTML += `<rect x="${x}" y="0" width="${bar.width}" height="60" fill="#000000"/>`;
+    }
+    x += bar.width;
+  });
+  
+  return `
+    <svg width="${x}" height="75" viewBox="0 0 ${x} 75" xmlns="http://www.w3.org/2000/svg" style="background: white;">
+      ${barsHTML}
+      <text x="${x/2}" y="72" text-anchor="middle" font-family="Arial, monospace" font-size="10" font-weight="bold" fill="#000000">${barcodeData}</text>
+    </svg>`;
+}
   
 // ————————————————————————————————————————————————————————————————
 // معاينة PDF داخل الصفحة
 // ————————————————————————————————————————————————————————————————
 function generatePDF() {
   if (pricingItems.length === 0) { alert('لا توجد منتجات في القائمة'); return; }
-  const fullHTML = buildTablesHTML();
+  const template = els.templateSelect.value;
+  const fullHTML = buildTablesHTML(template);
   const parser = new DOMParser();
   const doc = parser.parseFromString(fullHTML, 'text/html');
   const tables = doc.querySelectorAll('.pdf-table');
@@ -794,6 +1132,102 @@ function generatePDF() {
   els.pdfPreview.style.display = 'block';
   els.printBtn.style.display = 'inline-flex';
   els.pdfPreview.scrollIntoView({ behavior: 'smooth' });
+}
+
+function generateStickersPDF() {
+  if (stickerItems.length === 0) {
+    alert('لا توجد ملصقات لإنشاء PDF');
+    return;
+  }
+  
+  // استخدام الحجم المحدد من القائمة المنسدلة
+  const template = els.stickerSizeSelect.value || 'sticker-4x3';
+  const fullHTML = buildStickerPagesHTML(template);
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(fullHTML, 'text/html');
+  const pages = doc.querySelectorAll('.sticker-page');
+  let pagesHTML = '';
+  
+  // إضافة الستايل للمعاينة
+  const styleElement = doc.querySelector('style');
+  if (styleElement) {
+    pagesHTML += `<style>${styleElement.innerHTML}</style>`;
+  }
+  
+  pages.forEach(p => pagesHTML += p.outerHTML);
+  els.pdfContent.innerHTML = pagesHTML;
+  els.pdfPreview.style.display = 'block';
+  els.printStickersBtn.style.display = 'inline-flex';
+  els.pdfPreview.scrollIntoView({ behavior: 'smooth' });
+}
+
+async function downloadStickersPDF() {
+  if (stickerItems.length === 0) {
+    alert('لا توجد ملصقات للتحميل');
+    return;
+  }
+  
+  try {
+    const template = els.stickerSizeSelect ? els.stickerSizeSelect.value : 'sticker-4x3';
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({
+      orientation: 'portrait',
+      unit: 'mm',
+      format: template === 'sticker-4x3' ? [101.6, 76.2] : [76.2, 50.8]
+    });
+    
+    const fullHTML = buildStickerPagesHTML(template);
+    const iframe = document.createElement('iframe');
+    iframe.style.position = 'absolute';
+    iframe.style.left = '-9999px';
+    document.body.appendChild(iframe);
+    
+    iframe.contentDocument.open();
+    iframe.contentDocument.write(fullHTML);
+    iframe.contentDocument.close();
+    
+    setTimeout(async () => {
+      const pages = iframe.contentDocument.querySelectorAll('.sticker-page');
+      
+      for (let i = 0; i < pages.length; i++) {
+        if (i > 0) pdf.addPage();
+        
+        const canvas = await html2canvas(pages[i], {
+          scale: 2,
+          useCORS: true,
+          backgroundColor: '#ffffff'
+        });
+        
+        const imgData = canvas.toDataURL('image/png');
+        pdf.addImage(imgData, 'PNG', 0, 0, 75, template === 'sticker-3x4' ? 100 : 150);
+      }
+      
+      pdf.save(`stickers-${new Date().toISOString().split('T')[0]}.pdf`);
+      document.body.removeChild(iframe);
+    }, 1000);
+    
+  } catch (error) {
+    console.error('خطأ في تحميل PDF:', error);
+    alert('حدث خطأ أثناء تحميل PDF');
+  }
+}
+
+function printStickersPDF() {
+  if (stickerItems.length === 0) {
+    alert('لا توجد ملصقات للطباعة');
+    return;
+  }
+  
+  const template = els.templateSelect.value;
+  const fullHTML = buildStickerPagesHTML(template);
+  
+  const printWindow = window.open('', '_blank');
+  printWindow.document.write(fullHTML);
+  printWindow.document.close();
+  
+  setTimeout(() => {
+    printWindow.print();
+  }, 1000);
 }
 
 // ————————————————————————————————————————————————————————————————
@@ -841,14 +1275,22 @@ async function downloadPDF() {
     iframe.style.border = 'none';
     document.body.appendChild(iframe);
 
+    const template = els.templateSelect.value;
     const doc = iframe.contentDocument || iframe.contentWindow.document;
-    doc.open(); doc.write(buildTablesHTML()); doc.close();
+    doc.open(); doc.write(buildTablesHTML(template)); doc.close();
     await new Promise(r => { iframe.onload = r; setTimeout(r, 800); });
 
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     const pdf = await renderIframePagesToPdf(doc, /*scaleForMobile*/ isMobile);
 
-    pdf.save('pricing-table.pdf');
+    let templateName;
+    if (template === 'simple') templateName = 'بسيط';
+    else if (template === 'barcode') templateName = 'باركود';
+    else if (template === 'sticker-3x4') templateName = 'ملصقات-3x4';
+    else if (template === 'sticker-3x2') templateName = 'ملصقات-3x2';
+    else templateName = 'عادي';
+    
+    pdf.save(`pricing-table-${templateName}.pdf`);
     document.body.removeChild(iframe);
   } catch (error) {
     console.error('خطأ في إنشاء PDF:', error);
@@ -883,8 +1325,9 @@ async function printOnMobile() {
     iframe.style.border = 'none';
     document.body.appendChild(iframe);
 
+    const template = els.templateSelect.value;
     const doc = iframe.contentDocument || iframe.contentWindow.document;
-    doc.open(); doc.write(buildTablesHTML()); doc.close();
+    doc.open(); doc.write(buildTablesHTML(template)); doc.close();
     await new Promise(r => { iframe.onload = r; setTimeout(r, 800); });
 
     const pdf = await renderIframePagesToPdf(doc, /*scaleForMobile*/ true);
@@ -906,7 +1349,8 @@ async function printOnMobile() {
 function printOnDesktop() {
   const w = window.open('', '_blank');
   if (!w) { alert('فشل في فتح نافذة الطباعة'); return; }
-  const html = buildTablesHTML();
+  const template = els.templateSelect.value;
+  const html = buildTablesHTML(template);
   w.document.write(html);
   w.document.close();
   w.onload = () => setTimeout(() => { w.focus(); w.print(); w.close(); }, 400);
@@ -942,9 +1386,26 @@ els.generatePdfBtn.addEventListener('click', generatePDF);
 els.downloadPdfBtn.addEventListener('click', downloadPDF);
 els.printBtn.addEventListener('click', printPDF);
 
+// إظهار/إخفاء قسم الإدخال اليدوي حسب القالب المختار
+els.templateSelect.addEventListener('change', () => {
+  const template = els.templateSelect.value;
+  const isSticker = template.startsWith('sticker');
+  els.manualProductSection.style.display = isSticker ? 'block' : 'none';
+});
+
+// إضافة منتج يدوي للملصقات
+els.addManualProductBtn.addEventListener('click', addManualProduct);
+
+// إضافة مستمعي الأحداث للملصقات
+els.clearStickersBtn.addEventListener('click', clearStickerList);
+els.generateStickersBtn.addEventListener('click', generateStickersPDF);
+els.downloadStickersBtn.addEventListener('click', downloadStickersPDF);
+els.printStickersBtn.addEventListener('click', printStickersPDF);
+
 window.addEventListener('load', () => { 
   listCameras(); 
   initializeAppwrite(); // استخدام Appwrite بدلاً من التخزين المحلي
+  loadStickerListFromStorage(); // تحميل قائمة الملصقات من التخزين المحلي
 });
 
 // إضافة الوظائف إلى النطاق العام

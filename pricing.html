@@ -218,6 +218,39 @@
     <!-- قسم قائمة التسعير -->
     <section class="card">
       <h3>٤) قائمة التسعير</h3>
+      <!-- اختيار قالب الطباعة -->
+      <div style="margin-bottom: 12px;">
+        <label for="templateSelect">قالب الطباعة</label>
+        <select id="templateSelect" style="margin-bottom: 8px;">
+          <option value="standard">القالب العادي (اسم + سعر)</option>
+          <option value="simple">القالب البسيط (اسم + سعر فقط)</option>
+          <option value="barcode">القالب مع الباركود (اسم + سعر + باركود)</option>
+          <option value="sticker-3x4">ملصقات باركود 3×4</option>
+          <option value="sticker-3x2">ملصقات باركود 3×2</option>
+        </select>
+      </div>
+      
+      <!-- قسم إدخال منتج يدوي للملصقات -->
+      <div id="manualProductSection" style="display: none; margin-bottom: 12px; padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: #0b1324;">
+        <h4 style="margin-bottom: 8px;">إدخال منتج يدوي للملصقات</h4>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 8px; align-items: end;">
+          <div>
+            <label for="manualProductName">اسم المنتج</label>
+            <input id="manualProductName" type="text" placeholder="اسم المنتج..." style="width: 100%;" />
+          </div>
+          <div>
+              <label for="manualProductPrice">الباركود</label>
+              <input id="manualProductPrice" type="text" placeholder="أدخل الباركود" style="width: 100%;" />
+            </div>
+          <div>
+            <label for="manualProductQuantity">عدد الملصقات</label>
+            <input id="manualProductQuantity" type="number" min="1" value="1" style="width: 100%;" />
+          </div>
+          <button id="addManualProductBtn" class="btn btn-primary">إضافة للملصقات</button>
+        </div>
+        <div class="hint" style="margin-top: 6px;">💡 أو اختر منتج من القائمة أدناه لإضافته كملصق</div>
+      </div>
+      
       <div class="toolbar" style="margin-bottom: 12px;">
         <button id="clearListBtn" class="btn btn-danger">
           <i class="fas fa-trash"></i>
@@ -240,6 +273,42 @@
       
       <div id="pricingList" class="pricing-list">
         <div class="hint" style="padding: 20px; text-align: center;">لا توجد منتجات في القائمة</div>
+      </div>
+      
+      <!-- قائمة الملصقات -->
+      <div id="stickerList" class="sticker-list" style="display: none; margin-top: 20px;">
+        <h3 style="margin-bottom: 12px;">قائمة الملصقات</h3>
+        
+        <div class="toolbar" style="margin-bottom: 12px;">
+          <div style="margin-bottom: 10px;">
+            <label for="stickerSizeSelect" style="margin-left: 8px; font-weight: bold;">حجم الملصق:</label>
+            <select id="stickerSizeSelect" style="padding: 5px; border: 1px solid #ddd; border-radius: 4px;">
+              <option value="sticker-4x3">4×3 إنش (101.6×76.2 مم)</option>
+              <option value="sticker-3x2">3×2 إنش (76.2×50.8 مم)</option>
+            </select>
+          </div>
+          <button id="clearStickersBtn" class="btn btn-danger">
+            <i class="fas fa-trash"></i>
+            مسح الملصقات
+          </button>
+          <button id="generateStickersBtn" class="btn btn-primary">
+            <i class="fas fa-file-pdf"></i>
+            معاينة الملصقات
+          </button>
+          <button id="downloadStickersBtn" class="btn btn-success">
+            <i class="fas fa-download"></i>
+            تحميل الملصقات
+          </button>
+          <button id="printStickersBtn" class="btn btn-info" style="display: none;">
+            <i class="fas fa-print"></i>
+            طباعة الملصقات
+          </button>
+          <span id="stickerCount" class="hint">0 ملصق</span>
+        </div>
+        
+        <div id="stickerItems" class="sticker-items">
+          <div class="hint" style="padding: 20px; text-align: center;">لا توجد ملصقات في القائمة</div>
+        </div>
       </div>
       
       <!-- معاينة PDF -->
