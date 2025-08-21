@@ -26,7 +26,7 @@ const money = (n) => (n == null || isNaN(n)) ? "—" : Number(n).toLocaleString(
 // ————————————————————————————————————————————————————————————————
 // إعداد Appwrite
 // ————————————————————————————————————————————————————————————————
-const { Client, Databases, ID } = Appwrite;
+const { Client, Databases, ID, Query } = Appwrite;
 
 // إعداد عميل Appwrite باستخدام ملف الإعداد
 const config = window.APPWRITE_CONFIG || {
@@ -45,6 +45,7 @@ const databases = new Databases(client);
 // معرفات قاعدة البيانات والمجموعة
 const DATABASE_ID = config.DATABASE_ID;
 const COLLECTION_ID = config.COLLECTION_ID;
+const PRICING_COLLECTION_ID = config.COLLECTION_ID; // استخدام نفس المجموعة للتسعير والملصقات
 
 // ————————————————————————————————————————————————————————————————
 // حالة التطبيق
@@ -495,7 +496,8 @@ async function loadPricingItemsFromDatabase() {
   try {
     const response = await databases.listDocuments(
       DATABASE_ID,
-      COLLECTION_ID
+      PRICING_COLLECTION_ID,
+      [Query.limit(10000)]
     );
     
     pricingItems = response.documents.map(doc => ({
@@ -503,6 +505,7 @@ async function loadPricingItemsFromDatabase() {
       name: doc.name,
       price: doc.price,
       type: doc.type,
+      barcode: doc.barcode,
       documentId: doc.$id
     }));
     
