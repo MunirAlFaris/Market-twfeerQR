@@ -601,16 +601,21 @@ function renderPricingList() {
   if (pricingItems.length === 0) {
     els.pricingList.innerHTML = '<div class="hint" style="padding: 20px; text-align: center;">لا توجد منتجات في القائمة</div>';
   } else {
-    els.pricingList.innerHTML = pricingItems.map(item => `
+    // ترتيب العناصر بحسب الأحدث أولاً
+    const sortedItems = [...pricingItems].sort((a, b) => {
+      // استخدام الـ id للترتيب (الأحدث له id أكبر)
+      const aId = typeof a.id === 'string' ? parseInt(a.id) || 0 : a.id || 0;
+      const bId = typeof b.id === 'string' ? parseInt(b.id) || 0 : b.id || 0;
+      return bId - aId;
+    });
+    
+    els.pricingList.innerHTML = sortedItems.map(item => `
       <div class="pricing-item">
         <div>
           <div class="product-name" id="name-${item.id}" onclick="editItemName('${item.id}')" style="cursor: pointer; border-bottom: 1px dashed #ccc;">${item.name}</div>
           <div class="hint">${item.type === 'base' ? 'سعر أساسي' : 'سعر آخر'}</div>
           ${item.barcode ? `<div class="barcode-display" style="font-size: 12px; color: #666; margin-top: 4px;">
-            <div style="display: flex; align-items: center; gap: 8px;">
-              <span>الباركود: ${item.barcode}</span>
-              <div style="width: 60px; height: 20px;">${generateBarcodeSVG(item.barcode)}</div>
-            </div>
+            <span>الباركود: ${item.barcode}</span>
           </div>` : ''}
         </div>
         <div style="display: flex; align-items: center; gap: 8px;">
