@@ -1,5 +1,5 @@
 {
-"\r\nWITH PRICES_RAW AS (\r\n SELECT\r\n   pr.PRODUCT_ID,\r\n   MAX(COALESCE(pr.BASE_PRICE, pr.BASE_WIN)) AS BASE_RAW,\r\n   MAX(COALESCE(pr.MORE_PRICE, pr.MORE_WIN)) AS MORE_RAW,\r\n   MAX(COALESCE(pr.LESS_PRICE, pr.LESS_WIN)) AS LESS_RAW\r\n FROM PRODUCT_PRICE pr\r\n GROUP BY pr.PRODUCT_ID\r\n),\r\n\/* 2) باركودات الوحدة الأساسية (من PRODUCT + PRODUCT_BARCODES للوحدة الأساسية) *\/\r\nB_BASE AS (\r\n SELECT PRODUCT_ID, LIST(BC, ', ') AS BASE_UNIT_BARCODES\r\n FROM (\r\n   SELECT p.PRODUCT_ID, TRIM(p.BASE_BARCODE) AS BC\r\n     FROM PRODUCT p\r\n    WHERE p.BASE_BARCODE IS NOT NULL AND TRIM(p.BASE_BARCODE) <> ''\r\n   UNION\r\n   SELECT pb.PRODUCT_ID, TRIM(pb.PRODUCT_BARCODE)\r\n     FROM PRODUCT_BARCODES pb\r\n     JOIN PRODUCT p2 ON p2.PRODUCT_ID = pb.PRODUCT_ID\r\n    WHERE pb.PRODUCT_BARCODE IS NOT NULL AND TRIM(pb.PRODUCT_BARCODE) <> ''\r\n      AND pb.FOR_UNIT = p2.BASE_UNIT_ID\r\n ) t\r\n GROUP BY PRODUCT_ID\r\n),\r\n\/* 3) باركودات الوحدة الكبرى (إن وُجدت) *\/\r\nB_MORE AS (\r\n SELECT PRODUCT_ID, LIST(BC, ', ') AS MORE_UNIT_BARCODES\r\n FROM (\r\n   SELECT p.PRODUCT_ID, TRIM(p.MORE_BARCODE) AS BC\r\n     FROM PRODUCT p\r\n    WHERE p.MORE_BARCODE IS NOT NULL AND TRIM(p.MORE_BARCODE) <> ''\r\n   UNION\r\n   SELECT pb.PRODUCT_ID, TRIM(pb.PRODUCT_BARCODE)\r\n     FROM PRODUCT_BARCODES pb\r\n     JOIN PRODUCT p2 ON p2.PRODUCT_ID = pb.PRODUCT_ID\r\n    WHERE pb.PRODUCT_BARCODE IS NOT NULL AND TRIM(pb.PRODUCT_BARCODE) <> ''\r\n      AND p2.MORE_UNIT_ID IS NOT NULL\r\n      AND pb.FOR_UNIT = p2.MORE_UNIT_ID\r\n ) t\r\n GROUP BY PRODUCT_ID\r\n),\r\n\/* 4) باركودات الوحدة الصغرى (إن وُجدت) *\/\r\nB_LESS AS (\r\n SELECT PRODUCT_ID, LIST(BC, ', ') AS LESS_UNIT_BARCODES\r\n FROM (\r\n   SELECT p.PRODUCT_ID, TRIM(p.LESS_BARCODE) AS BC\r\n     FROM PRODUCT p\r\n    WHERE p.LESS_BARCODE IS NOT NULL AND TRIM(p.LESS_BARCODE) <> ''\r\n   UNION\r\n   SELECT pb.PRODUCT_ID, TRIM(pb.PRODUCT_BARCODE)\r\n     FROM PRODUCT_BARCODES pb\r\n     JOIN PRODUCT p2 ON p2.PRODUCT_ID = pb.PRODUCT_ID\r\n    WHERE pb.PRODUCT_BARCODE IS NOT NULL AND TRIM(pb.PRODUCT_BARCODE) <> ''\r\n      AND pb.FOR_UNIT <> p2.BASE_UNIT_ID\r\n      AND (p2.MORE_UNIT_ID IS NULL OR pb.FOR_UNIT <> p2.MORE_UNIT_ID)\r\n ) t\r\n GROUP BY PRODUCT_ID\r\n),\r\n\/* 5) نحسب سعر الأساسية مسبقاً لاستخدامه لاحقاً *\/\r\nBASE_CALC AS (\r\n SELECT\r\n   p.PRODUCT_ID,\r\n   CASE\r\n     WHEN COALESCE(r.BASE_RAW, 0) > 0 THEN r.BASE_RAW\r\n     WHEN COALESCE(r.MORE_RAW, 0) > 0 AND COALESCE(p.MORE_EXP, 0) > 0 THEN r.MORE_RAW \/ p.MORE_EXP\r\n     WHEN COALESCE(r.LESS_RAW, 0) > 0 AND COALESCE(p.LESS_EXP, 0) > 0 THEN r.LESS_RAW * p.LESS_EXP\r\n     ELSE NULL\r\n   END AS PRICE_BASE_UNIT\r\n FROM PRODUCT p\r\n LEFT JOIN PRICES_RAW r ON r.PRODUCT_ID = p.PRODUCT_ID\r\n)\r\nSELECT\r\n \/* اسم المنتج بالعربي (NONE -> WIN1256 -> UTF8) *\/\r\n CAST(CAST(CAST(p.PRODUCT_NAME AS VARCHAR(200) CHARACTER SET OCTETS)\r\n      AS VARCHAR(200) CHARACTER SET WIN1256) AS VARCHAR(400) CHARACTER SET UTF8)\r\n      AS ITEM_NAME_AR,\r\n \/* اسم الصنف بالعربي *\/\r\n CAST(CAST(CAST(pc.PROD_CATEG_NAME AS VARCHAR(200) CHARACTER SET OCTETS)\r\n      AS VARCHAR(200) CHARACTER SET WIN1256) AS VARCHAR(400) CHARACTER SET UTF8)\r\n      AS CATEGORY_AR,\r\n \/* سعر مبيع الواحدة الأساسية *\/\r\n bcalc.PRICE_BASE_UNIT AS SALE_PRICE_BASE,\r\n \/* سعر مبيع الواحدة الأخرى:\r\n    - إن كانت الأخرى = كبرى (MORE_UNIT_ID موجود): نأخذ MORE_RAW، وإلا نحسب Base × MORE_EXP.\r\n    - إن كانت الأخرى = صغرى (لا يوجد MORE_UNIT_ID): نأخذ LESS_RAW، وإلا نحسب Base ÷ LESS_EXP. *\/\r\n CASE\r\n   WHEN p.MORE_UNIT_ID IS NOT NULL THEN\r\n     CASE\r\n       WHEN COALESCE(r.MORE_RAW, 0) > 0 THEN r.MORE_RAW\r\n       WHEN COALESCE(bcalc.PRICE_BASE_UNIT, 0) > 0 AND COALESCE(p.MORE_EXP, 0) > 0\r\n         THEN bcalc.PRICE_BASE_UNIT * p.MORE_EXP\r\n       WHEN COALESCE(r.LESS_RAW, 0) > 0 AND COALESCE(p.LESS_EXP, 0) > 0 AND COALESCE(p.MORE_EXP, 0) > 0\r\n         THEN r.LESS_RAW * p.LESS_EXP * p.MORE_EXP\r\n       ELSE NULL\r\n     END\r\n   ELSE\r\n     CASE\r\n       WHEN COALESCE(r.LESS_RAW, 0) > 0 THEN r.LESS_RAW\r\n       WHEN COALESCE(bcalc.PRICE_BASE_UNIT, 0) > 0 AND COALESCE(p.LESS_EXP, 0) > 0\r\n         THEN bcalc.PRICE_BASE_UNIT \/ p.LESS_EXP\r\n       WHEN COALESCE(r.MORE_RAW, 0) > 0 AND COALESCE(p.MORE_EXP, 0) > 0 AND COALESCE(p.LESS_EXP, 0) > 0\r\n         THEN (r.MORE_RAW \/ p.MORE_EXP) \/ p.LESS_EXP\r\n       ELSE NULL\r\n     END\r\n END AS SALE_PRICE_OTHER,\r\n \/* باركودات الأساسية *\/\r\n bbase.BASE_UNIT_BARCODES AS BASE_UNIT_BARCODES,\r\n \/* باركودات الوحدة الأخرى (كبرى إن وُجدت، وإلا صغرى) *\/\r\n CASE\r\n   WHEN p.MORE_UNIT_ID IS NOT NULL THEN bmore.MORE_UNIT_BARCODES\r\n   ELSE bless.LESS_UNIT_BARCODES\r\n END AS OTHER_UNIT_BARCODES,\r\n \/* العلاقة كرقم صحيح واحد: MORE_EXP إن وُجد، وإلا LESS_EXP *\/\r\n CAST(\r\n   COALESCE(NULLIF(p.MORE_EXP, 0), NULLIF(p.LESS_EXP, 0))\r\n   AS INTEGER\r\n ) AS RELATION_FACTOR\r\nFROM PRODUCT p\r\nLEFT JOIN PRICES_RAW r  ON r.PRODUCT_ID  = p.PRODUCT_ID\r\nLEFT JOIN BASE_CALC bcalc ON bcalc.PRODUCT_ID = p.PRODUCT_ID\r\nLEFT JOIN B_BASE  bbase  ON bbase.PRODUCT_ID  = p.PRODUCT_ID\r\nLEFT JOIN B_MORE  bmore  ON bmore.PRODUCT_ID  = p.PRODUCT_ID\r\nLEFT JOIN B_LESS  bless  ON bless.PRODUCT_ID  = p.PRODUCT_ID\r\nLEFT JOIN PROD_CATEG pc  ON pc.PROD_CATEG_ID  = p.PROD_CATEG_ID\r\nORDER BY ITEM_NAME_AR\r\n\r\n": [
+"\/* 1) نطبع أسعار المنتج مرة واحدة *\/\r\nWITH PRICES_RAW AS (\r\n SELECT\r\n   pr.PRODUCT_ID,\r\n   MAX(COALESCE(pr.BASE_PRICE, pr.BASE_WIN)) AS BASE_RAW,\r\n   MAX(COALESCE(pr.MORE_PRICE, pr.MORE_WIN)) AS MORE_RAW,\r\n   MAX(COALESCE(pr.LESS_PRICE, pr.LESS_WIN)) AS LESS_RAW\r\n FROM PRODUCT_PRICE pr\r\n GROUP BY pr.PRODUCT_ID\r\n),\r\n\/* 2) باركودات الوحدة الأساسية (من PRODUCT + PRODUCT_BARCODES للوحدة الأساسية) *\/\r\nB_BASE AS (\r\n SELECT PRODUCT_ID, LIST(BC, ', ') AS BASE_UNIT_BARCODES\r\n FROM (\r\n   SELECT p.PRODUCT_ID, TRIM(p.BASE_BARCODE) AS BC\r\n     FROM PRODUCT p\r\n    WHERE p.BASE_BARCODE IS NOT NULL AND TRIM(p.BASE_BARCODE) <> ''\r\n   UNION\r\n   SELECT pb.PRODUCT_ID, TRIM(pb.PRODUCT_BARCODE)\r\n     FROM PRODUCT_BARCODES pb\r\n     JOIN PRODUCT p2 ON p2.PRODUCT_ID = pb.PRODUCT_ID\r\n    WHERE pb.PRODUCT_BARCODE IS NOT NULL AND TRIM(pb.PRODUCT_BARCODE) <> ''\r\n      AND pb.FOR_UNIT = p2.BASE_UNIT_ID\r\n ) t\r\n GROUP BY PRODUCT_ID\r\n),\r\n\/* 3) باركودات الوحدة الكبرى (إن وُجدت) *\/\r\nB_MORE AS (\r\n SELECT PRODUCT_ID, LIST(BC, ', ') AS MORE_UNIT_BARCODES\r\n FROM (\r\n   SELECT p.PRODUCT_ID, TRIM(p.MORE_BARCODE) AS BC\r\n     FROM PRODUCT p\r\n    WHERE p.MORE_BARCODE IS NOT NULL AND TRIM(p.MORE_BARCODE) <> ''\r\n   UNION\r\n   SELECT pb.PRODUCT_ID, TRIM(pb.PRODUCT_BARCODE)\r\n     FROM PRODUCT_BARCODES pb\r\n     JOIN PRODUCT p2 ON p2.PRODUCT_ID = pb.PRODUCT_ID\r\n    WHERE pb.PRODUCT_BARCODE IS NOT NULL AND TRIM(pb.PRODUCT_BARCODE) <> ''\r\n      AND p2.MORE_UNIT_ID IS NOT NULL\r\n      AND pb.FOR_UNIT = p2.MORE_UNIT_ID\r\n ) t\r\n GROUP BY PRODUCT_ID\r\n),\r\n\/* 4) باركودات الوحدة الصغرى (إن وُجدت) *\/\r\nB_LESS AS (\r\n SELECT PRODUCT_ID, LIST(BC, ', ') AS LESS_UNIT_BARCODES\r\n FROM (\r\n   SELECT p.PRODUCT_ID, TRIM(p.LESS_BARCODE) AS BC\r\n     FROM PRODUCT p\r\n    WHERE p.LESS_BARCODE IS NOT NULL AND TRIM(p.LESS_BARCODE) <> ''\r\n   UNION\r\n   SELECT pb.PRODUCT_ID, TRIM(pb.PRODUCT_BARCODE)\r\n     FROM PRODUCT_BARCODES pb\r\n     JOIN PRODUCT p2 ON p2.PRODUCT_ID = pb.PRODUCT_ID\r\n    WHERE pb.PRODUCT_BARCODE IS NOT NULL AND TRIM(pb.PRODUCT_BARCODE) <> ''\r\n      AND pb.FOR_UNIT <> p2.BASE_UNIT_ID\r\n      AND (p2.MORE_UNIT_ID IS NULL OR pb.FOR_UNIT <> p2.MORE_UNIT_ID)\r\n ) t\r\n GROUP BY PRODUCT_ID\r\n),\r\n\/* 5) نحسب سعر الأساسية مسبقاً لاستخدامه لاحقاً *\/\r\nBASE_CALC AS (\r\n SELECT\r\n   p.PRODUCT_ID,\r\n   CASE\r\n     WHEN COALESCE(r.BASE_RAW, 0) > 0 THEN r.BASE_RAW\r\n     WHEN COALESCE(r.MORE_RAW, 0) > 0 AND COALESCE(p.MORE_EXP, 0) > 0 THEN r.MORE_RAW \/ p.MORE_EXP\r\n     WHEN COALESCE(r.LESS_RAW, 0) > 0 AND COALESCE(p.LESS_EXP, 0) > 0 THEN r.LESS_RAW * p.LESS_EXP\r\n     ELSE NULL\r\n   END AS PRICE_BASE_UNIT\r\n FROM PRODUCT p\r\n LEFT JOIN PRICES_RAW r ON r.PRODUCT_ID = p.PRODUCT_ID\r\n)\r\nSELECT\r\n \/* اسم المنتج بالعربي (NONE -> WIN1256 -> UTF8) *\/\r\n CAST(CAST(CAST(p.PRODUCT_NAME AS VARCHAR(200) CHARACTER SET OCTETS)\r\n      AS VARCHAR(200) CHARACTER SET WIN1256) AS VARCHAR(400) CHARACTER SET UTF8)\r\n      AS ITEM_NAME_AR,\r\n \/* اسم الصنف بالعربي *\/\r\n CAST(CAST(CAST(pc.PROD_CATEG_NAME AS VARCHAR(200) CHARACTER SET OCTETS)\r\n      AS VARCHAR(200) CHARACTER SET WIN1256) AS VARCHAR(400) CHARACTER SET UTF8)\r\n      AS CATEGORY_AR,\r\n \/* سعر مبيع الواحدة الأساسية *\/\r\n bcalc.PRICE_BASE_UNIT AS SALE_PRICE_BASE,\r\n \/* سعر مبيع الواحدة الأخرى:\r\n    - إن كانت الأخرى = كبرى (MORE_UNIT_ID موجود): نأخذ MORE_RAW، وإلا نحسب Base × MORE_EXP.\r\n    - إن كانت الأخرى = صغرى (لا يوجد MORE_UNIT_ID): نأخذ LESS_RAW، وإلا نحسب Base ÷ LESS_EXP. *\/\r\n CASE\r\n   WHEN p.MORE_UNIT_ID IS NOT NULL THEN\r\n     CASE\r\n       WHEN COALESCE(r.MORE_RAW, 0) > 0 THEN r.MORE_RAW\r\n       WHEN COALESCE(bcalc.PRICE_BASE_UNIT, 0) > 0 AND COALESCE(p.MORE_EXP, 0) > 0\r\n         THEN bcalc.PRICE_BASE_UNIT * p.MORE_EXP\r\n       WHEN COALESCE(r.LESS_RAW, 0) > 0 AND COALESCE(p.LESS_EXP, 0) > 0 AND COALESCE(p.MORE_EXP, 0) > 0\r\n         THEN r.LESS_RAW * p.LESS_EXP * p.MORE_EXP\r\n       ELSE NULL\r\n     END\r\n   ELSE\r\n     CASE\r\n       WHEN COALESCE(r.LESS_RAW, 0) > 0 THEN r.LESS_RAW\r\n       WHEN COALESCE(bcalc.PRICE_BASE_UNIT, 0) > 0 AND COALESCE(p.LESS_EXP, 0) > 0\r\n         THEN bcalc.PRICE_BASE_UNIT \/ p.LESS_EXP\r\n       WHEN COALESCE(r.MORE_RAW, 0) > 0 AND COALESCE(p.MORE_EXP, 0) > 0 AND COALESCE(p.LESS_EXP, 0) > 0\r\n         THEN (r.MORE_RAW \/ p.MORE_EXP) \/ p.LESS_EXP\r\n       ELSE NULL\r\n     END\r\n END AS SALE_PRICE_OTHER,\r\n \/* باركودات الأساسية *\/\r\n bbase.BASE_UNIT_BARCODES AS BASE_UNIT_BARCODES,\r\n \/* باركودات الوحدة الأخرى (كبرى إن وُجدت، وإلا صغرى) *\/\r\n CASE\r\n   WHEN p.MORE_UNIT_ID IS NOT NULL THEN bmore.MORE_UNIT_BARCODES\r\n   ELSE bless.LESS_UNIT_BARCODES\r\n END AS OTHER_UNIT_BARCODES,\r\n \/* العلاقة كرقم صحيح واحد: MORE_EXP إن وُجد، وإلا LESS_EXP *\/\r\n CAST(\r\n   COALESCE(NULLIF(p.MORE_EXP, 0), NULLIF(p.LESS_EXP, 0))\r\n   AS INTEGER\r\n ) AS RELATION_FACTOR\r\nFROM PRODUCT p\r\nLEFT JOIN PRICES_RAW r  ON r.PRODUCT_ID  = p.PRODUCT_ID\r\nLEFT JOIN BASE_CALC bcalc ON bcalc.PRODUCT_ID = p.PRODUCT_ID\r\nLEFT JOIN B_BASE  bbase  ON bbase.PRODUCT_ID  = p.PRODUCT_ID\r\nLEFT JOIN B_MORE  bmore  ON bmore.PRODUCT_ID  = p.PRODUCT_ID\r\nLEFT JOIN B_LESS  bless  ON bless.PRODUCT_ID  = p.PRODUCT_ID\r\nLEFT JOIN PROD_CATEG pc  ON pc.PROD_CATEG_ID  = p.PROD_CATEG_ID\r\nORDER BY ITEM_NAME_AR\r\n\r\n": [
 	{
 		"ITEM_NAME_AR" : " ارابيكا اكسترا 250 غ",
 		"CATEGORY_AR" : "غذائيات",
@@ -1954,6 +1954,15 @@
 		"RELATION_FACTOR" : 12
 	},
 	{
+		"ITEM_NAME_AR" : "بازاليا مفرزة 450غ ",
+		"CATEGORY_AR" : "غذائيات",
+		"SALE_PRICE_BASE" : 26.0,
+		"SALE_PRICE_OTHER" : 1.4,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "8719274180951",
+		"RELATION_FACTOR" : 20
+	},
+	{
 		"ITEM_NAME_AR" : "بازلاء 450 غ احلام ",
 		"CATEGORY_AR" : "غذائيات",
 		"SALE_PRICE_BASE" : 22.0,
@@ -2107,6 +2116,15 @@
 		"RELATION_FACTOR" : 20
 	},
 	{
+		"ITEM_NAME_AR" : "بازيلاء مفرزة 400غ الدرة",
+		"CATEGORY_AR" : "غذائيات",
+		"SALE_PRICE_BASE" : 48.0,
+		"SALE_PRICE_OTHER" : 2.66,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "6210243809160",
+		"RELATION_FACTOR" : 20
+	},
+	{
 		"ITEM_NAME_AR" : "بازيلاء وجزر 400غ الدرة ",
 		"CATEGORY_AR" : "غذائيات",
 		"SALE_PRICE_BASE" : 23.0,
@@ -2132,6 +2150,15 @@
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "8682214703476",
 		"RELATION_FACTOR" : 1
+	},
+	{
+		"ITEM_NAME_AR" : "بازيلاء وجزر مفرزة 400غ الدرة",
+		"CATEGORY_AR" : "غذائيات",
+		"SALE_PRICE_BASE" : 45.0,
+		"SALE_PRICE_OTHER" : 2.35,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "6210247906162",
+		"RELATION_FACTOR" : 20
 	},
 	{
 		"ITEM_NAME_AR" : "بافي اصابع ",
@@ -2546,6 +2573,15 @@
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "9000101418729",
 		"RELATION_FACTOR" : 1
+	},
+	{
+		"ITEM_NAME_AR" : "برغر بقري 400غ الدرة",
+		"CATEGORY_AR" : "غذائيات",
+		"SALE_PRICE_BASE" : 51.0,
+		"SALE_PRICE_OTHER" : 2.3,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "6253803857461",
+		"RELATION_FACTOR" : 24
 	},
 	{
 		"ITEM_NAME_AR" : "برغل 1كغ عمي الحاج ",
@@ -7408,6 +7444,15 @@
 		"RELATION_FACTOR" : 12
 	},
 	{
+		"ITEM_NAME_AR" : "جوز  500غ ",
+		"CATEGORY_AR" : "موالح",
+		"SALE_PRICE_BASE" : 32.0,
+		"SALE_PRICE_OTHER" : 3.25,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "00111419",
+		"RELATION_FACTOR" : 10
+	},
+	{
 		"ITEM_NAME_AR" : "جوز الطيب 125غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"SALE_PRICE_BASE" : 5.1,
@@ -8506,12 +8551,21 @@
 		"RELATION_FACTOR" : 42
 	},
 	{
-		"ITEM_NAME_AR" : "حليب حليبنا 350غ",
+		"ITEM_NAME_AR" : "حليب حليبنا 400غ",
 		"CATEGORY_AR" : "غذائيات",
-		"SALE_PRICE_BASE" : 32.0,
-		"SALE_PRICE_OTHER" : 2.75,
+		"SALE_PRICE_BASE" : 31.0,
+		"SALE_PRICE_OTHER" : 2.65,
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "6217000163077",
+		"RELATION_FACTOR" : 12
+	},
+	{
+		"ITEM_NAME_AR" : "حليب حليبنا 900غ كولد",
+		"CATEGORY_AR" : "غذائيات",
+		"SALE_PRICE_BASE" : 83.0,
+		"SALE_PRICE_OTHER" : 7.0,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "6217000163183",
 		"RELATION_FACTOR" : 12
 	},
 	{
@@ -8830,19 +8884,19 @@
 		"RELATION_FACTOR" : 24
 	},
 	{
-		"ITEM_NAME_AR" : "حليبنا 400 غ",
+		"ITEM_NAME_AR" : "حليبنا 350غ كولد ",
 		"CATEGORY_AR" : "غذائيات",
-		"SALE_PRICE_BASE" : 70.0,
+		"SALE_PRICE_BASE" : 35.0,
 		"SALE_PRICE_OTHER" : 3.0,
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "6217000163251",
-		"RELATION_FACTOR" : 24
+		"RELATION_FACTOR" : 12
 	},
 	{
 		"ITEM_NAME_AR" : "حليبنا 900 غ",
 		"CATEGORY_AR" : "غذائيات",
-		"SALE_PRICE_BASE" : 80.0,
-		"SALE_PRICE_OTHER" : 6.75,
+		"SALE_PRICE_BASE" : 73.0,
+		"SALE_PRICE_OTHER" : 6.15,
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "6217000017653",
 		"RELATION_FACTOR" : 12
@@ -12340,7 +12394,7 @@
 		"RELATION_FACTOR" : 4
 	},
 	{
-		"ITEM_NAME_AR" : "زيت اوماي 4 لتر ",
+		"ITEM_NAME_AR" : "زيت اوماي 4 لتر مطربان",
 		"CATEGORY_AR" : "غذائيات",
 		"SALE_PRICE_BASE" : 30.0,
 		"SALE_PRICE_OTHER" : 7.75,
@@ -13564,10 +13618,10 @@
 		"RELATION_FACTOR" : 48
 	},
 	{
-		"ITEM_NAME_AR" : "سردين ابو الذهب ",
+		"ITEM_NAME_AR" : "سردين ابو الذهب 125غ",
 		"CATEGORY_AR" : "غذائيات",
 		"SALE_PRICE_BASE" : 25.0,
-		"SALE_PRICE_OTHER" : 0.64,
+		"SALE_PRICE_OTHER" : 0.61,
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "6210706186173",
 		"RELATION_FACTOR" : 50
@@ -15315,7 +15369,7 @@
 		"SALE_PRICE_BASE" : 53.0,
 		"SALE_PRICE_OTHER" : 4.5,
 		"BASE_UNIT_BARCODES" : null,
-		"OTHER_UNIT_BARCODES" : "8690637938320, 8690637936777, 8690637936784, 6221155058348, 6221155081544",
+		"OTHER_UNIT_BARCODES" : "8690637938320, 8690637936739, 8690637936777, 8690637936784, 6221155058348, 6221155081544",
 		"RELATION_FACTOR" : 12
 	},
 	{
@@ -15551,6 +15605,24 @@
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "4792128067718",
 		"RELATION_FACTOR" : 20
+	},
+	{
+		"ITEM_NAME_AR" : "شاي ابو الذهب 450غ ",
+		"CATEGORY_AR" : "غذائيات",
+		"SALE_PRICE_BASE" : 55.0,
+		"SALE_PRICE_OTHER" : 55.0,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : null,
+		"RELATION_FACTOR" : 1
+	},
+	{
+		"ITEM_NAME_AR" : "شاي ابو الذهب 90غ ",
+		"CATEGORY_AR" : "غذائيات",
+		"SALE_PRICE_BASE" : 55.0,
+		"SALE_PRICE_OTHER" : 1.15,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "4798810018792",
+		"RELATION_FACTOR" : 50
 	},
 	{
 		"ITEM_NAME_AR" : "شاي احمد 500 غ",
@@ -16023,8 +16095,8 @@
 	{
 		"ITEM_NAME_AR" : "شطة جلوريا 88 مل",
 		"CATEGORY_AR" : "غذائيات",
-		"SALE_PRICE_BASE" : 14.0,
-		"SALE_PRICE_OTHER" : 0.512,
+		"SALE_PRICE_BASE" : 15.0,
+		"SALE_PRICE_OTHER" : 0.5,
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "6281100111191",
 		"RELATION_FACTOR" : 36
@@ -19873,7 +19945,7 @@
 		"RELATION_FACTOR" : 10
 	},
 	{
-		"ITEM_NAME_AR" : "فاصولياء 700غ",
+		"ITEM_NAME_AR" : "فاصولياء حب تونسا 700غ",
 		"CATEGORY_AR" : "غذائيات",
 		"SALE_PRICE_BASE" : 10.0,
 		"SALE_PRICE_OTHER" : 1.0,
@@ -20384,6 +20456,15 @@
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "00111383",
 		"RELATION_FACTOR" : 20
+	},
+	{
+		"ITEM_NAME_AR" : "فستق مقشور نيء 500غ ",
+		"CATEGORY_AR" : "موالح",
+		"SALE_PRICE_BASE" : 10.5,
+		"SALE_PRICE_OTHER" : 1.1,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "00111420",
+		"RELATION_FACTOR" : 10
 	},
 	{
 		"ITEM_NAME_AR" : "فستق مملح 1 كغ",
@@ -21106,6 +21187,15 @@
 		"RELATION_FACTOR" : 6
 	},
 	{
+		"ITEM_NAME_AR" : "فيليه دجاج حار 900غ الدرة",
+		"CATEGORY_AR" : "غذائيات",
+		"SALE_PRICE_BASE" : 60.0,
+		"SALE_PRICE_OTHER" : 6.2,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "6251917001435",
+		"RELATION_FACTOR" : 10
+	},
+	{
 		"ITEM_NAME_AR" : "فيمتو تنك 250 مل ",
 		"CATEGORY_AR" : "مشروبات",
 		"SALE_PRICE_BASE" : 7.0,
@@ -21482,6 +21572,24 @@
 		"BASE_UNIT_BARCODES" : "00111118",
 		"OTHER_UNIT_BARCODES" : null,
 		"RELATION_FACTOR" : 1
+	},
+	{
+		"ITEM_NAME_AR" : "قطع دجاج مقرمش 225غ الدرة",
+		"CATEGORY_AR" : "غذائيات",
+		"SALE_PRICE_BASE" : 36.0,
+		"SALE_PRICE_OTHER" : 1.4,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "6251917001237",
+		"RELATION_FACTOR" : 28
+	},
+	{
+		"ITEM_NAME_AR" : "قطع دجاج مقرمش 320غ الدرة",
+		"CATEGORY_AR" : "غذائيات",
+		"SALE_PRICE_BASE" : 48.0,
+		"SALE_PRICE_OTHER" : 2.25,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "6253803857485",
+		"RELATION_FACTOR" : 24
 	},
 	{
 		"ITEM_NAME_AR" : "قلاب مع تركس",
@@ -23678,6 +23786,15 @@
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "8850002014589, 8850002006591, 8850002039797",
 		"RELATION_FACTOR" : 1
+	},
+	{
+		"ITEM_NAME_AR" : "كوردن بلو 400غ الدرة",
+		"CATEGORY_AR" : "غذائيات",
+		"SALE_PRICE_BASE" : 95.0,
+		"SALE_PRICE_OTHER" : 4.25,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "6253803857683",
+		"RELATION_FACTOR" : 24
 	},
 	{
 		"ITEM_NAME_AR" : "كورن فلكس شوكو وهو",
