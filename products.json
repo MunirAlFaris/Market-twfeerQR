@@ -60,7 +60,7 @@
 		"SALE_PRICE_BASE" : 16.5,
 		"SALE_PRICE_OTHER" : 1.7,
 		"BASE_UNIT_BARCODES" : null,
-		"OTHER_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "101",
 		"RELATION_FACTOR" : 10
 	},
 	{
@@ -2550,8 +2550,8 @@
 	{
 		"ITEM_NAME_AR" : "برافو 4كغ الي ",
 		"CATEGORY_AR" : "منظفات",
-		"SALE_PRICE_BASE" : 17.0,
-		"SALE_PRICE_OTHER" : 8.8,
+		"SALE_PRICE_BASE" : 26.4,
+		"SALE_PRICE_OTHER" : 9.0,
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "6210291801208",
 		"RELATION_FACTOR" : 3
@@ -3350,12 +3350,12 @@
 	},
 	{
 		"ITEM_NAME_AR" : "بسكويت بوبينس 30غ",
-		"CATEGORY_AR" : "اكلات ",
+		"CATEGORY_AR" : "مواد تحتاج 3 واحدات",
 		"SALE_PRICE_BASE" : 4.5,
-		"SALE_PRICE_OTHER" : 0.2,
+		"SALE_PRICE_OTHER" : 25.0,
 		"BASE_UNIT_BARCODES" : "5283003385212",
-		"OTHER_UNIT_BARCODES" : "5281128602306, 5281128602290, 5283003312010, 5283003313017, 5283003314014, 5283003316018, 5283003385113, 5283003385311, 5283003385519",
-		"RELATION_FACTOR" : 24
+		"OTHER_UNIT_BARCODES" : null,
+		"RELATION_FACTOR" : 6
 	},
 	{
 		"ITEM_NAME_AR" : "بسكويت بيمكس ",
@@ -3520,6 +3520,15 @@
 		"RELATION_FACTOR" : 10
 	},
 	{
+		"ITEM_NAME_AR" : "بسكويت محشي اوزمو 25غ ",
+		"CATEGORY_AR" : "مواد تحتاج 3 واحدات",
+		"SALE_PRICE_BASE" : 5.7,
+		"SALE_PRICE_OTHER" : 33.0,
+		"BASE_UNIT_BARCODES" : "8699141157159",
+		"OTHER_UNIT_BARCODES" : null,
+		"RELATION_FACTOR" : 6
+	},
+	{
 		"ITEM_NAME_AR" : "بسكويت مولتو ",
 		"CATEGORY_AR" : "اكلات ",
 		"SALE_PRICE_BASE" : 2.9,
@@ -3531,8 +3540,8 @@
 	{
 		"ITEM_NAME_AR" : "بسكويت ميتو ",
 		"CATEGORY_AR" : "مواد تحتاج 3 واحدات",
-		"SALE_PRICE_BASE" : 2.0,
-		"SALE_PRICE_OTHER" : 12.0,
+		"SALE_PRICE_BASE" : 1.58,
+		"SALE_PRICE_OTHER" : 9.0,
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : null,
 		"RELATION_FACTOR" : 6
@@ -5347,6 +5356,15 @@
 		"RELATION_FACTOR" : 40
 	},
 	{
+		"ITEM_NAME_AR" : "بوك مثلثات عرض *5",
+		"CATEGORY_AR" : "غذائيات",
+		"SALE_PRICE_BASE" : 31.0,
+		"SALE_PRICE_OTHER" : 4.0,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "6281048106051",
+		"RELATION_FACTOR" : 8
+	},
+	{
 		"ITEM_NAME_AR" : "بومباد",
 		"CATEGORY_AR" : "اكلات ",
 		"SALE_PRICE_BASE" : 2.0,
@@ -6987,8 +7005,8 @@
 	{
 		"ITEM_NAME_AR" : "جبنة دهن 275غ نيوبارك عرض*2",
 		"CATEGORY_AR" : "غذائيات",
-		"SALE_PRICE_BASE" : 11.0,
-		"SALE_PRICE_OTHER" : 1.845,
+		"SALE_PRICE_BASE" : 10.75,
+		"SALE_PRICE_OTHER" : 1.82,
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "00111376",
 		"RELATION_FACTOR" : 6
@@ -8821,12 +8839,30 @@
 		"RELATION_FACTOR" : 42
 	},
 	{
+		"ITEM_NAME_AR" : "حليب حليبنا 350غ كولد ",
+		"CATEGORY_AR" : "غذائيات",
+		"SALE_PRICE_BASE" : 35.0,
+		"SALE_PRICE_OTHER" : 3.0,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "6217000163251",
+		"RELATION_FACTOR" : 12
+	},
+	{
 		"ITEM_NAME_AR" : "حليب حليبنا 400غ",
 		"CATEGORY_AR" : "غذائيات",
 		"SALE_PRICE_BASE" : 31.0,
 		"SALE_PRICE_OTHER" : 2.65,
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "6217000163077",
+		"RELATION_FACTOR" : 12
+	},
+	{
+		"ITEM_NAME_AR" : "حليب حليبنا 900 غ",
+		"CATEGORY_AR" : "غذائيات",
+		"SALE_PRICE_BASE" : 73.0,
+		"SALE_PRICE_OTHER" : 6.15,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "6217000017653",
 		"RELATION_FACTOR" : 12
 	},
 	{
@@ -8959,7 +8995,7 @@
 		"ITEM_NAME_AR" : "حليب كامل الدسم 850مل نيو بارك",
 		"CATEGORY_AR" : "غذائيات",
 		"SALE_PRICE_BASE" : 11.5,
-		"SALE_PRICE_OTHER" : 0.982,
+		"SALE_PRICE_OTHER" : 0.98,
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "6215000474353",
 		"RELATION_FACTOR" : 12
@@ -9161,24 +9197,6 @@
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "8680417214430",
 		"RELATION_FACTOR" : 24
-	},
-	{
-		"ITEM_NAME_AR" : "حليبنا 350غ كولد ",
-		"CATEGORY_AR" : "غذائيات",
-		"SALE_PRICE_BASE" : 35.0,
-		"SALE_PRICE_OTHER" : 3.0,
-		"BASE_UNIT_BARCODES" : null,
-		"OTHER_UNIT_BARCODES" : "6217000163251",
-		"RELATION_FACTOR" : 12
-	},
-	{
-		"ITEM_NAME_AR" : "حليبنا 900 غ",
-		"CATEGORY_AR" : "غذائيات",
-		"SALE_PRICE_BASE" : 73.0,
-		"SALE_PRICE_OTHER" : 6.15,
-		"BASE_UNIT_BARCODES" : null,
-		"OTHER_UNIT_BARCODES" : "6217000017653",
-		"RELATION_FACTOR" : 12
 	},
 	{
 		"ITEM_NAME_AR" : "حمام زيت الفا 1 لتر ",
@@ -10711,7 +10729,7 @@
 		"RELATION_FACTOR" : 12
 	},
 	{
-		"ITEM_NAME_AR" : "درة بوشار 1كغ اليرموك 1كغ",
+		"ITEM_NAME_AR" : "درة بوشار اليرموك 1كغ",
 		"CATEGORY_AR" : "غذائيات",
 		"SALE_PRICE_BASE" : 9.75,
 		"SALE_PRICE_OTHER" : 1.0,
@@ -10726,6 +10744,15 @@
 		"SALE_PRICE_OTHER" : 0.6,
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "6217000288381",
+		"RELATION_FACTOR" : 10
+	},
+	{
+		"ITEM_NAME_AR" : "درة بوشار عصفور 500غ ",
+		"CATEGORY_AR" : "غذائيات",
+		"SALE_PRICE_BASE" : 4.25,
+		"SALE_PRICE_OTHER" : 0.45,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "6212733142054",
 		"RELATION_FACTOR" : 10
 	},
 	{
@@ -12145,7 +12172,7 @@
 		"ITEM_NAME_AR" : "رومبا *8",
 		"CATEGORY_AR" : "اكلات ",
 		"SALE_PRICE_BASE" : 3.0,
-		"SALE_PRICE_OTHER" : 0.25,
+		"SALE_PRICE_OTHER" : 0.3,
 		"BASE_UNIT_BARCODES" : "6210211709737",
 		"OTHER_UNIT_BARCODES" : "6210211709133, 6210211708532",
 		"RELATION_FACTOR" : 12
@@ -12410,6 +12437,15 @@
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "5740900864108",
 		"RELATION_FACTOR" : 40
+	},
+	{
+		"ITEM_NAME_AR" : "زبدة لورباك 10غ",
+		"CATEGORY_AR" : "غذائيات",
+		"SALE_PRICE_BASE" : 21.0,
+		"SALE_PRICE_OTHER" : 0.24,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "55",
+		"RELATION_FACTOR" : 100
 	},
 	{
 		"ITEM_NAME_AR" : "زبدة لورباك 200 غ",
@@ -14028,7 +14064,7 @@
 		"SALE_PRICE_BASE" : 1.75,
 		"SALE_PRICE_OTHER" : 1.75,
 		"BASE_UNIT_BARCODES" : null,
-		"OTHER_UNIT_BARCODES" : "8681116612350",
+		"OTHER_UNIT_BARCODES" : "8681116612312, 8681116612350",
 		"RELATION_FACTOR" : 1
 	},
 	{
@@ -14599,10 +14635,10 @@
 		"RELATION_FACTOR" : 6
 	},
 	{
-		"ITEM_NAME_AR" : "سمنة اصيل 1 لتر ",
+		"ITEM_NAME_AR" : "سمنة اصيل 1 كغ",
 		"CATEGORY_AR" : "غذائيات",
-		"SALE_PRICE_BASE" : 43.0,
-		"SALE_PRICE_OTHER" : 3.65,
+		"SALE_PRICE_BASE" : 45.0,
+		"SALE_PRICE_OTHER" : 3.8,
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "6291113003734",
 		"RELATION_FACTOR" : 12
@@ -14610,20 +14646,29 @@
 	{
 		"ITEM_NAME_AR" : "سمنة اصيل 2 كغ",
 		"CATEGORY_AR" : "غذائيات",
-		"SALE_PRICE_BASE" : 42.0,
-		"SALE_PRICE_OTHER" : 7.15,
+		"SALE_PRICE_BASE" : 45.0,
+		"SALE_PRICE_OTHER" : 7.35,
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "6291113003758",
 		"RELATION_FACTOR" : 6
 	},
 	{
-		"ITEM_NAME_AR" : "سمنة اصيل 4 لتر ",
+		"ITEM_NAME_AR" : "سمنة اصيل 4 كغ ",
 		"CATEGORY_AR" : "غذائيات",
-		"SALE_PRICE_BASE" : 49.0,
-		"SALE_PRICE_OTHER" : 12.4,
+		"SALE_PRICE_BASE" : 60.0,
+		"SALE_PRICE_OTHER" : 15.5,
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "6291113003772",
 		"RELATION_FACTOR" : 4
+	},
+	{
+		"ITEM_NAME_AR" : "سمنة اصيل 500غ ",
+		"CATEGORY_AR" : "غذائيات",
+		"SALE_PRICE_BASE" : 50.0,
+		"SALE_PRICE_OTHER" : 2.15,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "6291113003635",
+		"RELATION_FACTOR" : 24
 	},
 	{
 		"ITEM_NAME_AR" : "سمنة افت 2 لتر ",
@@ -15058,6 +15103,15 @@
 		"RELATION_FACTOR" : 10
 	},
 	{
+		"ITEM_NAME_AR" : "سميد عصفور 500غ ",
+		"CATEGORY_AR" : "غذائيات",
+		"SALE_PRICE_BASE" : 4.25,
+		"SALE_PRICE_OTHER" : 0.45,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "00111432",
+		"RELATION_FACTOR" : 10
+	},
+	{
 		"ITEM_NAME_AR" : "سميري 250 غ",
 		"CATEGORY_AR" : "موالح",
 		"SALE_PRICE_BASE" : 9.0,
@@ -15359,7 +15413,7 @@
 		"CATEGORY_AR" : "مواد تحتاج 3 واحدات",
 		"SALE_PRICE_BASE" : 3.5,
 		"SALE_PRICE_OTHER" : 20.0,
-		"BASE_UNIT_BARCODES" : "8684232463141",
+		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : null,
 		"RELATION_FACTOR" : 6
 	},
@@ -19662,7 +19716,7 @@
 		"SALE_PRICE_BASE" : 4.0,
 		"SALE_PRICE_OTHER" : 0.08,
 		"BASE_UNIT_BARCODES" : null,
-		"OTHER_UNIT_BARCODES" : "6210032333463, 8681967080018, 8681967080049",
+		"OTHER_UNIT_BARCODES" : "6210032333463, 8681967080018, 8681967080049, 8681967080162",
 		"RELATION_FACTOR" : 50
 	},
 	{
@@ -19774,6 +19828,15 @@
 		"RELATION_FACTOR" : 10
 	},
 	{
+		"ITEM_NAME_AR" : "عدس صاغ عصفور 500غ ",
+		"CATEGORY_AR" : "غذائيات",
+		"SALE_PRICE_BASE" : 8.5,
+		"SALE_PRICE_OTHER" : 0.9,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "6212733132055",
+		"RELATION_FACTOR" : 10
+	},
+	{
 		"ITEM_NAME_AR" : "عدس صاغ هشام 1 كغ",
 		"CATEGORY_AR" : "غذائيات",
 		"SALE_PRICE_BASE" : 9.0,
@@ -19843,6 +19906,15 @@
 		"SALE_PRICE_OTHER" : 1.05,
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "6212733142016",
+		"RELATION_FACTOR" : 10
+	},
+	{
+		"ITEM_NAME_AR" : "عدس مجروش عصفور 500غ ",
+		"CATEGORY_AR" : "غذائيات",
+		"SALE_PRICE_BASE" : 5.25,
+		"SALE_PRICE_OTHER" : 0.55,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "6212733152053",
 		"RELATION_FACTOR" : 10
 	},
 	{
@@ -21730,10 +21802,10 @@
 		"ITEM_NAME_AR" : "فواكه فريش 400 غ",
 		"CATEGORY_AR" : "غذائيات",
 		"SALE_PRICE_BASE" : 27.0,
-		"SALE_PRICE_OTHER" : 2.25,
+		"SALE_PRICE_OTHER" : 1.5,
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "6971225526870, 6971225526887",
-		"RELATION_FACTOR" : 12
+		"RELATION_FACTOR" : 24
 	},
 	{
 		"ITEM_NAME_AR" : "فواكه مجففة 100غ",
@@ -24726,8 +24798,8 @@
 	{
 		"ITEM_NAME_AR" : "كورن فلكس شوكو وهو",
 		"CATEGORY_AR" : "اكلات ",
-		"SALE_PRICE_BASE" : 7.0,
-		"SALE_PRICE_OTHER" : 0.615,
+		"SALE_PRICE_BASE" : 4.4,
+		"SALE_PRICE_OTHER" : 0.37,
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "8683478024017",
 		"RELATION_FACTOR" : 12
@@ -24783,7 +24855,7 @@
 		"SALE_PRICE_BASE" : 11.5,
 		"SALE_PRICE_OTHER" : 1.0,
 		"BASE_UNIT_BARCODES" : null,
-		"OTHER_UNIT_BARCODES" : "5281128605000, 5281128605031",
+		"OTHER_UNIT_BARCODES" : "5281128605000, 5281128605017, 5281128605031",
 		"RELATION_FACTOR" : 12
 	},
 	{
@@ -25433,6 +25505,15 @@
 		"BASE_UNIT_BARCODES" : "8691720108767",
 		"OTHER_UNIT_BARCODES" : "8691720008760, 8691720008784",
 		"RELATION_FACTOR" : 6
+	},
+	{
+		"ITEM_NAME_AR" : "كيك اوزمو دبدوب 30غ ",
+		"CATEGORY_AR" : "مواد تحتاج 3 واحدات",
+		"SALE_PRICE_BASE" : 5.5,
+		"SALE_PRICE_OTHER" : 20.0,
+		"BASE_UNIT_BARCODES" : "8699141158095",
+		"OTHER_UNIT_BARCODES" : null,
+		"RELATION_FACTOR" : 4
 	},
 	{
 		"ITEM_NAME_AR" : "كيك برافيو 32غ ",
@@ -31006,6 +31087,24 @@
 		"RELATION_FACTOR" : 24
 	},
 	{
+		"ITEM_NAME_AR" : "معكرونة دولامي 1كغ اشكال ",
+		"CATEGORY_AR" : "غذائيات",
+		"SALE_PRICE_BASE" : 9.5,
+		"SALE_PRICE_OTHER" : 0.97,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "6213445566770, 6213445599884",
+		"RELATION_FACTOR" : 10
+	},
+	{
+		"ITEM_NAME_AR" : "معكرونة دولامي 350غ اشكال ",
+		"CATEGORY_AR" : "غذائيات",
+		"SALE_PRICE_BASE" : 4.25,
+		"SALE_PRICE_OTHER" : 0.45,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "6213445998847",
+		"RELATION_FACTOR" : 10
+	},
+	{
 		"ITEM_NAME_AR" : "معكرونة هشام اشكال 1ك",
 		"CATEGORY_AR" : "غذائيات",
 		"SALE_PRICE_BASE" : 5.0,
@@ -33380,6 +33479,15 @@
 		"BASE_UNIT_BARCODES" : "7902195726280",
 		"OTHER_UNIT_BARCODES" : null,
 		"RELATION_FACTOR" : 1
+	},
+	{
+		"ITEM_NAME_AR" : "ويفر امادا 25غ ",
+		"CATEGORY_AR" : "مواد تحتاج 3 واحدات",
+		"SALE_PRICE_BASE" : 5.5,
+		"SALE_PRICE_OTHER" : 31.0,
+		"BASE_UNIT_BARCODES" : "8691707196176",
+		"OTHER_UNIT_BARCODES" : null,
+		"RELATION_FACTOR" : 6
 	},
 	{
 		"ITEM_NAME_AR" : "ويفر اونكس 28غ",
