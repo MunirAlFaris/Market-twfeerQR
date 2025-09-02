@@ -3327,7 +3327,7 @@
 		"SALE_PRICE_BASE" : 3.2,
 		"SALE_PRICE_OTHER" : 0.3,
 		"BASE_UNIT_BARCODES" : "6215625632237",
-		"OTHER_UNIT_BARCODES" : "6218709321232, 6218959999151, 6219948259751",
+		"OTHER_UNIT_BARCODES" : "6215568968585, 6218709321232, 6218959999151, 6219948259751",
 		"RELATION_FACTOR" : 12
 	},
 	{
@@ -6976,6 +6976,15 @@
 		"RELATION_FACTOR" : 12
 	},
 	{
+		"ITEM_NAME_AR" : "جبنة بلو تشيزو 300غ نيوبارك",
+		"CATEGORY_AR" : "غذائيات",
+		"SALE_PRICE_BASE" : 40.0,
+		"SALE_PRICE_OTHER" : 1.75,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "6215000479228",
+		"RELATION_FACTOR" : 24
+	},
+	{
 		"ITEM_NAME_AR" : "جبنة بلوك 300غ مراعي ",
 		"CATEGORY_AR" : "غذائيات",
 		"SALE_PRICE_BASE" : 16.0,
@@ -6992,6 +7001,15 @@
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "6213434046061, 6213431236069",
 		"RELATION_FACTOR" : 6
+	},
+	{
+		"ITEM_NAME_AR" : "جبنة بلوك تنك 110غ نيوبارك ",
+		"CATEGORY_AR" : "غذائيات",
+		"SALE_PRICE_BASE" : 20.0,
+		"SALE_PRICE_OTHER" : 0.85,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "6215000477606, 6215000474872",
+		"RELATION_FACTOR" : 24
 	},
 	{
 		"ITEM_NAME_AR" : "جبنة بلوك عوافي 300غ",
@@ -8697,8 +8715,8 @@
 	{
 		"ITEM_NAME_AR" : "حليب 1 ل هوى الشام بللور",
 		"CATEGORY_AR" : "غذائيات",
-		"SALE_PRICE_BASE" : 6.0,
-		"SALE_PRICE_OTHER" : 1.605,
+		"SALE_PRICE_BASE" : 6.5,
+		"SALE_PRICE_OTHER" : 1.7,
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "6217000501060",
 		"RELATION_FACTOR" : 4
@@ -11265,7 +11283,7 @@
 		"SALE_PRICE_BASE" : 10.5,
 		"SALE_PRICE_OTHER" : 1.0,
 		"BASE_UNIT_BARCODES" : null,
-		"OTHER_UNIT_BARCODES" : "00111394",
+		"OTHER_UNIT_BARCODES" : "00111394, 95487273",
 		"RELATION_FACTOR" : 10
 	},
 	{
@@ -14415,8 +14433,17 @@
 		"SALE_PRICE_BASE" : 3.0,
 		"SALE_PRICE_OTHER" : 0.2,
 		"BASE_UNIT_BARCODES" : "6210070113508",
-		"OTHER_UNIT_BARCODES" : "6210070112037, 6210070113034",
+		"OTHER_UNIT_BARCODES" : "6210070112501, 6210070114505, 6210070115502, 6210070145509, 6210070116509, 6210070112037, 6210070113034, 6210070114031, 6210070115038, 6210070145035, 6210070116035",
 		"RELATION_FACTOR" : 20
+	},
+	{
+		"ITEM_NAME_AR" : "سكاكر زاهي ظرف 200غ ",
+		"CATEGORY_AR" : "اكلات ",
+		"SALE_PRICE_BASE" : 19.5,
+		"SALE_PRICE_OTHER" : 0.85,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "6210070112150, 6210070113157, 6210070114154, 6210070115151, 6210070116158",
+		"RELATION_FACTOR" : 24
 	},
 	{
 		"ITEM_NAME_AR" : "سكاكين فواكه ملونه 0050",
@@ -20575,6 +20602,15 @@
 		"RELATION_FACTOR" : 10
 	},
 	{
+		"ITEM_NAME_AR" : "علكة دبل ان ببل ",
+		"CATEGORY_AR" : "مواد تحتاج 3 واحدات",
+		"SALE_PRICE_BASE" : 1.5,
+		"SALE_PRICE_OTHER" : 18.0,
+		"BASE_UNIT_BARCODES" : "6210075204638",
+		"OTHER_UNIT_BARCODES" : null,
+		"RELATION_FACTOR" : 12
+	},
+	{
 		"ITEM_NAME_AR" : "علكة ستيك 5 حبات ",
 		"CATEGORY_AR" : "اكلات ",
 		"SALE_PRICE_BASE" : 2.0,
@@ -20764,10 +20800,10 @@
 		"RELATION_FACTOR" : 12
 	},
 	{
-		"ITEM_NAME_AR" : "عيران 250 مل ",
+		"ITEM_NAME_AR" : "عيران 250مل نيوبارك ",
 		"CATEGORY_AR" : "غذائيات",
-		"SALE_PRICE_BASE" : 8.0,
-		"SALE_PRICE_OTHER" : 0.4,
+		"SALE_PRICE_BASE" : 8.5,
+		"SALE_PRICE_OTHER" : 0.3637,
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "6215000472939",
 		"RELATION_FACTOR" : 24
@@ -21016,7 +21052,7 @@
 		"RELATION_FACTOR" : 10
 	},
 	{
-		"ITEM_NAME_AR" : "فاصولياء حمرة 370غ بستان ",
+		"ITEM_NAME_AR" : "فاصولية حمرة 370غ بستان ",
 		"CATEGORY_AR" : "غذائيات",
 		"SALE_PRICE_BASE" : 26.0,
 		"SALE_PRICE_OTHER" : 1.1,
@@ -21025,7 +21061,7 @@
 		"RELATION_FACTOR" : 24
 	},
 	{
-		"ITEM_NAME_AR" : "فاصولياء هشام 1كغ",
+		"ITEM_NAME_AR" : "فاصولية هشام 1كغ",
 		"CATEGORY_AR" : "غذائيات",
 		"SALE_PRICE_BASE" : 10.5,
 		"SALE_PRICE_OTHER" : 2.2,
@@ -21034,7 +21070,7 @@
 		"RELATION_FACTOR" : 5
 	},
 	{
-		"ITEM_NAME_AR" : "فاصولياء هشام 500غ",
+		"ITEM_NAME_AR" : "فاصولية هشام 500غ",
 		"CATEGORY_AR" : "غذائيات",
 		"SALE_PRICE_BASE" : 11.0,
 		"SALE_PRICE_OTHER" : 1.15,
@@ -22456,7 +22492,7 @@
 		"RELATION_FACTOR" : 48
 	},
 	{
-		"ITEM_NAME_AR" : "قشطه ساده 155غ",
+		"ITEM_NAME_AR" : "قشطة سادة 155غ نيوبارك",
 		"CATEGORY_AR" : "غذائيات",
 		"SALE_PRICE_BASE" : 50.0,
 		"SALE_PRICE_OTHER" : 1.1,
@@ -24076,39 +24112,21 @@
 		"RELATION_FACTOR" : 24
 	},
 	{
-		"ITEM_NAME_AR" : "كرواسان بيستاشيو نيو بارك",
-		"CATEGORY_AR" : "اكلات ",
-		"SALE_PRICE_BASE" : 15.5,
-		"SALE_PRICE_OTHER" : 2.7,
-		"BASE_UNIT_BARCODES" : null,
-		"OTHER_UNIT_BARCODES" : "6211421115097",
-		"RELATION_FACTOR" : 6
-	},
-	{
-		"ITEM_NAME_AR" : "كرواسان شوكولا نيوبارك",
-		"CATEGORY_AR" : "اكلات ",
-		"SALE_PRICE_BASE" : 15.5,
-		"SALE_PRICE_OTHER" : 2.7,
-		"BASE_UNIT_BARCODES" : null,
-		"OTHER_UNIT_BARCODES" : "6211421101090",
-		"RELATION_FACTOR" : 6
-	},
-	{
-		"ITEM_NAME_AR" : "كرواسان فريز نيوبارك",
-		"CATEGORY_AR" : "اكلات ",
-		"SALE_PRICE_BASE" : 15.5,
-		"SALE_PRICE_OTHER" : 2.7,
-		"BASE_UNIT_BARCODES" : null,
-		"OTHER_UNIT_BARCODES" : "6211421102097",
-		"RELATION_FACTOR" : 6
-	},
-	{
 		"ITEM_NAME_AR" : "كروسان توو ",
 		"CATEGORY_AR" : "مواد تحتاج 3 واحدات",
 		"SALE_PRICE_BASE" : 4.0,
 		"SALE_PRICE_OTHER" : 22.0,
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : null,
+		"RELATION_FACTOR" : 6
+	},
+	{
+		"ITEM_NAME_AR" : "كروصان بيستاشيو نيو بارك",
+		"CATEGORY_AR" : "اكلات ",
+		"SALE_PRICE_BASE" : 15.5,
+		"SALE_PRICE_OTHER" : 2.7,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "6211421115097",
 		"RELATION_FACTOR" : 6
 	},
 	{
@@ -24119,6 +24137,24 @@
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "62",
 		"RELATION_FACTOR" : 1
+	},
+	{
+		"ITEM_NAME_AR" : "كروصان شوكولا نيوبارك",
+		"CATEGORY_AR" : "اكلات ",
+		"SALE_PRICE_BASE" : 15.5,
+		"SALE_PRICE_OTHER" : 2.7,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "6211421101090",
+		"RELATION_FACTOR" : 6
+	},
+	{
+		"ITEM_NAME_AR" : "كروصان فريز نيوبارك",
+		"CATEGORY_AR" : "اكلات ",
+		"SALE_PRICE_BASE" : 16.0,
+		"SALE_PRICE_OTHER" : 2.7,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "6211421102097",
+		"RELATION_FACTOR" : 6
 	},
 	{
 		"ITEM_NAME_AR" : "كروصان كنوز ",
@@ -24828,7 +24864,7 @@
 		"SALE_PRICE_BASE" : 14.0,
 		"SALE_PRICE_OTHER" : 1.4,
 		"BASE_UNIT_BARCODES" : null,
-		"OTHER_UNIT_BARCODES" : "00111160",
+		"OTHER_UNIT_BARCODES" : "00111160, 95487240",
 		"RELATION_FACTOR" : 10
 	},
 	{
@@ -26049,8 +26085,8 @@
 	{
 		"ITEM_NAME_AR" : "لافيسكو 45غ",
 		"CATEGORY_AR" : "اكلات ",
-		"SALE_PRICE_BASE" : 3.0,
-		"SALE_PRICE_OTHER" : 0.3,
+		"SALE_PRICE_BASE" : 2.8,
+		"SALE_PRICE_OTHER" : 0.24,
 		"BASE_UNIT_BARCODES" : "6210074660923",
 		"OTHER_UNIT_BARCODES" : "6210074660954",
 		"RELATION_FACTOR" : 12
@@ -28180,6 +28216,15 @@
 		"RELATION_FACTOR" : 24
 	},
 	{
+		"ITEM_NAME_AR" : "محارم معطرة للاطفال طيبة 96",
+		"CATEGORY_AR" : "حفوضات ",
+		"SALE_PRICE_BASE" : 5.5,
+		"SALE_PRICE_OTHER" : 0.49,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "8697393950214",
+		"RELATION_FACTOR" : 12
+	},
+	{
 		"ITEM_NAME_AR" : "محارم معطرة للجسم جيجلس ",
 		"CATEGORY_AR" : "منوعات",
 		"SALE_PRICE_BASE" : 30.0,
@@ -28187,6 +28232,15 @@
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "8680131206124",
 		"RELATION_FACTOR" : 24
+	},
+	{
+		"ITEM_NAME_AR" : "محارم معطرة للمكياج طيبة 72",
+		"CATEGORY_AR" : "حفوضات ",
+		"SALE_PRICE_BASE" : 5.0,
+		"SALE_PRICE_OTHER" : 0.49,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "8697393950221",
+		"RELATION_FACTOR" : 12
 	},
 	{
 		"ITEM_NAME_AR" : "محارم ميلونكس 225 غ",
@@ -28974,11 +29028,11 @@
 	{
 		"ITEM_NAME_AR" : "مربى فريز 1650غ بستان ",
 		"CATEGORY_AR" : "غذائيات",
-		"SALE_PRICE_BASE" : 27.0,
-		"SALE_PRICE_OTHER" : 6.75,
+		"SALE_PRICE_BASE" : 28.0,
+		"SALE_PRICE_OTHER" : 4.7,
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "6210393212384",
-		"RELATION_FACTOR" : 4
+		"RELATION_FACTOR" : 6
 	},
 	{
 		"ITEM_NAME_AR" : "مربى فريز 2 ك احلام ",
@@ -29155,10 +29209,10 @@
 		"ITEM_NAME_AR" : "مربى مشمش 1650غ بستان ",
 		"CATEGORY_AR" : "غذائيات",
 		"SALE_PRICE_BASE" : 24.0,
-		"SALE_PRICE_OTHER" : 6.0,
+		"SALE_PRICE_OTHER" : 4.1,
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "6210393662387",
-		"RELATION_FACTOR" : 4
+		"RELATION_FACTOR" : 6
 	},
 	{
 		"ITEM_NAME_AR" : "مربى مشمش 2 ك احلام ",
@@ -30127,7 +30181,7 @@
 		"ITEM_NAME_AR" : "مسحوق بنت الشام 8 كغ",
 		"CATEGORY_AR" : "منظفات",
 		"SALE_PRICE_BASE" : 12.5,
-		"SALE_PRICE_OTHER" : 6.17,
+		"SALE_PRICE_OTHER" : 6.31,
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "00111325",
 		"RELATION_FACTOR" : 2
@@ -31402,6 +31456,15 @@
 		"RELATION_FACTOR" : 1
 	},
 	{
+		"ITEM_NAME_AR" : "مكديميا 500غ تاج الخير ",
+		"CATEGORY_AR" : "موالح",
+		"SALE_PRICE_BASE" : 42.0,
+		"SALE_PRICE_OTHER" : 4.25,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "00111433",
+		"RELATION_FACTOR" : 10
+	},
+	{
 		"ITEM_NAME_AR" : "مكسرات 250 غ",
 		"CATEGORY_AR" : "موالح",
 		"SALE_PRICE_BASE" : 27.0,
@@ -32138,6 +32201,15 @@
 		"BASE_UNIT_BARCODES" : null,
 		"OTHER_UNIT_BARCODES" : "6213431114015",
 		"RELATION_FACTOR" : 24
+	},
+	{
+		"ITEM_NAME_AR" : "موزريلا ميلانو  2كغ نيوبارك",
+		"CATEGORY_AR" : "غذائيات",
+		"SALE_PRICE_BASE" : 50.0,
+		"SALE_PRICE_OTHER" : 13.0,
+		"BASE_UNIT_BARCODES" : null,
+		"OTHER_UNIT_BARCODES" : "6215000474261",
+		"RELATION_FACTOR" : 4
 	},
 	{
 		"ITEM_NAME_AR" : "موفستوس كراميل 88 غ",
