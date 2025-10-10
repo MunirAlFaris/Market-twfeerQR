@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تدقيق أسعار المواد - نظام إدارة الأسعار</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- SheetJS Library for Excel Export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            direction: rtl;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .header h1 {
+            color: #4a5568;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .header p {
+            color: #718096;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .controls-compact {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 12px;
+            align-items: end;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .control-group label {
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 4px;
+            font-size: 0.8rem;
+        }
+
+        .form-control {
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            background: white;
+            height: 36px;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+        }
+
+        .analysis-options {
+            display: flex;
+            gap: 6px;
+        }
+
+        .analysis-option {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .analysis-option.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .analysis-option:hover {
+            border-color: #667eea;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            grid-column: 1 / -1;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            height: 36px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(72, 187, 120, 0.4);
+        }
+
+        .btn-info {
+            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+            color: white;
+        }
+
+        .btn-info:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(66, 153, 225, 0.4);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+            color: white;
+        }
+
+        .btn-warning:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(237, 137, 54, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .results-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table-header h3 {
+            font-size: 1.3rem;
+        }
+
+        .table-filters {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .table-filters input {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 15px 12px;
+            text-align: right;
+            border-bottom: 1px solid #eee;
+        }
+
+        .data-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .data-table th:hover {
+            background: #e9ecef;
+        }
+
+        .data-table th.sortable::after {
+            content: '\f0dc';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 10px;
+            opacity: 0.5;
+        }
+
+        .data-table th.sort-asc::after {
+            content: '\f0de';
+            opacity: 1;
+        }
+
+        .data-table th.sort-desc::after {
+            content: '\f0dd';
+            opacity: 1;
+        }
+
+        .data-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .profit-indicator {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .profit-high {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .profit-medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .profit-low {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #7f8c8d;
+        }
+
+        .loading i {
+            font-size: 3rem;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 50px;
+            color: #7f8c8d;
+        }
+
+        .no-results i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #4a5568;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .nav-links a.active {
+            background: #667eea;
+            color: white;
+        }
+
+        /* Products Info Styles */
+        .products-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .products-counter {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 8px rgba(72, 187, 120, 0.3);
+        }
+
+        .loading-status {
+            background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 8px rgba(237, 137, 54, 0.3);
+        }
+
+        /* Progress Bar Styles */
+        .progress-container {
+            margin: 15px 0;
+            padding: 10px 0;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            width: 0%;
+            transition: width 0.3s ease;
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .progress-text {
+            font-weight: 600;
+            color: #4a5568;
+            font-size: 0.9rem;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .controls-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .analysis-type-selector {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .table-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .table-filters {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .data-table {
+                font-size: 0.85rem;
+            }
+
+            .data-table th,
+            .data-table td {
+                padding: 10px 8px;
+            }
+        }
+
+        /* أنماط التمييز للمقارنة */
+        .comparison-higher {
+            background-color: rgba(40, 167, 69, 0.1);
+            border-left: 4px solid #28a745;
+        }
+
+        .comparison-lower {
+            background-color: rgba(220, 53, 69, 0.1);
+            border-left: 4px solid #dc3545;
+        }
+
+        .comparison-equal {
+            background-color: rgba(255, 193, 7, 0.1);
+            border-left: 4px solid #ffc107;
+        }
+
+        .text-success {
+            color: #28a745 !important;
+        }
+
+        .text-danger {
+            color: #dc3545 !important;
+        }
+
+        .text-warning {
+            color: #ffc107 !important;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-top">
+                <h1>📊 تدقيق أسعار المواد</h1>
+                <div class="products-info">
+                    <span id="products-counter" class="products-counter">
+                        <i class="fas fa-box"></i>
+                        <span id="products-count">0</span> منتج محمل
+                    </span>
+                    <span id="loading-status" class="loading-status" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        جاري التحميل...
+                    </span>
+                </div>
+            </div>
+            
+            <!-- Progress Bar -->
+            <div id="progress-container" class="progress-container" style="display: none;">
+                <div class="progress-bar">
+                    <div id="progress-fill" class="progress-fill"></div>
+                </div>
+                <span id="progress-text" class="progress-text">0%</span>
+            </div>
+            
+            <div class="nav-links">
+                <a href="index.html">🏠 الرئيسية</a>
+                <a href="pricing.html">💰 الأسعار</a>
+                <a href="audit.html" class="active">📊 تدقيق الأسعار</a>
+            </div>
+            <div class="controls-compact">
+                <div class="control-group">
+                    <label for="categoryFilter">صنف المنتج</label>
+                    <select id="categoryFilter" class="form-control">
+                        <option value="all">جميع الأصناف</option>
+                        <option value="base">الوحدة الأساسية</option>
+                        <option value="more">الوحدة الأكثر</option>
+                        <option value="less">الوحدة الأقل</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="searchFilter">البحث</label>
+                    <input type="text" id="searchFilter" class="form-control" placeholder="ادخل اسم المادة أو جزء منه...">
+                </div>
+
+                <div class="control-group">
+                    <label>نوع التحليل</label>
+                    <div class="analysis-options">
+                        <div class="analysis-option active" data-type="show-all">عرض الكل</div>
+                        <div class="analysis-option" data-type="percentage">نسبة %</div>
+                        <div class="analysis-option" data-type="fixed">مبلغ ثابت</div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label for="analysisValue">قيمة التحليل</label>
+                    <input type="number" id="analysisValue" class="form-control" placeholder="25" min="0" step="0.01">
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-primary" id="analyzeBtn">
+                        <i class="fas fa-play"></i> تحليل
+                    </button>
+                    <button class="btn btn-success" id="exportExcelBtn" disabled>
+                        <i class="fas fa-file-excel"></i> Excel
+                    </button>
+                    <button class="btn btn-info" id="refreshDataBtn">
+                        <i class="fas fa-sync-alt"></i> تحديث
+                    </button>
+                    <button class="btn btn-warning" id="clearFiltersBtn">
+                        <i class="fas fa-eraser"></i> مسح
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Results Panel -->
+        <div class="results-panel" id="resultsPanel" style="display: none;">
+            <!-- Statistics -->
+            <div class="stats-grid" id="statsGrid">
+                <div class="stat-card">
+                    <h3 id="totalProductsCount">0</h3>
+                    <p>إجمالي المواد</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="highProfitCount">0</h3>
+                    <p>مواد عالية الربح</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="lowProfitCount">0</h3>
+                    <p>مواد منخفضة الربح</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="averageProfit">0%</h3>
+                    <p>متوسط الربح</p>
+                </div>
+            </div>
+
+            <!-- Data Table -->
+            <div class="table-container">
+                <div class="table-header">
+                    <h3><i class="fas fa-table"></i> نتائج التحليل</h3>
+                    <div class="table-filters">
+                        <input type="text" id="tableSearch" placeholder="بحث سريع...">
+                        <select id="tableSortBy">
+                            <option value="name">ترتيب حسب الاسم</option>
+                            <option value="profit">ترتيب حسب الربح</option>
+                            <option value="cost">ترتيب حسب التكلفة</option>
+                            <option value="price">ترتيب حسب السعر</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div id="tableContent">
+                    <div class="loading">
+                        <i class="fas fa-spinner"></i>
+                        <p>جاري تحميل البيانات...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="audit.js"></script>
+</body>
+</html>
