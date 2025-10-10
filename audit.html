@@ -268,254 +268,178 @@
         .data-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            background: white;
         }
 
         .data-table th,
         .data-table td {
-            padding: 15px 12px;
-            text-align: right;
-            border-bottom: 1px solid #eee;
+            padding: 12px 10px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            vertical-align: middle;
         }
 
         .data-table th {
-            background: #f8f9fa;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
             font-weight: 600;
-            color: #2c3e50;
-            cursor: pointer;
-            position: relative;
+            font-size: 0.85rem;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
 
-        .data-table th:hover {
-            background: #e9ecef;
+        .data-table tbody tr {
+            transition: all 0.2s ease;
         }
 
-        .data-table th.sortable::after {
-            content: '\f0dc';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 10px;
-            opacity: 0.5;
-        }
-
-        .data-table th.sort-asc::after {
-            content: '\f0de';
-            opacity: 1;
-        }
-
-        .data-table th.sort-desc::after {
-            content: '\f0dd';
-            opacity: 1;
+        .data-table tbody tr:nth-child(even) {
+            background: #f8f9fa;
         }
 
         .data-table tbody tr:hover {
-            background: #f8f9fa;
+            background: #e3f2fd;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        .profit-indicator {
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.85rem;
+        /* تحسين عرض الوحدات */
+        .unit-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
             font-weight: 600;
-        }
-
-        .profit-high {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .profit-medium {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .profit-low {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
-        .loading {
             text-align: center;
-            padding: 50px;
-            color: #7f8c8d;
+            min-width: 70px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }
 
-        .loading i {
-            font-size: 3rem;
-            animation: spin 1s linear infinite;
+        .unit-base { 
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white; 
+        }
+        
+        .unit-more { 
+            background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+            color: white; 
+        }
+        
+        .unit-less { 
+            background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%);
+            color: #212529; 
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        /* تحسين عرض الأسعار والأرباح */
+        .price-cell {
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
         }
 
-        .no-results {
+        .profit-cell {
+            font-weight: 700;
+        }
+
+        .text-success { 
+            color: #28a745 !important; 
+            font-weight: 600;
+        }
+        
+        .text-danger { 
+            color: #dc3545 !important; 
+            font-weight: 600;
+        }
+
+        /* تحسين عرض النسب المئوية */
+        .percentage-cell {
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        /* تحسين عرض أسماء المنتجات */
+        .product-name-cell {
+            text-align: right !important;
+            font-weight: 600;
+            color: #2c3e50;
+            max-width: 200px;
+            word-wrap: break-word;
+        }
+
+        .product-type-cell {
             text-align: center;
-            padding: 50px;
-            color: #7f8c8d;
+            font-size: 0.8rem;
+            color: #6c757d;
+            font-style: italic;
         }
 
-        .no-results i {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            opacity: 0.5;
+        /* تحسين الجدول المتجاوب */
+        .table-responsive {
+            overflow-x: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        .nav-links {
-            display: flex;
-            gap: 10px;
-            align-items: center;
+        /* تحسين رؤوس الأعمدة */
+        .data-table th:first-child {
+            border-top-right-radius: 8px;
         }
 
-        .nav-links a {
-            color: #4a5568;
-            text-decoration: none;
-            padding: 6px 12px;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            font-size: 0.9rem;
+        .data-table th:last-child {
+            border-top-left-radius: 8px;
         }
 
-        .nav-links a:hover {
-            background: #667eea;
-            color: white;
+        /* إضافة خطوط فاصلة بين المجموعات */
+        .data-table tbody tr.group-separator {
+            border-top: 2px solid #dee2e6;
         }
 
-        .nav-links a.active {
-            background: #667eea;
-            color: white;
+        /* تحسين عرض الأيقونات */
+        .comparison-icon {
+            font-size: 1.1rem;
         }
 
-        /* Products Info Styles */
-        .products-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+        /* تحسين ألوان الصفوف حسب الحالة */
+        .table-success {
+            background-color: #d4edda !important;
+            border-color: #c3e6cb !important;
         }
 
-        .products-counter {
-            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 2px 8px rgba(72, 187, 120, 0.3);
+        .table-danger {
+            background-color: #f8d7da !important;
+            border-color: #f5c6cb !important;
         }
 
-        .loading-status {
-            background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 2px 8px rgba(237, 137, 54, 0.3);
+        .table-warning {
+            background-color: #fff3cd !important;
+            border-color: #ffeaa7 !important;
         }
 
-        /* Progress Bar Styles */
-        .progress-container {
-            margin: 15px 0;
-            padding: 10px 0;
-            border-top: 1px solid #e2e8f0;
-            display: flex;
-            align-items: center;
-            gap: 15px;
+        /* تحسين التباعد والمحاذاة */
+        .align-middle {
+            vertical-align: middle !important;
         }
 
-        .progress-bar {
-            flex: 1;
-            height: 8px;
-            background: #e2e8f0;
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 10px;
-            width: 0%;
-            transition: width 0.3s ease;
-            position: relative;
-        }
-
-        .progress-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        .progress-text {
-            font-weight: 600;
-            color: #4a5568;
-            font-size: 0.9rem;
-            min-width: 40px;
-            text-align: center;
-        }
-
+        /* تحسين عرض الجدول على الشاشات الصغيرة */
         @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .controls-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .analysis-type-selector {
-                grid-template-columns: 1fr;
-            }
-
-            .action-buttons {
-                flex-direction: column;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .table-header {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .table-filters {
-                width: 100%;
-                justify-content: center;
-            }
-
             .data-table {
-                font-size: 0.85rem;
+                font-size: 0.8rem;
             }
-
+            
             .data-table th,
             .data-table td {
-                padding: 10px 8px;
+                padding: 8px 6px;
+            }
+            
+            .unit-badge {
+                font-size: 0.7rem;
+                padding: 2px 6px;
+                min-width: 60px;
+            }
+            
+            .product-name-cell {
+                max-width: 150px;
             }
         }
 

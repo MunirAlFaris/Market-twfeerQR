@@ -277,16 +277,24 @@ async function runAnalysis() {
                 const totalQuantity = unitProducts.reduce((sum, p) => sum + p.quantity, 0);
                 const totalCost = unitProducts.reduce((sum, p) => sum + (p.cost * p.quantity), 0);
                 const totalRevenue = unitProducts.reduce((sum, p) => sum + (p.price * p.quantity), 0);
-                const profit = totalRevenue - totalCost;
-                const averageCost = totalCost / totalQuantity;
-                const averagePrice = totalRevenue / totalQuantity;
-                const profitMargin = averageCost > 0 ? (((averagePrice - averageCost) / averageCost) * 100) : 0;
+                
+                // حساب المتوسطات للوحدة الواحدة
+                const averageCost = Math.round((totalCost / totalQuantity) * 100) / 100;
+                const averagePrice = Math.round((totalRevenue / totalQuantity) * 100) / 100;
+                
+                // حساب الربح للوحدة الواحدة (السعر - التكلفة)
+                const profit = Math.round((averagePrice - averageCost) * 100) / 100;
+                
+                // إصلاح حساب النسبة المئوية: النسبة = ((السعر - التكلفة) / التكلفة) × 100
+                // للتحقق: إذا كانت التكلفة 1 والنسبة 55.6%، فالسعر = 1 + (1 × 55.6/100) = 1.556
+                const profitMargin = averageCost > 0 ? 
+                    Math.round(((averagePrice - averageCost) / averageCost) * 100 * 100) / 100 : 0;
 
                 units[unit] = {
                     quantity: totalQuantity,
                     totalCost: totalCost,
                     totalRevenue: totalRevenue,
-                    profit: profit,
+                    profit: profit, // الآن يعرض الربح للوحدة الواحدة
                     profitMargin: profitMargin,
                     averageCost: averageCost,
                     averagePrice: averagePrice
@@ -297,10 +305,10 @@ async function runAnalysis() {
                 totalProductRevenue += totalRevenue;
             }
 
-            const totalProductProfit = totalProductRevenue - totalProductCost;
-            const averageProductCost = totalProductCost / totalProductQuantity;
-            const averageProductPrice = totalProductRevenue / totalProductQuantity;
-            const totalProductProfitMargin = averageProductCost > 0 ? (((averageProductPrice - averageProductCost) / averageProductCost) * 100) : 0;
+            const totalProductProfit = Math.round((totalProductRevenue - totalProductCost) * 100) / 100;
+            const averageProductCost = Math.round((totalProductCost / totalProductQuantity) * 100) / 100;
+            const averageProductPrice = Math.round((totalProductRevenue / totalProductQuantity) * 100) / 100;
+            const totalProductProfitMargin = averageProductCost > 0 ? Math.round((((averageProductPrice - averageProductCost) / averageProductCost) * 100) * 100) / 100 : 0;
 
             analysisResults.push({
                 name: productName,
@@ -440,9 +448,9 @@ function displayTable(results, analysisType, analysisValue) {
     const getUnitComparisonIcon = (unitData) => {
         const status = getUnitComparisonStatus(unitData);
         if (status === 'none') return '';
-        return status === 'higher' ? '<i class="fas fa-arrow-up text-success"></i>' : 
-               status === 'lower' ? '<i class="fas fa-arrow-down text-danger"></i>' : 
-               '<i class="fas fa-equals text-warning"></i>';
+        return status === 'higher' ? '<i class="fas fa-arrow-up text-success comparison-icon"></i>' : 
+               status === 'lower' ? '<i class="fas fa-arrow-down text-danger comparison-icon"></i>' : 
+               '<i class="fas fa-equals text-warning comparison-icon"></i>';
     };
 
     const getRowClass = (unitData) => {
@@ -453,8 +461,8 @@ function displayTable(results, analysisType, analysisValue) {
     };
 
     const tableHeaders = analysisType !== 'show-all' 
-        ? `<th>اسم المنتج</th><th>نوع الوحدة</th><th>نوع المنتج</th><th>التكلفة</th><th>السعر</th><th>الربح</th><th>هامش الربح</th><th>المقارنة</th>`
-        : `<th>اسم المنتج</th><th>نوع الوحدة</th><th>نوع المنتج</th><th>التكلفة</th><th>السعر</th><th>الربح</th><th>هامش الربح</th>`;
+        ? `<th class="product-name-cell">اسم المنتج</th><th>نوع الوحدة</th><th class="product-type-cell">نوع المنتج</th><th>التكلفة</th><th>السعر</th><th>الربح</th><th>هامش الربح</th><th>المقارنة</th>`
+        : `<th class="product-name-cell">اسم المنتج</th><th>نوع الوحدة</th><th class="product-type-cell">نوع المنتج</th><th>التكلفة</th><th>السعر</th><th>الربح</th><th>هامش الربح</th>`;
 
     let tableRows = '';
     
@@ -466,8 +474,8 @@ function displayTable(results, analysisType, analysisValue) {
             // إذا لم توجد وحدات، اعرض سطر واحد للمنتج
             tableRows += `
                 <tr>
-                    <td><strong>${result.name}</strong></td>
-                    <td colspan="${analysisType !== 'show-all' ? '7' : '6'}">لا توجد وحدات</td>
+                    <td class="product-name-cell"><strong>${result.name}</strong></td>
+                    <td colspan="${analysisType !== 'show-all' ? '7' : '6'}" class="text-center">لا توجد وحدات</td>
                 </tr>
             `;
         } else {
@@ -478,17 +486,17 @@ function displayTable(results, analysisType, analysisValue) {
                 
                 tableRows += `
                     <tr class="${rowClass}">
-                        ${isFirstRow ? `<td rowspan="${unitsCount}" class="align-middle"><strong>${result.name}</strong></td>` : ''}
-                        <td>
+                        ${isFirstRow ? `<td rowspan="${unitsCount}" class="align-middle product-name-cell"><strong>${result.name}</strong></td>` : ''}
+                        <td class="text-center">
                             <span class="unit-badge unit-${unitType}">${getUnitName(unitType)}</span>
                         </td>
-                        ${isFirstRow ? `<td rowspan="${unitsCount}" class="align-middle">${result.productType || 'غير محدد'}</td>` : ''}
-                        <td>$${unitData.averageCost.toFixed(2)}</td>
-                        <td>$${unitData.averagePrice.toFixed(2)}</td>
-                        <td class="${unitData.profit >= 0 ? 'text-success' : 'text-danger'}">
+                        ${isFirstRow ? `<td rowspan="${unitsCount}" class="align-middle product-type-cell">${result.productType || 'غير محدد'}</td>` : ''}
+                        <td class="price-cell text-center">$${unitData.averageCost.toFixed(2)}</td>
+                        <td class="price-cell text-center">$${unitData.averagePrice.toFixed(2)}</td>
+                        <td class="profit-cell text-center ${unitData.profit >= 0 ? 'text-success' : 'text-danger'}">
                             $${unitData.profit.toFixed(2)}
                         </td>
-                        <td class="${unitData.profitMargin >= 0 ? 'text-success' : 'text-danger'}">
+                        <td class="percentage-cell text-center ${unitData.profitMargin >= 0 ? 'text-success' : 'text-danger'}">
                             ${unitData.profitMargin.toFixed(1)}%
                         </td>
                         ${analysisType !== 'show-all' ? `<td class="text-center">${getUnitComparisonIcon(unitData)}</td>` : ''}
@@ -500,8 +508,8 @@ function displayTable(results, analysisType, analysisValue) {
 
     const tableHTML = `
         <div class="table-responsive">
-            <table class="table table-striped table-hover">
-                <thead class="table-dark">
+            <table class="data-table">
+                <thead>
                     <tr>
                         ${tableHeaders}
                     </tr>
