@@ -52,7 +52,8 @@ const PRICING_COLLECTION_ID = config.COLLECTION_ID; // استخدام نفس ا�
 // ————————————————————————————————————————————————————————————————
 let PRODUCTS = [];
 let INDEX_BC_BASE = new Map();
-let INDEX_BC_OTHER = new Map();
+let INDEX_BC_MORE = new Map();
+let INDEX_BC_LESS = new Map();
 let pricingItems = [];
 let stickerItems = [];
 let currentStream = null;
@@ -115,26 +116,45 @@ function extractProducts(json) {
 function cleanAndIndex(products) {
   PRODUCTS = products.map((p, i) => {
     const name = (p.ITEM_NAME_AR ?? p.name ?? "").toString();
-    const saleBase = (p.SALE_PRICE_BASE ?? p.PRICE_BASE_UNIT ?? null);
-    const saleOther = (p.SALE_PRICE_OTHER ?? p.PRICE_BIG_UNIT ?? null);
-    const baseBCs = parseBarcodes(p.BASE_UNIT_BARCODES ?? p.BASE_BARCODES ?? p.BARCODES_BASE);
-    const otherBCs = parseBarcodes(p.OTHER_UNIT_BARCODES ?? p.LESS_UNIT_BARCODES ?? p.BARCODES_OTHER);
+    const cat = (p.CATEGORY_AR ?? p.category ?? "").toString();
+    const saleBase = (p.BASE_SALE_PRICE ?? p.SALE_PRICE_BASE ?? p.PRICE_BASE_UNIT ?? null);
+    const saleMore = (p.MORE_SALE_PRICE ?? p.SALE_PRICE_MORE ?? null);
+    const saleLess = (p.LESS_SALE_PRICE ?? p.SALE_PRICE_LESS ?? null);
+    const baseBCs = parseBarcodes(p.BASE_BARCODES ?? p.BASE_UNIT_BARCODES ?? p.BARCODES_BASE);
+    const moreBCs = parseBarcodes(p.MORE_BARCODES ?? p.MORE_UNIT_BARCODES ?? null);
+    const lessBCs = parseBarcodes(p.LESS_BARCODES ?? p.LESS_UNIT_BARCODES ?? null);
+    const baseQty = (p.BASE_QTY ?? p.QTY_BASE ?? null);
+    const moreQty = (p.MORE_QTY ?? p.QTY_MORE ?? null);
+    const lessQty = (p.LESS_QTY ?? p.QTY_LESS ?? null);
+    const moreRelation = (p.MORE_RELATION ?? p.RELATION_MORE ?? null);
+    const lessRelation = (p.LESS_RELATION ?? p.RELATION_LESS ?? null);
+    
     return {
       _i: i,
       name,
+      cat,
       nameNorm: normArabic(name),
       saleBase: saleBase != null ? Number(saleBase) : null,
-      saleOther: saleOther != null ? Number(saleOther) : null,
+      saleMore: saleMore != null ? Number(saleMore) : null,
+      saleLess: saleLess != null ? Number(saleLess) : null,
       baseBCs,
-      otherBCs
+      moreBCs,
+      lessBCs,
+      baseQty: baseQty != null ? Number(baseQty) : null,
+      moreQty: moreQty != null ? Number(moreQty) : null,
+      lessQty: lessQty != null ? Number(lessQty) : null,
+      moreRelation: moreRelation != null ? Number(moreRelation) : null,
+      lessRelation: lessRelation != null ? Number(lessRelation) : null
     };
   });
 
   INDEX_BC_BASE = new Map();
-  INDEX_BC_OTHER = new Map();
+  INDEX_BC_MORE = new Map();
+  INDEX_BC_LESS = new Map();
   PRODUCTS.forEach((p, i) => {
     p.baseBCs.forEach(bc => INDEX_BC_BASE.set(bc, i));
-    p.otherBCs.forEach(bc => INDEX_BC_OTHER.set(bc, i));
+    p.moreBCs.forEach(bc => INDEX_BC_MORE.set(bc, i));
+    p.lessBCs.forEach(bc => INDEX_BC_LESS.set(bc, i));
   });
 
   console.log(`تم تحميل ${PRODUCTS.length} منتج بنجاح`);
@@ -272,18 +292,30 @@ function startScanning() {
 }
 
 function scanWithBarcodeDetector() {
-  const detector = new BarcodeDetector();
+  const detector = new BarcodeDetector({ formats: ['ean_13','ean_8','upc_a','upc_e','code_128'] });
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+
   scanInterval = setInterval(async () => {
     try {
-      const barcodes = await detector.detect(els.video);
+      if (!currentStream) return;
+      const v = els.video;
+      if (!v.videoWidth) return;
+      canvas.width = v.videoWidth; 
+      canvas.height = v.videoHeight;
+      ctx.drawImage(v, 0, 0, canvas.width, canvas.height);
+      
+      const barcodes = await detector.detect(canvas);
       if (barcodes.length > 0) {
-        const code = barcodes[0].rawValue;
-        handleBarcodeDetected(code);
+        const code = (barcodes[0].rawValue || '').replace(/[^0-9]/g, '');
+        if (code) {
+          handleBarcodeDetected(code);
+        }
       }
     } catch (err) {
       console.error('خطأ في قراءة الباركود:', err);
     }
-  }, 500);
+  }, 220);
 }
 
 function scanWithQuagga() { scanInterval = setInterval(() => {}, 500); }
@@ -348,9 +380,11 @@ function searchProducts(query) {
   if (isBarcode) {
     const cleanCode = query.replace(/[^0-9]/g, '');
     const iBase = INDEX_BC_BASE.get(cleanCode);
-    const iOther = INDEX_BC_OTHER.get(cleanCode);
+    const iMore = INDEX_BC_MORE.get(cleanCode);
+    const iLess = INDEX_BC_LESS.get(cleanCode);
     if (Number.isInteger(iBase)) return [{ product: PRODUCTS[iBase], type: 'base' }];
-    if (Number.isInteger(iOther)) return [{ product: PRODUCTS[iOther], type: 'other' }];
+    if (Number.isInteger(iMore)) return [{ product: PRODUCTS[iMore], type: 'more' }];
+    if (Number.isInteger(iLess)) return [{ product: PRODUCTS[iLess], type: 'less' }];
     return [];
   }
   return PRODUCTS
@@ -366,8 +400,9 @@ function handleBarcodeInput() {
   const code = els.barcodeInput.value.trim();
   if (!code) { els.barcodeResults.textContent = ""; return; }
   const bcBase = INDEX_BC_BASE.get(code);
-  const bcOther = INDEX_BC_OTHER.get(code);
-  if (Number.isInteger(bcBase) || Number.isInteger(bcOther)) {
+  const bcMore = INDEX_BC_MORE.get(code);
+  const bcLess = INDEX_BC_LESS.get(code);
+  if (Number.isInteger(bcBase) || Number.isInteger(bcMore) || Number.isInteger(bcLess)) {
     const preferType = els.barcodeType.value;
     addByBarcode(code, preferType);
     els.barcodeInput.value = "";
@@ -388,7 +423,13 @@ function handleNameSearch() {
   if (results.length === 0) { els.nameResults.textContent = "لا توجد نتائج"; return; }
   const preferType = els.nameType.value;
   const html = results.slice(0, 10).map(r => {
-    const price = preferType === 'base' ? r.product.saleBase : r.product.saleOther;
+    let price;
+    switch (preferType) {
+      case 'base': price = r.product.saleBase; break;
+      case 'more': price = r.product.saleMore; break;
+      case 'less': price = r.product.saleLess; break;
+      default: price = r.product.saleBase;
+    }
     const priceText = price ? money(price) : "غير متوفر";
     return `<div class="search-result" onclick="addToPricingList('${escapeHtml(r.product.name)}', ${price || 0}, '${preferType}'); els.nameInput.value=''; els.nameResults.textContent='';">
       ${escapeHtml(r.product.name)} - ${priceText}
@@ -404,7 +445,13 @@ function addSelectedProduct() {
   if (results.length > 0) {
     const preferType = els.nameType.value;
     const product = results[0].product;
-    const price = preferType === 'base' ? product.saleBase : product.saleOther;
+    let price;
+     switch (preferType) {
+       case 'base': price = product.saleBase; break;
+       case 'more': price = product.saleMore; break;
+       case 'less': price = product.saleLess; break;
+       default: price = product.saleBase;
+     }
     addToPricingList(product.name, price || 0, preferType);
     els.nameInput.value = ""; els.nameResults.textContent = "";
   }
@@ -413,18 +460,29 @@ function addSelectedProduct() {
 // إضافة عنصر بالباركود
 function addByBarcode(code, preferType) {
   const iBase = INDEX_BC_BASE.get(code);
-  const iOther = INDEX_BC_OTHER.get(code);
+  const iMore = INDEX_BC_MORE.get(code);
+  const iLess = INDEX_BC_LESS.get(code);
+  
+  // إعطاء الأولوية للنوع المفضل
   if (preferType === 'base' && Number.isInteger(iBase)) {
     const p = PRODUCTS[iBase]; if (p.saleBase != null) { addToPricingList(p.name, p.saleBase, 'base'); return true; }
   }
-  if (preferType === 'other' && Number.isInteger(iOther)) {
-    const p = PRODUCTS[iOther]; if (p.saleOther != null) { addToPricingList(p.name, p.saleOther, 'other'); return true; }
+  if (preferType === 'more' && Number.isInteger(iMore)) {
+    const p = PRODUCTS[iMore]; if (p.saleMore != null) { addToPricingList(p.name, p.saleMore, 'more'); return true; }
   }
+  if (preferType === 'less' && Number.isInteger(iLess)) {
+    const p = PRODUCTS[iLess]; if (p.saleLess != null) { addToPricingList(p.name, p.saleLess, 'less'); return true; }
+  }
+  
+  // إذا لم يتم العثور على النوع المفضل، جرب الأنواع المتبقية
   if (Number.isInteger(iBase)) {
     const p = PRODUCTS[iBase]; if (p.saleBase != null) { addToPricingList(p.name, p.saleBase, 'base'); return true; }
   }
-  if (Number.isInteger(iOther)) {
-    const p = PRODUCTS[iOther]; if (p.saleOther != null) { addToPricingList(p.name, p.saleOther, 'other'); return true; }
+  if (Number.isInteger(iMore)) {
+    const p = PRODUCTS[iMore]; if (p.saleMore != null) { addToPricingList(p.name, p.saleMore, 'more'); return true; }
+  }
+  if (Number.isInteger(iLess)) {
+    const p = PRODUCTS[iLess]; if (p.saleLess != null) { addToPricingList(p.name, p.saleLess, 'less'); return true; }
   }
   return false;
 }

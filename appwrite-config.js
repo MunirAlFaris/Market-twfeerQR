@@ -46,11 +46,11 @@ if (typeof module !== 'undefined' && module.exports) {
    - النوع: Float
    - مطلوب: نعم
 
-3. type (string) - نوع السعر (base أو other)
+3. type (string) - نوع السعر (base أو more أو less)
    - النوع: String
    - الحجم: 50
    - مطلوب: نعم
-   - القيم المسموحة: base, other
+   - القيم المسموحة: base, more, less
 
 4. created_at (datetime) - تاريخ الإنشاء
    - النوع: DateTime

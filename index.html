@@ -185,10 +185,19 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 8px;
+      padding: 8px;
+      border-radius: 6px;
+      transition: background-color 0.2s ease;
     }
     
     .price-row:last-child {
       margin-bottom: 0;
+    }
+
+    .price-row.highlighted {
+      background-color: rgba(59, 130, 246, 0.1);
+      border: 1px solid #3b82f6;
+      font-weight: 600;
     }
     
     .price-label {
@@ -399,7 +408,8 @@
     let PRODUCTS = [];
     let INDEX_NAME = [];
     let INDEX_BC_BASE = new Map();
-    let INDEX_BC_OTHER = new Map();
+    let INDEX_BC_MORE = new Map();
+    let INDEX_BC_LESS = new Map();
     let USD_TRY = null;
 
     const els = {
@@ -448,11 +458,26 @@
       PRODUCTS = products.map((p, i) => {
         const name = (p.ITEM_NAME_AR ?? p.name ?? "").toString();
         const cat = (p.CATEGORY_AR ?? p.category ?? "").toString();
-        const saleBase = (p.SALE_PRICE_BASE ?? p.PRICE_BASE_UNIT ?? null);
-        const saleOther = (p.SALE_PRICE_OTHER ?? p.PRICE_BIG_UNIT ?? null);
-        const baseBCs = parseBarcodes(p.BASE_UNIT_BARCODES ?? p.BASE_BARCODES ?? p.BARCODES_BASE);
-        const otherBCs = parseBarcodes(p.OTHER_UNIT_BARCODES ?? p.LESS_UNIT_BARCODES ?? p.BARCODES_OTHER);
-        const rel = (p.RELATION_FACTOR ?? p.SMALL_TO_BIG_FACTOR ?? null);
+        
+        // الأسعار للوحدات الثلاث
+        const saleBase = (p.BASE_SALE_PRICE ?? p.SALE_PRICE_BASE ?? p.PRICE_BASE_UNIT ?? null);
+        const saleMore = (p.MORE_SALE_PRICE ?? p.SALE_PRICE_MORE ?? null);
+        const saleLess = (p.LESS_SALE_PRICE ?? p.SALE_PRICE_LESS ?? null);
+        
+        // الباركودات للوحدات الثلاث
+        const baseBCs = parseBarcodes(p.BASE_BARCODES ?? p.BASE_UNIT_BARCODES ?? p.BARCODES_BASE);
+        const moreBCs = parseBarcodes(p.MORE_BARCODES ?? p.MORE_UNIT_BARCODES ?? p.BARCODES_MORE);
+        const lessBCs = parseBarcodes(p.LESS_BARCODES ?? p.LESS_UNIT_BARCODES ?? p.BARCODES_LESS);
+        
+        // الكميات والعلاقات
+        const baseQty = p.BASE_QTY ?? null;
+        const moreQty = p.MORE_QTY ?? null;
+        const lessQty = p.LESS_QTY ?? null;
+        const moreRelation = p.MORE_RELATION ?? null;
+        const lessRelation = p.LESS_RELATION ?? null;
+        
+        const rel = moreRelation ?? lessRelation ?? (p.RELATION_FACTOR ?? p.SMALL_TO_BIG_FACTOR ?? null);
+        
         return {
           _i: i,
           name,
@@ -460,19 +485,29 @@
           cat,
           catNorm: normArabic(cat),
           saleBase: saleBase != null ? Number(saleBase) : null,
-          saleOther: saleOther != null ? Number(saleOther) : null,
+          saleMore: saleMore != null ? Number(saleMore) : null,
+          saleLess: saleLess != null ? Number(saleLess) : null,
           baseBCs,
-          otherBCs,
+          moreBCs,
+          lessBCs,
+          baseQty,
+          moreQty,
+          lessQty,
+          moreRelation,
+          lessRelation,
           rel: rel != null ? Number(rel) : null
         };
       });
 
       INDEX_NAME = PRODUCTS.map((p, i) => ({ key: p.nameNorm + ' ' + p.catNorm, idx: i }));
       INDEX_BC_BASE = new Map();
-      INDEX_BC_OTHER = new Map();
+      INDEX_BC_MORE = new Map();
+      INDEX_BC_LESS = new Map();
+      
       PRODUCTS.forEach((p, i) => {
         p.baseBCs.forEach(bc => INDEX_BC_BASE.set(bc, i));
-        p.otherBCs.forEach(bc => INDEX_BC_OTHER.set(bc, i));
+        p.moreBCs.forEach(bc => INDEX_BC_MORE.set(bc, i));
+        p.lessBCs.forEach(bc => INDEX_BC_LESS.set(bc, i));
       });
 
       els.fileStatus.textContent = `تم التحميل: ${PRODUCTS.length.toLocaleString('ar-EG')} منتج`;
@@ -562,12 +597,14 @@
 
       if (codeQ) {
         const iBase = INDEX_BC_BASE.get(codeQ);
-        const iOther = INDEX_BC_OTHER.get(codeQ);
+        const iMore = INDEX_BC_MORE.get(codeQ);
+        const iLess = INDEX_BC_LESS.get(codeQ);
         const arr = [];
         if (Number.isInteger(iBase)) arr.push(PRODUCTS[iBase]);
-        if (Number.isInteger(iOther) && iOther !== iBase) arr.push(PRODUCTS[iOther]);
+        if (Number.isInteger(iMore) && iMore !== iBase) arr.push(PRODUCTS[iMore]);
+        if (Number.isInteger(iLess) && iLess !== iBase && iLess !== iMore) arr.push(PRODUCTS[iLess]);
         if (!arr.length) {
-          const hasCode = (p) => p.baseBCs.includes(codeQ) || p.otherBCs.includes(codeQ);
+          const hasCode = (p) => p.baseBCs.includes(codeQ) || p.moreBCs.includes(codeQ) || p.lessBCs.includes(codeQ);
           res = res.filter(hasCode);
         } else {
           res = arr;
@@ -598,28 +635,47 @@
     function renderCard(p, highlightKind = null, detectedCode = null) {
       const rate = USD_TRY;
       const tryBase = rate && p.saleBase != null ? (p.saleBase * rate) : null;
-      const tryOther = rate && p.saleOther != null ? (p.saleOther * rate) : null;
+      const tryMore = rate && p.saleMore != null ? (p.saleMore * rate) : null;
+      const tryLess = rate && p.saleLess != null ? (p.saleLess * rate) : null;
       const bcsBase = p.baseBCs.join('، ');
-      const bcsOther = p.otherBCs.join('، ');
+      const bcsMore = p.moreBCs.join('، ');
+      const bcsLess = p.lessBCs.join('، ');
+
+      let highlightText = '';
+      if (highlightKind) {
+        const unitNames = {
+          'base': 'أساسية',
+          'more': 'أكثر',
+          'less': 'أقل'
+        };
+        const unitColors = {
+          'base': 'green',
+          'more': 'blue',
+          'less': 'orange'
+        };
+        highlightText = ` <span class="badge ${unitColors[highlightKind] || 'green'}">وحدة ${unitNames[highlightKind] || 'أساسية'}${detectedCode?` — <span class=\"mono\">${detectedCode}</span>`:''}</span>`;
+      }
 
       const wrap = document.createElement('div');
       wrap.className = 'prod';
       wrap.innerHTML = `
         <h4 title="${p.name}">${p.name}</h4>
-        <div class="hint">${p.cat || '—'} ${p.rel ? `<span class="badge">العلاقة: ${p.rel}</span>` : ''}
-          ${highlightKind ? ` <span class="badge ${highlightKind==='base' ? 'green' : 'yellow'}">وحدة ${highlightKind==='base' ? 'أساسية' : 'أخرى'}${detectedCode?` — <span class=\"mono\">${detectedCode}</span>`:''}</span>` : ''}
+        <div class="hint">${p.cat || '—'} ${p.moreRelation ? `<span class="badge">علاقة أكثر: ${p.moreRelation}</span>` : ''} ${p.lessRelation ? `<span class="badge">علاقة أقل: ${p.lessRelation}</span>` : ''}${highlightText}
         </div>
         <div class="kv">
           <div>سعر الأساسية:</div>
           <div><span class="price">$${money(p.saleBase)}${rate?` · ₺${money(tryBase)}`:''}</span></div>
-          <div>سعر الأخرى:</div>
-          <div><span class="price">$${money(p.saleOther)}${rate?` · ₺${money(tryOther)}`:''}</span></div>
+          ${p.saleMore != null ? `<div>سعر الأكثر:</div><div><span class="price">$${money(p.saleMore)}${rate?` · ₺${money(tryMore)}`:''}</span></div>` : ''}
+          ${p.saleLess != null ? `<div>سعر الأقل:</div><div><span class="price">$${money(p.saleLess)}${rate?` · ₺${money(tryLess)}`:''}</span></div>` : ''}
           <div>باركود الأساسية:</div><div class="mono">${bcsBase || '—'}</div>
-          <div>باركود الأخرى:</div><div class="mono">${bcsOther || '—'}</div>
+          ${bcsMore ? `<div>باركود الأكثر:</div><div class="mono">${bcsMore}</div>` : ''}
+          ${bcsLess ? `<div>باركود الأقل:</div><div class="mono">${bcsLess}</div>` : ''}
         </div>
       `;
       wrap.addEventListener('click', () => {
-        const txt = `${p.name} — الأساسية: $${money(p.saleBase)}${USD_TRY?` (₺${money(tryBase)})`:''} — الأخرى: $${money(p.saleOther)}${USD_TRY?` (₺${money(tryOther)})`:''}`;
+        let txt = `${p.name} — الأساسية: $${money(p.saleBase)}${USD_TRY?` (₺${money(tryBase)})`:''} `;
+        if (p.saleMore != null) txt += `— الأكثر: $${money(p.saleMore)}${USD_TRY?` (₺${money(tryMore)})`:''} `;
+        if (p.saleLess != null) txt += `— الأقل: $${money(p.saleLess)}${USD_TRY?` (₺${money(tryLess)})`:''} `;
         navigator.clipboard?.writeText(txt);
       });
       return wrap;
@@ -709,12 +765,72 @@
      function showProductModal(product, detectedKind = null, detectedCode = null) {
       const rate = USD_TRY;
       const tryBase = rate && product.saleBase != null ? (product.saleBase * rate) : null;
-      const tryOther = rate && product.saleOther != null ? (product.saleOther * rate) : null;
+      const tryMore = rate && product.saleMore != null ? (product.saleMore * rate) : null;
+      const tryLess = rate && product.saleLess != null ? (product.saleLess * rate) : null;
+      
       const bcsBase = product.baseBCs.join('، ');
-      const bcsOther = product.otherBCs.join('، ');
+      const bcsMore = product.moreBCs.join('، ');
+      const bcsLess = product.lessBCs.join('، ');
+
+      const getUnitName = (kind) => {
+        switch(kind) {
+          case 'base': return 'أساسية';
+          case 'more': return 'أكبر';
+          case 'less': return 'أصغر';
+          default: return 'غير محدد';
+        }
+      };
 
       const detectedBadge = detectedCode ? 
-        `<div class="detected-badge">تم اكتشاف الباركود: ${detectedCode} (وحدة ${detectedKind === 'base' ? 'أساسية' : 'أخرى'})</div>` : '';
+        `<div class="detected-badge">تم اكتشاف الباركود: ${detectedCode} (وحدة ${getUnitName(detectedKind)})</div>` : '';
+
+      // بناء صفوف الأسعار للوحدات المتوفرة
+      let priceRows = '';
+      if (product.saleBase != null) {
+        priceRows += `
+          <div class="price-row ${detectedKind === 'base' ? 'highlighted' : ''}">
+            <span class="price-label">سعر الوحدة الأساسية:</span>
+            <span class="price-value">$${money(product.saleBase)}${rate ? ` · ₺${money(tryBase)}` : ''}</span>
+          </div>`;
+      }
+      if (product.saleMore != null) {
+        priceRows += `
+          <div class="price-row ${detectedKind === 'more' ? 'highlighted' : ''}">
+            <span class="price-label">سعر الوحدة الأكبر:</span>
+            <span class="price-value">$${money(product.saleMore)}${rate ? ` · ₺${money(tryMore)}` : ''}</span>
+          </div>`;
+      }
+      if (product.saleLess != null) {
+        priceRows += `
+          <div class="price-row ${detectedKind === 'less' ? 'highlighted' : ''}">
+            <span class="price-label">سعر الوحدة الأصغر:</span>
+            <span class="price-value">$${money(product.saleLess)}${rate ? ` · ₺${money(tryLess)}` : ''}</span>
+          </div>`;
+      }
+
+      // بناء صفوف الباركودات للوحدات المتوفرة
+      let barcodeRows = '';
+      if (bcsBase) {
+        barcodeRows += `
+          <div class="barcode-row">
+            <span class="barcode-label">باركود الوحدة الأساسية:</span>
+            <span class="barcode-value">${bcsBase}</span>
+          </div>`;
+      }
+      if (bcsMore) {
+        barcodeRows += `
+          <div class="barcode-row">
+            <span class="barcode-label">باركود الوحدة الأكبر:</span>
+            <span class="barcode-value">${bcsMore}</span>
+          </div>`;
+      }
+      if (bcsLess) {
+        barcodeRows += `
+          <div class="barcode-row">
+            <span class="barcode-label">باركود الوحدة الأصغر:</span>
+            <span class="barcode-value">${bcsLess}</span>
+          </div>`;
+      }
 
       els.modalContent.innerHTML = `
         <div class="product-name">${product.name}</div>
@@ -723,27 +839,14 @@
         
         <div class="price-section">
           <h4 style="margin: 0 0 12px 0; color: var(--text);">الأسعار</h4>
-          <div class="price-row">
-            <span class="price-label">سعر الوحدة الأساسية:</span>
-            <span class="price-value">$${money(product.saleBase)}${rate ? ` · ₺${money(tryBase)}` : ''}</span>
-          </div>
-          <div class="price-row">
-            <span class="price-label">سعر الوحدة الأخرى:</span>
-            <span class="price-value">$${money(product.saleOther)}${rate ? ` · ₺${money(tryOther)}` : ''}</span>
-          </div>
-          ${product.rel ? `<div class="price-row"><span class="price-label">معامل التحويل:</span><span class="price-value">${product.rel}</span></div>` : ''}
+          ${priceRows}
+          ${product.moreRelation ? `<div class="price-row"><span class="price-label">معامل التحويل (أكبر):</span><span class="price-value">${product.moreRelation}</span></div>` : ''}
+          ${product.lessRelation ? `<div class="price-row"><span class="price-label">معامل التحويل (أصغر):</span><span class="price-value">${product.lessRelation}</span></div>` : ''}
         </div>
         
         <div class="barcode-section">
           <h4 style="margin: 0 0 12px 0; color: var(--text);">الباركود</h4>
-          <div class="barcode-row">
-            <span class="barcode-label">باركود الوحدة الأساسية:</span>
-            <span class="barcode-value">${bcsBase || '—'}</span>
-          </div>
-          <div class="barcode-row">
-            <span class="barcode-label">باركود الوحدة الأخرى:</span>
-            <span class="barcode-value">${bcsOther || '—'}</span>
-          </div>
+          ${barcodeRows}
         </div>
       `;
        
@@ -755,10 +858,12 @@
        const c = String(code || '').replace(/[^0-9]/g, '');
        if (!c) return;
        const iBase = INDEX_BC_BASE.get(c);
-       const iOther = INDEX_BC_OTHER.get(c);
+       const iMore = INDEX_BC_MORE.get(c);
+       const iLess = INDEX_BC_LESS.get(c);
        let p = null, kind = null;
        if (Number.isInteger(iBase)) { p = PRODUCTS[iBase]; kind = 'base'; }
-       else if (Number.isInteger(iOther)) { p = PRODUCTS[iOther]; kind = 'other'; }
+       else if (Number.isInteger(iMore)) { p = PRODUCTS[iMore]; kind = 'more'; }
+       else if (Number.isInteger(iLess)) { p = PRODUCTS[iLess]; kind = 'less'; }
 
        if (p) {
          showProductModal(p, kind, c);
@@ -913,27 +1018,39 @@
     }
 
     async function scanWithBarcodeDetector() {
-      const detector = new BarcodeDetector({ formats: ['ean_13','ean_8','upc_a','upc_e','code_128'] });
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
+      try {
+        const detector = new BarcodeDetector({ formats: ['ean_13','ean_8','upc_a','upc_e','code_128'] });
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        console.log('BarcodeDetector initialized successfully');
+        els.scanStatus.textContent = 'جارِ المسح باستخدام BarcodeDetector...';
 
-      scanTimer = setInterval(async () => {
-        if (!stream) return;
-        const v = els.video;
-        if (!v.videoWidth) return;
-        canvas.width = v.videoWidth; canvas.height = v.videoHeight;
-        ctx.drawImage(v, 0, 0, canvas.width, canvas.height);
-        try {
-          const bits = await detector.detect(canvas);
-          if (bits && bits.length) {
-            const code = (bits[0].rawValue || '').replace(/[^0-9]/g, '');
-            if (code) {
-              els.scanStatus.innerHTML = `تم التقاط: <span class="mono">${code}</span>`;
-              showOneByBarcode(code);
+        scanTimer = setInterval(async () => {
+          if (!stream) return;
+          const v = els.video;
+          if (!v.videoWidth) return;
+          canvas.width = v.videoWidth; canvas.height = v.videoHeight;
+          ctx.drawImage(v, 0, 0, canvas.width, canvas.height);
+          try {
+            const bits = await detector.detect(canvas);
+            if (bits && bits.length) {
+              const code = (bits[0].rawValue || '').replace(/[^0-9]/g, '');
+              if (code) {
+                console.log('Barcode detected:', code);
+                els.scanStatus.innerHTML = `تم التقاط: <span class="mono">${code}</span>`;
+                showOneByBarcode(code);
+              }
             }
+          } catch (e) { 
+            console.error('Error detecting barcode:', e);
           }
-        } catch (e) { /* تجاهل */ }
-      }, 220);
+        }, 220);
+      } catch (error) {
+        console.error('Failed to initialize BarcodeDetector:', error);
+        els.scanStatus.innerHTML = '<span class="err">فشل تهيئة BarcodeDetector، جارِ التبديل إلى Quagga</span>';
+        scanWithQuagga();
+      }
     }
 
     function scanWithQuagga() {
@@ -1018,9 +1135,9 @@
         const sample = PRODUCTS.find(p => p.name.includes('اندومي'));
         ok('T3 sample exists', !!sample);
 
-        // T4: مطابقة باركود الأخرى لعينة موجودة (من SAMPLE)
-        const iOther = INDEX_BC_OTHER.get('089686120226');
-        ok('T4 other barcode maps', Number.isInteger(iOther));
+        // T4: مطابقة باركود الأكثر لعينة موجودة (من SAMPLE)
+        const iMore = INDEX_BC_MORE.get('089686120226');
+        ok('T4 more barcode maps', Number.isInteger(iMore));
 
         // T5: حساب تحويل العملة
         const rate = 30.5; const usd = 10; const tryv = usd * rate; ok('T5 currency calc', tryv === 305);
@@ -1064,8 +1181,8 @@
         
         // في حالة فشل التحميل، استخدم البيانات النموذجية
         const SAMPLE = [
-          { ITEM_NAME_AR: 'مثال — مرتديلا 200غ', CATEGORY_AR: 'غذائية', SALE_PRICE_BASE: 11, SALE_PRICE_OTHER: 0.46, BASE_UNIT_BARCODES: '', OTHER_UNIT_BARCODES: '8684252325238', RELATION_FACTOR: 24 },
-          { ITEM_NAME_AR: 'مثال — اندومي 75غ', CATEGORY_AR: 'غذائية', SALE_PRICE_BASE: 10, SALE_PRICE_OTHER: 0.25, BASE_UNIT_BARCODES: '', OTHER_UNIT_BARCODES: '089686120226', RELATION_FACTOR: 40 }
+          { ITEM_NAME_AR: 'مثال — مرتديلا 200غ', CATEGORY_AR: 'غذائية', SALE_PRICE_BASE: 11, SALE_PRICE_MORE: 0.46, BASE_UNIT_BARCODES: '', MORE_UNIT_BARCODES: '8684252325238', RELATION_FACTOR: 24 },
+          { ITEM_NAME_AR: 'مثال — اندومي 75غ', CATEGORY_AR: 'غذائية', SALE_PRICE_BASE: 10, SALE_PRICE_MORE: 0.25, BASE_UNIT_BARCODES: '', MORE_UNIT_BARCODES: '089686120226', RELATION_FACTOR: 40 }
         ];
         cleanAndIndex(SAMPLE);
         
