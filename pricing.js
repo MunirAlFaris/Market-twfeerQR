@@ -120,6 +120,9 @@ function cleanAndIndex(products) {
     const saleBase = (p.BASE_SALE_PRICE ?? p.SALE_PRICE_BASE ?? p.PRICE_BASE_UNIT ?? null);
     const saleMore = (p.MORE_SALE_PRICE ?? p.SALE_PRICE_MORE ?? null);
     const saleLess = (p.LESS_SALE_PRICE ?? p.SALE_PRICE_LESS ?? null);
+    const costBase = (p.BASE_COST_PRICE ?? p.COST_PRICE_BASE ?? p.COST_BASE_UNIT ?? null);
+    const costMore = (p.MORE_COST_PRICE ?? p.COST_PRICE_MORE ?? null);
+    const costLess = (p.LESS_COST_PRICE ?? p.COST_PRICE_LESS ?? null);
     const baseBCs = parseBarcodes(p.BASE_BARCODES ?? p.BASE_UNIT_BARCODES ?? p.BARCODES_BASE);
     const moreBCs = parseBarcodes(p.MORE_BARCODES ?? p.MORE_UNIT_BARCODES ?? null);
     const lessBCs = parseBarcodes(p.LESS_BARCODES ?? p.LESS_UNIT_BARCODES ?? null);
@@ -137,6 +140,9 @@ function cleanAndIndex(products) {
       saleBase: saleBase != null ? Number(saleBase) : null,
       saleMore: saleMore != null ? Number(saleMore) : null,
       saleLess: saleLess != null ? Number(saleLess) : null,
+      costBase: costBase != null ? Number(costBase) : null,
+      costMore: costMore != null ? Number(costMore) : null,
+      costLess: costLess != null ? Number(costLess) : null,
       baseBCs,
       moreBCs,
       lessBCs,

@@ -21,7 +21,7 @@
       margin: 0; background: radial-gradient(1200px 600px at 80% -10%, #0f1b36 0%, var(--bg) 60%);
       color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Kufi Arabic", "Noto Sans Arabic", Tahoma, Arial, sans-serif;
     }
-    header { padding: 20px 16px; border-bottom: 1px solid var(--border); position: sticky; top: 0; backdrop-filter: blur(8px); background: linear-gradient( to bottom, rgba(11,18,32,.9), rgba(11,18,32,.6)); z-index: 10; }
+    header { padding: 20px 16px; border-bottom: 1px solid var(--border); backdrop-filter: blur(8px); background: linear-gradient( to bottom, rgba(11,18,32,.9), rgba(11,18,32,.6)); z-index: 10; }
     .title { font-size: 20px; font-weight: 700; letter-spacing: .3px; }
     .subtitle { color: var(--muted); font-size: 13px; margin-top: 4px; }
 
@@ -61,6 +61,80 @@
     .kv { display: grid; grid-template-columns: max-content 1fr; gap: 0 10px; margin-top: 6px; font-size: 13px; }
     .kv div:nth-child(odd) { color: #9db4df; }
     .price { display: inline-flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 10px; border: 1px dashed var(--border); }
+      .price.cost { background-color: #fff3cd; border-color: #ffeaa7; color: #856404; }
+      
+      .product-actions { margin-top: 10px; text-align: center; }
+
+      .price-section {
+        margin-bottom: 20px;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .price-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .price-row:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+      }
+
+      .price-label {
+        font-weight: 500;
+        color: var(--text-muted);
+      }
+
+      .price-value {
+        font-weight: 600;
+        color: var(--text);
+      }
+
+      .price-value.cost {
+        color: #ffc107;
+      }
+
+      .price-value.profit {
+        color: #28a745;
+      }
+
+      .barcode-section {
+        margin-top: 20px;
+      }
+
+      .barcode-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+        padding: 8px 12px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 6px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .barcode-label {
+        font-weight: 500;
+        color: var(--text-muted);
+      }
+
+      .barcode-value {
+        font-family: 'Courier New', monospace;
+        font-weight: 600;
+        color: var(--accent);
+        background: rgba(0, 123, 255, 0.1);
+        padding: 4px 8px;
+        border-radius: 4px;
+      }
+      .btn-details { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; transition: all 0.3s ease; }
+      .btn-details:hover { transform: translateY(-1px); box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3); }
 
     .badge { display: inline-block; padding: 3px 8px; border-radius: 999px; font-size: 11px; border: 1px solid var(--border); color: #b8d5ff; background: rgba(28,48,83,.55); }
     .badge.green { color: #cffce6; background: rgba(22,52,40,.55); border-color: #1a4534; }
@@ -524,6 +598,11 @@
         const saleMore = (p.MORE_SALE_PRICE ?? p.SALE_PRICE_MORE ?? null);
         const saleLess = (p.LESS_SALE_PRICE ?? p.SALE_PRICE_LESS ?? null);
         
+        // أسعار التكلفة للوحدات الثلاث
+        const costBase = (p.BASE_COST_PRICE ?? p.COST_PRICE_BASE ?? p.COST_BASE_UNIT ?? null);
+        const costMore = (p.MORE_COST_PRICE ?? p.COST_PRICE_MORE ?? null);
+        const costLess = (p.LESS_COST_PRICE ?? p.COST_PRICE_LESS ?? null);
+        
         // الباركودات للوحدات الثلاث
         const baseBCs = parseBarcodes(p.BASE_BARCODES ?? p.BASE_UNIT_BARCODES ?? p.BARCODES_BASE);
         const moreBCs = parseBarcodes(p.MORE_BARCODES ?? p.MORE_UNIT_BARCODES ?? p.BARCODES_MORE);
@@ -547,6 +626,9 @@
           saleBase: saleBase != null ? Number(saleBase) : null,
           saleMore: saleMore != null ? Number(saleMore) : null,
           saleLess: saleLess != null ? Number(saleLess) : null,
+          costBase: costBase != null ? Number(costBase) : null,
+          costMore: costMore != null ? Number(costMore) : null,
+          costLess: costLess != null ? Number(costLess) : null,
           baseBCs,
           moreBCs,
           lessBCs,
@@ -697,6 +779,9 @@
       const tryBase = rate && p.saleBase != null ? (p.saleBase * rate) : null;
       const tryMore = rate && p.saleMore != null ? (p.saleMore * rate) : null;
       const tryLess = rate && p.saleLess != null ? (p.saleLess * rate) : null;
+      const tryCostBase = rate && p.costBase != null ? (p.costBase * rate) : null;
+      const tryCostMore = rate && p.costMore != null ? (p.costMore * rate) : null;
+      const tryCostLess = rate && p.costLess != null ? (p.costLess * rate) : null;
       const bcsBase = p.baseBCs.join('، ');
       const bcsMore = p.moreBCs.join('، ');
       const bcsLess = p.lessBCs.join('، ');
@@ -723,13 +808,19 @@
         <div class="hint">${p.cat || '—'} ${p.moreRelation ? `<span class="badge">علاقة أكثر: ${p.moreRelation}</span>` : ''} ${p.lessRelation ? `<span class="badge">علاقة أقل: ${p.lessRelation}</span>` : ''}${highlightText}
         </div>
         <div class="kv">
-          <div>سعر الأساسية:</div>
+          <div>سعر البيع الأساسية:</div>
           <div><span class="price">$${money(p.saleBase)}${rate?` · ₺${money(tryBase)}`:''}</span></div>
-          ${p.saleMore != null ? `<div>سعر الأكثر:</div><div><span class="price">$${money(p.saleMore)}${rate?` · ₺${money(tryMore)}`:''}</span></div>` : ''}
-          ${p.saleLess != null ? `<div>سعر الأقل:</div><div><span class="price">$${money(p.saleLess)}${rate?` · ₺${money(tryLess)}`:''}</span></div>` : ''}
+          ${p.costBase != null ? `<div>سعر التكلفة الأساسية:</div><div><span class="price cost">$${money(p.costBase)}${rate?` · ₺${money(tryCostBase)}`:''}</span></div>` : ''}
+          ${p.saleMore != null ? `<div>سعر البيع الأكثر:</div><div><span class="price">$${money(p.saleMore)}${rate?` · ₺${money(tryMore)}`:''}</span></div>` : ''}
+          ${p.costMore != null ? `<div>سعر التكلفة الأكثر:</div><div><span class="price cost">$${money(p.costMore)}${rate?` · ₺${money(tryCostMore)}`:''}</span></div>` : ''}
+          ${p.saleLess != null ? `<div>سعر البيع الأقل:</div><div><span class="price">$${money(p.saleLess)}${rate?` · ₺${money(tryLess)}`:''}</span></div>` : ''}
+          ${p.costLess != null ? `<div>سعر التكلفة الأقل:</div><div><span class="price cost">$${money(p.costLess)}${rate?` · ₺${money(tryCostLess)}`:''}</span></div>` : ''}
           <div>باركود الأساسية:</div><div class="mono">${bcsBase || '—'}</div>
           ${bcsMore ? `<div>باركود الأكثر:</div><div class="mono">${bcsMore}</div>` : ''}
           ${bcsLess ? `<div>باركود الأقل:</div><div class="mono">${bcsLess}</div>` : ''}
+        </div>
+        <div class="product-actions">
+          <button class="btn-details" onclick="showProductDetailsModal(${p._i})">عرض التفاصيل الكاملة</button>
         </div>
       `;
       wrap.addEventListener('click', () => {
@@ -911,6 +1002,188 @@
       `;
        
        playSuccessSound();
+       showModal();
+    }
+
+    function showProductDetailsModal(productIndex) {
+      const product = PRODUCTS[productIndex];
+      if (!product) return;
+      
+      const rate = USD_TRY;
+      const tryBase = rate && product.saleBase != null ? (product.saleBase * rate) : null;
+      const tryMore = rate && product.saleMore != null ? (product.saleMore * rate) : null;
+      const tryLess = rate && product.saleLess != null ? (product.saleLess * rate) : null;
+      const tryCostBase = rate && product.costBase != null ? (product.costBase * rate) : null;
+      const tryCostMore = rate && product.costMore != null ? (product.costMore * rate) : null;
+      const tryCostLess = rate && product.costLess != null ? (product.costLess * rate) : null;
+      
+      const bcsBase = product.baseBCs.join('، ');
+      const bcsMore = product.moreBCs.join('، ');
+      const bcsLess = product.lessBCs.join('، ');
+
+      // بناء صفوف أسعار البيع والتكلفة للوحدات المتوفرة
+      let priceRows = '';
+      
+      // الوحدة الأساسية
+      if (product.saleBase != null || product.costBase != null) {
+        priceRows += `<div class="price-section">
+          <h5 style="margin: 0 0 8px 0; color: var(--accent);">الوحدة الأساسية</h5>`;
+        if (product.saleBase != null) {
+          priceRows += `<div class="price-row">
+            <span class="price-label">سعر البيع:</span>
+            <span class="price-value">$${money(product.saleBase)}${rate ? ` · ₺${money(tryBase)}` : ''}</span>
+          </div>`;
+        }
+        if (product.costBase != null) {
+          priceRows += `<div class="price-row">
+            <span class="price-label">سعر التكلفة:</span>
+            <span class="price-value cost">$${money(product.costBase)}${rate ? ` · ₺${money(tryCostBase)}` : ''}</span>
+          </div>`;
+        }
+        if (product.saleBase != null && product.costBase != null) {
+          const profit = product.saleBase - product.costBase;
+          const profitPercent = ((profit / product.costBase) * 100).toFixed(1);
+          priceRows += `<div class="price-row">
+            <span class="price-label">الربح:</span>
+            <span class="price-value profit">$${money(profit)} (${profitPercent}%)</span>
+          </div>`;
+        }
+        priceRows += `</div>`;
+      }
+      
+      // الوحدة الأكبر
+      if (product.saleMore != null || product.costMore != null) {
+        priceRows += `<div class="price-section">
+          <h5 style="margin: 0 0 8px 0; color: var(--accent);">الوحدة الأكبر</h5>`;
+        if (product.saleMore != null) {
+          priceRows += `<div class="price-row">
+            <span class="price-label">سعر البيع:</span>
+            <span class="price-value">$${money(product.saleMore)}${rate ? ` · ₺${money(tryMore)}` : ''}</span>
+          </div>`;
+        }
+        if (product.costMore != null) {
+          priceRows += `<div class="price-row">
+            <span class="price-label">سعر التكلفة:</span>
+            <span class="price-value cost">$${money(product.costMore)}${rate ? ` · ₺${money(tryCostMore)}` : ''}</span>
+          </div>`;
+        }
+        if (product.saleMore != null && product.costMore != null) {
+          const profit = product.saleMore - product.costMore;
+          const profitPercent = ((profit / product.costMore) * 100).toFixed(1);
+          priceRows += `<div class="price-row">
+            <span class="price-label">الربح:</span>
+            <span class="price-value profit">$${money(profit)} (${profitPercent}%)</span>
+          </div>`;
+        }
+        if (product.moreRelation) {
+          priceRows += `<div class="price-row">
+            <span class="price-label">معامل التحويل:</span>
+            <span class="price-value">${product.moreRelation}</span>
+          </div>`;
+        }
+        priceRows += `</div>`;
+      }
+      
+      // الوحدة الأصغر
+      if (product.saleLess != null || product.costLess != null) {
+        priceRows += `<div class="price-section">
+          <h5 style="margin: 0 0 8px 0; color: var(--accent);">الوحدة الأصغر</h5>`;
+        if (product.saleLess != null) {
+          priceRows += `<div class="price-row">
+            <span class="price-label">سعر البيع:</span>
+            <span class="price-value">$${money(product.saleLess)}${rate ? ` · ₺${money(tryLess)}` : ''}</span>
+          </div>`;
+        }
+        if (product.costLess != null) {
+          priceRows += `<div class="price-row">
+            <span class="price-label">سعر التكلفة:</span>
+            <span class="price-value cost">$${money(product.costLess)}${rate ? ` · ₺${money(tryCostLess)}` : ''}</span>
+          </div>`;
+        }
+        if (product.saleLess != null && product.costLess != null) {
+          const profit = product.saleLess - product.costLess;
+          const profitPercent = ((profit / product.costLess) * 100).toFixed(1);
+          priceRows += `<div class="price-row">
+            <span class="price-label">الربح:</span>
+            <span class="price-value profit">$${money(profit)} (${profitPercent}%)</span>
+          </div>`;
+        }
+        if (product.lessRelation) {
+          priceRows += `<div class="price-row">
+            <span class="price-label">معامل التحويل:</span>
+            <span class="price-value">${product.lessRelation}</span>
+          </div>`;
+        }
+        priceRows += `</div>`;
+      }
+
+      // بناء صفوف الباركودات للوحدات المتوفرة
+      let barcodeRows = '';
+      if (bcsBase) {
+        barcodeRows += `
+          <div class="barcode-row">
+            <span class="barcode-label">باركود الوحدة الأساسية:</span>
+            <span class="barcode-value">${bcsBase}</span>
+          </div>`;
+      }
+      if (bcsMore) {
+        barcodeRows += `
+          <div class="barcode-row">
+            <span class="barcode-label">باركود الوحدة الأكبر:</span>
+            <span class="barcode-value">${bcsMore}</span>
+          </div>`;
+      }
+      if (bcsLess) {
+        barcodeRows += `
+          <div class="barcode-row">
+            <span class="barcode-label">باركود الوحدة الأصغر:</span>
+            <span class="barcode-value">${bcsLess}</span>
+          </div>`;
+      }
+
+      // بناء معلومات إضافية
+      let additionalInfo = '';
+      if (product.baseQty || product.moreQty || product.lessQty) {
+        additionalInfo += `<div class="price-section">
+          <h4 style="margin: 0 0 12px 0; color: var(--text);">الكميات</h4>`;
+        if (product.baseQty) {
+          additionalInfo += `<div class="price-row">
+            <span class="price-label">كمية الوحدة الأساسية:</span>
+            <span class="price-value">${product.baseQty}</span>
+          </div>`;
+        }
+        if (product.moreQty) {
+          additionalInfo += `<div class="price-row">
+            <span class="price-label">كمية الوحدة الأكبر:</span>
+            <span class="price-value">${product.moreQty}</span>
+          </div>`;
+        }
+        if (product.lessQty) {
+          additionalInfo += `<div class="price-row">
+            <span class="price-label">كمية الوحدة الأصغر:</span>
+            <span class="price-value">${product.lessQty}</span>
+          </div>`;
+        }
+        additionalInfo += `</div>`;
+      }
+
+      els.modalContent.innerHTML = `
+        <div class="product-name">${product.name}</div>
+        <div class="product-category">${product.cat || 'غير محدد'}</div>
+        
+        <div style="margin: 20px 0;">
+          <h4 style="margin: 0 0 12px 0; color: var(--text);">الأسعار والأرباح</h4>
+          ${priceRows}
+        </div>
+        
+        ${additionalInfo}
+        
+        <div class="barcode-section">
+          <h4 style="margin: 0 0 12px 0; color: var(--text);">الباركود</h4>
+          ${barcodeRows}
+        </div>
+      `;
+       
        showModal();
     }
 
