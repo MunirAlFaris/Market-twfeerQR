@@ -296,89 +296,237 @@ function stopCamera() {
   els.scanStatus.textContent = '';
 }
 
-function startScanning() {
-  if ('BarcodeDetector' in window) {
-    scanWithBarcodeDetector();
-  } else if (typeof Quagga !== 'undefined') {
-    scanWithQuagga();
-  } else {
-    els.scanStatus.textContent = 'قارئ الباركود غير متاح';
+async function startScanning() {
+  try {
+    els.scanStatus.textContent = 'جارِ تهيئة قارئ الباركود...';
+    
+    if ('BarcodeDetector' in window) {
+      // التحقق من دعم الأنواع المطلوبة
+      try {
+        const supportedFormats = await BarcodeDetector.getSupportedFormats();
+        if (supportedFormats.length > 0) {
+          console.log('Using native BarcodeDetector with formats:', supportedFormats);
+          els.scanStatus.textContent = `استخدام قارئ الباركود المدمج (${supportedFormats.length} نوع مدعوم)`;
+          scanWithBarcodeDetector();
+          return;
+        }
+      } catch (e) {
+        console.warn('BarcodeDetector available but failed to initialize:', e);
+      }
+    }
+    
+    // التراجع إلى Quagga
+    if (typeof Quagga !== 'undefined') {
+      console.log('Falling back to Quagga library');
+      els.scanStatus.textContent = 'استخدام مكتبة Quagga للباركود';
+      scanWithQuagga();
+    } else {
+      throw new Error('No barcode detection method available');
+    }
+  } catch (error) {
+    console.error('Failed to start barcode scanning:', error);
+    els.scanStatus.innerHTML = '<span style="color: #dc2626;">❌ فشل في تشغيل قارئ الباركود. تأكد من السماح بالوصول للكاميرا.</span>';
+    
+    // إعادة تمكين أزرار التحكم
+    els.startCam.disabled = false;
+    els.stopCam.disabled = true;
+    els.switchCam.disabled = true;
   }
 }
 
 async function scanWithBarcodeDetector() {
   try {
-    const detector = new BarcodeDetector({ formats: ['ean_13','ean_8','upc_a','upc_e','code_128'] });
+    // التحقق من دعم المتصفح لـ BarcodeDetector
+    if (!('BarcodeDetector' in window)) {
+      throw new Error('BarcodeDetector not supported');
+    }
+
+    // التحقق من الأنواع المدعومة
+    const supportedFormats = await BarcodeDetector.getSupportedFormats();
+    console.log('Supported barcode formats:', supportedFormats);
+
+    // اختيار الأنواع المدعومة من قائمة الأنواع المطلوبة
+    const desiredFormats = ['ean_13', 'ean_8', 'upc_a', 'upc_e', 'code_128', 'code_39', 'code_93', 'qr_code', 'data_matrix'];
+    const availableFormats = desiredFormats.filter(format => supportedFormats.includes(format));
+    
+    if (availableFormats.length === 0) {
+      throw new Error('No supported barcode formats available');
+    }
+
+    const detector = new BarcodeDetector({ formats: availableFormats });
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
 
-    console.log('BarcodeDetector initialized successfully');
-    els.scanStatus.textContent = 'جارِ المسح باستخدام BarcodeDetector...';
+    console.log('BarcodeDetector initialized with formats:', availableFormats);
+    els.scanStatus.textContent = `جارِ المسح باستخدام BarcodeDetector (${availableFormats.length} نوع مدعوم)...`;
 
     scanInterval = setInterval(async () => {
       try {
-        if (!currentStream) return;
+        if (!currentStream || isProcessingBarcode) return;
         const v = els.video;
-        if (!v.videoWidth) return;
-        canvas.width = v.videoWidth; 
-        canvas.height = v.videoHeight;
+        if (!v.videoWidth || !v.videoHeight) return;
+        
+        // تحسين جودة الصورة للمسح
+        const scale = Math.min(640 / v.videoWidth, 480 / v.videoHeight);
+        canvas.width = v.videoWidth * scale;
+        canvas.height = v.videoHeight * scale;
+        
         ctx.drawImage(v, 0, 0, canvas.width, canvas.height);
         
         const barcodes = await detector.detect(canvas);
-        if (barcodes.length > 0) {
-          const code = (barcodes[0].rawValue || '').replace(/[^0-9]/g, '');
-          if (code) {
+        if (barcodes && barcodes.length > 0) {
+          // البحث عن أفضل باركود (أعلى ثقة)
+          const bestBarcode = barcodes.reduce((best, current) => {
+            const bestConfidence = best.cornerPoints ? best.cornerPoints.length : 0;
+            const currentConfidence = current.cornerPoints ? current.cornerPoints.length : 0;
+            return currentConfidence > bestConfidence ? current : best;
+          });
+
+          let code = bestBarcode.rawValue || '';
+          
+          // معالجة أنواع مختلفة من الباركود
+          if (bestBarcode.format === 'qr_code') {
+            // للـ QR codes، قد تحتوي على نص أو رقم
+            const numericMatch = code.match(/\d+/);
+            if (numericMatch) {
+              code = numericMatch[0];
+            }
+          } else {
+            // للباركود العادي، استخراج الأرقام فقط
+            code = code.replace(/[^0-9]/g, '');
+          }
+          
+          if (code && code.length >= 8) { // التأكد من أن الباركود طويل بما فيه الكفاية
+            console.log('Barcode detected:', {
+              format: bestBarcode.format,
+              rawValue: bestBarcode.rawValue,
+              processedCode: code,
+              confidence: bestBarcode.cornerPoints?.length || 0
+            });
+            
             handleBarcodeDetected(code);
           }
         }
       } catch (err) {
         console.error('خطأ في قراءة الباركود:', err);
+        // لا نوقف المسح في حالة خطأ مؤقت
       }
-    }, 220);
+    }, 150); // تقليل الفترة لتحسين الاستجابة
   } catch (error) {
     console.error('Failed to initialize BarcodeDetector:', error);
-    els.scanStatus.innerHTML = '<span class="err">فشل تهيئة BarcodeDetector، جارِ التبديل إلى Quagga</span>';
+    els.scanStatus.innerHTML = '<span class="err">BarcodeDetector غير متاح، جارِ التبديل إلى Quagga</span>';
     scanWithQuagga();
   }
 }
 
 function scanWithQuagga() {
   if (!window.Quagga) {
-    els.scanStatus.innerHTML = '<span class="err">مكتبة Quagga غير متاحة</span>';
+    els.scanStatus.innerHTML = '<span style="color: #dc2626;">❌ مكتبة Quagga غير متاحة. يرجى التحقق من اتصال الإنترنت.</span>';
     return;
   }
 
-  els.scanStatus.textContent = 'جارِ المسح باستخدام Quagga...';
+  els.scanStatus.textContent = 'جارِ تهيئة مكتبة Quagga...';
   
-  Quagga.init({
+  // إعداد محسن لـ Quagga مع دعم أنواع باركود أكثر <mcreference link="https://developer.mozilla.org/en-US/docs/Web/API/Barcode_Detection_API" index="0">0</mcreference>
+  const quaggaConfig = {
     inputStream: {
       name: "Live",
       type: "LiveStream",
       target: els.video,
       constraints: {
-        width: 640,
-        height: 480,
-        facingMode: "environment"
+        width: { min: 640, ideal: 1280, max: 1920 },
+        height: { min: 480, ideal: 720, max: 1080 },
+        facingMode: "environment",
+        aspectRatio: { ideal: 1.7777777778 }
       }
     },
+    locator: {
+      patchSize: "medium",
+      halfSample: true
+    },
+    numOfWorkers: 2,
+    frequency: 10,
     decoder: {
-      readers: ["ean_reader", "ean_8_reader", "code_128_reader"]
-    }
-  }, function(err) {
+      readers: [
+        "ean_reader", 
+        "ean_8_reader", 
+        "code_128_reader",
+        "code_39_reader",
+        "code_93_reader",
+        "codabar_reader"
+      ]
+    },
+    locate: true
+  };
+  
+  Quagga.init(quaggaConfig, function(err) {
     if (err) {
       console.error('خطأ في تهيئة Quagga:', err);
-      els.scanStatus.innerHTML = '<span class="err">فشل تهيئة Quagga</span>';
+      let errorMessage = 'فشل في تهيئة قارئ الباركود';
+      
+      if (err.name === 'NotAllowedError') {
+        errorMessage = 'يرجى السماح بالوصول للكاميرا';
+      } else if (err.name === 'NotFoundError') {
+        errorMessage = 'لم يتم العثور على كاميرا';
+      } else if (err.name === 'NotReadableError') {
+        errorMessage = 'الكاميرا مستخدمة من تطبيق آخر';
+      }
+      
+      els.scanStatus.innerHTML = `<span style="color: #dc2626;">❌ ${errorMessage}</span>`;
+      
+      // إعادة تمكين أزرار التحكم
+      els.startCam.disabled = false;
+      els.stopCam.disabled = true;
+      els.switchCam.disabled = true;
       return;
     }
     
-    console.log('Quagga initialized successfully');
+    console.log('Quagga initialized successfully with enhanced config');
+    els.scanStatus.innerHTML = '<span style="color: #16a34a;">✅ جاهز للمسح باستخدام Quagga</span>';
+    
     Quagga.start();
     
+    // معالج اكتشاف الباركود مع تحسينات
     Quagga.onDetected(function(result) {
-      const code = result.codeResult.code;
-      if (code) {
-        Quagga.stop();
-        handleBarcodeDetected(code);
+      try {
+        const code = result.codeResult.code;
+        const format = result.codeResult.format;
+        const confidence = result.codeResult.startInfo.error || 0;
+        
+        console.log('Quagga detected:', { code, format, confidence });
+        
+        if (code && confidence < 0.1) { // فقط الباركود عالي الثقة
+          Quagga.stop();
+          handleBarcodeDetected(code);
+        }
+      } catch (e) {
+        console.error('Error processing detected barcode:', e);
+      }
+    });
+    
+    // معالج الأخطاء أثناء التشغيل
+    Quagga.onProcessed(function(result) {
+      if (result && result.codeResult && result.codeResult.code) {
+        // رسم مربع حول الباركود المكتشف (اختياري)
+        const drawingCtx = Quagga.canvas.ctx.overlay;
+        const drawingCanvas = Quagga.canvas.dom.overlay;
+        
+        if (result.boxes) {
+          drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute("width")), parseInt(drawingCanvas.getAttribute("height")));
+          result.boxes.filter(function (box) {
+            return box !== result.box;
+          }).forEach(function (box) {
+            Quagga.ImageDebug.drawPath(box, {x: 0, y: 1}, drawingCtx, {color: "green", lineWidth: 2});
+          });
+        }
+        
+        if (result.box) {
+          Quagga.ImageDebug.drawPath(result.box, {x: 0, y: 1}, drawingCtx, {color: "#00F", lineWidth: 2});
+        }
+        
+        if (result.codeResult && result.codeResult.code) {
+          Quagga.ImageDebug.drawPath(result.line, {x: 'x', y: 'y'}, drawingCtx, {color: 'red', lineWidth: 3});
+        }
       }
     });
   });

@@ -1354,26 +1354,74 @@
 
     async function scanWithBarcodeDetector() {
       try {
-        const detector = new BarcodeDetector({ formats: ['ean_13','ean_8','upc_a','upc_e','code_128'] });
+        // التحقق من دعم المتصفح لـ BarcodeDetector
+        if (!('BarcodeDetector' in window)) {
+          throw new Error('BarcodeDetector not supported');
+        }
+
+        // التحقق من الأنواع المدعومة
+        const supportedFormats = await BarcodeDetector.getSupportedFormats();
+        console.log('Supported barcode formats:', supportedFormats);
+
+        // اختيار الأنواع المدعومة من قائمة الأنواع المطلوبة
+        const desiredFormats = ['ean_13', 'ean_8', 'upc_a', 'upc_e', 'code_128', 'code_39', 'code_93', 'qr_code', 'data_matrix'];
+        const availableFormats = desiredFormats.filter(format => supportedFormats.includes(format));
+        
+        if (availableFormats.length === 0) {
+          throw new Error('No supported barcode formats available');
+        }
+
+        const detector = new BarcodeDetector({ formats: availableFormats });
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
         
-        console.log('BarcodeDetector initialized successfully');
-        els.scanStatus.textContent = 'جارِ المسح باستخدام BarcodeDetector...';
+        console.log('BarcodeDetector initialized with formats:', availableFormats);
+        els.scanStatus.textContent = `جارِ المسح باستخدام BarcodeDetector (${availableFormats.length} نوع مدعوم)...`;
 
         scanTimer = setInterval(async () => {
           if (!stream || isProcessingBarcode) return;
           const v = els.video;
-          if (!v.videoWidth) return;
-          canvas.width = v.videoWidth; canvas.height = v.videoHeight;
+          if (!v.videoWidth || !v.videoHeight) return;
+          
+          // تحسين جودة الصورة للمسح
+          const scale = Math.min(640 / v.videoWidth, 480 / v.videoHeight);
+          canvas.width = v.videoWidth * scale;
+          canvas.height = v.videoHeight * scale;
+          
           ctx.drawImage(v, 0, 0, canvas.width, canvas.height);
+          
           try {
-            const bits = await detector.detect(canvas);
-            if (bits && bits.length) {
-              const code = (bits[0].rawValue || '').replace(/[^0-9]/g, '');
-              if (code) {
+            const barcodes = await detector.detect(canvas);
+            if (barcodes && barcodes.length > 0) {
+              // البحث عن أفضل باركود (أعلى ثقة)
+              const bestBarcode = barcodes.reduce((best, current) => {
+                const bestConfidence = best.cornerPoints ? best.cornerPoints.length : 0;
+                const currentConfidence = current.cornerPoints ? current.cornerPoints.length : 0;
+                return currentConfidence > bestConfidence ? current : best;
+              });
+
+              let code = bestBarcode.rawValue || '';
+              
+              // معالجة أنواع مختلفة من الباركود
+              if (bestBarcode.format === 'qr_code') {
+                // للـ QR codes، قد تحتوي على نص أو رقم
+                const numericMatch = code.match(/\d+/);
+                if (numericMatch) {
+                  code = numericMatch[0];
+                }
+              } else {
+                // للباركود العادي، استخراج الأرقام فقط
+                code = code.replace(/[^0-9]/g, '');
+              }
+              
+              if (code && code.length >= 8) { // التأكد من أن الباركود طويل بما فيه الكفاية
                 isProcessingBarcode = true;
-                console.log('Barcode detected:', code);
+                console.log('Barcode detected:', {
+                  format: bestBarcode.format,
+                  rawValue: bestBarcode.rawValue,
+                  processedCode: code,
+                  confidence: bestBarcode.cornerPoints?.length || 0
+                });
                 
                 // إيقاف المسح مؤقتاً
                 if (scanTimer) {
@@ -1381,7 +1429,13 @@
                   scanTimer = null;
                 }
                 
-                els.scanStatus.innerHTML = `تم التقاط: <span class="mono">${code}</span>`;
+                // تشغيل صوت التنبيه
+                try {
+                  const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmGgU7k9n1unEiBC13yO/eizEIHWq+8+OWT');
+                  audio.play().catch(() => {}); // تجاهل الأخطاء إذا لم يُسمح بالصوت
+                } catch (e) {}
+                
+                els.scanStatus.innerHTML = `✅ تم التقاط ${bestBarcode.format.toUpperCase()}: <span class="mono">${code}</span>`;
                 showOneByBarcode(code);
                 
                 // إعادة تشغيل المسح بعد ثانيتين
@@ -1396,11 +1450,13 @@
             }
           } catch (e) { 
             console.error('Error detecting barcode:', e);
+            // لا نوقف المسح في حالة خطأ مؤقت
           }
-        }, 220);
+        }, 150); // تقليل الفترة لتحسين الاستجابة
+        
       } catch (error) {
         console.error('Failed to initialize BarcodeDetector:', error);
-        els.scanStatus.innerHTML = '<span class="err">فشل تهيئة BarcodeDetector، جارِ التبديل إلى Quagga</span>';
+        els.scanStatus.innerHTML = '<span class="err">BarcodeDetector غير متاح، جارِ التبديل إلى Quagga</span>';
         scanWithQuagga();
       }
     }
