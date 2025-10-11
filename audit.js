@@ -548,11 +548,16 @@ function displayTable(results, analysisType, analysisValue) {
                 const isFirstRow = index === 0;
                 const rowClass = getRowClass(unitData);
                 
+                // إضافة تمييز خاص للوحدات الصغرى
+                const isSmallUnit = unitType === 'less';
+                const smallUnitClass = isSmallUnit ? 'small-unit-highlight' : '';
+                const smallUnitIcon = isSmallUnit ? '<i class="fas fa-star text-warning" title="وحدة صغرى"></i> ' : '';
+                
                 tableRows += `
-                    <tr class="${rowClass}">
+                    <tr class="${rowClass} ${smallUnitClass}">
                         ${isFirstRow ? `<td rowspan="${unitsCount}" class="align-middle product-name-cell"><strong>${result.name}</strong></td>` : ''}
                         <td class="text-center">
-                            <span class="unit-badge unit-${unitType}">${getUnitName(unitType)}</span>
+                            ${smallUnitIcon}<span class="unit-badge unit-${unitType}">${getUnitName(unitType)}</span>
                         </td>
                         ${isFirstRow ? `<td rowspan="${unitsCount}" class="align-middle product-type-cell">${result.productType || 'غير محدد'}</td>` : ''}
                         <td class="price-cell text-center">$${unitData.averageCost.toFixed(2)}</td>
@@ -560,7 +565,7 @@ function displayTable(results, analysisType, analysisValue) {
                         <td class="profit-cell text-center ${unitData.profit >= 0 ? 'text-success' : 'text-danger'}">
                             $${unitData.profit.toFixed(2)}
                         </td>
-                        <td class="percentage-cell text-center ${unitData.profitMargin >= 0 ? 'text-success' : 'text-danger'}">
+                        <td class="percentage-cell text-center ${unitData.profitMargin >= 0 ? 'text-success' : 'text-danger'} ${isSmallUnit ? 'small-unit-profit' : ''}">
                             ${unitData.profitMargin.toFixed(1)}%
                         </td>
                         ${analysisType !== 'show-all' ? `<td class="text-center">${getUnitComparisonIcon(unitData)}</td>` : ''}
@@ -589,6 +594,9 @@ function displayTable(results, analysisType, analysisValue) {
     
     // حفظ البيانات الحالية للفلترة والترتيب
     currentTableData = results;
+    
+    // تطبيق التلوين على الوحدات الصغرى
+    applySmallUnitColoring();
     
     // حساب متوسط الربح
     calculateAverageProfit(results);
@@ -715,27 +723,43 @@ function applyTableFilters() {
     // تطبيق فلتر مقارنة الربح بناءً على نوع التحليل والقيمة المدخلة
     if (profitFilter !== 'all') {
         const referenceValue = currentAnalysisValue;
-        const tolerance = currentAnalysisType === 'percentage' ? 0.5 : 0.1; // هامش تسامح أصغر
+        const tolerance = currentAnalysisType === 'percentage' ? 0.5 : 0.01; // هامش تسامح أصغر للقيم الثابتة
         
         filteredData = filteredData.filter(result => {
-            // الحصول على أعلى قيمة للمقارنة (الوحدة الأساسية أو أعلى قيمة)
+            // البحث عن الوحدة الصغرى (less) فقط
+            const lessUnit = result.units && result.units.less;
+            
+            if (!lessUnit) {
+                // إذا لم توجد وحدة فرعية، لا تظهر هذا المنتج في النتائج المفلترة
+                console.log(`المنتج ${result.name}: لا توجد وحدة صغرى`);
+                return false;
+            }
+            
             let comparisonValue;
             
             if (currentAnalysisType === 'percentage') {
-                comparisonValue = getMaxUnitValue(result, 'profitMargin');
+                comparisonValue = lessUnit.profitMargin || 0;
             } else if (currentAnalysisType === 'fixed') {
-                comparisonValue = getMaxUnitValue(result, 'profit');
+                comparisonValue = lessUnit.profit || 0;
             } else {
-                comparisonValue = getMaxUnitValue(result, 'profitMargin');
+                comparisonValue = lessUnit.profitMargin || 0;
             }
+            
+            console.log(`فلترة المنتج: ${result.name}, نوع التحليل: ${currentAnalysisType}, قيمة المقارنة: ${comparisonValue}, القيمة المرجعية: ${referenceValue}, نوع الفلتر: ${profitFilter}, هامش التسامح: ${tolerance}`);
             
             switch (profitFilter) {
                 case 'equal':
-                    return Math.abs(comparisonValue - referenceValue) <= tolerance;
+                    const isEqual = Math.abs(comparisonValue - referenceValue) <= tolerance;
+                    console.log(`مطابق: ${isEqual} (الفرق: ${Math.abs(comparisonValue - referenceValue)})`);
+                    return isEqual;
                 case 'below':
-                    return comparisonValue < referenceValue;
+                    const isBelow = comparisonValue < referenceValue;
+                    console.log(`أقل: ${isBelow} (${comparisonValue} < ${referenceValue})`);
+                    return isBelow;
                 case 'above':
-                    return comparisonValue > referenceValue;
+                    const isAbove = comparisonValue > referenceValue;
+                    console.log(`أعلى: ${isAbove} (${comparisonValue} > ${referenceValue})`);
+                    return isAbove;
                 default:
                     return true;
             }
@@ -896,8 +920,116 @@ function displayFilteredTable(results) {
     
     tableContent.innerHTML = tableHTML;
     
+    // تطبيق التلوين على الوحدات الصغرى
+    applySmallUnitColoring();
+    
     // تحديث حالة زر الطباعة
     updatePrintButtonState(true);
+}
+
+// دالة لتطبيق التلوين على الوحدات الصغرى في الجدول الأساسي
+function applySmallUnitColoring() {
+    if (currentAnalysisType === 'show-all' || !currentAnalysisValue) return;
+    
+    const table = document.getElementById('printableTable');
+    if (!table) return;
+    
+    const rows = table.querySelectorAll('tbody tr');
+    
+    rows.forEach((row, index) => {
+        const profitCell = row.querySelector('td:nth-child(7)'); // عمود هامش الربح
+        const profitValueCell = row.querySelector('td:nth-child(6)'); // عمود قيمة الربح
+        
+        if (profitCell && currentAnalysisValue !== null && currentAnalysisValue !== undefined) {
+            // التحقق من نوع الوحدة
+            const unitCell = row.querySelector('td:nth-child(2)'); // عمود نوع الوحدة
+            const unitBadge = unitCell ? unitCell.querySelector('.unit-badge') : null;
+            let unitType = 'base'; // افتراضي
+            
+            if (unitBadge) {
+                if (unitBadge.classList.contains('unit-less')) {
+                    unitType = 'less';
+                } else if (unitBadge.classList.contains('unit-more')) {
+                    unitType = 'more';
+                } else if (unitBadge.classList.contains('unit-base')) {
+                    unitType = 'base';
+                }
+            }
+            
+            // تطبيق التلوين فقط على الوحدات الصغرى
+            if (unitType === 'less') {
+                let comparisonValue;
+                
+                // تحديد القيمة للمقارنة حسب نوع التحليل
+                if (currentAnalysisType === 'percentage') {
+                    // للنسب المئوية، استخدم هامش الربح
+                    const profitText = profitCell.textContent.trim();
+                    comparisonValue = parseFloat(profitText.replace(/[%\s]/g, ''));
+                } else if (currentAnalysisType === 'fixed') {
+                    // للقيم الثابتة، استخدم قيمة الربح
+                    const profitValueText = profitValueCell ? profitValueCell.textContent.trim() : '0';
+                    comparisonValue = parseFloat(profitValueText.replace(/[$\s]/g, ''));
+                }
+                
+                if (!isNaN(comparisonValue)) {
+                    const tolerance = currentAnalysisType === 'percentage' ? 0.5 : 0.01;
+                    const difference = Math.abs(comparisonValue - currentAnalysisValue);
+                    
+                    let colorStyle, bgStyle, cssClass;
+                    
+                    if (difference <= tolerance) {
+                        // مساوي للمعدل - أصفر
+                        colorStyle = '#856404';
+                        bgStyle = '#fff3cd';
+                        cssClass = 'small-unit-equal';
+                        console.log(`صف ${index + 1}: وحدة صغرى مساوية للمعدل (الفرق: ${difference.toFixed(3)})`);
+                    } else if (comparisonValue < currentAnalysisValue) {
+                        // أقل من المعدل - أحمر
+                        colorStyle = '#721c24';
+                        bgStyle = '#f8d7da';
+                        cssClass = 'small-unit-below';
+                        console.log(`صف ${index + 1}: وحدة صغرى أقل من المعدل (الفرق: ${difference.toFixed(3)})`);
+                    } else {
+                        // أعلى من المعدل - أخضر
+                        colorStyle = '#155724';
+                        bgStyle = '#d4edda';
+                        cssClass = 'small-unit-above';
+                        console.log(`صف ${index + 1}: وحدة صغرى أعلى من المعدل (الفرق: ${difference.toFixed(3)})`);
+                    }
+                    
+                    // تطبيق التلوين على عمود هامش الربح
+                    profitCell.style.color = colorStyle + ' !important';
+                    profitCell.style.fontWeight = 'bold';
+                    profitCell.style.backgroundColor = bgStyle;
+                    profitCell.style.border = '1px solid #ddd';
+                    
+                    // تطبيق التلوين على عمود قيمة الربح أيضاً
+                    if (profitValueCell) {
+                        profitValueCell.style.color = colorStyle + ' !important';
+                        profitValueCell.style.fontWeight = 'bold';
+                        profitValueCell.style.backgroundColor = bgStyle;
+                        profitValueCell.style.border = '1px solid #ddd';
+                    }
+                    
+                    // تطبيق التلوين على شارة الوحدة
+                    if (unitBadge) {
+                        unitBadge.style.borderLeft = `4px solid ${colorStyle}`;
+                        unitBadge.style.boxShadow = `0 0 5px ${colorStyle}40`;
+                        unitBadge.style.fontWeight = 'bold';
+                    }
+                    
+                    // إضافة فئة CSS للوحدة الصغرى
+                    row.classList.add('small-unit-highlight', cssClass);
+                    
+                    // تطبيق تلوين خفيف على الصف كاملاً
+                    row.style.borderLeft = `3px solid ${colorStyle}`;
+                    row.style.backgroundColor = bgStyle + '20'; // خلفية شفافة
+                }
+            } else if (unitType !== 'less') {
+                console.log(`صف ${index + 1}: تم تجاهل الوحدة ${unitType} - التلوين مخصص للوحدات الصغرى فقط`);
+            }
+        }
+    });
 }
 
 function printTable() {
@@ -928,28 +1060,102 @@ function printTable() {
             row.style.backgroundColor = '#ffffff';
         }
         
-        // تلوين النسب حسب المقارنة مع قيمة التحليل
-        const profitCell = row.querySelector('td:nth-child(3)'); // عمود هامش الربح
-        if (profitCell) {
-            const profitText = profitCell.textContent.trim();
-            const profitValue = parseFloat(profitText.replace('%', ''));
+        // تلوين النسب حسب المقارنة مع قيمة التحليل - للوحدات الصغرى فقط
+        const profitCell = row.querySelector('td:nth-child(7)'); // عمود هامش الربح
+        const profitValueCell = row.querySelector('td:nth-child(6)'); // عمود قيمة الربح
+        
+        if (profitCell && currentAnalysisValue !== null && currentAnalysisValue !== undefined) {
+            // التحقق من نوع الوحدة
+            const unitCell = row.querySelector('td:nth-child(2)'); // عمود نوع الوحدة
+            const unitBadge = unitCell ? unitCell.querySelector('.unit-badge') : null;
+            let unitType = 'base'; // افتراضي
             
-            if (!isNaN(profitValue) && currentAnalysisValue) {
-                const tolerance = currentAnalysisType === 'percentage' ? 0.5 : 0.1;
-                
-                if (Math.abs(profitValue - currentAnalysisValue) <= tolerance) {
-                    // مطابق للمعدل - أزرق
-                    profitCell.style.color = '#007bff';
-                    profitCell.style.fontWeight = 'bold';
-                } else if (profitValue < currentAnalysisValue) {
-                    // أقل من المعدل - أحمر
-                    profitCell.style.color = '#dc3545';
-                    profitCell.style.fontWeight = 'bold';
-                } else {
-                    // أعلى من المعدل - أخضر
-                    profitCell.style.color = '#28a745';
-                    profitCell.style.fontWeight = 'bold';
+            if (unitBadge) {
+                if (unitBadge.classList.contains('unit-less')) {
+                    unitType = 'less';
+                } else if (unitBadge.classList.contains('unit-more')) {
+                    unitType = 'more';
+                } else if (unitBadge.classList.contains('unit-base')) {
+                    unitType = 'base';
                 }
+            }
+            
+            // تطبيق التلوين فقط على الوحدات الصغرى
+            if (unitType === 'less') {
+                let comparisonValue;
+                
+                // تحديد القيمة للمقارنة حسب نوع التحليل
+                if (currentAnalysisType === 'percentage') {
+                    // للنسب المئوية، استخدم هامش الربح
+                    const profitText = profitCell.textContent.trim();
+                    comparisonValue = parseFloat(profitText.replace(/[%\s]/g, ''));
+                } else if (currentAnalysisType === 'fixed') {
+                    // للقيم الثابتة، استخدم قيمة الربح
+                    const profitText = profitValueCell ? profitValueCell.textContent.trim() : '';
+                    comparisonValue = parseFloat(profitText.replace(/[$\s]/g, ''));
+                }
+                
+                console.log(`صف ${index + 1}: نوع الوحدة = ${unitType}, نوع التحليل = ${currentAnalysisType}, قيمة المقارنة = ${comparisonValue}, قيمة التحليل = ${currentAnalysisValue}`);
+                
+                if (!isNaN(comparisonValue)) {
+                    // تحديد نطاق التسامح حسب نوع التحليل
+                    const tolerance = currentAnalysisType === 'percentage' ? 0.5 : 0.01;
+                    const difference = Math.abs(comparisonValue - currentAnalysisValue);
+                    
+                    let colorStyle = '';
+                    let bgStyle = '';
+                    let cssClass = '';
+                    
+                    if (difference <= tolerance) {
+                        // مطابق للمعدل - أزرق
+                        colorStyle = '#007bff';
+                        bgStyle = '#e3f2fd';
+                        cssClass = 'small-unit-equal';
+                        console.log(`صف ${index + 1}: وحدة صغرى مطابقة للمعدل (الفرق: ${difference.toFixed(3)})`);
+                    } else if (comparisonValue < currentAnalysisValue) {
+                        // أقل من المعدل - أحمر
+                        colorStyle = '#dc3545';
+                        bgStyle = '#ffebee';
+                        cssClass = 'small-unit-below';
+                        console.log(`صف ${index + 1}: وحدة صغرى أقل من المعدل (الفرق: ${difference.toFixed(3)})`);
+                    } else {
+                        // أعلى من المعدل - أخضر
+                        colorStyle = '#28a745';
+                        bgStyle = '#e8f5e8';
+                        cssClass = 'small-unit-above';
+                        console.log(`صف ${index + 1}: وحدة صغرى أعلى من المعدل (الفرق: ${difference.toFixed(3)})`);
+                    }
+                    
+                    // تطبيق التلوين على عمود هامش الربح
+                    profitCell.style.color = colorStyle + ' !important';
+                    profitCell.style.fontWeight = 'bold';
+                    profitCell.style.backgroundColor = bgStyle;
+                    profitCell.style.border = '1px solid #ddd';
+                    
+                    // تطبيق التلوين على عمود قيمة الربح أيضاً
+                    if (profitValueCell) {
+                        profitValueCell.style.color = colorStyle + ' !important';
+                        profitValueCell.style.fontWeight = 'bold';
+                        profitValueCell.style.backgroundColor = bgStyle;
+                        profitValueCell.style.border = '1px solid #ddd';
+                    }
+                    
+                    // تطبيق التلوين على شارة الوحدة
+                    if (unitBadge) {
+                        unitBadge.style.borderLeft = `4px solid ${colorStyle}`;
+                        unitBadge.style.boxShadow = `0 0 5px ${colorStyle}40`;
+                        unitBadge.style.fontWeight = 'bold';
+                    }
+                    
+                    // إضافة فئة CSS للوحدة الصغرى
+                    row.classList.add('small-unit-highlight', cssClass);
+                    
+                    // تطبيق تلوين خفيف على الصف كاملاً
+                    row.style.borderLeft = `3px solid ${colorStyle}`;
+                    row.style.backgroundColor = bgStyle + '20'; // خلفية شفافة
+                }
+            } else if (unitType !== 'less') {
+                console.log(`صف ${index + 1}: تم تجاهل الوحدة ${unitType} - التلوين مخصص للوحدات الصغرى فقط`);
             }
         }
     });
@@ -1021,7 +1227,43 @@ function printTable() {
                 }
                 .unit-base { background-color: #007bff; color: white; }
                 .unit-more { background-color: #28a745; color: white; }
-                .unit-less { background-color: #ffc107; color: black; }
+                .unit-less { 
+                    background-color: #ffc107 !important; 
+                    color: black !important;
+                    box-shadow: 0 2px 4px rgba(255, 193, 7, 0.3) !important;
+                    border: 1px solid #e0a800 !important;
+                }
+                
+                /* تمييز خاص للوحدات الصغرى */
+                .small-unit-highlight {
+                    background-color: #fff8e1 !important;
+                    border-left: 3px solid #ffc107 !important;
+                }
+                
+                .small-unit-profit {
+                    font-weight: bold !important;
+                    font-size: 1.1em !important;
+                    text-shadow: 1px 1px 2px rgba(0,0,0,0.1) !important;
+                }
+                
+                /* ألوان التحليل للوحدات الصغرى */
+                .small-unit-above {
+                    background-color: #e8f5e8 !important;
+                    color: #28a745 !important;
+                    border-left: 4px solid #28a745 !important;
+                }
+                
+                .small-unit-equal {
+                    background-color: #e3f2fd !important;
+                    color: #007bff !important;
+                    border-left: 4px solid #007bff !important;
+                }
+                
+                .small-unit-below {
+                    background-color: #ffebee !important;
+                    color: #dc3545 !important;
+                    border-left: 4px solid #dc3545 !important;
+                }
                 .print-footer {
                     margin-top: 20px;
                     text-align: center;
@@ -1046,6 +1288,12 @@ function printTable() {
                 @media print {
                     body { margin: 0; }
                     .print-header { page-break-after: avoid; }
+                    /* ضمان ظهور الألوان في الطباعة */
+                    * {
+                        -webkit-print-color-adjust: exact !important;
+                        color-adjust: exact !important;
+                        print-color-adjust: exact !important;
+                    }
                 }
             </style>
         </head>
@@ -1221,6 +1469,25 @@ const additionalStyles = `
         .unit-base { background-color: #007bff; color: white; }
         .unit-more { background-color: #28a745; color: white; }
         .unit-less { background-color: #ffc107; color: black; }
+        
+        /* تمييز خاص للوحدات الصغرى */
+        .small-unit-highlight {
+            background-color: #fff8e1 !important;
+            border-left: 3px solid #ffc107 !important;
+        }
+        
+        .small-unit-profit {
+            font-weight: bold !important;
+            font-size: 1.1em !important;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1) !important;
+        }
+        
+        .unit-less {
+            background-color: #ffc107 !important;
+            color: black !important;
+            box-shadow: 0 2px 4px rgba(255, 193, 7, 0.3) !important;
+            border: 1px solid #e0a800 !important;
+        }
         
         .units-cell {
             max-width: 300px;
