@@ -253,15 +253,74 @@
       font-weight: 500;
       margin-top: 8px;
     }
+    
+    /* Navigation Links Styling */
+    .nav-links {
+      display: flex;
+      gap: 15px;
+      margin: 20px 0;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-links a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .nav-links a:hover::before {
+      left: 100%;
+    }
+
+    .nav-links a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+      background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    }
+
+    .nav-links a.active {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      box-shadow: 0 4px 15px rgba(245, 87, 108, 0.3);
+    }
+
+    .nav-links a.active:hover {
+      background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+      box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4);
+    }
   </style>
 </head>
 <body>
   <header>
     <div class="title">🛒 قارئ باركود + بحث — ماركت توفير</div>
     <div class="subtitle">اقرأ باركود الكاميرا أو ابحث بالاسم/الباركود، واعرض السعر بالدولار والليرة التركية (مع تحديث تلقائي لسعر الصرف وقابل للتعديل اليدوي).</div>
-    <div style="margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap;">
-      <a href="pricing.html" class="btn ghost" style="text-decoration: none;">🏷️ صفحة التسعير →</a>
-      <a href="audit.html" class="btn ghost" style="text-decoration: none;">📊 تدقيق أسعار المواد →</a>
+    <div class="nav-links">
+      <a href="index.html" class="active">🏠 الرئيسية</a>
+      <a href="pricing.html">💰 الأسعار</a>
+      <a href="audit.html">📊 تدقيق الأسعار</a>
+      <a href="inventory.html">📦 المستودع</a>
     </div>
   </header>
 
@@ -1018,6 +1077,8 @@
       els.switchCam.disabled = true;
     }
 
+    let isProcessingBarcode = false;
+
     async function scanWithBarcodeDetector() {
       try {
         const detector = new BarcodeDetector({ formats: ['ean_13','ean_8','upc_a','upc_e','code_128'] });
@@ -1028,7 +1089,7 @@
         els.scanStatus.textContent = 'جارِ المسح باستخدام BarcodeDetector...';
 
         scanTimer = setInterval(async () => {
-          if (!stream) return;
+          if (!stream || isProcessingBarcode) return;
           const v = els.video;
           if (!v.videoWidth) return;
           canvas.width = v.videoWidth; canvas.height = v.videoHeight;
@@ -1038,9 +1099,26 @@
             if (bits && bits.length) {
               const code = (bits[0].rawValue || '').replace(/[^0-9]/g, '');
               if (code) {
+                isProcessingBarcode = true;
                 console.log('Barcode detected:', code);
+                
+                // إيقاف المسح مؤقتاً
+                if (scanTimer) {
+                  clearInterval(scanTimer);
+                  scanTimer = null;
+                }
+                
                 els.scanStatus.innerHTML = `تم التقاط: <span class="mono">${code}</span>`;
                 showOneByBarcode(code);
+                
+                // إعادة تشغيل المسح بعد ثانيتين
+                setTimeout(() => {
+                  isProcessingBarcode = false;
+                  if (stream && !scanTimer) {
+                    startScanning();
+                    els.scanStatus.textContent = 'جاهز للمسح';
+                  }
+                }, 2000);
               }
             }
           } catch (e) { 
@@ -1066,9 +1144,21 @@
         els.scanStatus.textContent = 'جارِ المسح…';
         Quagga.onDetected(res => {
           const code = (res?.codeResult?.code || '').replace(/[^0-9]/g, '');
-          if (code) {
+          if (code && !isProcessingBarcode) {
+            isProcessingBarcode = true;
+            Quagga.stop();
+            
             els.scanStatus.innerHTML = `تم التقاط: <span class="mono">${code}</span>`;
             showOneByBarcode(code);
+            
+            // إعادة تشغيل المسح بعد ثانيتين
+            setTimeout(() => {
+              isProcessingBarcode = false;
+              if (stream) {
+                startScanning();
+                els.scanStatus.textContent = 'جاهز للمسح';
+              }
+            }, 2000);
           }
         });
       });

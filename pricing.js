@@ -275,6 +275,15 @@ function stopCamera() {
     scanInterval = null;
   }
   
+  // إيقاف Quagga إذا كان يعمل
+  try { 
+    if (window.Quagga) {
+      window.Quagga.stop(); 
+    }
+  } catch(e) {
+    console.log('Quagga already stopped or not initialized');
+  }
+  
   els.startCam.disabled = false;
   els.stopCam.disabled = true;
   els.switchCam.disabled = true;
@@ -291,34 +300,83 @@ function startScanning() {
   }
 }
 
-function scanWithBarcodeDetector() {
-  const detector = new BarcodeDetector({ formats: ['ean_13','ean_8','upc_a','upc_e','code_128'] });
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
+async function scanWithBarcodeDetector() {
+  try {
+    const detector = new BarcodeDetector({ formats: ['ean_13','ean_8','upc_a','upc_e','code_128'] });
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
 
-  scanInterval = setInterval(async () => {
-    try {
-      if (!currentStream) return;
-      const v = els.video;
-      if (!v.videoWidth) return;
-      canvas.width = v.videoWidth; 
-      canvas.height = v.videoHeight;
-      ctx.drawImage(v, 0, 0, canvas.width, canvas.height);
-      
-      const barcodes = await detector.detect(canvas);
-      if (barcodes.length > 0) {
-        const code = (barcodes[0].rawValue || '').replace(/[^0-9]/g, '');
-        if (code) {
-          handleBarcodeDetected(code);
+    console.log('BarcodeDetector initialized successfully');
+    els.scanStatus.textContent = 'جارِ المسح باستخدام BarcodeDetector...';
+
+    scanInterval = setInterval(async () => {
+      try {
+        if (!currentStream) return;
+        const v = els.video;
+        if (!v.videoWidth) return;
+        canvas.width = v.videoWidth; 
+        canvas.height = v.videoHeight;
+        ctx.drawImage(v, 0, 0, canvas.width, canvas.height);
+        
+        const barcodes = await detector.detect(canvas);
+        if (barcodes.length > 0) {
+          const code = (barcodes[0].rawValue || '').replace(/[^0-9]/g, '');
+          if (code) {
+            handleBarcodeDetected(code);
+          }
         }
+      } catch (err) {
+        console.error('خطأ في قراءة الباركود:', err);
       }
-    } catch (err) {
-      console.error('خطأ في قراءة الباركود:', err);
-    }
-  }, 220);
+    }, 220);
+  } catch (error) {
+    console.error('Failed to initialize BarcodeDetector:', error);
+    els.scanStatus.innerHTML = '<span class="err">فشل تهيئة BarcodeDetector، جارِ التبديل إلى Quagga</span>';
+    scanWithQuagga();
+  }
 }
 
-function scanWithQuagga() { scanInterval = setInterval(() => {}, 500); }
+function scanWithQuagga() {
+  if (!window.Quagga) {
+    els.scanStatus.innerHTML = '<span class="err">مكتبة Quagga غير متاحة</span>';
+    return;
+  }
+
+  els.scanStatus.textContent = 'جارِ المسح باستخدام Quagga...';
+  
+  Quagga.init({
+    inputStream: {
+      name: "Live",
+      type: "LiveStream",
+      target: els.video,
+      constraints: {
+        width: 640,
+        height: 480,
+        facingMode: "environment"
+      }
+    },
+    decoder: {
+      readers: ["ean_reader", "ean_8_reader", "code_128_reader"]
+    }
+  }, function(err) {
+    if (err) {
+      console.error('خطأ في تهيئة Quagga:', err);
+      els.scanStatus.innerHTML = '<span class="err">فشل تهيئة Quagga</span>';
+      return;
+    }
+    
+    console.log('Quagga initialized successfully');
+    Quagga.start();
+    
+    Quagga.onDetected(function(result) {
+      const code = result.codeResult.code;
+      if (code) {
+        Quagga.stop();
+        handleBarcodeDetected(code);
+      }
+    });
+  });
+}
 
 function playBeepSound() {
   try {
@@ -342,15 +400,27 @@ function playBeepSound() {
   }
 }
 
+let isProcessingBarcode = false;
+
 function handleBarcodeDetected(code) {
   const c = String(code || '').replace(/[^0-9]/g, '');
-  if (!c) return;
+  if (!c || isProcessingBarcode) return;
+  
+  // منع المعالجة المتكررة
+  isProcessingBarcode = true;
   
   // إيقاف القراءة المتكررة
   if (scanInterval) {
     clearInterval(scanInterval);
     scanInterval = null;
   }
+  
+  // إيقاف Quagga إذا كان يعمل
+  try { 
+    if (window.Quagga) {
+      window.Quagga.stop(); 
+    }
+  } catch(e) {}
   
   // تشغيل صوت التنبيه
   playBeepSound();
@@ -363,6 +433,7 @@ function handleBarcodeDetected(code) {
   
   // إعادة تشغيل المسح بعد ثانيتين
   setTimeout(() => {
+    isProcessingBarcode = false;
     if (currentStream && !scanInterval) {
       startScanning();
       els.scanStatus.textContent = 'جاهز للمسح';

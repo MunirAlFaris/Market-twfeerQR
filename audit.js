@@ -9,6 +9,8 @@ let currentAnalysisType = 'percentage';
 let currentAnalysisValue = 25;
 let sortColumn = 'name';
 let sortDirection = 'asc';
+let currentTableData = [];
+let averageProfit = 0;
 
 // إضافة متغيرات جديدة للعداد وشريط التقدم
 let productsCounter = 0;
@@ -330,19 +332,41 @@ async function runAnalysis() {
         let finalResults = analysisResults;
         
         if (analysisType === 'percentage' && analysisValue > 0) {
-            // تصفية حسب نسبة الربح
-            finalResults = analysisResults.map(result => ({
-                ...result,
-                comparisonStatus: result.profitMargin > analysisValue ? 'higher' : 
-                                result.profitMargin < analysisValue ? 'lower' : 'equal'
-            }));
+            // تصفية حسب نسبة الربح - تطبيق على كل وحدة
+            finalResults = analysisResults.map(result => {
+                const updatedUnits = {};
+                for (const [unitType, unitData] of Object.entries(result.units || {})) {
+                    updatedUnits[unitType] = {
+                        ...unitData,
+                        comparisonStatus: unitData.profitMargin > analysisValue ? 'higher' : 
+                                        unitData.profitMargin < analysisValue ? 'lower' : 'equal'
+                    };
+                }
+                return {
+                    ...result,
+                    units: updatedUnits,
+                    comparisonStatus: result.averageProfitMargin > analysisValue ? 'higher' : 
+                                    result.averageProfitMargin < analysisValue ? 'lower' : 'equal'
+                };
+            });
         } else if (analysisType === 'fixed' && analysisValue > 0) {
-            // تصفية حسب مبلغ الربح الثابت
-            finalResults = analysisResults.map(result => ({
-                ...result,
-                comparisonStatus: result.profit > analysisValue ? 'higher' : 
-                                result.profit < analysisValue ? 'lower' : 'equal'
-            }));
+            // تصفية حسب مبلغ الربح الثابت - تطبيق على كل وحدة
+            finalResults = analysisResults.map(result => {
+                const updatedUnits = {};
+                for (const [unitType, unitData] of Object.entries(result.units || {})) {
+                    updatedUnits[unitType] = {
+                        ...unitData,
+                        comparisonStatus: unitData.profit > analysisValue ? 'higher' : 
+                                        unitData.profit < analysisValue ? 'lower' : 'equal'
+                    };
+                }
+                return {
+                    ...result,
+                    units: updatedUnits,
+                    comparisonStatus: result.totalProfit > analysisValue ? 'higher' : 
+                                    result.totalProfit < analysisValue ? 'lower' : 'equal'
+                };
+            });
         } else {
             // عرض الكل - إضافة حالة افتراضية
             finalResults = analysisResults.map(result => ({
@@ -357,6 +381,9 @@ async function runAnalysis() {
         updateProgress(90, 'عرض النتائج...');
 
         // عرض النتائج
+        console.log('نتائج التحليل:', finalResults.length, 'منتج');
+        console.log('عينة من البيانات:', finalResults.slice(0, 2));
+        
         displayResults(finalResults, analysisType, analysisValue);
         displayTable(finalResults, analysisType, analysisValue);
         
@@ -387,21 +414,26 @@ function displayResults(results, analysisType, analysisValue) {
     const totalRevenueElement = document.getElementById('totalRevenue');
     const averageMarginElement = document.getElementById('averageMargin');
     
+    // حفظ نوع التحليل والقيمة الحالية
+    currentAnalysisType = analysisType;
+    currentAnalysisValue = analysisValue;
+    
     if (!results || results.length === 0) {
         if (totalProductsElement) totalProductsElement.textContent = '0';
         if (totalProfitElement) totalProfitElement.textContent = '$0.00';
         if (totalRevenueElement) totalRevenueElement.textContent = '$0.00';
         if (averageMarginElement) averageMarginElement.textContent = '0%';
+        updatePrintButtonState(false);
         showNoResults();
         return;
     }
     
     // حساب الإجماليات الصحيحة
     const totalProducts = results.length;
-    const totalProfit = results.reduce((sum, result) => sum + (result.profit || 0), 0);
+    const totalProfit = results.reduce((sum, result) => sum + (result.totalProfit || 0), 0);
     const totalRevenue = results.reduce((sum, result) => sum + (result.totalRevenue || 0), 0);
     const totalCost = results.reduce((sum, result) => sum + (result.totalCost || 0), 0);
-    const averageMargin = totalRevenue > 0 ? (totalProfit / totalRevenue) * 100 : 0;
+    const averageMargin = totalCost > 0 ? ((totalRevenue - totalCost) / totalCost) * 100 : 0;
     
     // عرض الإحصائيات
     if (totalProductsElement) totalProductsElement.textContent = totalProducts.toLocaleString();
@@ -423,16 +455,48 @@ function displayResults(results, analysisType, analysisValue) {
     if (resultsPanel) {
         resultsPanel.style.display = 'block';
     }
+    
+    // تفعيل زر الطباعة
+    updatePrintButtonState(true);
+}
+
+// دالة لإدارة حالة زر الطباعة
+function updatePrintButtonState(hasData) {
+    const printTableBtn = document.getElementById('printTableBtn');
+    if (printTableBtn) {
+        if (hasData && currentTableData && currentTableData.length > 0) {
+            printTableBtn.disabled = false;
+            printTableBtn.style.opacity = '1';
+            printTableBtn.title = 'طباعة النتائج';
+        } else {
+            printTableBtn.disabled = true;
+            printTableBtn.style.opacity = '0.5';
+            printTableBtn.title = 'لا توجد بيانات للطباعة - يرجى تشغيل التحليل أولاً';
+        }
+    }
 }
 
 function displayTable(results, analysisType, analysisValue) {
     const tableContent = document.getElementById('tableContent');
-    if (!tableContent || !results || results.length === 0) {
+    if (!tableContent) {
+        console.error('عنصر tableContent غير موجود');
+        return;
+    }
+    
+    if (!results || results.length === 0) {
+        console.log('لا توجد نتائج لعرضها');
         showNoResults();
         return;
     }
     
+    console.log('عرض الجدول:', results.length, 'منتج');
+    
     const getUnitComparisonStatus = (unitData) => {
+        // استخدام الحالة المحفوظة في البيانات إذا كانت متوفرة
+        if (unitData.comparisonStatus) {
+            return unitData.comparisonStatus;
+        }
+        
         if (analysisType === 'show-all') return 'none';
         
         if (analysisType === 'percentage' && analysisValue > 0) {
@@ -508,7 +572,7 @@ function displayTable(results, analysisType, analysisValue) {
 
     const tableHTML = `
         <div class="table-responsive">
-            <table class="data-table">
+            <table class="data-table" id="printableTable">
                 <thead>
                     <tr>
                         ${tableHeaders}
@@ -522,6 +586,503 @@ function displayTable(results, analysisType, analysisValue) {
     `;
     
     tableContent.innerHTML = tableHTML;
+    
+    // حفظ البيانات الحالية للفلترة والترتيب
+    currentTableData = results;
+    
+    // حساب متوسط الربح
+    calculateAverageProfit(results);
+    
+    // إعداد مستمعي الأحداث للفلاتر
+    setupTableFilters();
+}
+
+// ========================================
+// وظائف الفلترة والترتيب
+// ========================================
+
+function calculateAverageProfit(results) {
+    // حساب المتوسط بناءً على نوع التحليل الحالي
+    if (currentAnalysisType === 'percentage') {
+        let totalProfitMargin = 0;
+        let totalUnits = 0;
+        
+        results.forEach(result => {
+            Object.values(result.units || {}).forEach(unitData => {
+                totalProfitMargin += unitData.profitMargin || 0;
+                totalUnits++;
+            });
+        });
+        
+        averageProfit = totalUnits > 0 ? totalProfitMargin / totalUnits : 0;
+    } else if (currentAnalysisType === 'fixed') {
+        let totalProfit = 0;
+        let totalUnits = 0;
+        
+        results.forEach(result => {
+            Object.values(result.units || {}).forEach(unitData => {
+                totalProfit += unitData.profit || 0;
+                totalUnits++;
+            });
+        });
+        
+        averageProfit = totalUnits > 0 ? totalProfit / totalUnits : 0;
+    } else {
+        // للعرض الكامل، استخدم القيمة المدخلة أو المتوسط
+        averageProfit = currentAnalysisValue || 0;
+    }
+}
+
+function setupTableFilters() {
+    const tableSearch = document.getElementById('tableSearch');
+    const profitComparisonFilter = document.getElementById('profitComparisonFilter');
+    const tableSortBy = document.getElementById('tableSortBy');
+    const sortDirectionBtn = document.getElementById('sortDirectionBtn');
+    const printTableBtn = document.getElementById('printTableBtn');
+    
+    // إزالة المستمعين السابقين لتجنب التكرار
+    if (tableSearch) {
+        tableSearch.removeEventListener('input', handleTableSearch);
+        tableSearch.addEventListener('input', handleTableSearch);
+    }
+    
+    if (profitComparisonFilter) {
+        profitComparisonFilter.removeEventListener('change', handleProfitFilter);
+        profitComparisonFilter.addEventListener('change', handleProfitFilter);
+    }
+    
+    if (tableSortBy) {
+        tableSortBy.removeEventListener('change', handleSortChange);
+        tableSortBy.addEventListener('change', handleSortChange);
+    }
+    
+    if (sortDirectionBtn) {
+        sortDirectionBtn.removeEventListener('click', toggleSortDirection);
+        sortDirectionBtn.addEventListener('click', toggleSortDirection);
+    }
+    
+    if (printTableBtn) {
+        printTableBtn.removeEventListener('click', printTable);
+        printTableBtn.addEventListener('click', printTable);
+    }
+}
+
+function handleTableSearch() {
+    applyTableFilters();
+}
+
+function handleProfitFilter() {
+    applyTableFilters();
+}
+
+function handleSortChange() {
+    const tableSortBy = document.getElementById('tableSortBy');
+    if (tableSortBy) {
+        sortColumn = tableSortBy.value;
+        applyTableFilters();
+    }
+}
+
+function toggleSortDirection() {
+    sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+    const sortDirectionBtn = document.getElementById('sortDirectionBtn');
+    if (sortDirectionBtn) {
+        const icon = sortDirectionBtn.querySelector('i');
+        if (icon) {
+            icon.className = sortDirection === 'asc' ? 'fas fa-sort-amount-down' : 'fas fa-sort-amount-up';
+        }
+        sortDirectionBtn.classList.toggle('desc', sortDirection === 'desc');
+    }
+    applyTableFilters();
+}
+
+function applyTableFilters() {
+    if (!currentTableData || currentTableData.length === 0) return;
+    
+    const searchTerm = document.getElementById('tableSearch')?.value.toLowerCase() || '';
+    const profitFilter = document.getElementById('profitComparisonFilter')?.value || 'all';
+    
+    let filteredData = [...currentTableData];
+    
+    // تطبيق فلتر البحث
+    if (searchTerm) {
+        filteredData = filteredData.filter(result => 
+            result.name.toLowerCase().includes(searchTerm) ||
+            (result.productType && result.productType.toLowerCase().includes(searchTerm))
+        );
+    }
+    
+    // تطبيق فلتر مقارنة الربح بناءً على نوع التحليل والقيمة المدخلة
+    if (profitFilter !== 'all') {
+        const referenceValue = currentAnalysisValue;
+        const tolerance = currentAnalysisType === 'percentage' ? 0.5 : 0.1; // هامش تسامح أصغر
+        
+        filteredData = filteredData.filter(result => {
+            // الحصول على أعلى قيمة للمقارنة (الوحدة الأساسية أو أعلى قيمة)
+            let comparisonValue;
+            
+            if (currentAnalysisType === 'percentage') {
+                comparisonValue = getMaxUnitValue(result, 'profitMargin');
+            } else if (currentAnalysisType === 'fixed') {
+                comparisonValue = getMaxUnitValue(result, 'profit');
+            } else {
+                comparisonValue = getMaxUnitValue(result, 'profitMargin');
+            }
+            
+            switch (profitFilter) {
+                case 'equal':
+                    return Math.abs(comparisonValue - referenceValue) <= tolerance;
+                case 'below':
+                    return comparisonValue < referenceValue;
+                case 'above':
+                    return comparisonValue > referenceValue;
+                default:
+                    return true;
+            }
+        });
+    }
+    
+    // تطبيق الترتيب
+    filteredData.sort((a, b) => {
+        let valueA, valueB;
+        
+        switch (sortColumn) {
+            case 'name':
+                valueA = a.name.toLowerCase();
+                valueB = b.name.toLowerCase();
+                break;
+            case 'profit':
+                // ترتيب حسب نوع التحليل
+                if (currentAnalysisType === 'percentage') {
+                    valueA = getMaxUnitValue(a, 'profitMargin');
+                    valueB = getMaxUnitValue(b, 'profitMargin');
+                } else if (currentAnalysisType === 'fixed') {
+                    valueA = getMaxUnitValue(a, 'profit');
+                    valueB = getMaxUnitValue(b, 'profit');
+                } else {
+                    valueA = getMaxUnitValue(a, 'profitMargin');
+                    valueB = getMaxUnitValue(b, 'profitMargin');
+                }
+                break;
+            case 'cost':
+                valueA = getMaxUnitValue(a, 'averageCost');
+                valueB = getMaxUnitValue(b, 'averageCost');
+                break;
+            case 'price':
+                valueA = getMaxUnitValue(a, 'averagePrice');
+                valueB = getMaxUnitValue(b, 'averagePrice');
+                break;
+            default:
+                valueA = a.name.toLowerCase();
+                valueB = b.name.toLowerCase();
+        }
+        
+        if (typeof valueA === 'string') {
+            return sortDirection === 'asc' ? 
+                valueA.localeCompare(valueB, 'ar') : 
+                valueB.localeCompare(valueA, 'ar');
+        } else {
+            return sortDirection === 'asc' ? valueA - valueB : valueB - valueA;
+        }
+    });
+    
+    // إعادة عرض الجدول
+    displayFilteredTable(filteredData);
+}
+
+function getMaxUnitValue(result, property) {
+    const units = Object.values(result.units || {});
+    if (units.length === 0) return 0;
+    
+    return Math.max(...units.map(unit => unit[property] || 0));
+}
+
+function displayFilteredTable(results) {
+    const tableContent = document.getElementById('tableContent');
+    if (!tableContent || !results || results.length === 0) {
+        showNoResults();
+        return;
+    }
+    
+    // تحديث البيانات الحالية للطباعة
+    currentTableData = results;
+    
+    const getUnitComparisonStatus = (unitData) => {
+        if (currentAnalysisType === 'show-all') return 'none';
+        
+        if (currentAnalysisType === 'percentage' && currentAnalysisValue > 0) {
+            return unitData.profitMargin > currentAnalysisValue ? 'higher' : 
+                   unitData.profitMargin < currentAnalysisValue ? 'lower' : 'equal';
+        } else if (currentAnalysisType === 'fixed' && currentAnalysisValue > 0) {
+            return unitData.profit > currentAnalysisValue ? 'higher' : 
+                   unitData.profit < currentAnalysisValue ? 'lower' : 'equal';
+        }
+        return 'none';
+    };
+
+    const getUnitComparisonIcon = (unitData) => {
+        const status = getUnitComparisonStatus(unitData);
+        if (status === 'none') return '';
+        return status === 'higher' ? '<i class="fas fa-arrow-up text-success comparison-icon"></i>' : 
+               status === 'lower' ? '<i class="fas fa-arrow-down text-danger comparison-icon"></i>' : 
+               '<i class="fas fa-equals text-warning comparison-icon"></i>';
+    };
+
+    const getRowClass = (unitData) => {
+        const status = getUnitComparisonStatus(unitData);
+        return status === 'higher' ? 'table-success' : 
+               status === 'lower' ? 'table-danger' : 
+               status === 'equal' ? 'table-warning' : '';
+    };
+
+    const tableHeaders = currentAnalysisType !== 'show-all' 
+        ? `<th class="product-name-cell">اسم المنتج</th><th>نوع الوحدة</th><th class="product-type-cell">نوع المنتج</th><th>التكلفة</th><th>السعر</th><th>الربح</th><th>هامش الربح</th><th>المقارنة</th>`
+        : `<th class="product-name-cell">اسم المنتج</th><th>نوع الوحدة</th><th class="product-type-cell">نوع المنتج</th><th>التكلفة</th><th>السعر</th><th>الربح</th><th>هامش الربح</th>`;
+
+    let tableRows = '';
+    
+    results.forEach(result => {
+        const units = Object.entries(result.units || {});
+        const unitsCount = units.length;
+        
+        if (unitsCount === 0) {
+            tableRows += `
+                <tr>
+                    <td class="product-name-cell"><strong>${result.name}</strong></td>
+                    <td colspan="${currentAnalysisType !== 'show-all' ? '7' : '6'}" class="text-center">لا توجد وحدات</td>
+                </tr>
+            `;
+        } else {
+            units.forEach(([unitType, unitData], index) => {
+                const isFirstRow = index === 0;
+                const rowClass = getRowClass(unitData);
+                
+                tableRows += `
+                    <tr class="${rowClass}">
+                        ${isFirstRow ? `<td rowspan="${unitsCount}" class="align-middle product-name-cell"><strong>${result.name}</strong></td>` : ''}
+                        <td class="text-center">
+                            <span class="unit-badge unit-${unitType}">${getUnitName(unitType)}</span>
+                        </td>
+                        ${isFirstRow ? `<td rowspan="${unitsCount}" class="align-middle product-type-cell">${result.productType || 'غير محدد'}</td>` : ''}
+                        <td class="price-cell text-center">$${unitData.averageCost.toFixed(2)}</td>
+                        <td class="price-cell text-center">$${unitData.averagePrice.toFixed(2)}</td>
+                        <td class="profit-cell text-center ${unitData.profit >= 0 ? 'text-success' : 'text-danger'}">
+                            $${unitData.profit.toFixed(2)}
+                        </td>
+                        <td class="percentage-cell text-center ${unitData.profitMargin >= 0 ? 'text-success' : 'text-danger'}">
+                            ${unitData.profitMargin.toFixed(1)}%
+                        </td>
+                        ${currentAnalysisType !== 'show-all' ? `<td class="text-center">${getUnitComparisonIcon(unitData)}</td>` : ''}
+                    </tr>
+                `;
+            });
+        }
+    });
+
+    const tableHTML = `
+        <div class="table-responsive">
+            <table class="data-table" id="printableTable">
+                <thead>
+                    <tr>
+                        ${tableHeaders}
+                    </tr>
+                </thead>
+                <tbody>
+                    ${tableRows}
+                </tbody>
+            </table>
+        </div>
+    `;
+    
+    tableContent.innerHTML = tableHTML;
+    
+    // تحديث حالة زر الطباعة
+    updatePrintButtonState(true);
+}
+
+function printTable() {
+    // التحقق من وجود بيانات للطباعة
+    if (!currentTableData || currentTableData.length === 0) {
+        alert('لا توجد بيانات للطباعة. يرجى تشغيل التحليل أولاً.');
+        return;
+    }
+    
+    const printableTable = document.getElementById('printableTable');
+    if (!printableTable) {
+        alert('لا توجد بيانات للطباعة. يرجى تشغيل التحليل أولاً.');
+        return;
+    }
+    
+    const printWindow = window.open('', '_blank');
+    const currentDate = new Date().toLocaleDateString('en-GB'); // التاريخ الميلادي
+    
+    // إنشاء نسخة من الجدول مع تلوين النسب
+    const tableClone = printableTable.cloneNode(true);
+    const rows = tableClone.querySelectorAll('tbody tr');
+    
+    rows.forEach((row, index) => {
+        // إضافة خلفية متناوبة للصفوف
+        if (index % 2 === 0) {
+            row.style.backgroundColor = '#f8f9fa';
+        } else {
+            row.style.backgroundColor = '#ffffff';
+        }
+        
+        // تلوين النسب حسب المقارنة مع قيمة التحليل
+        const profitCell = row.querySelector('td:nth-child(3)'); // عمود هامش الربح
+        if (profitCell) {
+            const profitText = profitCell.textContent.trim();
+            const profitValue = parseFloat(profitText.replace('%', ''));
+            
+            if (!isNaN(profitValue) && currentAnalysisValue) {
+                const tolerance = currentAnalysisType === 'percentage' ? 0.5 : 0.1;
+                
+                if (Math.abs(profitValue - currentAnalysisValue) <= tolerance) {
+                    // مطابق للمعدل - أزرق
+                    profitCell.style.color = '#007bff';
+                    profitCell.style.fontWeight = 'bold';
+                } else if (profitValue < currentAnalysisValue) {
+                    // أقل من المعدل - أحمر
+                    profitCell.style.color = '#dc3545';
+                    profitCell.style.fontWeight = 'bold';
+                } else {
+                    // أعلى من المعدل - أخضر
+                    profitCell.style.color = '#28a745';
+                    profitCell.style.fontWeight = 'bold';
+                }
+            }
+        }
+    });
+    
+    printWindow.document.write(`
+        <!DOCTYPE html>
+        <html lang="ar" dir="rtl">
+        <head>
+            <meta charset="UTF-8">
+            <title>تدقيق أسعار المواد - ${currentDate}</title>
+            <style>
+                body {
+                    font-family: 'Cairo', Arial, sans-serif;
+                    direction: rtl;
+                    margin: 20px;
+                    color: #333;
+                }
+                .print-header {
+                    text-align: center;
+                    margin-bottom: 20px;
+                    border-bottom: 2px solid #333;
+                    padding-bottom: 15px;
+                }
+                .print-header h1 {
+                    color: #2c3e50;
+                    margin-bottom: 10px;
+                    font-size: 24px;
+                }
+                .header-info {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-top: 10px;
+                }
+                .header-left, .header-right {
+                    flex: 1;
+                    text-align: center;
+                }
+                .header-info p {
+                    color: #666;
+                    margin: 3px 0;
+                    font-size: 14px;
+                    font-weight: bold;
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-top: 20px;
+                    font-size: 11px;
+                }
+                th, td {
+                    border: 1px solid #ddd;
+                    padding: 6px;
+                    text-align: center;
+                }
+                th {
+                    background-color: #2c3e50;
+                    color: white;
+                    font-weight: bold;
+                    font-size: 12px;
+                }
+                .unit-badge {
+                    display: inline-block;
+                    padding: 2px 6px;
+                    border-radius: 3px;
+                    font-size: 0.8em;
+                    font-weight: bold;
+                    margin: 1px;
+                }
+                .unit-base { background-color: #007bff; color: white; }
+                .unit-more { background-color: #28a745; color: white; }
+                .unit-less { background-color: #ffc107; color: black; }
+                .print-footer {
+                    margin-top: 20px;
+                    text-align: center;
+                    font-size: 10px;
+                    color: #666;
+                    border-top: 1px solid #ddd;
+                    padding-top: 10px;
+                }
+                .legend {
+                    margin-top: 15px;
+                    font-size: 10px;
+                    text-align: center;
+                    color: #666;
+                }
+                .legend span {
+                    margin: 0 10px;
+                    font-weight: bold;
+                }
+                .legend .above { color: #28a745; }
+                .legend .equal { color: #007bff; }
+                .legend .below { color: #dc3545; }
+                @media print {
+                    body { margin: 0; }
+                    .print-header { page-break-after: avoid; }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="print-header">
+                <h1>📊 تدقيق أسعار المواد</h1>
+                <div class="header-info">
+                    <div class="header-right">
+                        <p>تاريخ التقرير: ${currentDate}</p>
+                        <p>متوسط الربح: ${averageProfit.toFixed(1)}%</p>
+                    </div>
+                    <div class="header-left">
+                        <p>نوع التحليل: ${currentAnalysisType === 'percentage' ? 'نسبة مئوية' : currentAnalysisType === 'fixed' ? 'مبلغ ثابت' : 'عرض الكل'}</p>
+                        ${currentAnalysisType !== 'show-all' ? `<p>قيمة التحليل: ${currentAnalysisValue}${currentAnalysisType === 'percentage' ? '%' : '$'}</p>` : ''}
+                    </div>
+                </div>
+            </div>
+            ${tableClone.outerHTML}
+            <div class="legend">
+                <span class="above">■ أعلى من المعدل</span>
+                <span class="equal">■ مطابق للمعدل</span>
+                <span class="below">■ أقل من المعدل</span>
+            </div>
+            <div class="print-footer">
+                <p>تم إنشاء هذا التقرير بواسطة نظام إدارة الأسعار</p>
+            </div>
+        </body>
+        </html>
+    `);
+    
+    printWindow.document.close();
+    printWindow.focus();
+    
+    setTimeout(() => {
+        printWindow.print();
+        printWindow.close();
+    }, 250);
 }
 
 function getUnitName(unit) {
@@ -599,6 +1160,9 @@ function showSuccess(message) {
 // ========================================
 
 document.addEventListener('DOMContentLoaded', function() {
+    // إعداد حالة زر الطباعة الأولية
+    updatePrintButtonState(false);
+    
     // تحميل البيانات عند بدء التطبيق
     loadProductsData();
 

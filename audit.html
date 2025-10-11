@@ -95,6 +95,63 @@
             box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
         }
 
+        /* Navigation Links Styling */
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-links a:hover::before {
+            left: 100%;
+        }
+
+        .nav-links a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+
+        .nav-links a.active {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.3);
+        }
+
+        .nav-links a.active:hover {
+            background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4);
+        }
+
         .analysis-options {
             display: flex;
             gap: 6px;
@@ -256,13 +313,46 @@
             display: flex;
             gap: 10px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
-        .table-filters input {
+        .table-filters input,
+        .table-filters select {
             padding: 8px 12px;
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 0.9rem;
+            background: white;
+        }
+
+        .sort-direction-btn,
+        .print-btn {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: white;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .sort-direction-btn:hover,
+        .print-btn:hover {
+            background: #f8f9fa;
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .sort-direction-btn.desc {
+            color: #667eea;
+            border-color: #667eea;
+        }
+
+        .print-btn:hover {
+            background: #28a745;
+            border-color: #28a745;
+            color: white;
         }
 
         .data-table {
@@ -506,6 +596,7 @@
                 <a href="index.html">🏠 الرئيسية</a>
                 <a href="pricing.html">💰 الأسعار</a>
                 <a href="audit.html" class="active">📊 تدقيق الأسعار</a>
+                <a href="inventory.html">📦 المستودع</a>
             </div>
             <div class="controls-compact">
                 <div class="control-group">
@@ -583,12 +674,24 @@
                     <h3><i class="fas fa-table"></i> نتائج التحليل</h3>
                     <div class="table-filters">
                         <input type="text" id="tableSearch" placeholder="بحث سريع...">
+                        <select id="profitComparisonFilter">
+                            <option value="all">الجميع</option>
+                            <option value="equal">مطابق للمعدل</option>
+                            <option value="below">أقل من المعدل</option>
+                            <option value="above">أعلى من المعدل</option>
+                        </select>
                         <select id="tableSortBy">
                             <option value="name">ترتيب حسب الاسم</option>
                             <option value="profit">ترتيب حسب الربح</option>
                             <option value="cost">ترتيب حسب التكلفة</option>
                             <option value="price">ترتيب حسب السعر</option>
                         </select>
+                        <button id="sortDirectionBtn" class="sort-direction-btn" title="تغيير اتجاه الترتيب">
+                            <i class="fas fa-sort-amount-down"></i>
+                        </button>
+                        <button id="printTableBtn" class="print-btn" title="طباعة النتائج">
+                            <i class="fas fa-print"></i>
+                        </button>
                     </div>
                 </div>
                 

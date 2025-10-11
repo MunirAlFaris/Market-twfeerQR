@@ -150,13 +150,73 @@
         font-size: 26px !important;
       }
     }
+    
+    /* Navigation Links Styling */
+    .nav-links {
+      display: flex;
+      gap: 15px;
+      margin: 20px 0;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-links a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .nav-links a:hover::before {
+      left: 100%;
+    }
+
+    .nav-links a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+      background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    }
+
+    .nav-links a.active {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      box-shadow: 0 4px 15px rgba(245, 87, 108, 0.3);
+    }
+
+    .nav-links a.active:hover {
+      background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+      box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4);
+    }
   </style>
 </head>
 <body>
   <header>
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-      <div class="title">🏷️ تسعير المنتجات</div>
-      <a href="index.html" class="btn ghost" style="text-decoration: none;">← العودة إلى الصفحة الرئيسية</a>
+    <div class="title">🏷️ تسعير المنتجات</div>
+    <div class="nav-links">
+      <a href="index.html">🏠 الرئيسية</a>
+      <a href="pricing.html" class="active">💰 الأسعار</a>
+      <a href="audit.html">📊 تدقيق الأسعار</a>
+      <a href="inventory.html">📦 المستودع</a>
     </div>
   </header>
 
