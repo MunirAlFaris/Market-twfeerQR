@@ -682,7 +682,7 @@
 		"LESS_COST_PRICE" : 0.6667,
 		"LESS_BARCODES" : "40111490, 40111445, 5000159460309, 5000159460293, 5000159563062, 5000159561662, 5000159561679, 5000159563086",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -426.0
+		"LESS_QTY" : -427.0
 	},
 	{
 		"ITEM_NAME_AR" : "آيس كوفي لانديسا 230مل",
@@ -1042,7 +1042,7 @@
 		"LESS_COST_PRICE" : 0.5,
 		"LESS_BARCODES" : "6219740320130, 6219740322134, 6219740324138, 6219740327139, 6219740318137, 6219740329133",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -697.0
+		"LESS_QTY" : -698.0
 	},
 	{
 		"ITEM_NAME_AR" : "ارابيكا جامبو 65غ ",
@@ -1078,7 +1078,7 @@
 		"LESS_COST_PRICE" : 0.4375,
 		"LESS_BARCODES" : "6219740201019, 6219740202016, 6219740203013, 6219740204010, 6219740205031",
 		"LESS_RELATION" : 16,
-		"LESS_QTY" : -1094.0
+		"LESS_QTY" : -1095.0
 	},
 	{
 		"ITEM_NAME_AR" : "ارابيكا هال دبل 250غ",
@@ -1114,7 +1114,7 @@
 		"LESS_COST_PRICE" : 0.2188,
 		"LESS_BARCODES" : "6219740311114, 6219740306110, 6219740301030, 6219740302037, 6219740303034, 6219740304031, 6219740305038, 6219740308039, 6219740309036",
 		"LESS_RELATION" : 16,
-		"LESS_QTY" : -469.0
+		"LESS_QTY" : -471.0
 	},
 	{
 		"ITEM_NAME_AR" : "ارز بسمتي 900غ الدرة ",
@@ -1420,7 +1420,7 @@
 		"LESS_COST_PRICE" : 2.4,
 		"LESS_BARCODES" : "00111163, 95487142",
 		"LESS_RELATION" : 5,
-		"LESS_QTY" : -448.0
+		"LESS_QTY" : -449.0
 	},
 	{
 		"ITEM_NAME_AR" : "اسنفنجة بويا ديلي ",
@@ -1600,7 +1600,7 @@
 		"LESS_COST_PRICE" : 0.066,
 		"LESS_BARCODES" : "8690562008211",
 		"LESS_RELATION" : 36,
-		"LESS_QTY" : -1376.0
+		"LESS_QTY" : -1379.0
 	},
 	{
 		"ITEM_NAME_AR" : "اصابع مالح بيفا 150غ",
@@ -1608,7 +1608,7 @@
 		"BASE_SALE_PRICE" : 9.756,
 		"BASE_COST_PRICE" : 8.5,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 5.0,
+		"BASE_QTY" : 10.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -1618,7 +1618,7 @@
 		"LESS_COST_PRICE" : 0.2833,
 		"LESS_BARCODES" : "8690562007825",
 		"LESS_RELATION" : 30,
-		"LESS_QTY" : -81.0
+		"LESS_QTY" : -83.0
 	},
 	{
 		"ITEM_NAME_AR" : "اصابع مالح ستيك 30غ ",
@@ -1752,7 +1752,7 @@
 		"BASE_SALE_PRICE" : 27.0,
 		"BASE_COST_PRICE" : 23.75,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 29.5,
+		"BASE_QTY" : 35.5,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -1788,7 +1788,7 @@
 		"BASE_SALE_PRICE" : 18.0,
 		"BASE_COST_PRICE" : 17.35,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 4.0,
+		"BASE_QTY" : 5.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -1842,7 +1842,7 @@
 		"BASE_SALE_PRICE" : 10.0,
 		"BASE_COST_PRICE" : 9.5,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 21.0,
+		"BASE_QTY" : 23.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -1860,7 +1860,7 @@
 		"BASE_SALE_PRICE" : 15.0,
 		"BASE_COST_PRICE" : 13.25,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 31.0,
+		"BASE_QTY" : 33.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -1878,7 +1878,7 @@
 		"BASE_SALE_PRICE" : 11.5,
 		"BASE_COST_PRICE" : 10.5,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 19.0,
+		"BASE_QTY" : 23.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -1896,7 +1896,7 @@
 		"BASE_SALE_PRICE" : 9.0,
 		"BASE_COST_PRICE" : 8.4,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 21.0,
+		"BASE_QTY" : 27.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -1906,7 +1906,7 @@
 		"LESS_COST_PRICE" : 0.7,
 		"LESS_BARCODES" : "6214000760459, 6214000761456, 6214000759453",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -247.0
+		"LESS_QTY" : -248.0
 	},
 	{
 		"ITEM_NAME_AR" : "افراح ملمع زجاج ",
@@ -1914,7 +1914,7 @@
 		"BASE_SALE_PRICE" : 9.25,
 		"BASE_COST_PRICE" : 8.6,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 30.0,
+		"BASE_QTY" : 33.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -2490,7 +2490,7 @@
 		"BASE_SALE_PRICE" : 21.0,
 		"BASE_COST_PRICE" : 19.1,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 12.0,
+		"BASE_QTY" : 16.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -2508,7 +2508,7 @@
 		"BASE_SALE_PRICE" : 25.75,
 		"BASE_COST_PRICE" : 22.9,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 28.5,
+		"BASE_QTY" : 31.5,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -3238,7 +3238,7 @@
 		"LESS_COST_PRICE" : 1.2188,
 		"LESS_BARCODES" : "5285000390602, 5285000390626, 5285000390640, 5285000390596, 5285000914099",
 		"LESS_RELATION" : 16,
-		"LESS_QTY" : -7890.0
+		"LESS_QTY" : -7892.0
 	},
 	{
 		"ITEM_NAME_AR" : "اندومي جامبو 125غ",
@@ -3274,7 +3274,7 @@
 		"LESS_COST_PRICE" : 0.2437,
 		"LESS_BARCODES" : "089686120226",
 		"LESS_RELATION" : 40,
-		"LESS_QTY" : -7405.0
+		"LESS_QTY" : -7414.0
 	},
 	{
 		"ITEM_NAME_AR" : "اندومي سوبر مي",
@@ -3454,7 +3454,7 @@
 		"LESS_COST_PRICE" : 0.1319,
 		"LESS_BARCODES" : "8691720052855",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -47.0
+		"LESS_QTY" : -48.0
 	},
 	{
 		"ITEM_NAME_AR" : "اورجينال 1.4ل ",
@@ -3490,7 +3490,7 @@
 		"LESS_COST_PRICE" : 0.8,
 		"LESS_BARCODES" : "6281100510147, 6281100510055, 6281100512486",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -374.0
+		"LESS_QTY" : -376.0
 	},
 	{
 		"ITEM_NAME_AR" : "اورجينال بلور 200 مل",
@@ -3688,7 +3688,7 @@
 		"LESS_COST_PRICE" : 0.3472,
 		"LESS_BARCODES" : "8691707057149",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -9.0
+		"LESS_QTY" : -10.0
 	},
 	{
 		"ITEM_NAME_AR" : "اوسلو دبي 40 غ",
@@ -3778,7 +3778,7 @@
 		"LESS_COST_PRICE" : 0.6217,
 		"LESS_BARCODES" : "8690504081333, 8690504080893, 68690504080895",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -484.0
+		"LESS_QTY" : -485.0
 	},
 	{
 		"ITEM_NAME_AR" : "اولالا موز 70غ",
@@ -4336,7 +4336,7 @@
 		"LESS_COST_PRICE" : 0.5556,
 		"LESS_BARCODES" : "8690526095417",
 		"LESS_RELATION" : 18,
-		"LESS_QTY" : -20.0
+		"LESS_QTY" : -22.0
 	},
 	{
 		"ITEM_NAME_AR" : "ايتي لوح 60 غ",
@@ -5128,7 +5128,7 @@
 		"LESS_COST_PRICE" : 0.4042,
 		"LESS_BARCODES" : "6212721094037, 6219233061038",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -299.0
+		"LESS_QTY" : -300.0
 	},
 	{
 		"ITEM_NAME_AR" : "بازيلاء الشهية كبيرة",
@@ -5146,7 +5146,7 @@
 		"LESS_COST_PRICE" : 0.8167,
 		"LESS_BARCODES" : "6217000186946",
 		"LESS_RELATION" : 6,
-		"LESS_QTY" : -298.0
+		"LESS_QTY" : -299.0
 	},
 	{
 		"ITEM_NAME_AR" : "بازيلاء بورجو 570 غ",
@@ -5398,7 +5398,7 @@
 		"LESS_COST_PRICE" : 0.95,
 		"LESS_BARCODES" : "6224007809556, 6224007809587",
 		"LESS_RELATION" : 20,
-		"LESS_QTY" : -25.0
+		"LESS_QTY" : -26.0
 	},
 	{
 		"ITEM_NAME_AR" : "بازيلاء وجزر 850غ بستان",
@@ -5632,7 +5632,7 @@
 		"LESS_COST_PRICE" : 2.5833,
 		"LESS_BARCODES" : "8700216228503, 8700216422284, 8700216555319, 8700216555425, 8700216555258, 8700216556958, 8700216555371, 8700216556880, 5410076652105, 5410076651627, 5410076652471, 5410076652686, 5410076651788, 5410076881802, 5410076881840, 4015600835149, 8006540277553",
 		"LESS_RELATION" : 6,
-		"LESS_QTY" : -112.0
+		"LESS_QTY" : -114.0
 	},
 	{
 		"ITEM_NAME_AR" : "بانتين 530 مل شفاف",
@@ -5668,7 +5668,7 @@
 		"LESS_COST_PRICE" : 0.0234,
 		"LESS_BARCODES" : "8684501939070",
 		"LESS_RELATION" : 48,
-		"LESS_QTY" : -314.0
+		"LESS_QTY" : -324.0
 	},
 	{
 		"ITEM_NAME_AR" : "بانينو سيجار 33غ",
@@ -5758,7 +5758,7 @@
 		"LESS_COST_PRICE" : 0.5833,
 		"LESS_BARCODES" : "5000159558280",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -474.0
+		"LESS_QTY" : -476.0
 	},
 	{
 		"ITEM_NAME_AR" : "باونتي اصبع ",
@@ -6226,7 +6226,7 @@
 		"LESS_COST_PRICE" : 0.625,
 		"LESS_BARCODES" : "655729300421, 655729300513, 655729300438, 6557293005754, 6557293005686, 6557293005990, 6218651011014, 6218651021013, 6218651061019, 6218651081017, 6218651091016, 6218651101012, 6218651691018",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -2602.0
+		"LESS_QTY" : -2604.0
 	},
 	{
 		"ITEM_NAME_AR" : "براتيك فروستي 150غ ",
@@ -6280,7 +6280,7 @@
 		"LESS_COST_PRICE" : 4.628,
 		"LESS_BARCODES" : "6210291801161, 6210291802168, 6210291816165",
 		"LESS_RELATION" : 5,
-		"LESS_QTY" : 3.0
+		"LESS_QTY" : 2.0
 	},
 	{
 		"ITEM_NAME_AR" : "برافو 4كغ الي ",
@@ -6370,7 +6370,7 @@
 		"LESS_COST_PRICE" : 0.1146,
 		"LESS_BARCODES" : "8691720020519, 8691720020243, 8691720020250, 8691720020281, 8691720120240, 8691720120257, 8691720120288",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -808.0
+		"LESS_QTY" : -810.0
 	},
 	{
 		"ITEM_NAME_AR" : "براو كراكيز ",
@@ -6442,7 +6442,7 @@
 		"LESS_COST_PRICE" : 1.75,
 		"LESS_BARCODES" : "8690526066004, 8690526076522, 8690526086835, 8690526076065",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -283.0
+		"LESS_QTY" : -285.0
 	},
 	{
 		"ITEM_NAME_AR" : "برايم بوظة",
@@ -6478,7 +6478,7 @@
 		"LESS_COST_PRICE" : 0.2917,
 		"LESS_BARCODES" : "6281034913700, 6281034913731, 6281034913762, 6281034913670",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -342.0
+		"LESS_QTY" : -343.0
 	},
 	{
 		"ITEM_NAME_AR" : "بربيكان تنك 330 مل ",
@@ -6496,7 +6496,7 @@
 		"LESS_COST_PRICE" : 0.4271,
 		"LESS_BARCODES" : "6281034904807, 6281034904821, 6281034904869, 6281034914868, 6281034904784, 6281034904883, 6297000747460",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -686.0
+		"LESS_QTY" : -688.0
 	},
 	{
 		"ITEM_NAME_AR" : "بربيكان مشكل ",
@@ -6514,7 +6514,7 @@
 		"LESS_COST_PRICE" : 0.6772,
 		"LESS_BARCODES" : "6281034007041, 6281034007164, 6281034007171, 6281034900601, 6281034915902, 6281034914516, 6281034908126, 6281034902629, 6281034907822, 6281034904456, 6281034902650",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -1298.0
+		"LESS_QTY" : -1300.0
 	},
 	{
 		"ITEM_NAME_AR" : "برسيل 9 كغ ",
@@ -6628,16 +6628,16 @@
 		"ITEM_NAME_AR" : "برغل حمزة 1كغ ",
 		"CATEGORY_AR" : "غذائيات",
 		"BASE_SALE_PRICE" : 7.5,
-		"BASE_COST_PRICE" : 6.1,
+		"BASE_COST_PRICE" : 6.2,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 43.0,
+		"BASE_QTY" : 47.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 0.8,
-		"LESS_COST_PRICE" : 0.61,
+		"LESS_COST_PRICE" : 0.62,
 		"LESS_BARCODES" : "6211009156085, 6211009156092",
 		"LESS_RELATION" : 10,
 		"LESS_QTY" : -344.0
@@ -6918,7 +6918,7 @@
 		"BASE_SALE_PRICE" : 2.7,
 		"BASE_COST_PRICE" : 2.275,
 		"BASE_BARCODES" : "6214960101026",
-		"BASE_QTY" : 247.0,
+		"BASE_QTY" : 246.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -7018,7 +7018,7 @@
 		"LESS_COST_PRICE" : 0.1513,
 		"LESS_BARCODES" : "6214961204108",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -299.0
+		"LESS_QTY" : -301.0
 	},
 	{
 		"ITEM_NAME_AR" : "بركات فولت ",
@@ -7114,7 +7114,7 @@
 		"ITEM_NAME_AR" : "برياني 125غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 3.0,
-		"BASE_COST_PRICE" : 2.28,
+		"BASE_COST_PRICE" : 2.46,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 7.0,
 		"MORE_SALE_PRICE" : null,
@@ -7123,10 +7123,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.05,
-		"LESS_COST_PRICE" : 0.76,
+		"LESS_COST_PRICE" : 0.82,
 		"LESS_BARCODES" : "6214851282087",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -21.0
+		"LESS_QTY" : -15.0
 	},
 	{
 		"ITEM_NAME_AR" : "بريتزول ميكس 150 غ",
@@ -7450,7 +7450,7 @@
 		"LESS_COST_PRICE" : 1.4737,
 		"LESS_BARCODES" : "5053990101535, 5053990127733, 5053990101542, 5053990127641, 5053990101566, 5053990161669, 5053990161966, 5053990101573, 5053990101580, 5053990106981, 5053990101597",
 		"LESS_RELATION" : 19,
-		"LESS_QTY" : -5236.0
+		"LESS_QTY" : -5237.0
 	},
 	{
 		"ITEM_NAME_AR" : "برينكلز 40 غ",
@@ -7468,7 +7468,7 @@
 		"LESS_COST_PRICE" : 0.75,
 		"LESS_BARCODES" : "5053990161607, 5053990107315, 5053990107339, 5053990161935, 5053990107353, 5053990107384, 5053990107292",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -242.0
+		"LESS_QTY" : -243.0
 	},
 	{
 		"ITEM_NAME_AR" : "بريوش شوكولا + تمر ",
@@ -7522,7 +7522,7 @@
 		"LESS_COST_PRICE" : 0.92,
 		"LESS_BARCODES" : "00111162, 95487022",
 		"LESS_RELATION" : 10,
-		"LESS_QTY" : -650.0
+		"LESS_QTY" : -656.0
 	},
 	{
 		"ITEM_NAME_AR" : "بزر جبس اسود 500غ",
@@ -7630,7 +7630,7 @@
 		"LESS_COST_PRICE" : 1.09,
 		"LESS_BARCODES" : "00111147, 95487032",
 		"LESS_RELATION" : 10,
-		"LESS_QTY" : -389.0
+		"LESS_QTY" : -391.0
 	},
 	{
 		"ITEM_NAME_AR" : "بزر شمس 250 غ",
@@ -7666,7 +7666,7 @@
 		"LESS_COST_PRICE" : 1.06,
 		"LESS_BARCODES" : "00111161, 95487230, 1321412341239",
 		"LESS_RELATION" : 10,
-		"LESS_QTY" : -1625.0
+		"LESS_QTY" : -1632.0
 	},
 	{
 		"ITEM_NAME_AR" : "بزر قرع 250 غ",
@@ -7738,7 +7738,7 @@
 		"LESS_COST_PRICE" : 1.96,
 		"LESS_BARCODES" : "00111155, 95487062",
 		"LESS_RELATION" : 10,
-		"LESS_QTY" : -408.0
+		"LESS_QTY" : -411.0
 	},
 	{
 		"ITEM_NAME_AR" : "بستاشيو 350 غ مكي",
@@ -7954,7 +7954,7 @@
 		"LESS_COST_PRICE" : 1.25,
 		"LESS_BARCODES" : "8699141058319, 8699141057039, 8699141057053",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -126.0
+		"LESS_QTY" : -127.0
 	},
 	{
 		"ITEM_NAME_AR" : "بسكويت اطفال اولكر 1كغ",
@@ -8116,7 +8116,7 @@
 		"LESS_COST_PRICE" : 0.8542,
 		"LESS_BARCODES" : "6215001271180",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -827.0
+		"LESS_QTY" : -829.0
 	},
 	{
 		"ITEM_NAME_AR" : "بسكويت بوبينس 30غ",
@@ -8358,7 +8358,7 @@
 		"BASE_SALE_PRICE" : 8.0,
 		"BASE_COST_PRICE" : 7.5,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 109.0,
+		"BASE_QTY" : 129.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -9304,13 +9304,13 @@
 		"LESS_COST_PRICE" : 0.87,
 		"LESS_BARCODES" : "6214852382083",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -35.0
+		"LESS_QTY" : -29.0
 	},
 	{
 		"ITEM_NAME_AR" : "بصل شرائح 80غ احلام",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 3.0,
-		"BASE_COST_PRICE" : 2.22,
+		"BASE_COST_PRICE" : 2.4,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 1.0,
 		"MORE_SALE_PRICE" : null,
@@ -9319,10 +9319,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.1,
-		"LESS_COST_PRICE" : 0.74,
+		"LESS_COST_PRICE" : 0.8,
 		"LESS_BARCODES" : "6214852532525",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -1.0
+		"LESS_QTY" : 5.0
 	},
 	{
 		"ITEM_NAME_AR" : "بصل كرات 500غ ",
@@ -9574,7 +9574,7 @@
 		"LESS_COST_PRICE" : 0.0663,
 		"LESS_BARCODES" : "6210815738966",
 		"LESS_RELATION" : 40,
-		"LESS_QTY" : -3143.0
+		"LESS_QTY" : -3148.0
 	},
 	{
 		"ITEM_NAME_AR" : "بطاطا الذهبي ",
@@ -9646,7 +9646,7 @@
 		"LESS_COST_PRICE" : 0.75,
 		"LESS_BARCODES" : "8690624103533, 8690624106244, 8690624103540, 8690624106251, 8690624103557, 8690624202762, 8690624203967, 8690624202779, 8690624202977, 8690624200492",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -5618.0
+		"LESS_QTY" : -5631.0
 	},
 	{
 		"ITEM_NAME_AR" : "بطاطا رقائق سنيبس 62غ ",
@@ -9682,7 +9682,7 @@
 		"LESS_COST_PRICE" : 0.75,
 		"LESS_BARCODES" : "8690624103564, 8690624103571, 8690624103588",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -1388.0
+		"LESS_QTY" : -1391.0
 	},
 	{
 		"ITEM_NAME_AR" : "بطاطا سيتوس 40 غ",
@@ -9736,7 +9736,7 @@
 		"LESS_COST_PRICE" : 3.12,
 		"LESS_BARCODES" : "8684712118035",
 		"LESS_RELATION" : 5,
-		"LESS_QTY" : -404.0
+		"LESS_QTY" : -405.0
 	},
 	{
 		"ITEM_NAME_AR" : "بطاطا فوكس 40غ",
@@ -9808,7 +9808,7 @@
 		"LESS_COST_PRICE" : 0.9792,
 		"LESS_BARCODES" : "5283003301205, 5283003352603, 5283003301908, 5283003352610, 5283003352528, 5283003301137, 5283003352535, 5283003307832, 5283003352559, 5283003304657, 5283003300857, 5283003301069, 5283003303063, 5283003304060, 5283003352566, 5283003304763, 5283003300864",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -1062.0
+		"LESS_QTY" : -1064.0
 	},
 	{
 		"ITEM_NAME_AR" : "بطاطا ماستر 70 غ",
@@ -9898,7 +9898,7 @@
 		"LESS_COST_PRICE" : 6.2,
 		"LESS_BARCODES" : "6224008717706",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 6.0
+		"LESS_QTY" : 5.0
 	},
 	{
 		"ITEM_NAME_AR" : "بطاطا مفرزة 2.5كغ مايراو ",
@@ -9934,7 +9934,7 @@
 		"LESS_COST_PRICE" : 0.4792,
 		"LESS_BARCODES" : "5281128101809, 5281128102554, 5281128102486, 5281128102097",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -746.0
+		"LESS_QTY" : -748.0
 	},
 	{
 		"ITEM_NAME_AR" : "بطاطا نفش سنيبس 100غ ",
@@ -10122,7 +10122,7 @@
 		"BASE_SALE_PRICE" : 1.5,
 		"BASE_COST_PRICE" : 1.35,
 		"BASE_BARCODES" : "6213237083416",
-		"BASE_QTY" : 87.0,
+		"BASE_QTY" : 86.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -10276,7 +10276,7 @@
 		"LESS_COST_PRICE" : 1.5,
 		"LESS_BARCODES" : "6217000117544",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 10.0
+		"LESS_QTY" : 9.0
 	},
 	{
 		"ITEM_NAME_AR" : "بلسم فتوح 1.7 ل",
@@ -10492,7 +10492,7 @@
 		"LESS_COST_PRICE" : 0.1392,
 		"LESS_BARCODES" : "6222035243458, 6222035243366, 6222035211198, 6223000502143, 6223000502167",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -900.0
+		"LESS_QTY" : -902.0
 	},
 	{
 		"ITEM_NAME_AR" : "بليزو مينيز حقيبة",
@@ -10816,7 +10816,7 @@
 		"LESS_COST_PRICE" : 3.102,
 		"LESS_BARCODES" : "6212900009067",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 45.0
+		"LESS_QTY" : 44.0
 	},
 	{
 		"ITEM_NAME_AR" : "بن الشامي ذهبي 500غ",
@@ -11253,8 +11253,8 @@
 	{
 		"ITEM_NAME_AR" : "بهار اوريغانو 125 غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
-		"BASE_SALE_PRICE" : 3.0,
-		"BASE_COST_PRICE" : 2.27,
+		"BASE_SALE_PRICE" : 3.25,
+		"BASE_COST_PRICE" : 2.82,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 8.0,
 		"MORE_SALE_PRICE" : null,
@@ -11262,17 +11262,17 @@
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
-		"LESS_SALE_PRICE" : 1.05,
-		"LESS_COST_PRICE" : 0.7567,
+		"LESS_SALE_PRICE" : 1.1,
+		"LESS_COST_PRICE" : 0.94,
 		"LESS_BARCODES" : "6214851242081",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -25.0
+		"LESS_QTY" : -19.0
 	},
 	{
 		"ITEM_NAME_AR" : "بهار ببريكا 125غ احلام",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 3.75,
-		"BASE_COST_PRICE" : 3.22,
+		"BASE_COST_PRICE" : 3.0,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 11.0,
 		"MORE_SALE_PRICE" : null,
@@ -11281,10 +11281,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.3,
-		"LESS_COST_PRICE" : 1.0733,
+		"LESS_COST_PRICE" : 1.0,
 		"LESS_BARCODES" : "6214851582088",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -28.0
+		"LESS_QTY" : -19.0
 	},
 	{
 		"ITEM_NAME_AR" : "بهار برغر 125 غ احلام",
@@ -11326,7 +11326,7 @@
 		"ITEM_NAME_AR" : "بهار بطاطا 150غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 3.0,
-		"BASE_COST_PRICE" : 2.39,
+		"BASE_COST_PRICE" : 2.34,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 15.0,
 		"MORE_SALE_PRICE" : null,
@@ -11335,16 +11335,16 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.05,
-		"LESS_COST_PRICE" : 0.7967,
+		"LESS_COST_PRICE" : 0.78,
 		"LESS_BARCODES" : "6214851462090",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -48.0
+		"LESS_QTY" : -42.0
 	},
 	{
 		"ITEM_NAME_AR" : "بهار بيتزا 150 غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 3.25,
-		"BASE_COST_PRICE" : 2.7,
+		"BASE_COST_PRICE" : 2.85,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 6.0,
 		"MORE_SALE_PRICE" : null,
@@ -11353,25 +11353,25 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.15,
-		"LESS_COST_PRICE" : 0.9,
+		"LESS_COST_PRICE" : 0.95,
 		"LESS_BARCODES" : "6214851472099",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -17.0
+		"LESS_QTY" : -14.0
 	},
 	{
 		"ITEM_NAME_AR" : "بهار حلو 125 غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 6.5,
-		"BASE_COST_PRICE" : 5.99,
+		"BASE_COST_PRICE" : 5.865,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 4.0,
+		"BASE_QTY" : 6.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 2.3,
-		"LESS_COST_PRICE" : 1.9967,
+		"LESS_COST_PRICE" : 1.955,
 		"LESS_BARCODES" : "6214851162082",
 		"LESS_RELATION" : 3,
 		"LESS_QTY" : -10.0
@@ -11380,7 +11380,7 @@
 		"ITEM_NAME_AR" : "بهار دجاج 125غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 3.6,
-		"BASE_COST_PRICE" : 3.04,
+		"BASE_COST_PRICE" : 2.97,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 9.0,
 		"MORE_SALE_PRICE" : null,
@@ -11389,16 +11389,16 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.2,
-		"LESS_COST_PRICE" : 1.0133,
+		"LESS_COST_PRICE" : 0.99,
 		"LESS_BARCODES" : "6214851132085",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -21.0
+		"LESS_QTY" : -12.0
 	},
 	{
 		"ITEM_NAME_AR" : "بهار سجق 125 غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 3.0,
-		"BASE_COST_PRICE" : 2.27,
+		"BASE_COST_PRICE" : 2.22,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 7.0,
 		"MORE_SALE_PRICE" : null,
@@ -11407,16 +11407,16 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.0,
-		"LESS_COST_PRICE" : 0.7567,
+		"LESS_COST_PRICE" : 0.74,
 		"LESS_BARCODES" : "6214851722088",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -15.0
+		"LESS_QTY" : -9.0
 	},
 	{
 		"ITEM_NAME_AR" : "بهار سلطه 125 غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 4.0,
-		"BASE_COST_PRICE" : 2.19,
+		"BASE_COST_PRICE" : 2.34,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 4.0,
 		"MORE_SALE_PRICE" : null,
@@ -11425,16 +11425,16 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.0,
-		"LESS_COST_PRICE" : 0.73,
+		"LESS_COST_PRICE" : 0.78,
 		"LESS_BARCODES" : "6214851982086",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -11.0
+		"LESS_QTY" : -5.0
 	},
 	{
 		"ITEM_NAME_AR" : "بهار شاورما دجاج 125غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 4.5,
-		"BASE_COST_PRICE" : 3.66,
+		"BASE_COST_PRICE" : 3.96,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 10.0,
 		"MORE_SALE_PRICE" : null,
@@ -11443,16 +11443,16 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.5,
-		"LESS_COST_PRICE" : 1.22,
+		"LESS_COST_PRICE" : 1.32,
 		"LESS_BARCODES" : "6214851222083",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -27.0
+		"LESS_QTY" : -24.0
 	},
 	{
 		"ITEM_NAME_AR" : "بهار فاهيتا 125غ احلام",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 3.4,
-		"BASE_COST_PRICE" : 2.78,
+		"BASE_COST_PRICE" : 2.67,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 4.0,
 		"MORE_SALE_PRICE" : null,
@@ -11461,10 +11461,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.15,
-		"LESS_COST_PRICE" : 0.9267,
+		"LESS_COST_PRICE" : 0.89,
 		"LESS_BARCODES" : "6214851732087",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -12.0
+		"LESS_QTY" : -9.0
 	},
 	{
 		"ITEM_NAME_AR" : "بهار كاري 25غ الدرة ",
@@ -11506,7 +11506,7 @@
 		"ITEM_NAME_AR" : "بهار كبسة 125غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 3.4,
-		"BASE_COST_PRICE" : 2.84,
+		"BASE_COST_PRICE" : 2.85,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 19.0,
 		"MORE_SALE_PRICE" : null,
@@ -11515,10 +11515,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.15,
-		"LESS_COST_PRICE" : 0.9467,
+		"LESS_COST_PRICE" : 0.95,
 		"LESS_BARCODES" : "6214851302082",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -50.0
+		"LESS_QTY" : -35.0
 	},
 	{
 		"ITEM_NAME_AR" : "بهار كبسة علبة 100غ الدرة",
@@ -11542,7 +11542,7 @@
 		"ITEM_NAME_AR" : "بهار كريسبي 125 غ احلام",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 3.15,
-		"BASE_COST_PRICE" : 2.57,
+		"BASE_COST_PRICE" : 2.52,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 8.0,
 		"MORE_SALE_PRICE" : null,
@@ -11551,10 +11551,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.05,
-		"LESS_COST_PRICE" : 0.8567,
+		"LESS_COST_PRICE" : 0.84,
 		"LESS_BARCODES" : "00111457, 6214851572089",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -20.0
+		"LESS_QTY" : -14.0
 	},
 	{
 		"ITEM_NAME_AR" : "بهار مشاوي 125 غ احلام ",
@@ -11578,7 +11578,7 @@
 		"ITEM_NAME_AR" : "بهار مندي 150 غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 4.5,
-		"BASE_COST_PRICE" : 3.57,
+		"BASE_COST_PRICE" : 3.84,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 9.0,
 		"MORE_SALE_PRICE" : null,
@@ -11587,10 +11587,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.5,
-		"LESS_COST_PRICE" : 1.19,
+		"LESS_COST_PRICE" : 1.28,
 		"LESS_BARCODES" : "6214851232099",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -27.0
+		"LESS_QTY" : -24.0
 	},
 	{
 		"ITEM_NAME_AR" : "بهار مندي الدرة",
@@ -11614,16 +11614,16 @@
 		"ITEM_NAME_AR" : "بهارات اوزي 150غ احلام",
 		"CATEGORY_AR" : "غذائيات",
 		"BASE_SALE_PRICE" : 4.5,
-		"BASE_COST_PRICE" : 3.72,
+		"BASE_COST_PRICE" : 3.79,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 1.0,
+		"BASE_QTY" : 3.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.6,
-		"LESS_COST_PRICE" : 1.24,
+		"LESS_COST_PRICE" : 1.2633,
 		"LESS_BARCODES" : "6214851382091",
 		"LESS_RELATION" : 3,
 		"LESS_QTY" : 5.0
@@ -11722,7 +11722,7 @@
 		"ITEM_NAME_AR" : "بهارات سمك 100غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 2.7,
-		"BASE_COST_PRICE" : 2.01,
+		"BASE_COST_PRICE" : 2.13,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 4.0,
 		"MORE_SALE_PRICE" : null,
@@ -11731,10 +11731,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 0.9,
-		"LESS_COST_PRICE" : 0.67,
+		"LESS_COST_PRICE" : 0.71,
 		"LESS_BARCODES" : "6214851362079",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -10.0
+		"LESS_QTY" : -5.0
 	},
 	{
 		"ITEM_NAME_AR" : "بهارات شاورما لحمة 100غ",
@@ -11758,7 +11758,7 @@
 		"ITEM_NAME_AR" : "بهارات شيش 100غ احلام",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 3.25,
-		"BASE_COST_PRICE" : 2.68,
+		"BASE_COST_PRICE" : 2.55,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 8.0,
 		"MORE_SALE_PRICE" : null,
@@ -11767,10 +11767,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.1,
-		"LESS_COST_PRICE" : 0.8933,
+		"LESS_COST_PRICE" : 0.85,
 		"LESS_BARCODES" : "6214851202078",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -19.0
+		"LESS_QTY" : -16.0
 	},
 	{
 		"ITEM_NAME_AR" : "بهارات صفيحة 125غ احلام",
@@ -11812,7 +11812,7 @@
 		"ITEM_NAME_AR" : "بهارات كفته 100 غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 3.75,
-		"BASE_COST_PRICE" : 3.11,
+		"BASE_COST_PRICE" : 2.79,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 3.0,
 		"MORE_SALE_PRICE" : null,
@@ -11821,10 +11821,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.25,
-		"LESS_COST_PRICE" : 1.0367,
+		"LESS_COST_PRICE" : 0.93,
 		"LESS_BARCODES" : "6214851752078",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -5.0
+		"LESS_QTY" : 1.0
 	},
 	{
 		"ITEM_NAME_AR" : "بهارات مشكلة 1كغ احلام ",
@@ -11866,7 +11866,7 @@
 		"ITEM_NAME_AR" : "بهارات مشكله 100 غ احلام",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 3.75,
-		"BASE_COST_PRICE" : 2.85,
+		"BASE_COST_PRICE" : 3.09,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 10.0,
 		"MORE_SALE_PRICE" : null,
@@ -11875,10 +11875,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.25,
-		"LESS_COST_PRICE" : 0.95,
+		"LESS_COST_PRICE" : 1.03,
 		"LESS_BARCODES" : "6214851292079",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -32.0
+		"LESS_QTY" : -20.0
 	},
 	{
 		"ITEM_NAME_AR" : "بهارات مندي كرتون بيسان 100غ",
@@ -12400,7 +12400,7 @@
 		"LESS_COST_PRICE" : 0.1667,
 		"LESS_BARCODES" : "6219740410015, 6219740401013, 6219740402010, 6219740413016, 6219740404014, 6219740409019",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -270.0
+		"LESS_QTY" : -273.0
 	},
 	{
 		"ITEM_NAME_AR" : "بوشار هشام 500غ",
@@ -12742,7 +12742,7 @@
 		"LESS_COST_PRICE" : 3.625,
 		"LESS_BARCODES" : "00111474",
 		"LESS_RELATION" : 8,
-		"LESS_QTY" : -334.0
+		"LESS_QTY" : -335.0
 	},
 	{
 		"ITEM_NAME_AR" : "بومباد",
@@ -12797,6 +12797,24 @@
 		"LESS_BARCODES" : "8684220034001",
 		"LESS_RELATION" : 24,
 		"LESS_QTY" : -88.0
+	},
+	{
+		"ITEM_NAME_AR" : "بومونتي جوز الهند ",
+		"CATEGORY_AR" : "مواد تحتاج 3 واحدات",
+		"BASE_SALE_PRICE" : 4.25,
+		"BASE_COST_PRICE" : 3.3333,
+		"BASE_BARCODES" : "8684220134107",
+		"BASE_QTY" : 0.0,
+		"MORE_SALE_PRICE" : 25.5,
+		"MORE_COST_PRICE" : 20.0,
+		"MORE_BARCODES" : null,
+		"MORE_RELATION" : 6,
+		"MORE_QTY" : 1.0,
+		"LESS_SALE_PRICE" : 0.1887,
+		"LESS_COST_PRICE" : 0.1389,
+		"LESS_BARCODES" : "8684220034100",
+		"LESS_RELATION" : 24,
+		"LESS_QTY" : 0.0
 	},
 	{
 		"ITEM_NAME_AR" : "بونجو بلاكي بكر ",
@@ -12868,7 +12886,7 @@
 		"LESS_COST_PRICE" : 0.1215,
 		"LESS_BARCODES" : "8682941001258",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -87.0
+		"LESS_QTY" : -88.0
 	},
 	{
 		"ITEM_NAME_AR" : "بونجي غوستوسو كيك 50غ",
@@ -13102,7 +13120,7 @@
 		"LESS_COST_PRICE" : 0.375,
 		"LESS_BARCODES" : "6215000021014, 6215000021021, 6215000021038",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -82.0
+		"LESS_QTY" : -83.0
 	},
 	{
 		"ITEM_NAME_AR" : "بي اتش سيلا 1 لتر",
@@ -13264,7 +13282,7 @@
 		"LESS_COST_PRICE" : 0.5086,
 		"LESS_BARCODES" : "8690504011101",
 		"LESS_RELATION" : 16,
-		"LESS_QTY" : -655.0
+		"LESS_QTY" : -658.0
 	},
 	{
 		"ITEM_NAME_AR" : "بيتيفور اوبرا صحن",
@@ -13498,7 +13516,7 @@
 		"LESS_COST_PRICE" : 0.5,
 		"LESS_BARCODES" : "8697422658043",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -88.0
+		"LESS_QTY" : -89.0
 	},
 	{
 		"ITEM_NAME_AR" : "بيض العاب ديدو فن",
@@ -13516,7 +13534,7 @@
 		"LESS_COST_PRICE" : 0.2014,
 		"LESS_BARCODES" : "86, 8682134086369",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -230.0
+		"LESS_QTY" : -231.0
 	},
 	{
 		"ITEM_NAME_AR" : "بيض العاب سوبرايز ",
@@ -13534,7 +13552,7 @@
 		"LESS_COST_PRICE" : 0.0875,
 		"LESS_BARCODES" : "8850199330653",
 		"LESS_RELATION" : 60,
-		"LESS_QTY" : -1646.0
+		"LESS_QTY" : -1649.0
 	},
 	{
 		"ITEM_NAME_AR" : "بيض العاب ميكس تويز كبيرة",
@@ -13606,7 +13624,7 @@
 		"LESS_COST_PRICE" : 0.1708,
 		"LESS_BARCODES" : "8850199320715, 8816956323450",
 		"LESS_RELATION" : 60,
-		"LESS_QTY" : -1412.0
+		"LESS_QTY" : -1414.0
 	},
 	{
 		"ITEM_NAME_AR" : "بيغ باودر 100 غ",
@@ -14056,7 +14074,7 @@
 		"LESS_COST_PRICE" : 0.1258,
 		"LESS_BARCODES" : "6212668859102, 6213243242340, 6227122021209",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -1163.0
+		"LESS_QTY" : -1167.0
 	},
 	{
 		"ITEM_NAME_AR" : "تاو تاو فانتوم ",
@@ -14308,7 +14326,7 @@
 		"LESS_COST_PRICE" : 2.3,
 		"LESS_BARCODES" : "95487282",
 		"LESS_RELATION" : 10,
-		"LESS_QTY" : -135.0
+		"LESS_QTY" : -136.0
 	},
 	{
 		"ITEM_NAME_AR" : "تخليطة قليه 250 غ",
@@ -14650,7 +14668,7 @@
 		"LESS_COST_PRICE" : 0.2137,
 		"LESS_BARCODES" : "6213790312022, 6213790312046, 6213790309046, 6213790312053, 6213790309053, 6213790308063, 6213790309060, 6213790404017, 6213790403027, 6213790404031, 6213790403041",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -676.0
+		"LESS_QTY" : -677.0
 	},
 	{
 		"ITEM_NAME_AR" : "ترونو ستيكس عائلي  ",
@@ -14668,7 +14686,7 @@
 		"LESS_COST_PRICE" : 0.3561,
 		"LESS_BARCODES" : "6213790104030, 6213790105037, 6213790106034, 6213790104047, 6213790105044",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -241.0
+		"LESS_QTY" : -242.0
 	},
 	{
 		"ITEM_NAME_AR" : "ترونو فينغرز 24غ ",
@@ -14740,7 +14758,7 @@
 		"LESS_COST_PRICE" : 0.6667,
 		"LESS_BARCODES" : "8691720006636, 8691720006643, 8691720006681, 8695077101242",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -191.0
+		"LESS_QTY" : -193.0
 	},
 	{
 		"ITEM_NAME_AR" : "تروي رول ",
@@ -15082,7 +15100,7 @@
 		"LESS_COST_PRICE" : 10.0,
 		"LESS_BARCODES" : "6213630505416",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 2.0
+		"LESS_QTY" : 1.0
 	},
 	{
 		"ITEM_NAME_AR" : "تمر خضري 800غ الزبرجد",
@@ -15118,7 +15136,7 @@
 		"LESS_COST_PRICE" : 2.2,
 		"LESS_BARCODES" : "00111496",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 8.0
+		"LESS_QTY" : 3.0
 	},
 	{
 		"ITEM_NAME_AR" : "تمر سري 500غ الزبرجد",
@@ -15694,7 +15712,7 @@
 		"LESS_COST_PRICE" : 0.3021,
 		"LESS_BARCODES" : "8695504168770",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -31.0
+		"LESS_QTY" : -32.0
 	},
 	{
 		"ITEM_NAME_AR" : "توركو كريملي ",
@@ -15838,7 +15856,7 @@
 		"LESS_COST_PRICE" : 0.1146,
 		"LESS_BARCODES" : "6210210301727, 6210210301048, 6210210302045",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -765.0
+		"LESS_QTY" : -767.0
 	},
 	{
 		"ITEM_NAME_AR" : "تويست دارك",
@@ -16072,7 +16090,7 @@
 		"LESS_COST_PRICE" : 0.1528,
 		"LESS_BARCODES" : "6223006533639, 6223006534186, 6223006534193",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -3406.0
+		"LESS_QTY" : -3433.0
 	},
 	{
 		"ITEM_NAME_AR" : "تيكسو جامبو بالفستق ",
@@ -16240,7 +16258,7 @@
 		"ITEM_NAME_AR" : "ثوم شرائح 60غ احلام",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 2.75,
-		"BASE_COST_PRICE" : 1.95,
+		"BASE_COST_PRICE" : 2.1,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 1.0,
 		"MORE_SALE_PRICE" : null,
@@ -16249,16 +16267,16 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.0,
-		"LESS_COST_PRICE" : 0.65,
+		"LESS_COST_PRICE" : 0.7,
 		"LESS_BARCODES" : "6214852522526",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : 0.0
+		"LESS_QTY" : 3.0
 	},
 	{
 		"ITEM_NAME_AR" : "ثوم مطحون 125 غ احلام",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 3.75,
-		"BASE_COST_PRICE" : 2.46,
+		"BASE_COST_PRICE" : 2.64,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 14.0,
 		"MORE_SALE_PRICE" : null,
@@ -16267,10 +16285,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.25,
-		"LESS_COST_PRICE" : 0.82,
+		"LESS_COST_PRICE" : 0.88,
 		"LESS_BARCODES" : "6214851152083",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -41.0
+		"LESS_QTY" : -26.0
 	},
 	{
 		"ITEM_NAME_AR" : "ثوم ناعم 1 كغ احلام ",
@@ -16324,7 +16342,7 @@
 		"LESS_COST_PRICE" : 0.4792,
 		"LESS_BARCODES" : "8697459293521, 8697459290353",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -1605.0
+		"LESS_QTY" : -1613.0
 	},
 	{
 		"ITEM_NAME_AR" : "جاكر بوري 150غ ",
@@ -16504,7 +16522,7 @@
 		"LESS_COST_PRICE" : 1.18,
 		"LESS_BARCODES" : "6217000095330",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -472.0
+		"LESS_QTY" : -475.0
 	},
 	{
 		"ITEM_NAME_AR" : "جبنة اكناز 500غ ",
@@ -16540,7 +16558,7 @@
 		"LESS_COST_PRICE" : 1.21,
 		"LESS_BARCODES" : "6210205021074, 6210205071079",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -48.0
+		"LESS_QTY" : -49.0
 	},
 	{
 		"ITEM_NAME_AR" : "جبنة السهول 350 غ",
@@ -17026,7 +17044,7 @@
 		"LESS_COST_PRICE" : 1.095,
 		"LESS_BARCODES" : "6281048109588",
 		"LESS_RELATION" : 40,
-		"LESS_QTY" : -320.0
+		"LESS_QTY" : -325.0
 	},
 	{
 		"ITEM_NAME_AR" : "جبنة دهن 275غ نيوبارك عرض*2",
@@ -17044,7 +17062,7 @@
 		"LESS_COST_PRICE" : 1.6,
 		"LESS_BARCODES" : "00111376",
 		"LESS_RELATION" : 6,
-		"LESS_QTY" : -1308.0
+		"LESS_QTY" : -1310.0
 	},
 	{
 		"ITEM_NAME_AR" : "جبنة دهن 300غ دريم بوك",
@@ -17062,7 +17080,7 @@
 		"LESS_COST_PRICE" : 0.9583,
 		"LESS_BARCODES" : "6215001751132",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -177.0
+		"LESS_QTY" : -178.0
 	},
 	{
 		"ITEM_NAME_AR" : "جبنة دوست 500غ ",
@@ -17692,7 +17710,7 @@
 		"LESS_COST_PRICE" : 1.75,
 		"LESS_BARCODES" : "95487336",
 		"LESS_RELATION" : 32,
-		"LESS_QTY" : -169.0
+		"LESS_QTY" : -170.0
 	},
 	{
 		"ITEM_NAME_AR" : "جل استحمام مكس فروت ",
@@ -18412,7 +18430,7 @@
 		"LESS_COST_PRICE" : 0.1042,
 		"LESS_BARCODES" : "5879314596319, 5879314596326, 5879314596333",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -478.0
+		"LESS_QTY" : -480.0
 	},
 	{
 		"ITEM_NAME_AR" : "جلاتين بيبيتو فاست فود 30غ",
@@ -18430,7 +18448,7 @@
 		"LESS_COST_PRICE" : 0.1458,
 		"LESS_BARCODES" : "8690146132516, 8690146132592, 8690146655718",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -135.0
+		"LESS_QTY" : -137.0
 	},
 	{
 		"ITEM_NAME_AR" : "جلاتين جيلي ميكس 900غ علب",
@@ -18484,7 +18502,7 @@
 		"LESS_COST_PRICE" : 0.75,
 		"LESS_BARCODES" : "00111478, 00111479, 95487276, 95487277",
 		"LESS_RELATION" : 25,
-		"LESS_QTY" : -716.0
+		"LESS_QTY" : -721.0
 	},
 	{
 		"ITEM_NAME_AR" : "جلاتين مروحه",
@@ -18502,7 +18520,7 @@
 		"LESS_COST_PRICE" : 0.0667,
 		"LESS_BARCODES" : "41, 8857038506902",
 		"LESS_RELATION" : 30,
-		"LESS_QTY" : -868.0
+		"LESS_QTY" : -873.0
 	},
 	{
 		"ITEM_NAME_AR" : "جلاتين مشكل 160 غ",
@@ -18520,7 +18538,7 @@
 		"LESS_COST_PRICE" : 0.7708,
 		"LESS_BARCODES" : "8695077071514, 8695077071576, 8695077071590",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -244.0
+		"LESS_QTY" : -245.0
 	},
 	{
 		"ITEM_NAME_AR" : "جلاتين مشكل ظرف 100غ ",
@@ -18538,7 +18556,7 @@
 		"LESS_COST_PRICE" : 0.5104,
 		"LESS_BARCODES" : "8695077015105, 8695077015129, 8695077015136, 8695077007346, 8695077017451, 8695077013866",
 		"LESS_RELATION" : 48,
-		"LESS_QTY" : -602.0
+		"LESS_QTY" : -603.0
 	},
 	{
 		"ITEM_NAME_AR" : "جمبري 250 غ",
@@ -18574,7 +18592,7 @@
 		"LESS_COST_PRICE" : 3.9,
 		"LESS_BARCODES" : "621100001022",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 3.0
+		"LESS_QTY" : 2.0
 	},
 	{
 		"ITEM_NAME_AR" : "جنتي معمول بدون سكر حقيبة",
@@ -18736,13 +18754,13 @@
 		"LESS_COST_PRICE" : 2.9,
 		"LESS_BARCODES" : "00111419, 95487331, 95487189",
 		"LESS_RELATION" : 10,
-		"LESS_QTY" : -63.0
+		"LESS_QTY" : -64.0
 	},
 	{
 		"ITEM_NAME_AR" : "جوز الطيب 125غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 5.1,
-		"BASE_COST_PRICE" : 4.6,
+		"BASE_COST_PRICE" : 4.59,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 5.0,
 		"MORE_SALE_PRICE" : null,
@@ -18751,10 +18769,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.7595,
-		"LESS_COST_PRICE" : 1.5333,
+		"LESS_COST_PRICE" : 1.53,
 		"LESS_BARCODES" : "6214851082083",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -14.0
+		"LESS_QTY" : -8.0
 	},
 	{
 		"ITEM_NAME_AR" : "جوز الهند راما *4",
@@ -18808,7 +18826,7 @@
 		"LESS_COST_PRICE" : 1.2972,
 		"LESS_BARCODES" : "00111502",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : -3.0
+		"LESS_QTY" : -1.0
 	},
 	{
 		"ITEM_NAME_AR" : "جوز هند الدرة",
@@ -19024,7 +19042,7 @@
 		"LESS_COST_PRICE" : 1.5,
 		"LESS_BARCODES" : "8690637068768, 8690637069864, 8690637727887",
 		"LESS_RELATION" : 16,
-		"LESS_QTY" : -45.0
+		"LESS_QTY" : -46.0
 	},
 	{
 		"ITEM_NAME_AR" : "جيف كريم 750 مل",
@@ -19042,7 +19060,7 @@
 		"LESS_COST_PRICE" : 2.125,
 		"LESS_BARCODES" : "8690637069826, 8690637069840, 8690637727863, 8690637866074",
 		"LESS_RELATION" : 16,
-		"LESS_QTY" : -63.0
+		"LESS_QTY" : -64.0
 	},
 	{
 		"ITEM_NAME_AR" : "جيكسي ",
@@ -19240,7 +19258,7 @@
 		"LESS_COST_PRICE" : 0.0688,
 		"LESS_BARCODES" : "6916222000848",
 		"LESS_RELATION" : 30,
-		"LESS_QTY" : -606.0
+		"LESS_QTY" : -610.0
 	},
 	{
 		"ITEM_NAME_AR" : "جيليه 85غ الدرة ",
@@ -19294,7 +19312,7 @@
 		"LESS_COST_PRICE" : 0.75,
 		"LESS_BARCODES" : "00111490",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 432.0
+		"LESS_QTY" : 431.0
 	},
 	{
 		"ITEM_NAME_AR" : "جيليه السهول ",
@@ -19462,7 +19480,7 @@
 		"ITEM_NAME_AR" : "حبة البركه 125 غ احلام",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 3.5,
-		"BASE_COST_PRICE" : 2.9,
+		"BASE_COST_PRICE" : 3.06,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 10.0,
 		"MORE_SALE_PRICE" : null,
@@ -19470,11 +19488,11 @@
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
-		"LESS_SALE_PRICE" : 1.15,
-		"LESS_COST_PRICE" : 0.9667,
+		"LESS_SALE_PRICE" : 1.18,
+		"LESS_COST_PRICE" : 1.02,
 		"LESS_BARCODES" : "6214851172081",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -26.0
+		"LESS_QTY" : -20.0
 	},
 	{
 		"ITEM_NAME_AR" : "حبة بركة الدرة",
@@ -19582,7 +19600,7 @@
 		"LESS_COST_PRICE" : 1.0,
 		"LESS_BARCODES" : "6215000029065",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 64.0
+		"LESS_QTY" : 63.0
 	},
 	{
 		"ITEM_NAME_AR" : "حر احمر علبة 100غ الدرة",
@@ -19654,7 +19672,7 @@
 		"LESS_COST_PRICE" : 3.1,
 		"LESS_BARCODES" : "6210331087036",
 		"LESS_RELATION" : 25,
-		"LESS_QTY" : -17.0
+		"LESS_QTY" : -18.0
 	},
 	{
 		"ITEM_NAME_AR" : "حسيب 200 غ فضي",
@@ -19758,11 +19776,11 @@
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
-		"LESS_SALE_PRICE" : 4.18,
+		"LESS_SALE_PRICE" : 3.6,
 		"LESS_COST_PRICE" : 3.48,
 		"LESS_BARCODES" : "8680131206902, 8680131206919, 8680131206926, 8680131206872, 8680131206889, 8680131206896",
 		"LESS_RELATION" : 5,
-		"LESS_QTY" : -179.0
+		"LESS_QTY" : -180.0
 	},
 	{
 		"ITEM_NAME_AR" : "حفوضات اطفال جامبو جيجلس ",
@@ -19776,17 +19794,17 @@
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
-		"LESS_SALE_PRICE" : 7.36,
+		"LESS_SALE_PRICE" : 6.3679,
 		"LESS_COST_PRICE" : 6.13,
 		"LESS_BARCODES" : "8680131206933, 8680131206940, 8680131206957, 8680131206964, 8680131206971, 8680131206988",
 		"LESS_RELATION" : 4,
-		"LESS_QTY" : -242.0
+		"LESS_QTY" : -243.0
 	},
 	{
 		"ITEM_NAME_AR" : "حفوضات بعد الولادة L جيجلس ",
 		"CATEGORY_AR" : "حفوضات ",
-		"BASE_SALE_PRICE" : 18.0,
-		"BASE_COST_PRICE" : 15.862,
+		"BASE_SALE_PRICE" : 17.0,
+		"BASE_COST_PRICE" : 15.86,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 2.0,
 		"MORE_SALE_PRICE" : null,
@@ -19794,8 +19812,8 @@
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
-		"LESS_SALE_PRICE" : 4.8,
-		"LESS_COST_PRICE" : 3.9655,
+		"LESS_SALE_PRICE" : 4.5,
+		"LESS_COST_PRICE" : 3.965,
 		"LESS_BARCODES" : "8680131208142",
 		"LESS_RELATION" : 4,
 		"LESS_QTY" : -1.0
@@ -19803,7 +19821,7 @@
 	{
 		"ITEM_NAME_AR" : "حفوضات بعد الولادة M جيجلس ",
 		"CATEGORY_AR" : "حفوضات ",
-		"BASE_SALE_PRICE" : 15.0,
+		"BASE_SALE_PRICE" : 14.0,
 		"BASE_COST_PRICE" : 12.7286,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 1.0,
@@ -19812,10 +19830,28 @@
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
-		"LESS_SALE_PRICE" : 3.8186,
+		"LESS_SALE_PRICE" : 3.65,
 		"LESS_COST_PRICE" : 3.1822,
 		"LESS_BARCODES" : "8680131208159",
 		"LESS_RELATION" : 4,
+		"LESS_QTY" : -2.0
+	},
+	{
+		"ITEM_NAME_AR" : "حفوضات بعد الولادة توين M جيجلس",
+		"CATEGORY_AR" : "حفوضات ",
+		"BASE_SALE_PRICE" : 22.0,
+		"BASE_COST_PRICE" : 20.017,
+		"BASE_BARCODES" : null,
+		"BASE_QTY" : 1.0,
+		"MORE_SALE_PRICE" : null,
+		"MORE_COST_PRICE" : null,
+		"MORE_BARCODES" : null,
+		"MORE_RELATION" : null,
+		"MORE_QTY" : null,
+		"LESS_SALE_PRICE" : 1.9,
+		"LESS_COST_PRICE" : 1.6681,
+		"LESS_BARCODES" : "8680131208135",
+		"LESS_RELATION" : 12,
 		"LESS_QTY" : -2.0
 	},
 	{
@@ -19888,7 +19924,7 @@
 		"LESS_COST_PRICE" : 6.2148,
 		"LESS_BARCODES" : "8680131204571",
 		"LESS_RELATION" : 4,
-		"LESS_QTY" : -5.0
+		"LESS_QTY" : -6.0
 	},
 	{
 		"ITEM_NAME_AR" : "حفوضات عجزة جامبو L جيجلس ",
@@ -19996,7 +20032,7 @@
 		"LESS_COST_PRICE" : 2.3,
 		"LESS_BARCODES" : "6214007511016, 6214007511115, 6214007510613, 6214007510712, 6214007510811, 6214007510910",
 		"LESS_RELATION" : 5,
-		"LESS_QTY" : -284.0
+		"LESS_QTY" : -285.0
 	},
 	{
 		"ITEM_NAME_AR" : "حفوضات كونفي",
@@ -20086,7 +20122,7 @@
 		"LESS_COST_PRICE" : 2.85,
 		"LESS_BARCODES" : "1234567890630",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 44.0
+		"LESS_QTY" : 43.0
 	},
 	{
 		"ITEM_NAME_AR" : "حلاوة 5كغ مهروسة ",
@@ -20734,7 +20770,7 @@
 		"LESS_COST_PRICE" : 3.1667,
 		"LESS_BARCODES" : "8681305252794",
 		"LESS_RELATION" : 6,
-		"LESS_QTY" : -68.0
+		"LESS_QTY" : -69.0
 	},
 	{
 		"ITEM_NAME_AR" : "حلاوة فستق 2كغ صافي",
@@ -20914,7 +20950,7 @@
 		"LESS_COST_PRICE" : 1.4,
 		"LESS_BARCODES" : "00111468",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : 4.0
+		"LESS_QTY" : 3.0
 	},
 	{
 		"ITEM_NAME_AR" : "حلاوة فستق 400غ هشام",
@@ -21208,7 +21244,7 @@
 		"ITEM_NAME_AR" : "حلبة مطحونة 115غ احلام",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 2.25,
-		"BASE_COST_PRICE" : 1.88,
+		"BASE_COST_PRICE" : 2.01,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 2.0,
 		"MORE_SALE_PRICE" : null,
@@ -21217,10 +21253,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 0.85,
-		"LESS_COST_PRICE" : 0.6267,
+		"LESS_COST_PRICE" : 0.67,
 		"LESS_BARCODES" : "6214852372398",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -2.0
+		"LESS_QTY" : 1.0
 	},
 	{
 		"ITEM_NAME_AR" : "حلبي 100غ",
@@ -21400,7 +21436,7 @@
 		"LESS_COST_PRICE" : 1.0183,
 		"LESS_BARCODES" : "6211439106063, 6211439107060, 6217000501428, 6217000501435, 6217000501459",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -118.0
+		"LESS_QTY" : -121.0
 	},
 	{
 		"ITEM_NAME_AR" : "حليب بروتين بينار 500مل ",
@@ -21652,7 +21688,7 @@
 		"LESS_COST_PRICE" : 0.1667,
 		"LESS_BARCODES" : "6211082763132, 6211082773131, 6211082783130, 6211082793139, 6211082833132, 6211082843131, 6211082853130",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -167.0
+		"LESS_QTY" : -173.0
 	},
 	{
 		"ITEM_NAME_AR" : "حليب جينا 300غ سادة ",
@@ -21922,7 +21958,7 @@
 		"LESS_COST_PRICE" : 1.125,
 		"LESS_BARCODES" : "8695077102010",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -1811.0
+		"LESS_QTY" : -1814.0
 	},
 	{
 		"ITEM_NAME_AR" : "حليب سوت منكه 200 مل ",
@@ -21958,7 +21994,7 @@
 		"LESS_COST_PRICE" : 1.0,
 		"LESS_BARCODES" : "8691958007375",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -112.0
+		"LESS_QTY" : -116.0
 	},
 	{
 		"ITEM_NAME_AR" : "حليب عوافي 1 ل + جبنة",
@@ -22138,7 +22174,7 @@
 		"LESS_COST_PRICE" : 0.8846,
 		"LESS_BARCODES" : "6215000474353",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -3152.0
+		"LESS_QTY" : -3160.0
 	},
 	{
 		"ITEM_NAME_AR" : "حليب لونا 195غ",
@@ -22228,7 +22264,7 @@
 		"LESS_COST_PRICE" : 0.3704,
 		"LESS_BARCODES" : "6223001877202, 6223001877165, 6223001876366, 6223001877172",
 		"LESS_RELATION" : 27,
-		"LESS_QTY" : -1448.0
+		"LESS_QTY" : -1455.0
 	},
 	{
 		"ITEM_NAME_AR" : "حليب مرح 275غ",
@@ -22426,7 +22462,7 @@
 		"LESS_COST_PRICE" : 0.2146,
 		"LESS_BARCODES" : "6217000501138, 6217000501145, 6217000501152",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -1200.0
+		"LESS_QTY" : -1204.0
 	},
 	{
 		"ITEM_NAME_AR" : "حليب منكه 170مل نيو بارك ",
@@ -22516,7 +22552,7 @@
 		"LESS_COST_PRICE" : 0.3241,
 		"LESS_BARCODES" : "8692095343906, 8692095343869, 8692095343883",
 		"LESS_RELATION" : 27,
-		"LESS_QTY" : -785.0
+		"LESS_QTY" : -789.0
 	},
 	{
 		"ITEM_NAME_AR" : "حليب منكه فيو ",
@@ -22542,7 +22578,7 @@
 		"BASE_SALE_PRICE" : 2.15,
 		"BASE_COST_PRICE" : 1.88,
 		"BASE_BARCODES" : "36",
-		"BASE_QTY" : 77.0,
+		"BASE_QTY" : 75.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -22822,7 +22858,7 @@
 		"LESS_COST_PRICE" : 0.6,
 		"LESS_BARCODES" : "6217000277125",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 9.0
+		"LESS_QTY" : 8.0
 	},
 	{
 		"ITEM_NAME_AR" : "حمص بطحينة 370غ الدرة ",
@@ -22984,7 +23020,7 @@
 		"LESS_COST_PRICE" : 0.3188,
 		"LESS_BARCODES" : "6217000186380, 6219233061021",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -178.0
+		"LESS_QTY" : -179.0
 	},
 	{
 		"ITEM_NAME_AR" : "حمص حب تونسا 700غ",
@@ -23146,7 +23182,7 @@
 		"LESS_COST_PRICE" : 0.3417,
 		"LESS_BARCODES" : "6217000186922",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -387.0
+		"LESS_QTY" : -392.0
 	},
 	{
 		"ITEM_NAME_AR" : "حمص قمر حلب كيس ",
@@ -23362,7 +23398,7 @@
 		"LESS_COST_PRICE" : 1.15,
 		"LESS_BARCODES" : "6210551011019",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -46.0
+		"LESS_QTY" : -47.0
 	},
 	{
 		"ITEM_NAME_AR" : "حموي 100 غ هال ",
@@ -23542,13 +23578,13 @@
 		"LESS_COST_PRICE" : 0.2594,
 		"LESS_BARCODES" : "6215552544900",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 85.0
+		"LESS_QTY" : 137.0
 	},
 	{
 		"ITEM_NAME_AR" : "خبز شوفان تنور العصر",
 		"CATEGORY_AR" : "غذائيات",
-		"BASE_SALE_PRICE" : 0.519,
-		"BASE_COST_PRICE" : 0.4481,
+		"BASE_SALE_PRICE" : 0.5896,
+		"BASE_COST_PRICE" : 0.5,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 0.0,
 		"MORE_SALE_PRICE" : null,
@@ -23556,11 +23592,11 @@
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
-		"LESS_SALE_PRICE" : 0.519,
-		"LESS_COST_PRICE" : 0.4481,
+		"LESS_SALE_PRICE" : 0.5896,
+		"LESS_COST_PRICE" : 0.5,
 		"LESS_BARCODES" : "5287001115109, 5287001115208, 5287001115017, 5287001115116, 5287001115055, 5287001115079, 5289000007690",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 23.0
+		"LESS_QTY" : 89.0
 	},
 	{
 		"ITEM_NAME_AR" : "خردل 300غ ديلو فود ",
@@ -23728,7 +23764,7 @@
 		"ITEM_NAME_AR" : "خل ابيض 500 مل احلام ",
 		"CATEGORY_AR" : "غذائيات",
 		"BASE_SALE_PRICE" : 8.5,
-		"BASE_COST_PRICE" : 6.41,
+		"BASE_COST_PRICE" : 6.48,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 3.0,
 		"MORE_SALE_PRICE" : null,
@@ -23737,10 +23773,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 0.75,
-		"LESS_COST_PRICE" : 0.5342,
+		"LESS_COST_PRICE" : 0.54,
 		"LESS_BARCODES" : "6210708796639",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -33.0
+		"LESS_QTY" : -21.0
 	},
 	{
 		"ITEM_NAME_AR" : "خل ابيض 500مل الدرة ",
@@ -23830,7 +23866,7 @@
 		"LESS_COST_PRICE" : 0.5417,
 		"LESS_BARCODES" : "8681407001788",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -7.0
+		"LESS_QTY" : -8.0
 	},
 	{
 		"ITEM_NAME_AR" : "خل ابيض دلتا 1ل",
@@ -24424,13 +24460,13 @@
 		"LESS_COST_PRICE" : 0.0841,
 		"LESS_BARCODES" : "8690770332399",
 		"LESS_RELATION" : 60,
-		"LESS_QTY" : -1102.0
+		"LESS_QTY" : -1117.0
 	},
 	{
 		"ITEM_NAME_AR" : "خميره 150 غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
-		"BASE_SALE_PRICE" : 3.75,
-		"BASE_COST_PRICE" : 3.21,
+		"BASE_SALE_PRICE" : 4.0,
+		"BASE_COST_PRICE" : 3.69,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 6.0,
 		"MORE_SALE_PRICE" : null,
@@ -24438,26 +24474,26 @@
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
-		"LESS_SALE_PRICE" : 1.3,
-		"LESS_COST_PRICE" : 1.07,
+		"LESS_SALE_PRICE" : 1.42,
+		"LESS_COST_PRICE" : 1.23,
 		"LESS_BARCODES" : "6214851482098",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -18.0
+		"LESS_QTY" : -12.0
 	},
 	{
 		"ITEM_NAME_AR" : "خولجان مطحون 100غ احلام",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 4.0,
-		"BASE_COST_PRICE" : 3.31,
+		"BASE_COST_PRICE" : 3.065,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 1.0,
+		"BASE_QTY" : 3.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.4,
-		"LESS_COST_PRICE" : 1.1033,
+		"LESS_COST_PRICE" : 1.0217,
 		"LESS_BARCODES" : "6214852352079",
 		"LESS_RELATION" : 3,
 		"LESS_QTY" : 0.0
@@ -24532,7 +24568,7 @@
 		"LESS_COST_PRICE" : 0.2162,
 		"LESS_BARCODES" : "6211136504117, 6211136502243, 6211136507248, 6211136501055, 6211136503059, 6211136505053, 6211136508054, 6211136509051",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -2323.0
+		"LESS_QTY" : -2324.0
 	},
 	{
 		"ITEM_NAME_AR" : "دارنيتو اكس فورتين صغير ",
@@ -24568,7 +24604,7 @@
 		"LESS_COST_PRICE" : 0.4127,
 		"LESS_BARCODES" : "6211136601144, 6211136613147",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -447.0
+		"LESS_QTY" : -451.0
 	},
 	{
 		"ITEM_NAME_AR" : "دارنيتو بوشار 70غ ",
@@ -24604,7 +24640,7 @@
 		"LESS_COST_PRICE" : 0.3079,
 		"LESS_BARCODES" : "6211136521053, 6211136522050, 6211136523057, 6211136525174, 6211136526171",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -754.0
+		"LESS_QTY" : -755.0
 	},
 	{
 		"ITEM_NAME_AR" : "دارنيتو جامبو 70غ ",
@@ -24622,7 +24658,7 @@
 		"LESS_COST_PRICE" : 0.4127,
 		"LESS_BARCODES" : "6211136501215, 6211136503219, 6211136505213, 6211136507217, 6211136508214, 6211136509211",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -3453.0
+		"LESS_QTY" : -3459.0
 	},
 	{
 		"ITEM_NAME_AR" : "دارنيتو ديربي 35غ ",
@@ -24874,7 +24910,7 @@
 		"LESS_COST_PRICE" : 0.0688,
 		"LESS_BARCODES" : "8690504079323, 8690504079279, 68690504081762, 68690504081755",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -1741.0
+		"LESS_QTY" : -1762.0
 	},
 	{
 		"ITEM_NAME_AR" : "دان كيك دونات + تارت",
@@ -25468,7 +25504,7 @@
 		"LESS_COST_PRICE" : 2.39,
 		"LESS_BARCODES" : "6210701981322, 6210703986738",
 		"LESS_RELATION" : 6,
-		"LESS_QTY" : -21.0
+		"LESS_QTY" : -15.0
 	},
 	{
 		"ITEM_NAME_AR" : "دبس بندورة 2كغ الدرة ",
@@ -25540,7 +25576,7 @@
 		"LESS_COST_PRICE" : 4.4,
 		"LESS_BARCODES" : "6210701980264, 6210701988178",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 3.0
+		"LESS_QTY" : 5.0
 	},
 	{
 		"ITEM_NAME_AR" : "دبس بندورة 4كغ الدرة",
@@ -25975,6 +26011,24 @@
 		"LESS_QTY" : -66.0
 	},
 	{
+		"ITEM_NAME_AR" : "دبس تمر 800غ احلام ",
+		"CATEGORY_AR" : "غذائيات",
+		"BASE_SALE_PRICE" : 2.22,
+		"BASE_COST_PRICE" : 1.92,
+		"BASE_BARCODES" : null,
+		"BASE_QTY" : 0.0,
+		"MORE_SALE_PRICE" : null,
+		"MORE_COST_PRICE" : null,
+		"MORE_BARCODES" : null,
+		"MORE_RELATION" : null,
+		"MORE_QTY" : null,
+		"LESS_SALE_PRICE" : 2.22,
+		"LESS_COST_PRICE" : 1.92,
+		"LESS_BARCODES" : "6210702796345",
+		"LESS_RELATION" : 1,
+		"LESS_QTY" : 6.0
+	},
+	{
 		"ITEM_NAME_AR" : "دبس تمر 800غ بستان",
 		"CATEGORY_AR" : "غذائيات",
 		"BASE_SALE_PRICE" : 29.0,
@@ -26121,17 +26175,17 @@
 	{
 		"ITEM_NAME_AR" : "دبس رمان 350 غ احلام ",
 		"CATEGORY_AR" : "غذائيات",
-		"BASE_SALE_PRICE" : 10.0,
-		"BASE_COST_PRICE" : 8.88,
+		"BASE_SALE_PRICE" : 13.5,
+		"BASE_COST_PRICE" : 12.44,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 2.0,
+		"BASE_QTY" : 3.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
-		"LESS_SALE_PRICE" : 0.9,
-		"LESS_COST_PRICE" : 0.74,
+		"LESS_SALE_PRICE" : 1.2,
+		"LESS_COST_PRICE" : 1.0367,
 		"LESS_BARCODES" : "6210701160031",
 		"LESS_RELATION" : 12,
 		"LESS_QTY" : -20.0
@@ -26332,7 +26386,7 @@
 		"LESS_COST_PRICE" : 2.1667,
 		"LESS_BARCODES" : "6253500258257",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -2.0
+		"LESS_QTY" : -3.0
 	},
 	{
 		"ITEM_NAME_AR" : "دبس رمان زجاج 700غ هشام ",
@@ -26350,7 +26404,7 @@
 		"LESS_COST_PRICE" : 1.5408,
 		"LESS_BARCODES" : "6213291622194",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -1.0
+		"LESS_QTY" : -2.0
 	},
 	{
 		"ITEM_NAME_AR" : "دبس رمان طبيعي العجمي 300غ",
@@ -26800,7 +26854,7 @@
 		"LESS_COST_PRICE" : 0.75,
 		"LESS_BARCODES" : "8690624005820",
 		"LESS_RELATION" : 30,
-		"LESS_QTY" : -297.0
+		"LESS_QTY" : -299.0
 	},
 	{
 		"ITEM_NAME_AR" : "دوف 330 مل ",
@@ -26962,7 +27016,7 @@
 		"LESS_COST_PRICE" : 0.355,
 		"LESS_BARCODES" : "61",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 0.0
+		"LESS_QTY" : -1.0
 	},
 	{
 		"ITEM_NAME_AR" : "دونات ايفري دي 40غ",
@@ -27088,7 +27142,7 @@
 		"LESS_COST_PRICE" : 0.0988,
 		"LESS_BARCODES" : "6291003020582",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -245.0
+		"LESS_QTY" : -249.0
 	},
 	{
 		"ITEM_NAME_AR" : "ديدرون دوف 200مل ",
@@ -27160,7 +27214,7 @@
 		"LESS_COST_PRICE" : 0.1,
 		"LESS_BARCODES" : "6215670103096",
 		"LESS_RELATION" : 40,
-		"LESS_QTY" : -4891.0
+		"LESS_QTY" : -4893.0
 	},
 	{
 		"ITEM_NAME_AR" : "ديربي اصلي 50غ",
@@ -27250,7 +27304,7 @@
 		"LESS_COST_PRICE" : 0.0787,
 		"LESS_BARCODES" : "6211035101011",
 		"LESS_RELATION" : 50,
-		"LESS_QTY" : -20.0
+		"LESS_QTY" : -28.0
 	},
 	{
 		"ITEM_NAME_AR" : "ديربي دشق جامبو ",
@@ -27268,7 +27322,7 @@
 		"LESS_COST_PRICE" : 0.335,
 		"LESS_BARCODES" : "6211035101028",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -84.0
+		"LESS_QTY" : -90.0
 	},
 	{
 		"ITEM_NAME_AR" : "ديربي صباغ 190غ ",
@@ -27286,7 +27340,7 @@
 		"LESS_COST_PRICE" : 0.6667,
 		"LESS_BARCODES" : "6215547789651",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -231.0
+		"LESS_QTY" : -233.0
 	},
 	{
 		"ITEM_NAME_AR" : "ديلوكس 39غ",
@@ -27700,7 +27754,7 @@
 		"LESS_COST_PRICE" : 1.12,
 		"LESS_BARCODES" : "00111158, 95487272",
 		"LESS_RELATION" : 10,
-		"LESS_QTY" : -207.0
+		"LESS_QTY" : -208.0
 	},
 	{
 		"ITEM_NAME_AR" : "ذرة الخطيب 340غ ",
@@ -27744,7 +27798,7 @@
 		"BASE_SALE_PRICE" : 8.0,
 		"BASE_COST_PRICE" : 7.4,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 5.0,
+		"BASE_QTY" : 7.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -27754,7 +27808,7 @@
 		"LESS_COST_PRICE" : 0.74,
 		"LESS_BARCODES" : "6211009154463",
 		"LESS_RELATION" : 10,
-		"LESS_QTY" : -27.0
+		"LESS_QTY" : -28.0
 	},
 	{
 		"ITEM_NAME_AR" : "ذرة بوشار 1كغ عصفور ",
@@ -27834,7 +27888,7 @@
 		"BASE_SALE_PRICE" : 4.6,
 		"BASE_COST_PRICE" : 3.75,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 75.0,
+		"BASE_QTY" : 80.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -27934,7 +27988,7 @@
 		"LESS_COST_PRICE" : 0.74,
 		"LESS_BARCODES" : "6210701172126",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -40.0
+		"LESS_QTY" : -22.0
 	},
 	{
 		"ITEM_NAME_AR" : "ذرة حلوة 350غ الدرة ",
@@ -28024,7 +28078,7 @@
 		"LESS_COST_PRICE" : 0.8417,
 		"LESS_BARCODES" : "6213251084055",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -60.0
+		"LESS_QTY" : -61.0
 	},
 	{
 		"ITEM_NAME_AR" : "ذرة زجاج 370غ بستان",
@@ -28384,7 +28438,7 @@
 		"LESS_COST_PRICE" : 0.3458,
 		"LESS_BARCODES" : "6281034016029, 6281034916077, 6281034900175, 6281034903572, 6281034900182, 6281034916183, 9504000291105, 9504000291129, 9504000291471",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -2826.0
+		"LESS_QTY" : -2829.0
 	},
 	{
 		"ITEM_NAME_AR" : "رجل الي ",
@@ -28492,7 +28546,7 @@
 		"LESS_COST_PRICE" : 0.8361,
 		"LESS_BARCODES" : "1",
 		"LESS_RELATION" : 10,
-		"LESS_QTY" : -1592.0
+		"LESS_QTY" : -1596.0
 	},
 	{
 		"ITEM_NAME_AR" : "رز 10 كغ اوماي ",
@@ -28546,7 +28600,7 @@
 		"LESS_COST_PRICE" : 8.0,
 		"LESS_BARCODES" : "6211009158720",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 21.0
+		"LESS_QTY" : 20.0
 	},
 	{
 		"ITEM_NAME_AR" : "رز 1كغ ارتو ",
@@ -28762,7 +28816,7 @@
 		"LESS_COST_PRICE" : 1.325,
 		"LESS_BARCODES" : "8697449901351",
 		"LESS_RELATION" : 20,
-		"LESS_QTY" : -2003.0
+		"LESS_QTY" : -2004.0
 	},
 	{
 		"ITEM_NAME_AR" : "رز 9كغ محمود ",
@@ -29112,7 +29166,7 @@
 		"BASE_SALE_PRICE" : 10.0,
 		"BASE_COST_PRICE" : 8.15,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 65.0,
+		"BASE_QTY" : 67.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -29158,7 +29212,7 @@
 		"LESS_COST_PRICE" : 4.05,
 		"LESS_BARCODES" : "6212731073022, 6212733073020",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 8.0
+		"LESS_QTY" : 6.0
 	},
 	{
 		"ITEM_NAME_AR" : "رز صيني 5كغ اليرموك ",
@@ -29310,7 +29364,7 @@
 		"BASE_SALE_PRICE" : 8.25,
 		"BASE_COST_PRICE" : 7.25,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 61.0,
+		"BASE_QTY" : 66.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -29662,7 +29716,7 @@
 		"LESS_COST_PRICE" : 2.3,
 		"LESS_BARCODES" : "6280538430461",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 17.0
+		"LESS_QTY" : 14.0
 	},
 	{
 		"ITEM_NAME_AR" : "رقائق بورك مثلثية 360غ مرسين",
@@ -30040,7 +30094,7 @@
 		"LESS_COST_PRICE" : 0.2025,
 		"LESS_BARCODES" : "6214581101016, 6214581101023, 6217000312550, 6217000312567, 6218710301018, 6218710320392",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -2412.0
+		"LESS_QTY" : -2413.0
 	},
 	{
 		"ITEM_NAME_AR" : "رولانا كرتون 250غ ",
@@ -30112,7 +30166,7 @@
 		"LESS_COST_PRICE" : 0.0799,
 		"LESS_BARCODES" : "6210211708280",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -165.0
+		"LESS_QTY" : -167.0
 	},
 	{
 		"ITEM_NAME_AR" : "رومبا *6 ",
@@ -30148,7 +30202,7 @@
 		"LESS_COST_PRICE" : 0.205,
 		"LESS_BARCODES" : "6210211709133, 6210211708532, 6210211708051",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -1064.0
+		"LESS_QTY" : -1065.0
 	},
 	{
 		"ITEM_NAME_AR" : "روندو 100غ ",
@@ -30742,7 +30796,7 @@
 		"LESS_COST_PRICE" : 0.112,
 		"LESS_BARCODES" : "55",
 		"LESS_RELATION" : 100,
-		"LESS_QTY" : -70.0
+		"LESS_QTY" : -72.0
 	},
 	{
 		"ITEM_NAME_AR" : "زبدة لورباك 200 غ",
@@ -30760,7 +30814,7 @@
 		"LESS_COST_PRICE" : 2.625,
 		"LESS_BARCODES" : "5740900884304",
 		"LESS_RELATION" : 40,
-		"LESS_QTY" : -282.0
+		"LESS_QTY" : -284.0
 	},
 	{
 		"ITEM_NAME_AR" : "زبدة لورباك 200غ علبة",
@@ -30966,7 +31020,7 @@
 		"BASE_SALE_PRICE" : 13.0,
 		"BASE_COST_PRICE" : 12.0,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 50.0,
+		"BASE_QTY" : 52.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -31264,7 +31318,7 @@
 		"LESS_COST_PRICE" : 0.8095,
 		"LESS_BARCODES" : "6217889911035",
 		"LESS_RELATION" : 20,
-		"LESS_QTY" : -1061.0
+		"LESS_QTY" : -1067.0
 	},
 	{
 		"ITEM_NAME_AR" : "زعتر عصفور احمر 500غ ",
@@ -31308,7 +31362,7 @@
 		"BASE_SALE_PRICE" : 13.25,
 		"BASE_COST_PRICE" : 12.0,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 43.0,
+		"BASE_QTY" : 44.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -31344,7 +31398,7 @@
 		"BASE_SALE_PRICE" : 13.25,
 		"BASE_COST_PRICE" : 12.0,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 78.0,
+		"BASE_QTY" : 80.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -31354,7 +31408,7 @@
 		"LESS_COST_PRICE" : 1.0,
 		"LESS_BARCODES" : "6211009856770",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -877.0
+		"LESS_QTY" : -878.0
 	},
 	{
 		"ITEM_NAME_AR" : "زعتر ملوكي اخضر 400غ الدرة",
@@ -31468,7 +31522,7 @@
 		"ITEM_NAME_AR" : "زنجبيل مطحون 125غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 4.5,
-		"BASE_COST_PRICE" : 3.88,
+		"BASE_COST_PRICE" : 3.63,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 8.0,
 		"MORE_SALE_PRICE" : null,
@@ -31477,10 +31531,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.5,
-		"LESS_COST_PRICE" : 1.2933,
+		"LESS_COST_PRICE" : 1.21,
 		"LESS_BARCODES" : "6214851102088",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -24.0
+		"LESS_QTY" : -18.0
 	},
 	{
 		"ITEM_NAME_AR" : "زنجبيل ناعم 20غ الدرة",
@@ -31570,7 +31624,7 @@
 		"LESS_COST_PRICE" : 1.167,
 		"LESS_BARCODES" : "6212900002105, 6212900002402, 6212900008923, 6212900009944, 6212900002051, 6212900002068, 6212900008268, 6212900002075, 6212900002082, 6212900008688",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : 181.0
+		"LESS_QTY" : 180.0
 	},
 	{
 		"ITEM_NAME_AR" : "زهورات عذوقك",
@@ -31660,7 +31714,7 @@
 		"LESS_COST_PRICE" : 1.975,
 		"LESS_BARCODES" : "6210247026822",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -47.0
+		"LESS_QTY" : -48.0
 	},
 	{
 		"ITEM_NAME_AR" : "زيت الدرة 4 لتر ",
@@ -31876,7 +31930,7 @@
 		"LESS_COST_PRICE" : 1.8,
 		"LESS_BARCODES" : "8697924590698",
 		"LESS_RELATION" : 20,
-		"LESS_QTY" : -318.0
+		"LESS_QTY" : -322.0
 	},
 	{
 		"ITEM_NAME_AR" : "زيت تونسا 4 لتر",
@@ -31894,7 +31948,7 @@
 		"LESS_COST_PRICE" : 7.375,
 		"LESS_BARCODES" : "8697924591350",
 		"LESS_RELATION" : 4,
-		"LESS_QTY" : -752.0
+		"LESS_QTY" : -753.0
 	},
 	{
 		"ITEM_NAME_AR" : "زيت تونسا 4 لتر عريض ",
@@ -31912,7 +31966,7 @@
 		"LESS_COST_PRICE" : 7.625,
 		"LESS_BARCODES" : "8697924592364",
 		"LESS_RELATION" : 4,
-		"LESS_QTY" : -264.0
+		"LESS_QTY" : -265.0
 	},
 	{
 		"ITEM_NAME_AR" : "زيت جونسون 300مل ",
@@ -33267,17 +33321,17 @@
 	{
 		"ITEM_NAME_AR" : "زيتون محشي جزر 450غ احلام ",
 		"CATEGORY_AR" : "غذائيات",
-		"BASE_SALE_PRICE" : 29.0,
-		"BASE_COST_PRICE" : 26.16,
+		"BASE_SALE_PRICE" : 37.0,
+		"BASE_COST_PRICE" : 33.49,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 2.0,
+		"BASE_QTY" : 3.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
-		"LESS_SALE_PRICE" : 2.507,
-		"LESS_COST_PRICE" : 2.18,
+		"LESS_SALE_PRICE" : 3.2,
+		"LESS_COST_PRICE" : 2.7908,
 		"LESS_BARCODES" : "6210702636757",
 		"LESS_RELATION" : 12,
 		"LESS_QTY" : -23.0
@@ -33334,7 +33388,7 @@
 		"LESS_COST_PRICE" : 2.5975,
 		"LESS_BARCODES" : "6210701236194",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -60.0
+		"LESS_QTY" : -61.0
 	},
 	{
 		"ITEM_NAME_AR" : "زيتون مكلس مطربان 2.25كغ",
@@ -33406,7 +33460,7 @@
 		"LESS_COST_PRICE" : 0.8725,
 		"LESS_BARCODES" : "6210291903827, 6210291904824",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : 35.0
+		"LESS_QTY" : 33.0
 	},
 	{
 		"ITEM_NAME_AR" : "سائل ايدي براتيك 500 عرض ",
@@ -33846,7 +33900,7 @@
 		"BASE_SALE_PRICE" : 19.5,
 		"BASE_COST_PRICE" : 18.5,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 21.0,
+		"BASE_QTY" : 36.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -34216,7 +34270,7 @@
 		"LESS_COST_PRICE" : 3.5556,
 		"LESS_BARCODES" : "8001841470375, 8001841780818",
 		"LESS_RELATION" : 9,
-		"LESS_QTY" : -71.0
+		"LESS_QTY" : -72.0
 	},
 	{
 		"ITEM_NAME_AR" : "سائل فيري اقتصادي 2.6 ل",
@@ -34306,7 +34360,7 @@
 		"LESS_COST_PRICE" : 0.9083,
 		"LESS_BARCODES" : "6210291401828, 6210291402825, 6210291403822, 6210291423820, 6210291424827, 6210291405826, 6210291429822",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -251.0
+		"LESS_QTY" : -253.0
 	},
 	{
 		"ITEM_NAME_AR" : "سائل وايت كلوز ازرق 900مل",
@@ -34548,7 +34602,7 @@
 		"BASE_SALE_PRICE" : 0.9434,
 		"BASE_COST_PRICE" : 0.8523,
 		"BASE_BARCODES" : "6217000056164",
-		"BASE_QTY" : -43.0,
+		"BASE_QTY" : -44.0,
 		"MORE_SALE_PRICE" : 11.3208,
 		"MORE_COST_PRICE" : 10.2273,
 		"MORE_BARCODES" : null,
@@ -34702,7 +34756,7 @@
 		"LESS_COST_PRICE" : 0.2525,
 		"LESS_BARCODES" : "5000112612592",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -84.0
+		"LESS_QTY" : -86.0
 	},
 	{
 		"ITEM_NAME_AR" : "سبرايت 330مل",
@@ -34918,7 +34972,7 @@
 		"LESS_COST_PRICE" : 1.2381,
 		"LESS_BARCODES" : "8690146059561",
 		"LESS_RELATION" : 105,
-		"LESS_QTY" : -726.0
+		"LESS_QTY" : -727.0
 	},
 	{
 		"ITEM_NAME_AR" : "سجق تومبيك 900غ",
@@ -35122,7 +35176,7 @@
 		"ITEM_NAME_AR" : "سردين احلام ",
 		"CATEGORY_AR" : "غذائيات",
 		"BASE_SALE_PRICE" : 33.0,
-		"BASE_COST_PRICE" : 25.5,
+		"BASE_COST_PRICE" : 0.0,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 8.0,
 		"MORE_SALE_PRICE" : null,
@@ -35131,10 +35185,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 0.75,
-		"LESS_COST_PRICE" : 0.51,
+		"LESS_COST_PRICE" : 0.0,
 		"LESS_BARCODES" : "6970679241605, 6970679241575",
 		"LESS_RELATION" : 50,
-		"LESS_QTY" : -272.0
+		"LESS_QTY" : -367.0
 	},
 	{
 		"ITEM_NAME_AR" : "سردين ارتو 125غ عمي الحاج ",
@@ -35206,7 +35260,7 @@
 		"LESS_COST_PRICE" : 0.8,
 		"LESS_BARCODES" : "6111162000327",
 		"LESS_RELATION" : 50,
-		"LESS_QTY" : -30.0
+		"LESS_QTY" : -41.0
 	},
 	{
 		"ITEM_NAME_AR" : "سردين جولي اوميغا 3",
@@ -35404,7 +35458,7 @@
 		"LESS_COST_PRICE" : 0.8417,
 		"LESS_BARCODES" : "8697924594641",
 		"LESS_RELATION" : 30,
-		"LESS_QTY" : -107.0
+		"LESS_QTY" : -110.0
 	},
 	{
 		"ITEM_NAME_AR" : "سفنجة جلي العائلة كيس *3",
@@ -35494,7 +35548,7 @@
 		"LESS_COST_PRICE" : 0.0976,
 		"LESS_BARCODES" : "6210070112501, 6210070114505, 6210070115502, 6210070145509, 6210070116509, 6210070112037, 6210070113034, 6210070114031, 6210070115038, 6210070145035, 6210070116035",
 		"LESS_RELATION" : 20,
-		"LESS_QTY" : -1137.0
+		"LESS_QTY" : -1143.0
 	},
 	{
 		"ITEM_NAME_AR" : "سكاكر زاهي ظرف 200غ ",
@@ -35674,7 +35728,7 @@
 		"LESS_COST_PRICE" : 6.3,
 		"LESS_BARCODES" : "10",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 65.0
+		"LESS_QTY" : 64.0
 	},
 	{
 		"ITEM_NAME_AR" : "سكر بودرة شفق 250غ ",
@@ -35700,7 +35754,7 @@
 		"BASE_SALE_PRICE" : 8.0,
 		"BASE_COST_PRICE" : 7.0,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 93.0,
+		"BASE_QTY" : 100.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -35764,7 +35818,7 @@
 		"LESS_COST_PRICE" : 0.69,
 		"LESS_BARCODES" : "17, 00111260",
 		"LESS_RELATION" : 10,
-		"LESS_QTY" : -933.0
+		"LESS_QTY" : -938.0
 	},
 	{
 		"ITEM_NAME_AR" : "سكر مكعبات 1 كغ ",
@@ -36292,7 +36346,7 @@
 		"ITEM_NAME_AR" : "سمسم محمص 100 غ احلام",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 2.75,
-		"BASE_COST_PRICE" : 2.15,
+		"BASE_COST_PRICE" : 2.19,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 5.0,
 		"MORE_SALE_PRICE" : null,
@@ -36301,10 +36355,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 0.95,
-		"LESS_COST_PRICE" : 0.7167,
+		"LESS_COST_PRICE" : 0.73,
 		"LESS_BARCODES" : "6214851392076",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -12.0
+		"LESS_QTY" : -6.0
 	},
 	{
 		"ITEM_NAME_AR" : "سمسم مقشور 100 غ احلام ",
@@ -36322,7 +36376,7 @@
 		"LESS_COST_PRICE" : 0.8467,
 		"LESS_BARCODES" : "6214851342071",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -12.0
+		"LESS_QTY" : -13.0
 	},
 	{
 		"ITEM_NAME_AR" : "سمسم هازال 50غ",
@@ -36772,7 +36826,7 @@
 		"LESS_COST_PRICE" : 14.15,
 		"LESS_BARCODES" : "00111489",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : -1.0
+		"LESS_QTY" : -2.0
 	},
 	{
 		"ITEM_NAME_AR" : "سمنة بقرية 1كغ ",
@@ -36952,7 +37006,7 @@
 		"LESS_COST_PRICE" : 3.9,
 		"LESS_BARCODES" : "6210260211045",
 		"LESS_RELATION" : 6,
-		"LESS_QTY" : -12.0
+		"LESS_QTY" : -13.0
 	},
 	{
 		"ITEM_NAME_AR" : "سمنة رغد 4 كغ",
@@ -37060,7 +37114,7 @@
 		"LESS_COST_PRICE" : 2.84,
 		"LESS_BARCODES" : "8681877078617",
 		"LESS_RELATION" : 6,
-		"LESS_QTY" : -68.0
+		"LESS_QTY" : -69.0
 	},
 	{
 		"ITEM_NAME_AR" : "سمنة فرزات 700 مل",
@@ -37500,7 +37554,7 @@
 		"BASE_SALE_PRICE" : 8.0,
 		"BASE_COST_PRICE" : 7.0,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 14.0,
+		"BASE_QTY" : 16.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -37914,7 +37968,7 @@
 		"BASE_SALE_PRICE" : 2.1,
 		"BASE_COST_PRICE" : 1.542,
 		"BASE_BARCODES" : "6211282010524",
-		"BASE_QTY" : 95.0,
+		"BASE_QTY" : 94.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -38536,7 +38590,7 @@
 		"LESS_COST_PRICE" : 1.92,
 		"LESS_BARCODES" : "6210552296033",
 		"LESS_RELATION" : 6,
-		"LESS_QTY" : 8.0
+		"LESS_QTY" : 7.0
 	},
 	{
 		"ITEM_NAME_AR" : "سيتي كافيه جولد ظرف",
@@ -38788,7 +38842,7 @@
 		"LESS_COST_PRICE" : 0.1629,
 		"LESS_BARCODES" : "6215000550859",
 		"LESS_RELATION" : 11,
-		"LESS_QTY" : -676.0
+		"LESS_QTY" : -678.0
 	},
 	{
 		"ITEM_NAME_AR" : "سيف العائلة كيس ",
@@ -39058,7 +39112,7 @@
 		"LESS_COST_PRICE" : 2.35,
 		"LESS_BARCODES" : "6210290000329, 6210290001036, 6210290000336, 6210290003733, 6210290000343, 6210290000350, 6210290000367, 6210290003672, 6210290003689",
 		"LESS_RELATION" : 6,
-		"LESS_QTY" : -651.0
+		"LESS_QTY" : -652.0
 	},
 	{
 		"ITEM_NAME_AR" : "شامبو بانسي 400 مل",
@@ -39310,7 +39364,7 @@
 		"LESS_COST_PRICE" : 3.0,
 		"LESS_BARCODES" : "8710447223413, 8710447223352, 8710447223468",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -446.0
+		"LESS_QTY" : -447.0
 	},
 	{
 		"ITEM_NAME_AR" : "شامبو تريشوب 400 مل ",
@@ -39850,7 +39904,7 @@
 		"LESS_COST_PRICE" : 3.75,
 		"LESS_BARCODES" : "8683130010402, 8683130010310, 8683130010419, 8683130010327, 8683130010341, 8683130012550, 8683130012574, 8683130010389, 8683130010396",
 		"LESS_RELATION" : 16,
-		"LESS_QTY" : -145.0
+		"LESS_QTY" : -146.0
 	},
 	{
 		"ITEM_NAME_AR" : "شامبو كلير 600مل",
@@ -40120,7 +40174,7 @@
 		"LESS_COST_PRICE" : 3.1167,
 		"LESS_BARCODES" : "6210290332994, 6210290333991, 6210290334998",
 		"LESS_RELATION" : 6,
-		"LESS_QTY" : -169.0
+		"LESS_QTY" : -170.0
 	},
 	{
 		"ITEM_NAME_AR" : "شامبو نورا 600 مل",
@@ -40436,7 +40490,7 @@
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 2.0,
 		"MORE_SALE_PRICE" : 55.0,
-		"MORE_COST_PRICE" : 0.0,
+		"MORE_COST_PRICE" : 50.0,
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : 1,
 		"MORE_QTY" : 0.0,
@@ -41020,7 +41074,7 @@
 		"LESS_COST_PRICE" : 2.5,
 		"LESS_BARCODES" : "4796015725422",
 		"LESS_RELATION" : 36,
-		"LESS_QTY" : -60.0
+		"LESS_QTY" : -62.0
 	},
 	{
 		"ITEM_NAME_AR" : "شاي كرزة 100غ",
@@ -41056,7 +41110,7 @@
 		"LESS_COST_PRICE" : 1.95,
 		"LESS_BARCODES" : "5014176005559",
 		"LESS_RELATION" : 40,
-		"LESS_QTY" : -38.0
+		"LESS_QTY" : -39.0
 	},
 	{
 		"ITEM_NAME_AR" : "شاي كرزة 25 ظرف ",
@@ -41884,7 +41938,7 @@
 		"LESS_COST_PRICE" : 1.8,
 		"LESS_BARCODES" : "13",
 		"LESS_RELATION" : 10,
-		"LESS_QTY" : -44.0
+		"LESS_QTY" : -45.0
 	},
 	{
 		"ITEM_NAME_AR" : "شعيرية عكل 200 غ",
@@ -42172,7 +42226,7 @@
 		"LESS_COST_PRICE" : 3.1,
 		"LESS_BARCODES" : "7702018466979",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 8.0
+		"LESS_QTY" : 7.0
 	},
 	{
 		"ITEM_NAME_AR" : "شفرات جيليت 5+1",
@@ -42244,7 +42298,7 @@
 		"LESS_COST_PRICE" : 1.5,
 		"LESS_BARCODES" : "7702018844791",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 15.0
+		"LESS_QTY" : 14.0
 	},
 	{
 		"ITEM_NAME_AR" : "شفرات حلاقة بيغ بن كرت",
@@ -42298,7 +42352,7 @@
 		"LESS_COST_PRICE" : 0.75,
 		"LESS_BARCODES" : "8801038605760",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : 44.0
+		"LESS_QTY" : 43.0
 	},
 	{
 		"ITEM_NAME_AR" : "شفرات دوركو نسائية 3+1 ",
@@ -42538,7 +42592,7 @@
 		"ITEM_NAME_AR" : "شمرا مطحونه 125 غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 2.65,
-		"BASE_COST_PRICE" : 2.16,
+		"BASE_COST_PRICE" : 2.1,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 3.0,
 		"MORE_SALE_PRICE" : null,
@@ -42547,10 +42601,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 0.9,
-		"LESS_COST_PRICE" : 0.72,
+		"LESS_COST_PRICE" : 0.7,
 		"LESS_BARCODES" : "6214851352070",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -9.0
+		"LESS_QTY" : -3.0
 	},
 	{
 		"ITEM_NAME_AR" : "شمس 250غ",
@@ -42694,7 +42748,7 @@
 		"LESS_COST_PRICE" : 0.0708,
 		"LESS_BARCODES" : "6224000498030",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -245.0
+		"LESS_QTY" : -249.0
 	},
 	{
 		"ITEM_NAME_AR" : "شو ميلك شيللو 53غ ",
@@ -42964,7 +43018,7 @@
 		"LESS_COST_PRICE" : 0.2083,
 		"LESS_BARCODES" : "6215000092373, 6215000097378, 6215000098375, 6215000099372, 6215000092380, 6215000097385, 6215000099389",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -795.0
+		"LESS_QTY" : -798.0
 	},
 	{
 		"ITEM_NAME_AR" : "شوفان 500غ هشام",
@@ -43270,7 +43324,7 @@
 		"LESS_COST_PRICE" : 0.1258,
 		"LESS_BARCODES" : "6210211202122, 6210211202344",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -717.0
+		"LESS_QTY" : -720.0
 	},
 	{
 		"ITEM_NAME_AR" : "شوكو تويست صغير 17غ",
@@ -43432,7 +43486,7 @@
 		"LESS_COST_PRICE" : 0.4167,
 		"LESS_BARCODES" : "8690504027508",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : 6.0
+		"LESS_QTY" : 5.0
 	},
 	{
 		"ITEM_NAME_AR" : "شوكو هيفي يار ",
@@ -43450,7 +43504,7 @@
 		"LESS_COST_PRICE" : 0.0573,
 		"LESS_BARCODES" : "6210191201122, 6210191202129, 6210191202136",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -175.0
+		"LESS_QTY" : -176.0
 	},
 	{
 		"ITEM_NAME_AR" : "شوكو ون ",
@@ -43594,7 +43648,7 @@
 		"LESS_COST_PRICE" : 0.8875,
 		"LESS_BARCODES" : "6213225587179",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -102.0
+		"LESS_QTY" : -104.0
 	},
 	{
 		"ITEM_NAME_AR" : "شوكولا اوماي 700غ ",
@@ -43666,7 +43720,7 @@
 		"LESS_COST_PRICE" : 3.0,
 		"LESS_BARCODES" : "6210245251080",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -14.0
+		"LESS_QTY" : -15.0
 	},
 	{
 		"ITEM_NAME_AR" : "شوكولا بيتر 350غ",
@@ -43690,16 +43744,16 @@
 		"ITEM_NAME_AR" : "شوكولا بيفا 300 غ",
 		"CATEGORY_AR" : "شوكولا",
 		"BASE_SALE_PRICE" : 13.0,
-		"BASE_COST_PRICE" : 12.0,
+		"BASE_COST_PRICE" : 13.0,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 74.75,
+		"BASE_QTY" : 89.75,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.15,
-		"LESS_COST_PRICE" : 1.0,
+		"LESS_COST_PRICE" : 1.0833,
 		"LESS_BARCODES" : "8690562012201",
 		"LESS_RELATION" : 12,
 		"LESS_QTY" : -897.0
@@ -43708,19 +43762,19 @@
 		"ITEM_NAME_AR" : "شوكولا بيفا 850غ",
 		"CATEGORY_AR" : "شوكولا",
 		"BASE_SALE_PRICE" : 16.5,
-		"BASE_COST_PRICE" : 15.0,
+		"BASE_COST_PRICE" : 16.0,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 69.66667,
+		"BASE_QTY" : 84.66667,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 2.75,
-		"LESS_COST_PRICE" : 2.5,
+		"LESS_COST_PRICE" : 2.6667,
 		"LESS_BARCODES" : "8690562012218",
 		"LESS_RELATION" : 6,
-		"LESS_QTY" : -418.0
+		"LESS_QTY" : -419.0
 	},
 	{
 		"ITEM_NAME_AR" : "شوكولا بيوتي 400 غ",
@@ -44116,7 +44170,7 @@
 		"LESS_COST_PRICE" : 0.2013,
 		"LESS_BARCODES" : "8682091103222",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -124.0
+		"LESS_QTY" : -125.0
 	},
 	{
 		"ITEM_NAME_AR" : "شوكولا عمار 34غ",
@@ -44124,7 +44178,7 @@
 		"BASE_SALE_PRICE" : 4.0,
 		"BASE_COST_PRICE" : 3.3336,
 		"BASE_BARCODES" : "6215000081117",
-		"BASE_QTY" : 44.0,
+		"BASE_QTY" : 56.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -44134,7 +44188,7 @@
 		"LESS_COST_PRICE" : 0.1389,
 		"LESS_BARCODES" : "6215000081100, 6215000081209, 6215000081131, 6215000081162",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -775.0
+		"LESS_QTY" : -777.0
 	},
 	{
 		"ITEM_NAME_AR" : "شوكولا غيستات 300غ",
@@ -44224,7 +44278,7 @@
 		"LESS_COST_PRICE" : 0.6875,
 		"LESS_BARCODES" : "6217565412351",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -130.0
+		"LESS_QTY" : -131.0
 	},
 	{
 		"ITEM_NAME_AR" : "شوكولا لاتار 3 علب",
@@ -44458,7 +44512,7 @@
 		"LESS_COST_PRICE" : 1.75,
 		"LESS_BARCODES" : "6215863566370",
 		"LESS_RELATION" : 6,
-		"LESS_QTY" : -148.0
+		"LESS_QTY" : -151.0
 	},
 	{
 		"ITEM_NAME_AR" : "شوكولا ميلكا لوح ",
@@ -45268,7 +45322,7 @@
 		"LESS_COST_PRICE" : 5.82,
 		"LESS_BARCODES" : "6210291803837, 6210291804834, 6210291805831, 6210291806838, 6210291807835",
 		"LESS_RELATION" : 4,
-		"LESS_QTY" : -42.0
+		"LESS_QTY" : -43.0
 	},
 	{
 		"ITEM_NAME_AR" : "صابون سائل برافو 5ل",
@@ -45466,7 +45520,7 @@
 		"LESS_COST_PRICE" : 0.5808,
 		"LESS_BARCODES" : "6210290003856",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -84.0
+		"LESS_QTY" : -85.0
 	},
 	{
 		"ITEM_NAME_AR" : "صابون كريمي ايفيوني 500مل",
@@ -46318,7 +46372,7 @@
 		"ITEM_NAME_AR" : "صمون الحرية ",
 		"CATEGORY_AR" : "منوعات",
 		"BASE_SALE_PRICE" : 0.84,
-		"BASE_COST_PRICE" : 0.7092,
+		"BASE_COST_PRICE" : 0.7075,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 0.0,
 		"MORE_SALE_PRICE" : null,
@@ -46327,10 +46381,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 0.84,
-		"LESS_COST_PRICE" : 0.7092,
+		"LESS_COST_PRICE" : 0.7075,
 		"LESS_BARCODES" : null,
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 1.0
+		"LESS_QTY" : 3.0
 	},
 	{
 		"ITEM_NAME_AR" : "صندويش اوريو مولر ",
@@ -46366,7 +46420,7 @@
 		"LESS_COST_PRICE" : 0.25,
 		"LESS_BARCODES" : "8697520104022, 8697520104053, 8697520103087, 8697520103094",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -272.0
+		"LESS_QTY" : -274.0
 	},
 	{
 		"ITEM_NAME_AR" : "صودا زنجبيل وعسل ",
@@ -46618,7 +46672,7 @@
 		"LESS_COST_PRICE" : 1.5,
 		"LESS_BARCODES" : "6213251331531",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -5.0
+		"LESS_QTY" : -6.0
 	},
 	{
 		"ITEM_NAME_AR" : "صوص رانش 380 غ  الدرة",
@@ -46672,7 +46726,7 @@
 		"LESS_COST_PRICE" : 1.5208,
 		"LESS_BARCODES" : "8694587149201, 8694587149249",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -7.0
+		"LESS_QTY" : -8.0
 	},
 	{
 		"ITEM_NAME_AR" : "صوص كينت 750",
@@ -46942,7 +46996,7 @@
 		"LESS_COST_PRICE" : 0.25,
 		"LESS_BARCODES" : "8695280326500",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -1398.0
+		"LESS_QTY" : -1399.0
 	},
 	{
 		"ITEM_NAME_AR" : "طازج بلور 300 مل",
@@ -47194,7 +47248,7 @@
 		"LESS_COST_PRICE" : 0.3604,
 		"LESS_BARCODES" : "8697459290018, 8697459290711, 8697459299424, 8697459290834, 8697459290841, 8697459292760, 8697459292098",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -1223.0
+		"LESS_QTY" : -1227.0
 	},
 	{
 		"ITEM_NAME_AR" : "طاقه جست 1 لتر ",
@@ -47212,7 +47266,7 @@
 		"LESS_COST_PRICE" : 0.55,
 		"LESS_BARCODES" : "8699120449008, 8699120449183",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -796.0
+		"LESS_QTY" : -797.0
 	},
 	{
 		"ITEM_NAME_AR" : "طاقه جست 250 مل ",
@@ -47230,7 +47284,7 @@
 		"LESS_COST_PRICE" : 0.2721,
 		"LESS_BARCODES" : "8699120445703, 8699120448025",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -783.0
+		"LESS_QTY" : -784.0
 	},
 	{
 		"ITEM_NAME_AR" : "طاقه جوس 1ل ",
@@ -47338,7 +47392,7 @@
 		"LESS_COST_PRICE" : 2.6667,
 		"LESS_BARCODES" : "8",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -248.0
+		"LESS_QTY" : -249.0
 	},
 	{
 		"ITEM_NAME_AR" : "طحين اكسترا 1كغ اليرموك ",
@@ -47848,7 +47902,7 @@
 		"ITEM_NAME_AR" : "طحينة 800 غ احلام ",
 		"CATEGORY_AR" : "غذائيات",
 		"BASE_SALE_PRICE" : 45.0,
-		"BASE_COST_PRICE" : 40.26,
+		"BASE_COST_PRICE" : 40.32,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 2.0,
 		"MORE_SALE_PRICE" : null,
@@ -47857,10 +47911,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 3.864,
-		"LESS_COST_PRICE" : 3.355,
+		"LESS_COST_PRICE" : 3.36,
 		"LESS_BARCODES" : "6210701510218",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -20.0
+		"LESS_QTY" : -10.0
 	},
 	{
 		"ITEM_NAME_AR" : "طحينة 800غ + دبس تمر الدرة عرض",
@@ -48094,7 +48148,7 @@
 		"LESS_COST_PRICE" : 0.1458,
 		"LESS_BARCODES" : "6215001700321",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -74.0
+		"LESS_QTY" : -77.0
 	},
 	{
 		"ITEM_NAME_AR" : "طرابيش سيتي كورن 95غ",
@@ -48112,7 +48166,7 @@
 		"LESS_COST_PRICE" : 0.2917,
 		"LESS_BARCODES" : "6215001700147",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -96.0
+		"LESS_QTY" : -97.0
 	},
 	{
 		"ITEM_NAME_AR" : "طقم 6 زبادي اركوبال احمر \/ ازرق",
@@ -48280,7 +48334,7 @@
 		"ITEM_NAME_AR" : "طون احلام حد ",
 		"CATEGORY_AR" : "غذائيات",
 		"BASE_SALE_PRICE" : 50.0,
-		"BASE_COST_PRICE" : 45.5,
+		"BASE_COST_PRICE" : 0.0,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 4.0,
 		"MORE_SALE_PRICE" : null,
@@ -48289,16 +48343,16 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.1,
-		"LESS_COST_PRICE" : 0.9479,
+		"LESS_COST_PRICE" : 0.0,
 		"LESS_BARCODES" : "8858814650414",
 		"LESS_RELATION" : 48,
-		"LESS_QTY" : -82.0
+		"LESS_QTY" : -156.0
 	},
 	{
 		"ITEM_NAME_AR" : "طون احلام حلو ",
 		"CATEGORY_AR" : "غذائيات",
 		"BASE_SALE_PRICE" : 50.0,
-		"BASE_COST_PRICE" : 45.0,
+		"BASE_COST_PRICE" : 0.0,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 4.0,
 		"MORE_SALE_PRICE" : null,
@@ -48307,10 +48361,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.1,
-		"LESS_COST_PRICE" : 0.9375,
+		"LESS_COST_PRICE" : 0.0,
 		"LESS_BARCODES" : "8858814650407",
 		"LESS_RELATION" : 48,
-		"LESS_QTY" : -61.0
+		"LESS_QTY" : -148.0
 	},
 	{
 		"ITEM_NAME_AR" : "طون التونسا دايت",
@@ -48454,7 +48508,7 @@
 		"LESS_COST_PRICE" : 1.0,
 		"LESS_BARCODES" : "8855301220709, 8855301221713, 8855301220723, 8855301221737, 8855301220747, 8855301220761",
 		"LESS_RELATION" : 48,
-		"LESS_QTY" : -575.0
+		"LESS_QTY" : -583.0
 	},
 	{
 		"ITEM_NAME_AR" : "طون جاد قطع 140غ ",
@@ -48472,7 +48526,7 @@
 		"LESS_COST_PRICE" : 0.7656,
 		"LESS_BARCODES" : "8855301220662, 8855301220686",
 		"LESS_RELATION" : 48,
-		"LESS_QTY" : -1410.0
+		"LESS_QTY" : -1416.0
 	},
 	{
 		"ITEM_NAME_AR" : "طون جيسي 160غ ",
@@ -48526,7 +48580,7 @@
 		"LESS_COST_PRICE" : 0.4583,
 		"LESS_BARCODES" : "6212255458756, 6212255458763",
 		"LESS_RELATION" : 48,
-		"LESS_QTY" : -81.0
+		"LESS_QTY" : -82.0
 	},
 	{
 		"ITEM_NAME_AR" : "طون عصفور تونغول 185غ",
@@ -48742,7 +48796,7 @@
 		"LESS_COST_PRICE" : 0.9375,
 		"LESS_BARCODES" : "6218651232068, 6218651242067",
 		"LESS_RELATION" : 48,
-		"LESS_QTY" : -611.0
+		"LESS_QTY" : -614.0
 	},
 	{
 		"ITEM_NAME_AR" : "طون ليو ناعم 140غ ",
@@ -48760,7 +48814,7 @@
 		"LESS_COST_PRICE" : 0.75,
 		"LESS_BARCODES" : "6218651552067, 6218651562066",
 		"LESS_RELATION" : 48,
-		"LESS_QTY" : -185.0
+		"LESS_QTY" : -187.0
 	},
 	{
 		"ITEM_NAME_AR" : "طون هشام تونغول ",
@@ -48778,7 +48832,7 @@
 		"LESS_COST_PRICE" : 1.276,
 		"LESS_BARCODES" : "6213291275017, 6213291285016, 6213291295015",
 		"LESS_RELATION" : 48,
-		"LESS_QTY" : -390.0
+		"LESS_QTY" : -391.0
 	},
 	{
 		"ITEM_NAME_AR" : "طون هشام قطع ",
@@ -48976,7 +49030,7 @@
 		"LESS_COST_PRICE" : 0.0917,
 		"LESS_BARCODES" : "6210032333463, 8681967080018, 8681967080049, 8681967080162, 6215000161017, 6215000161024, 6215000161031",
 		"LESS_RELATION" : 50,
-		"LESS_QTY" : -3708.0
+		"LESS_QTY" : -3720.0
 	},
 	{
 		"ITEM_NAME_AR" : "ظرف شراب فريش ",
@@ -49120,7 +49174,7 @@
 		"LESS_COST_PRICE" : 1.7,
 		"LESS_BARCODES" : "6217000288299",
 		"LESS_RELATION" : 10,
-		"LESS_QTY" : -48.0
+		"LESS_QTY" : -49.0
 	},
 	{
 		"ITEM_NAME_AR" : "عدس صاغ 500غ اليرموك ",
@@ -49326,7 +49380,7 @@
 		"BASE_SALE_PRICE" : 9.5,
 		"BASE_COST_PRICE" : 8.9,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 16.0,
+		"BASE_QTY" : 17.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -49341,20 +49395,20 @@
 	{
 		"ITEM_NAME_AR" : "عدس مجروش حمزة 500غ",
 		"CATEGORY_AR" : "غذائيات",
-		"BASE_SALE_PRICE" : 4.5,
-		"BASE_COST_PRICE" : 4.25,
+		"BASE_SALE_PRICE" : 5.0,
+		"BASE_COST_PRICE" : 4.5,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 22.0,
+		"BASE_QTY" : 27.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
-		"LESS_SALE_PRICE" : 0.5,
-		"LESS_COST_PRICE" : 0.425,
+		"LESS_SALE_PRICE" : 0.52,
+		"LESS_COST_PRICE" : 0.45,
 		"LESS_BARCODES" : "6211009897537",
 		"LESS_RELATION" : 10,
-		"LESS_QTY" : -207.0
+		"LESS_QTY" : -208.0
 	},
 	{
 		"ITEM_NAME_AR" : "عدس مجروش عصفور 1 ك",
@@ -49570,7 +49624,7 @@
 		"LESS_COST_PRICE" : 1.6042,
 		"LESS_BARCODES" : "00111505",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -219.0
+		"LESS_QTY" : -225.0
 	},
 	{
 		"ITEM_NAME_AR" : "عروس و عريس 8011",
@@ -49660,7 +49714,7 @@
 		"LESS_COST_PRICE" : 2.375,
 		"LESS_BARCODES" : "8695867014202",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 117.0
+		"LESS_QTY" : 116.0
 	},
 	{
 		"ITEM_NAME_AR" : "عسل الشفاء 500غ",
@@ -49678,7 +49732,7 @@
 		"LESS_COST_PRICE" : 7.0,
 		"LESS_BARCODES" : "6281073210181",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -4.0
+		"LESS_QTY" : -5.0
 	},
 	{
 		"ITEM_NAME_AR" : "عسل الشفاء بالمكسرات ",
@@ -49696,7 +49750,7 @@
 		"LESS_COST_PRICE" : 2.9167,
 		"LESS_BARCODES" : "8695867017203",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -279.0
+		"LESS_QTY" : -281.0
 	},
 	{
 		"ITEM_NAME_AR" : "عسل بالمكسرات ",
@@ -49894,7 +49948,7 @@
 		"LESS_COST_PRICE" : 0.4583,
 		"LESS_BARCODES" : "8938507378518, 8938507378525, 8938507378532, 8938507378242, 8938507378280, 8938510764902, 8938510764919, 8938510765022, 8938510764926, 8938510764858, 8938510764865, 8938510764872, 8938510764889",
 		"LESS_RELATION" : 6,
-		"LESS_QTY" : -227.0
+		"LESS_QTY" : -232.0
 	},
 	{
 		"ITEM_NAME_AR" : "عصير اورجنال 250 مل",
@@ -50074,7 +50128,7 @@
 		"LESS_COST_PRICE" : 0.3333,
 		"LESS_BARCODES" : "6210315013037, 6210315033035, 6210315213031, 6210313473031, 6215401062043",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -2972.0
+		"LESS_QTY" : -2977.0
 	},
 	{
 		"ITEM_NAME_AR" : "عصير سلس 750مل",
@@ -50308,7 +50362,7 @@
 		"LESS_COST_PRICE" : 0.2407,
 		"LESS_BARCODES" : "6223007520706, 6223007520713, 6223007520683, 6223007520690",
 		"LESS_RELATION" : 27,
-		"LESS_QTY" : -2058.0
+		"LESS_QTY" : -2065.0
 	},
 	{
 		"ITEM_NAME_AR" : "عصير مكوموكو 320مل",
@@ -50434,7 +50488,7 @@
 		"LESS_COST_PRICE" : 0.8333,
 		"LESS_BARCODES" : "6214005506922, 6214005506939, 6214005506946, 6214005506557, 6214005506953, 6214005506861, 6214005506977, 6214005506984, 6214005506991",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -152.0
+		"LESS_QTY" : -153.0
 	},
 	{
 		"ITEM_NAME_AR" : "عطر اطفال فلة بخاخ 50مل",
@@ -51142,16 +51196,16 @@
 		"ITEM_NAME_AR" : "عمار 7غ",
 		"CATEGORY_AR" : "اكلات ",
 		"BASE_SALE_PRICE" : 2.5,
-		"BASE_COST_PRICE" : 1.917,
+		"BASE_COST_PRICE" : 2.0,
 		"BASE_BARCODES" : "8681161909771",
-		"BASE_QTY" : 60.0,
+		"BASE_QTY" : 96.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 0.075,
-		"LESS_COST_PRICE" : 0.0383,
+		"LESS_COST_PRICE" : 0.04,
 		"LESS_BARCODES" : "8681161909764",
 		"LESS_RELATION" : 50,
 		"LESS_QTY" : -1021.0
@@ -51658,7 +51712,7 @@
 		"LESS_COST_PRICE" : 0.1458,
 		"LESS_BARCODES" : "00111372",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -79.0
+		"LESS_QTY" : -80.0
 	},
 	{
 		"ITEM_NAME_AR" : "فازلين ماتيز 50 مل ",
@@ -51720,7 +51774,7 @@
 		"BASE_SALE_PRICE" : 10.0,
 		"BASE_COST_PRICE" : 7.4,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 13.0,
+		"BASE_QTY" : 14.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -52540,7 +52594,7 @@
 		"LESS_COST_PRICE" : 1.3333,
 		"LESS_BARCODES" : "6910021100204, 6001067017332, 8693495048019",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : 0.0
+		"LESS_QTY" : -2.0
 	},
 	{
 		"ITEM_NAME_AR" : "فرشاة اسنان كولجيت ماكس وايت",
@@ -52558,7 +52612,7 @@
 		"LESS_COST_PRICE" : 1.0,
 		"LESS_BARCODES" : "6001067025931",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -1.0
+		"LESS_QTY" : -3.0
 	},
 	{
 		"ITEM_NAME_AR" : "فرشاة اسنان لانشير علبة",
@@ -52882,7 +52936,7 @@
 		"LESS_COST_PRICE" : 2.96,
 		"LESS_BARCODES" : "6213291141015",
 		"LESS_RELATION" : 5,
-		"LESS_QTY" : -16.0
+		"LESS_QTY" : -18.0
 	},
 	{
 		"ITEM_NAME_AR" : "فستق 100غ",
@@ -53080,7 +53134,7 @@
 		"LESS_COST_PRICE" : 1.25,
 		"LESS_BARCODES" : "00111150, 95487090",
 		"LESS_RELATION" : 10,
-		"LESS_QTY" : -247.0
+		"LESS_QTY" : -248.0
 	},
 	{
 		"ITEM_NAME_AR" : "فستق مقشور 500غ عمي الحاج ",
@@ -53116,7 +53170,7 @@
 		"LESS_COST_PRICE" : 0.8,
 		"LESS_BARCODES" : "00111420, 95487327",
 		"LESS_RELATION" : 10,
-		"LESS_QTY" : -22.0
+		"LESS_QTY" : -23.0
 	},
 	{
 		"ITEM_NAME_AR" : "فستق مملح 1 كغ",
@@ -53734,7 +53788,7 @@
 		"ITEM_NAME_AR" : "فلفل ابيض 150 غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 9.75,
-		"BASE_COST_PRICE" : 8.74,
+		"BASE_COST_PRICE" : 8.52,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 9.0,
 		"MORE_SALE_PRICE" : null,
@@ -53743,10 +53797,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 3.3465,
-		"LESS_COST_PRICE" : 2.9133,
+		"LESS_COST_PRICE" : 2.84,
 		"LESS_BARCODES" : "6214851022096",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -27.0
+		"LESS_QTY" : -21.0
 	},
 	{
 		"ITEM_NAME_AR" : "فلفل ابيض حب 125غ احلام ",
@@ -53770,7 +53824,7 @@
 		"ITEM_NAME_AR" : "فلفل اسود 125 غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 6.0,
-		"BASE_COST_PRICE" : 5.36,
+		"BASE_COST_PRICE" : 5.55,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 12.0,
 		"MORE_SALE_PRICE" : null,
@@ -53779,10 +53833,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 2.1,
-		"LESS_COST_PRICE" : 1.7867,
+		"LESS_COST_PRICE" : 1.85,
 		"LESS_BARCODES" : "6214851972087",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -35.0
+		"LESS_QTY" : -26.0
 	},
 	{
 		"ITEM_NAME_AR" : "فلفل اسود مطحون علبة الدرة ",
@@ -53896,7 +53950,7 @@
 		"ITEM_NAME_AR" : "فليفله حده 125 غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 4.0,
-		"BASE_COST_PRICE" : 3.45,
+		"BASE_COST_PRICE" : 3.12,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 11.0,
 		"MORE_SALE_PRICE" : null,
@@ -53905,16 +53959,16 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.35,
-		"LESS_COST_PRICE" : 1.15,
+		"LESS_COST_PRICE" : 1.04,
 		"LESS_BARCODES" : "6214851912083",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -33.0
+		"LESS_QTY" : -21.0
 	},
 	{
 		"ITEM_NAME_AR" : "فليفله حلوة 125 غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 3.75,
-		"BASE_COST_PRICE" : 3.31,
+		"BASE_COST_PRICE" : 2.94,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 11.0,
 		"MORE_SALE_PRICE" : null,
@@ -53923,10 +53977,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.3,
-		"LESS_COST_PRICE" : 1.1033,
+		"LESS_COST_PRICE" : 0.98,
 		"LESS_BARCODES" : "6214851902084",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -25.0
+		"LESS_QTY" : -14.0
 	},
 	{
 		"ITEM_NAME_AR" : "فناجين قهوة سادة",
@@ -54016,7 +54070,7 @@
 		"LESS_COST_PRICE" : 1.9,
 		"LESS_BARCODES" : "95487070",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 57.0
+		"LESS_QTY" : 56.0
 	},
 	{
 		"ITEM_NAME_AR" : "فواكه مجففة مطربان 500غ",
@@ -54145,24 +54199,6 @@
 		"LESS_QTY" : 8.0
 	},
 	{
-		"ITEM_NAME_AR" : "فوط بعد الولادة توين M جيجلس",
-		"CATEGORY_AR" : "حفوضات ",
-		"BASE_SALE_PRICE" : 24.0,
-		"BASE_COST_PRICE" : 20.017,
-		"BASE_BARCODES" : null,
-		"BASE_QTY" : 1.0,
-		"MORE_SALE_PRICE" : null,
-		"MORE_COST_PRICE" : null,
-		"MORE_BARCODES" : null,
-		"MORE_RELATION" : null,
-		"MORE_QTY" : null,
-		"LESS_SALE_PRICE" : 2.0,
-		"LESS_COST_PRICE" : 1.6681,
-		"LESS_BARCODES" : "8680131208135",
-		"LESS_RELATION" : 12,
-		"LESS_QTY" : -2.0
-	},
-	{
 		"ITEM_NAME_AR" : "فوط بوليفار ليلي ",
 		"CATEGORY_AR" : "منظفات",
 		"BASE_SALE_PRICE" : 14.0,
@@ -54286,7 +54322,7 @@
 		"LESS_COST_PRICE" : 0.3333,
 		"LESS_BARCODES" : "6214007581712, 6214007581811",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -58.0
+		"LESS_QTY" : -59.0
 	},
 	{
 		"ITEM_NAME_AR" : "فوط نسائية الترا جيجلس ",
@@ -54304,7 +54340,7 @@
 		"LESS_COST_PRICE" : 0.44,
 		"LESS_BARCODES" : "8680131207800, 8680131207817, 8680131207824, 8680131207886",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -76.0
+		"LESS_QTY" : -78.0
 	},
 	{
 		"ITEM_NAME_AR" : "فوط نسائية بوليفار ماكسي ",
@@ -54448,7 +54484,7 @@
 		"LESS_COST_PRICE" : 0.75,
 		"LESS_BARCODES" : "6210622104008",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -47.0
+		"LESS_QTY" : -48.0
 	},
 	{
 		"ITEM_NAME_AR" : "فول اخضر 350غ دلتا ",
@@ -54520,7 +54556,7 @@
 		"LESS_COST_PRICE" : 0.2896,
 		"LESS_BARCODES" : "8681282303243, 6212721064030, 6219233061014",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -1556.0
+		"LESS_QTY" : -1561.0
 	},
 	{
 		"ITEM_NAME_AR" : "فول باجيلا الدرة ",
@@ -54634,16 +54670,16 @@
 		"ITEM_NAME_AR" : "فول مدمس 200غ احلام",
 		"CATEGORY_AR" : "غذائيات",
 		"BASE_SALE_PRICE" : 11.5,
-		"BASE_COST_PRICE" : 9.64,
+		"BASE_COST_PRICE" : 9.16,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 3.0,
+		"BASE_QTY" : 4.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 0.5,
-		"LESS_COST_PRICE" : 0.4017,
+		"LESS_COST_PRICE" : 0.3817,
 		"LESS_BARCODES" : "6210701551099",
 		"LESS_RELATION" : 24,
 		"LESS_QTY" : -70.0
@@ -55006,7 +55042,7 @@
 		"LESS_COST_PRICE" : 0.7361,
 		"LESS_BARCODES" : "80902379, 80927266, 80832386, 80840299, 86947930, 86947961, 86947954, 86945226, 86947947, 86945219, 80758594, 80853923, 80950677, 80761310, 80763444, 80770831, 80770855, 80770848, 80970057, 80794776, 80894889, 8682790003601, 8682790003540, 8682790003564, 8682790003588, 8003440205983, 8003440944820, 8003440942154, 8003440942352, 8003440942857, 8003440942260, 8003440942178, 8003440942376, 8003440942284, 8003440942789, 8003440942390",
 		"LESS_RELATION" : 18,
-		"LESS_QTY" : -1864.0
+		"LESS_QTY" : -1869.0
 	},
 	{
 		"ITEM_NAME_AR" : "فيفيدنت 67غ",
@@ -55024,7 +55060,7 @@
 		"LESS_COST_PRICE" : 1.2708,
 		"LESS_BARCODES" : "80801405, 80903543, 80908937, 80966289, 80979104, 80781721, 80791577",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -495.0
+		"LESS_QTY" : -498.0
 	},
 	{
 		"ITEM_NAME_AR" : "فيفيدنت باكيت 21غ",
@@ -55168,7 +55204,7 @@
 		"LESS_COST_PRICE" : 1.5,
 		"LESS_BARCODES" : "8690562003162",
 		"LESS_RELATION" : 6,
-		"LESS_QTY" : -563.0
+		"LESS_QTY" : -565.0
 	},
 	{
 		"ITEM_NAME_AR" : "فينغر مكي *4 اصابع",
@@ -55366,13 +55402,13 @@
 		"LESS_COST_PRICE" : 2.25,
 		"LESS_BARCODES" : "00111148, 95487042, 95487052, 95487045",
 		"LESS_RELATION" : 10,
-		"LESS_QTY" : -402.0
+		"LESS_QTY" : -403.0
 	},
 	{
 		"ITEM_NAME_AR" : "قرفة مطحونه 125 غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 3.5,
-		"BASE_COST_PRICE" : 2.61,
+		"BASE_COST_PRICE" : 2.79,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 6.0,
 		"MORE_SALE_PRICE" : null,
@@ -55381,10 +55417,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.2,
-		"LESS_COST_PRICE" : 0.87,
+		"LESS_COST_PRICE" : 0.93,
 		"LESS_BARCODES" : "6214851192089",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -16.0
+		"LESS_QTY" : -10.0
 	},
 	{
 		"ITEM_NAME_AR" : "قرفة ناعمة 100غ الدرة ",
@@ -55408,7 +55444,7 @@
 		"ITEM_NAME_AR" : "قرفه عود 45 غ احلام",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 3.25,
-		"BASE_COST_PRICE" : 2.445,
+		"BASE_COST_PRICE" : 2.61,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 10.0,
 		"MORE_SALE_PRICE" : null,
@@ -55417,16 +55453,16 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.1,
-		"LESS_COST_PRICE" : 0.815,
+		"LESS_COST_PRICE" : 0.87,
 		"LESS_BARCODES" : "6214852552561",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -29.0
+		"LESS_QTY" : -26.0
 	},
 	{
 		"ITEM_NAME_AR" : "قرنفل مطحون 125 غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 7.75,
-		"BASE_COST_PRICE" : 6.88,
+		"BASE_COST_PRICE" : 6.78,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 4.0,
 		"MORE_SALE_PRICE" : null,
@@ -55435,10 +55471,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 2.6335,
-		"LESS_COST_PRICE" : 2.2933,
+		"LESS_COST_PRICE" : 2.26,
 		"LESS_BARCODES" : "6214851052086",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -10.0
+		"LESS_QTY" : -4.0
 	},
 	{
 		"ITEM_NAME_AR" : "قريدس 500غ اسماك",
@@ -55582,7 +55618,7 @@
 		"LESS_COST_PRICE" : 0.4583,
 		"LESS_BARCODES" : "6291106857429",
 		"LESS_RELATION" : 48,
-		"LESS_QTY" : -1093.0
+		"LESS_QTY" : -1095.0
 	},
 	{
 		"ITEM_NAME_AR" : "قشطة سادة 155غ نيوبارك",
@@ -55726,7 +55762,7 @@
 		"LESS_COST_PRICE" : 3.375,
 		"LESS_BARCODES" : "6291058100390",
 		"LESS_RELATION" : 32,
-		"LESS_QTY" : -390.0
+		"LESS_QTY" : -391.0
 	},
 	{
 		"ITEM_NAME_AR" : "قشقوان هاجدو 700 غ",
@@ -55770,7 +55806,7 @@
 		"BASE_SALE_PRICE" : 0.8,
 		"BASE_COST_PRICE" : 0.6,
 		"BASE_BARCODES" : "6967813846314",
-		"BASE_QTY" : 35.0,
+		"BASE_QTY" : 33.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -55834,7 +55870,7 @@
 		"LESS_COST_PRICE" : 1.45,
 		"LESS_BARCODES" : "00111153, 95487200, 95487190",
 		"LESS_RELATION" : 10,
-		"LESS_QTY" : -118.0
+		"LESS_QTY" : -120.0
 	},
 	{
 		"ITEM_NAME_AR" : "قضامة جوهرة 250 غ",
@@ -56248,7 +56284,7 @@
 		"LESS_COST_PRICE" : 1.3,
 		"LESS_BARCODES" : "6210241417190",
 		"LESS_RELATION" : 20,
-		"LESS_QTY" : -2.0
+		"LESS_QTY" : -3.0
 	},
 	{
 		"ITEM_NAME_AR" : "قمر الدين طراحي 400غ بستان ",
@@ -56284,7 +56320,7 @@
 		"LESS_COST_PRICE" : 1.83,
 		"LESS_BARCODES" : "6210708528094",
 		"LESS_RELATION" : 20,
-		"LESS_QTY" : -73.0
+		"LESS_QTY" : -74.0
 	},
 	{
 		"ITEM_NAME_AR" : "قمر دين 400غ الدرة ",
@@ -56392,7 +56428,7 @@
 		"LESS_COST_PRICE" : 0.7708,
 		"LESS_BARCODES" : "6281100513223, 6281100513230, 6281100514268",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -979.0
+		"LESS_QTY" : -980.0
 	},
 	{
 		"ITEM_NAME_AR" : "قهوة بارده لونا ",
@@ -56410,7 +56446,7 @@
 		"LESS_COST_PRICE" : 0.6042,
 		"LESS_BARCODES" : "6281020174443, 6281020174849, 6281020170476, 6281020318236, 6281020318335",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -2969.0
+		"LESS_QTY" : -2977.0
 	},
 	{
 		"ITEM_NAME_AR" : "قهوة تنك تركوازي 250غ السهول",
@@ -56542,19 +56578,19 @@
 		"ITEM_NAME_AR" : "قهوة فريش *50",
 		"CATEGORY_AR" : "اكلات ",
 		"BASE_SALE_PRICE" : 2.606,
-		"BASE_COST_PRICE" : 2.44,
+		"BASE_COST_PRICE" : 2.3334,
 		"BASE_BARCODES" : "8681161905421",
-		"BASE_QTY" : 71.0,
+		"BASE_QTY" : 188.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 0.06,
-		"LESS_COST_PRICE" : 0.0488,
+		"LESS_COST_PRICE" : 0.0467,
 		"LESS_BARCODES" : "8681161905414",
 		"LESS_RELATION" : 50,
-		"LESS_QTY" : -1364.0
+		"LESS_QTY" : -1370.0
 	},
 	{
 		"ITEM_NAME_AR" : "قهوة كولد 250غ عمي الحاج ",
@@ -56878,7 +56914,7 @@
 		"LESS_COST_PRICE" : 1.35,
 		"LESS_BARCODES" : "5000112664522",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -390.0
+		"LESS_QTY" : -391.0
 	},
 	{
 		"ITEM_NAME_AR" : "كات تات ",
@@ -57298,7 +57334,7 @@
 		"ITEM_NAME_AR" : "كاري 125 غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 3.75,
-		"BASE_COST_PRICE" : 3.1,
+		"BASE_COST_PRICE" : 3.15,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 9.0,
 		"MORE_SALE_PRICE" : null,
@@ -57307,10 +57343,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.25,
-		"LESS_COST_PRICE" : 1.0333,
+		"LESS_COST_PRICE" : 1.05,
 		"LESS_BARCODES" : "6214851642089",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -27.0
+		"LESS_QTY" : -18.0
 	},
 	{
 		"ITEM_NAME_AR" : "كاسات 2.5 اونص",
@@ -57634,7 +57670,7 @@
 		"LESS_COST_PRICE" : 0.125,
 		"LESS_BARCODES" : "621477269761, 621477265893, 621477263424, 621477262557, 621477265619",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -335.0
+		"LESS_QTY" : -339.0
 	},
 	{
 		"ITEM_NAME_AR" : "كاسترد 125غ ",
@@ -58066,7 +58102,7 @@
 		"LESS_COST_PRICE" : 2.75,
 		"LESS_BARCODES" : "6211122113873",
 		"LESS_RELATION" : 10,
-		"LESS_QTY" : 24.0
+		"LESS_QTY" : 23.0
 	},
 	{
 		"ITEM_NAME_AR" : "كبتشينو تورا بيكا ظرف ",
@@ -58102,7 +58138,7 @@
 		"LESS_COST_PRICE" : 0.1514,
 		"LESS_BARCODES" : "8996001414002, 8996001414033, 8996001414040, 8998666003218, 8998666003225, 8998666003140, 8998666001948, 8998666003157, 8998666001955",
 		"LESS_RELATION" : 22,
-		"LESS_QTY" : -176.0
+		"LESS_QTY" : -183.0
 	},
 	{
 		"ITEM_NAME_AR" : "كبتشينو دايت حقيبة بلانس",
@@ -58876,7 +58912,7 @@
 		"LESS_COST_PRICE" : 0.625,
 		"LESS_BARCODES" : "8690562007702, 8690562007726",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -424.0
+		"LESS_QTY" : -425.0
 	},
 	{
 		"ITEM_NAME_AR" : "كراكر بريتزل 350غ ",
@@ -58938,7 +58974,7 @@
 		"BASE_SALE_PRICE" : 5.25,
 		"BASE_COST_PRICE" : 4.5,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 35.78571,
+		"BASE_QTY" : 45.78571,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -59074,7 +59110,7 @@
 		"LESS_COST_PRICE" : 0.1317,
 		"LESS_BARCODES" : "88, 8690481020103",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -326.0
+		"LESS_QTY" : -328.0
 	},
 	{
 		"ITEM_NAME_AR" : "كراكر مالح نيس 55غ",
@@ -59092,7 +59128,7 @@
 		"LESS_COST_PRICE" : 0.1389,
 		"LESS_BARCODES" : "8682376765459",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -314.0
+		"LESS_QTY" : -317.0
 	},
 	{
 		"ITEM_NAME_AR" : "كراكر مثلثات 200غ",
@@ -59152,7 +59188,7 @@
 		"ITEM_NAME_AR" : "كربونة 300غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 2.4,
-		"BASE_COST_PRICE" : 1.87,
+		"BASE_COST_PRICE" : 1.86,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 3.0,
 		"MORE_SALE_PRICE" : null,
@@ -59161,10 +59197,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 0.8,
-		"LESS_COST_PRICE" : 0.6233,
+		"LESS_COST_PRICE" : 0.62,
 		"LESS_BARCODES" : "6214851422117",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -9.0
+		"LESS_QTY" : -6.0
 	},
 	{
 		"ITEM_NAME_AR" : "كرت باروده + فرد",
@@ -59314,16 +59350,16 @@
 		"ITEM_NAME_AR" : "كركم 150غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 3.5,
-		"BASE_COST_PRICE" : 3.18,
+		"BASE_COST_PRICE" : 3.1075,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 7.0,
+		"BASE_QTY" : 11.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.25,
-		"LESS_COST_PRICE" : 1.06,
+		"LESS_COST_PRICE" : 1.0358,
 		"LESS_BARCODES" : "6214851252097",
 		"LESS_RELATION" : 3,
 		"LESS_QTY" : -21.0
@@ -59488,7 +59524,7 @@
 		"LESS_COST_PRICE" : 0.3646,
 		"LESS_BARCODES" : "6223016574059, 6223000759509, 6223000754269, 6223000759882, 6223000759981, 6223000759493",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -1689.0
+		"LESS_QTY" : -1693.0
 	},
 	{
 		"ITEM_NAME_AR" : "كروصان سامبا 35غ",
@@ -59524,7 +59560,7 @@
 		"LESS_COST_PRICE" : 0.375,
 		"LESS_BARCODES" : "7622202050947",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -124.0
+		"LESS_QTY" : -127.0
 	},
 	{
 		"ITEM_NAME_AR" : "كروصان شوكولا نيوبارك",
@@ -59632,7 +59668,7 @@
 		"LESS_COST_PRICE" : 2.0,
 		"LESS_BARCODES" : "6211421120091, 6211421121098, 6211421124099",
 		"LESS_RELATION" : 6,
-		"LESS_QTY" : -101.0
+		"LESS_QTY" : -102.0
 	},
 	{
 		"ITEM_NAME_AR" : "كريم  مزيل شعر بيوتي 100مل",
@@ -60370,7 +60406,7 @@
 		"LESS_COST_PRICE" : 1.0,
 		"LESS_BARCODES" : "632588374961, 632588376286, 8681967080605, 8681967080629, 8681967080582, 6215000162113, 6215000168030, 6215000162090",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -140.0
+		"LESS_QTY" : -141.0
 	},
 	{
 		"ITEM_NAME_AR" : "كريمة شانتيه اكيوميو عرض *3",
@@ -60550,7 +60586,7 @@
 		"LESS_COST_PRICE" : 1.0,
 		"LESS_BARCODES" : "6215668100502",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : 28.0
+		"LESS_QTY" : 26.0
 	},
 	{
 		"ITEM_NAME_AR" : "كريملي بيفا ",
@@ -60676,7 +60712,7 @@
 		"LESS_COST_PRICE" : 0.21,
 		"LESS_BARCODES" : "6210246529621",
 		"LESS_RELATION" : 20,
-		"LESS_QTY" : 14.0
+		"LESS_QTY" : 13.0
 	},
 	{
 		"ITEM_NAME_AR" : "كزبره مطحونه 100 غ احلام",
@@ -60694,7 +60730,7 @@
 		"LESS_COST_PRICE" : 0.59,
 		"LESS_BARCODES" : "6214851432079",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -32.0
+		"LESS_QTY" : -17.0
 	},
 	{
 		"ITEM_NAME_AR" : "كشك الدرة 500 غ",
@@ -60748,7 +60784,7 @@
 		"LESS_COST_PRICE" : 0.8373,
 		"LESS_BARCODES" : "66, 00111335",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -175.0
+		"LESS_QTY" : -164.0
 	},
 	{
 		"ITEM_NAME_AR" : "كعك مجروش درة 350غ ",
@@ -60928,7 +60964,7 @@
 		"LESS_COST_PRICE" : 1.6,
 		"LESS_BARCODES" : "8690637895838, 8690637895159, 8690637895166, 8690637895180, 8690637895197, 8683130078532",
 		"LESS_RELATION" : 20,
-		"LESS_QTY" : -353.0
+		"LESS_QTY" : -355.0
 	},
 	{
 		"ITEM_NAME_AR" : "كلور كانوكس 1.8لتر",
@@ -61204,7 +61240,7 @@
 		"ITEM_NAME_AR" : "كمون مطحون 125 غ احلام",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 3.5,
-		"BASE_COST_PRICE" : 2.93,
+		"BASE_COST_PRICE" : 2.91,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 10.0,
 		"MORE_SALE_PRICE" : null,
@@ -61213,10 +61249,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.2,
-		"LESS_COST_PRICE" : 0.9767,
+		"LESS_COST_PRICE" : 0.97,
 		"LESS_BARCODES" : "6214851272088",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -30.0
+		"LESS_QTY" : -18.0
 	},
 	{
 		"ITEM_NAME_AR" : "كمون مطحون 1كغ احلام ",
@@ -61522,7 +61558,7 @@
 		"LESS_COST_PRICE" : 1.55,
 		"LESS_BARCODES" : "8691707190525, 8691707190556, 8691707190488",
 		"LESS_RELATION" : 10,
-		"LESS_QTY" : -58.0
+		"LESS_QTY" : -59.0
 	},
 	{
 		"ITEM_NAME_AR" : "كورن فليكس بندق 500غ نيوبارك ",
@@ -61762,16 +61798,16 @@
 		"ITEM_NAME_AR" : "كورن فليكس كاسة",
 		"CATEGORY_AR" : "اكلات ",
 		"BASE_SALE_PRICE" : 7.0,
-		"BASE_COST_PRICE" : 6.0,
+		"BASE_COST_PRICE" : 4.0,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 14.41667,
+		"BASE_QTY" : 15.41667,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 0.6,
-		"LESS_COST_PRICE" : 0.5,
+		"LESS_COST_PRICE" : 0.3333,
 		"LESS_BARCODES" : "8683478027032, 8683478057039, 8683478038038",
 		"LESS_RELATION" : 12,
 		"LESS_QTY" : -173.0
@@ -62422,7 +62458,7 @@
 		"LESS_COST_PRICE" : 0.2033,
 		"LESS_BARCODES" : "6212201011097, 6212201061092, 6212202021095, 6212203031093, 6212203091097, 6212201121093, 6212202211090",
 		"LESS_RELATION" : 30,
-		"LESS_QTY" : -7353.0
+		"LESS_QTY" : -7373.0
 	},
 	{
 		"ITEM_NAME_AR" : "كولا 250 بلور ",
@@ -62458,7 +62494,7 @@
 		"LESS_COST_PRICE" : 0.3033,
 		"LESS_BARCODES" : "6212201011011, 6212551012072, 6212202021019, 6212552032079, 6212203031017, 6212203041016, 6212201121017, 8698771511201, 8698771511218, 8698771511249",
 		"LESS_RELATION" : 30,
-		"LESS_QTY" : -3814.0
+		"LESS_QTY" : -3823.0
 	},
 	{
 		"ITEM_NAME_AR" : "كولا 330 مل ",
@@ -62476,7 +62512,7 @@
 		"LESS_COST_PRICE" : 0.4521,
 		"LESS_BARCODES" : "012000002588, 012000002489, 012000800306, 6210316181063, 6210311221061, 6210316261062, 6210316271061, 8690574114641, 6212201011035, 6212551012058, 6212202021033, 6212552012057, 6212203031031, 6212553012056, 6212553022055, 6212201121031",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -5644.0
+		"LESS_QTY" : -5651.0
 	},
 	{
 		"ITEM_NAME_AR" : "كولا بللور ",
@@ -62530,7 +62566,7 @@
 		"LESS_COST_PRICE" : 1.2083,
 		"LESS_BARCODES" : "6210316182107, 6210311222105, 6210316262106, 6210316272105",
 		"LESS_RELATION" : 6,
-		"LESS_QTY" : -1019.0
+		"LESS_QTY" : -1020.0
 	},
 	{
 		"ITEM_NAME_AR" : "كولا عائلي فينيتو",
@@ -62566,7 +62602,7 @@
 		"LESS_COST_PRICE" : 0.65,
 		"LESS_BARCODES" : "6210316182077, 6210311222075, 6210316262076, 6210316272075",
 		"LESS_RELATION" : 6,
-		"LESS_QTY" : -1036.0
+		"LESS_QTY" : -1041.0
 	},
 	{
 		"ITEM_NAME_AR" : "كولانيا اركو255 مل ",
@@ -62710,7 +62746,7 @@
 		"LESS_COST_PRICE" : 1.9583,
 		"LESS_BARCODES" : "8697414940705, 8697414940644, 8697414940651, 8697414940774, 8697414940682, 8697414940699",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -74.0
+		"LESS_QTY" : -75.0
 	},
 	{
 		"ITEM_NAME_AR" : "كولونيا بخاخ دالين 150 مل",
@@ -62746,7 +62782,7 @@
 		"LESS_COST_PRICE" : 1.5,
 		"LESS_BARCODES" : "8681116616273",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 20.0
+		"LESS_QTY" : 19.0
 	},
 	{
 		"ITEM_NAME_AR" : "كولونيا هامول 250مل ",
@@ -63268,7 +63304,7 @@
 		"LESS_COST_PRICE" : 0.1383,
 		"LESS_BARCODES" : "6223000499641",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -745.0
+		"LESS_QTY" : -746.0
 	},
 	{
 		"ITEM_NAME_AR" : "كيك تيك ون 60غ مولر ",
@@ -63286,7 +63322,7 @@
 		"LESS_COST_PRICE" : 0.2333,
 		"LESS_BARCODES" : "6211022841012, 6211022841043, 6211022815044",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -280.0
+		"LESS_QTY" : -284.0
 	},
 	{
 		"ITEM_NAME_AR" : "كيك دولس دارك 300 غ",
@@ -63448,7 +63484,7 @@
 		"LESS_COST_PRICE" : 0.0781,
 		"LESS_BARCODES" : "6217000291664",
 		"LESS_RELATION" : 32,
-		"LESS_QTY" : -90.0
+		"LESS_QTY" : -92.0
 	},
 	{
 		"ITEM_NAME_AR" : "كيك كيندر 270 غ",
@@ -63595,24 +63631,6 @@
 		"LESS_QTY" : 1.0
 	},
 	{
-		"ITEM_NAME_AR" : "كيكز عائلي 200غ",
-		"CATEGORY_AR" : "اكلات ",
-		"BASE_SALE_PRICE" : 7.5,
-		"BASE_COST_PRICE" : 6.95,
-		"BASE_BARCODES" : null,
-		"BASE_QTY" : 42.0,
-		"MORE_SALE_PRICE" : null,
-		"MORE_COST_PRICE" : null,
-		"MORE_BARCODES" : null,
-		"MORE_RELATION" : null,
-		"MORE_QTY" : null,
-		"LESS_SALE_PRICE" : 0.667,
-		"LESS_COST_PRICE" : 0.5792,
-		"LESS_BARCODES" : "8690562042239, 8690562042246",
-		"LESS_RELATION" : 12,
-		"LESS_QTY" : -528.0
-	},
-	{
 		"ITEM_NAME_AR" : "كيكس رول ",
 		"CATEGORY_AR" : "اكلات ",
 		"BASE_SALE_PRICE" : 3.25,
@@ -63631,19 +63649,37 @@
 		"LESS_QTY" : -1202.0
 	},
 	{
+		"ITEM_NAME_AR" : "كيكس عائلي 200غ",
+		"CATEGORY_AR" : "اكلات ",
+		"BASE_SALE_PRICE" : 9.5,
+		"BASE_COST_PRICE" : 8.8889,
+		"BASE_BARCODES" : null,
+		"BASE_QTY" : 51.0,
+		"MORE_SALE_PRICE" : null,
+		"MORE_COST_PRICE" : null,
+		"MORE_BARCODES" : null,
+		"MORE_RELATION" : null,
+		"MORE_QTY" : null,
+		"LESS_SALE_PRICE" : 0.8255,
+		"LESS_COST_PRICE" : 0.7407,
+		"LESS_BARCODES" : "8690562042239, 8690562042246",
+		"LESS_RELATION" : 12,
+		"LESS_QTY" : -528.0
+	},
+	{
 		"ITEM_NAME_AR" : "كيكس ميني كيس",
 		"CATEGORY_AR" : "اكلات ",
 		"BASE_SALE_PRICE" : 12.0,
-		"BASE_COST_PRICE" : 9.6,
+		"BASE_COST_PRICE" : 9.0,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 116.0,
+		"BASE_QTY" : 146.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 0.75,
-		"LESS_COST_PRICE" : 0.6,
+		"LESS_COST_PRICE" : 0.5625,
 		"LESS_BARCODES" : "8690562041904, 8690562041911, 8690562041928, 8690562041935, 8690562041775, 8690562042093",
 		"LESS_RELATION" : 16,
 		"LESS_QTY" : -1771.0
@@ -63669,7 +63705,7 @@
 	{
 		"ITEM_NAME_AR" : "كيلوت اطفال توين جيجلس ",
 		"CATEGORY_AR" : "حفوضات ",
-		"BASE_SALE_PRICE" : 20.0,
+		"BASE_SALE_PRICE" : 19.0,
 		"BASE_COST_PRICE" : 17.65,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 9.0,
@@ -63678,7 +63714,7 @@
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
-		"LESS_SALE_PRICE" : 4.25,
+		"LESS_SALE_PRICE" : 4.0,
 		"LESS_COST_PRICE" : 3.53,
 		"LESS_BARCODES" : "00111404",
 		"LESS_RELATION" : 5,
@@ -63687,7 +63723,7 @@
 	{
 		"ITEM_NAME_AR" : "كيلوت اطفال جامبو جيجلس",
 		"CATEGORY_AR" : "حفوضات ",
-		"BASE_SALE_PRICE" : 27.0,
+		"BASE_SALE_PRICE" : 25.0,
 		"BASE_COST_PRICE" : 23.424,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 7.0,
@@ -63696,7 +63732,7 @@
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
-		"LESS_SALE_PRICE" : 7.1,
+		"LESS_SALE_PRICE" : 6.5,
 		"LESS_COST_PRICE" : 5.856,
 		"LESS_BARCODES" : "8680131205134, 8680131205141, 8680131205158, 8680131205165, 8680131205172",
 		"LESS_RELATION" : 4,
@@ -64024,7 +64060,7 @@
 		"LESS_COST_PRICE" : 0.3208,
 		"LESS_BARCODES" : "6287034100102, 6287034100119, 6287034100126, 6287034101130, 6287034100096",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -814.0
+		"LESS_QTY" : -819.0
 	},
 	{
 		"ITEM_NAME_AR" : "لاتار *2",
@@ -64320,7 +64356,7 @@
 		"BASE_SALE_PRICE" : 11.0,
 		"BASE_COST_PRICE" : 9.0,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 5.0,
+		"BASE_QTY" : 7.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -64348,7 +64384,7 @@
 		"LESS_COST_PRICE" : 1.25,
 		"LESS_BARCODES" : "6215000478405, 6215000472052",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -132.0
+		"LESS_QTY" : -133.0
 	},
 	{
 		"ITEM_NAME_AR" : "لبنة 350غ هوى الشام",
@@ -64680,7 +64716,7 @@
 		"BASE_SALE_PRICE" : 17.0,
 		"BASE_COST_PRICE" : 14.0,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 8.0,
+		"BASE_QTY" : 10.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -64744,7 +64780,7 @@
 		"LESS_COST_PRICE" : 6.75,
 		"LESS_BARCODES" : "6215000477347",
 		"LESS_RELATION" : 4,
-		"LESS_QTY" : -20.0
+		"LESS_QTY" : -21.0
 	},
 	{
 		"ITEM_NAME_AR" : "لبنيتو 300 غ نيو بارك",
@@ -65446,13 +65482,13 @@
 		"LESS_COST_PRICE" : 0.1528,
 		"LESS_BARCODES" : "6214410123332",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -1.0
+		"LESS_QTY" : -2.0
 	},
 	{
 		"ITEM_NAME_AR" : "لومي اصفر 125 غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 3.3,
-		"BASE_COST_PRICE" : 2.81,
+		"BASE_COST_PRICE" : 2.43,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 4.0,
 		"MORE_SALE_PRICE" : null,
@@ -65461,10 +65497,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.15,
-		"LESS_COST_PRICE" : 0.9367,
+		"LESS_COST_PRICE" : 0.81,
 		"LESS_BARCODES" : "6214852422079",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -8.0
+		"LESS_QTY" : -2.0
 	},
 	{
 		"ITEM_NAME_AR" : "لونجو كورنيه",
@@ -65500,7 +65536,7 @@
 		"LESS_COST_PRICE" : 2.42,
 		"LESS_BARCODES" : "4791038235255",
 		"LESS_RELATION" : 10,
-		"LESS_QTY" : 9.0
+		"LESS_QTY" : 8.0
 	},
 	{
 		"ITEM_NAME_AR" : "ليالينا 25 ظرف ",
@@ -65914,7 +65950,7 @@
 		"LESS_COST_PRICE" : 0.1513,
 		"LESS_BARCODES" : "6214961207079",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -83.0
+		"LESS_QTY" : -85.0
 	},
 	{
 		"ITEM_NAME_AR" : "ليليوم بسكويت عرض",
@@ -65968,7 +66004,7 @@
 		"LESS_COST_PRICE" : 0.2292,
 		"LESS_BARCODES" : "6214961203071",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -237.0
+		"LESS_QTY" : -239.0
 	},
 	{
 		"ITEM_NAME_AR" : "ليليوم كرانش 35غ ",
@@ -66462,7 +66498,7 @@
 		"BASE_SALE_PRICE" : 3.0,
 		"BASE_COST_PRICE" : 2.6667,
 		"BASE_BARCODES" : "8697449915518",
-		"BASE_QTY" : 20.0,
+		"BASE_QTY" : 19.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -66696,7 +66732,7 @@
 		"BASE_SALE_PRICE" : 1.6,
 		"BASE_COST_PRICE" : 1.4,
 		"BASE_BARCODES" : "6211177101047",
-		"BASE_QTY" : 160.0,
+		"BASE_QTY" : 159.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -66868,7 +66904,7 @@
 		"LESS_COST_PRICE" : 0.066,
 		"LESS_BARCODES" : "6938461474983",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -1707.0
+		"LESS_QTY" : -1713.0
 	},
 	{
 		"ITEM_NAME_AR" : "مارشملو 20غ",
@@ -67858,7 +67894,7 @@
 		"LESS_COST_PRICE" : 0.1424,
 		"LESS_BARCODES" : "6253002415721",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -9.0
+		"LESS_QTY" : -11.0
 	},
 	{
 		"ITEM_NAME_AR" : "مباهر *12",
@@ -67984,7 +68020,7 @@
 		"LESS_COST_PRICE" : 0.8,
 		"LESS_BARCODES" : "6219532032111, 6219532042141, 6219532052140, 6219532062057, 6219531772117, 6219531782116, 6219531792115, 6219531802111, 6219531842124, 6219531822058, 6219531832057, 6219531852055, 6219531872053",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 33.0
+		"LESS_QTY" : 32.0
 	},
 	{
 		"ITEM_NAME_AR" : "مبيد حشرات انتكس",
@@ -68028,7 +68064,7 @@
 		"BASE_SALE_PRICE" : 13.5,
 		"BASE_COST_PRICE" : 12.65,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 19.0,
+		"BASE_QTY" : 22.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -68038,7 +68074,7 @@
 		"LESS_COST_PRICE" : 0.7028,
 		"LESS_BARCODES" : "6214000701452",
 		"LESS_RELATION" : 18,
-		"LESS_QTY" : -346.0
+		"LESS_QTY" : -347.0
 	},
 	{
 		"ITEM_NAME_AR" : "مبيض افراح 90 غ",
@@ -68074,7 +68110,7 @@
 		"LESS_COST_PRICE" : 1.0,
 		"LESS_BARCODES" : "6210552077267",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 4.0
+		"LESS_QTY" : 3.0
 	},
 	{
 		"ITEM_NAME_AR" : "مبيض سيتي كريمر 400غ ",
@@ -68218,7 +68254,7 @@
 		"LESS_COST_PRICE" : 0.75,
 		"LESS_BARCODES" : "6217000277132",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 10.0
+		"LESS_QTY" : 9.0
 	},
 	{
 		"ITEM_NAME_AR" : "متبل باذنجان 370غ الدرة ",
@@ -68398,7 +68434,7 @@
 		"LESS_COST_PRICE" : 1.8542,
 		"LESS_BARCODES" : "8682368238114",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -444.0
+		"LESS_QTY" : -446.0
 	},
 	{
 		"ITEM_NAME_AR" : "مثلثات المراعي طبقة *8",
@@ -68884,7 +68920,7 @@
 		"LESS_COST_PRICE" : 1.5,
 		"LESS_BARCODES" : "8681812037020",
 		"LESS_RELATION" : 6,
-		"LESS_QTY" : -43.0
+		"LESS_QTY" : -44.0
 	},
 	{
 		"ITEM_NAME_AR" : "محارم تعقيم مينو 50م",
@@ -69100,7 +69136,7 @@
 		"LESS_COST_PRICE" : 0.75,
 		"LESS_BARCODES" : "6210955413716",
 		"LESS_RELATION" : 10,
-		"LESS_QTY" : -164.0
+		"LESS_QTY" : -165.0
 	},
 	{
 		"ITEM_NAME_AR" : "محارم كرتون 100 م",
@@ -69172,7 +69208,7 @@
 		"LESS_COST_PRICE" : 0.775,
 		"LESS_BARCODES" : "6214007550619",
 		"LESS_RELATION" : 10,
-		"LESS_QTY" : -3037.0
+		"LESS_QTY" : -3039.0
 	},
 	{
 		"ITEM_NAME_AR" : "محارم لاند 125غ",
@@ -69226,7 +69262,7 @@
 		"LESS_COST_PRICE" : 1.4,
 		"LESS_BARCODES" : "6213413173115, 6213413163123",
 		"LESS_RELATION" : 8,
-		"LESS_QTY" : -206.0
+		"LESS_QTY" : -208.0
 	},
 	{
 		"ITEM_NAME_AR" : "محارم مطبخ وينر 800غ ",
@@ -69244,7 +69280,7 @@
 		"LESS_COST_PRICE" : 2.3333,
 		"LESS_BARCODES" : "6213411053051",
 		"LESS_RELATION" : 6,
-		"LESS_QTY" : -151.0
+		"LESS_QTY" : -153.0
 	},
 	{
 		"ITEM_NAME_AR" : "محارم معطرة اوركيد *60",
@@ -69280,7 +69316,7 @@
 		"LESS_COST_PRICE" : 0.76,
 		"LESS_BARCODES" : "8680131207411, 8680131207428, 8680131207459, 8680131202263, 8680131203567, 8680131200573, 8680131205189",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -825.0
+		"LESS_QTY" : -829.0
 	},
 	{
 		"ITEM_NAME_AR" : "محارم معطرة طيبة *120",
@@ -69388,7 +69424,7 @@
 		"LESS_COST_PRICE" : 1.1158,
 		"LESS_BARCODES" : "8680131206124",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -40.0
+		"LESS_QTY" : -41.0
 	},
 	{
 		"ITEM_NAME_AR" : "محارم معطرة للمكياج طيبة 72",
@@ -69532,7 +69568,7 @@
 		"LESS_COST_PRICE" : 0.725,
 		"LESS_BARCODES" : "6214007570624",
 		"LESS_RELATION" : 10,
-		"LESS_QTY" : -2382.0
+		"LESS_QTY" : -2384.0
 	},
 	{
 		"ITEM_NAME_AR" : "محارم هيلينا 500غ",
@@ -69604,7 +69640,7 @@
 		"LESS_COST_PRICE" : 0.0781,
 		"LESS_BARCODES" : "000000, 8697449113556, 8697449918106, 8697449912456, 8697449912494",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -3882.0
+		"LESS_QTY" : -3891.0
 	},
 	{
 		"ITEM_NAME_AR" : "محمود 3*1 اكسترا",
@@ -69630,7 +69666,7 @@
 		"BASE_SALE_PRICE" : 3.0,
 		"BASE_COST_PRICE" : 2.75,
 		"BASE_BARCODES" : "8697449915433",
-		"BASE_QTY" : 42.0,
+		"BASE_QTY" : 41.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -69946,7 +69982,7 @@
 		"LESS_COST_PRICE" : 1.62,
 		"LESS_BARCODES" : "6251136029012",
 		"LESS_RELATION" : 6,
-		"LESS_QTY" : -3.0
+		"LESS_QTY" : -4.0
 	},
 	{
 		"ITEM_NAME_AR" : "مخلل فليفلة حورانية 2.6كغ الدرة",
@@ -70090,7 +70126,7 @@
 		"LESS_COST_PRICE" : 1.2083,
 		"LESS_BARCODES" : "8682214707382",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -93.0
+		"LESS_QTY" : -94.0
 	},
 	{
 		"ITEM_NAME_AR" : "مخلل فليفلة يونانية 600غ احلام",
@@ -70306,7 +70342,7 @@
 		"LESS_COST_PRICE" : 0.78,
 		"LESS_BARCODES" : "6251136018559",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : 4.0
+		"LESS_QTY" : 3.0
 	},
 	{
 		"ITEM_NAME_AR" : "مخلل مشكل 1.4كغ الدرة ",
@@ -70324,7 +70360,7 @@
 		"LESS_COST_PRICE" : 1.32,
 		"LESS_BARCODES" : "6251136029593",
 		"LESS_RELATION" : 6,
-		"LESS_QTY" : -3.0
+		"LESS_QTY" : -4.0
 	},
 	{
 		"ITEM_NAME_AR" : "مخلل مشكل 1250غ بستان",
@@ -70450,7 +70486,7 @@
 		"LESS_COST_PRICE" : 0.625,
 		"LESS_BARCODES" : "00111373",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -73.0
+		"LESS_QTY" : -74.0
 	},
 	{
 		"ITEM_NAME_AR" : "مخمرية مسك الطهارة 30غ",
@@ -70810,7 +70846,7 @@
 		"LESS_COST_PRICE" : 2.86,
 		"LESS_BARCODES" : "00111486",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : -3.0
+		"LESS_QTY" : -5.0
 	},
 	{
 		"ITEM_NAME_AR" : "مربى البستان 500غ عرض *2",
@@ -71140,7 +71176,7 @@
 		"ITEM_NAME_AR" : "مربى تين 800 غ احلام ",
 		"CATEGORY_AR" : "غذائيات",
 		"BASE_SALE_PRICE" : 17.0,
-		"BASE_COST_PRICE" : 16.17,
+		"BASE_COST_PRICE" : 16.2,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 1.0,
 		"MORE_SALE_PRICE" : null,
@@ -71149,10 +71185,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 2.0,
-		"LESS_COST_PRICE" : 1.3475,
+		"LESS_COST_PRICE" : 1.35,
 		"LESS_BARCODES" : "6210701830057",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -10.0
+		"LESS_QTY" : 2.0
 	},
 	{
 		"ITEM_NAME_AR" : "مربى تين 800غ هشام ",
@@ -71314,7 +71350,7 @@
 		"LESS_COST_PRICE" : 5.01,
 		"LESS_BARCODES" : "6210701950076",
 		"LESS_RELATION" : 6,
-		"LESS_QTY" : -15.0
+		"LESS_QTY" : -9.0
 	},
 	{
 		"ITEM_NAME_AR" : "مربى فريز 500غ بستان ",
@@ -71374,7 +71410,7 @@
 		"ITEM_NAME_AR" : "مربى فريز 800غ احلام ",
 		"CATEGORY_AR" : "غذائيات",
 		"BASE_SALE_PRICE" : 27.0,
-		"BASE_COST_PRICE" : 24.83,
+		"BASE_COST_PRICE" : 24.84,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 3.0,
 		"MORE_SALE_PRICE" : null,
@@ -71383,10 +71419,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 2.3805,
-		"LESS_COST_PRICE" : 2.0692,
+		"LESS_COST_PRICE" : 2.07,
 		"LESS_BARCODES" : "6210701950052",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -35.0
+		"LESS_QTY" : -23.0
 	},
 	{
 		"ITEM_NAME_AR" : "مربى فريز درة 2كغ ",
@@ -71710,7 +71746,7 @@
 		"LESS_COST_PRICE" : 4.15,
 		"LESS_BARCODES" : "6210701890075",
 		"LESS_RELATION" : 6,
-		"LESS_QTY" : -30.0
+		"LESS_QTY" : -24.0
 	},
 	{
 		"ITEM_NAME_AR" : "مربى مشمش 430غ هشام ",
@@ -71818,7 +71854,7 @@
 		"LESS_COST_PRICE" : 1.74,
 		"LESS_BARCODES" : "6210701890051",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -29.0
+		"LESS_QTY" : -17.0
 	},
 	{
 		"ITEM_NAME_AR" : "مربى مشمش 800غ هشام",
@@ -72448,7 +72484,7 @@
 		"LESS_COST_PRICE" : 0.3625,
 		"LESS_BARCODES" : "8681282303007, 6217000186038",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -2105.0
+		"LESS_QTY" : -2112.0
 	},
 	{
 		"ITEM_NAME_AR" : "مرتديلا الشهية 1820غ ",
@@ -72484,7 +72520,7 @@
 		"LESS_COST_PRICE" : 0.6188,
 		"LESS_BARCODES" : "6217000186052",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -1470.0
+		"LESS_QTY" : -1471.0
 	},
 	{
 		"ITEM_NAME_AR" : "مرتديلا الشهية 850غ",
@@ -72520,7 +72556,7 @@
 		"LESS_COST_PRICE" : 1.1312,
 		"LESS_BARCODES" : "6217000186311, 6219235061029, 6219235051044, 6219235061043, 6219235051068",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -231.0
+		"LESS_QTY" : -236.0
 	},
 	{
 		"ITEM_NAME_AR" : "مرتديلا الشهية بقر 200غ",
@@ -72628,7 +72664,7 @@
 		"LESS_COST_PRICE" : 0.2708,
 		"LESS_BARCODES" : "6211017402839",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -240.0
+		"LESS_QTY" : -241.0
 	},
 	{
 		"ITEM_NAME_AR" : "مرتديلا جوليا 300غ ",
@@ -72934,7 +72970,7 @@
 		"LESS_COST_PRICE" : 0.4583,
 		"LESS_BARCODES" : "6218653462340",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -24.0
+		"LESS_QTY" : -25.0
 	},
 	{
 		"ITEM_NAME_AR" : "مرتديلا هنا بقريه 200 غ",
@@ -73138,7 +73174,7 @@
 		"ITEM_NAME_AR" : "مرقة الدجاج 125 احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 3.5,
-		"BASE_COST_PRICE" : 2.71,
+		"BASE_COST_PRICE" : 2.61,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 9.0,
 		"MORE_SALE_PRICE" : null,
@@ -73147,10 +73183,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.15,
-		"LESS_COST_PRICE" : 0.9033,
+		"LESS_COST_PRICE" : 0.87,
 		"LESS_BARCODES" : "6214851882096",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -27.0
+		"LESS_QTY" : -24.0
 	},
 	{
 		"ITEM_NAME_AR" : "مرقة دجاج 10غ بستان",
@@ -73510,7 +73546,7 @@
 		"LESS_COST_PRICE" : 0.0,
 		"LESS_BARCODES" : "6215000661975",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -27.0
+		"LESS_QTY" : -28.0
 	},
 	{
 		"ITEM_NAME_AR" : "مسبح جدار 122",
@@ -74068,7 +74104,7 @@
 		"LESS_COST_PRICE" : 5.75,
 		"LESS_BARCODES" : "00111325",
 		"LESS_RELATION" : 2,
-		"LESS_QTY" : -283.0
+		"LESS_QTY" : -284.0
 	},
 	{
 		"ITEM_NAME_AR" : "مسحوق جلاية سوار 1كغ",
@@ -74338,7 +74374,7 @@
 		"LESS_COST_PRICE" : 5.86,
 		"LESS_BARCODES" : "6210290003375",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -84.0
+		"LESS_QTY" : -85.0
 	},
 	{
 		"ITEM_NAME_AR" : "مسحوق غسيل الي نورا 5 كغ مع عرض",
@@ -74356,7 +74392,7 @@
 		"LESS_COST_PRICE" : 8.0,
 		"LESS_BARCODES" : "6210290003757",
 		"LESS_RELATION" : 2,
-		"LESS_QTY" : -83.0
+		"LESS_QTY" : -84.0
 	},
 	{
 		"ITEM_NAME_AR" : "مسحوق غسيل روسلين 2كغ",
@@ -74734,7 +74770,7 @@
 		"LESS_COST_PRICE" : 1.05,
 		"LESS_BARCODES" : "5711953175954, 5711953175978, 5711953175992",
 		"LESS_RELATION" : 10,
-		"LESS_QTY" : -823.0
+		"LESS_QTY" : -827.0
 	},
 	{
 		"ITEM_NAME_AR" : "مشروبات مشكلة ارمغان 250غ",
@@ -74760,7 +74796,7 @@
 		"BASE_SALE_PRICE" : 1.0714,
 		"BASE_COST_PRICE" : 0.0,
 		"BASE_BARCODES" : "6215581101259",
-		"BASE_QTY" : -23.0,
+		"BASE_QTY" : -24.0,
 		"MORE_SALE_PRICE" : 11.904,
 		"MORE_COST_PRICE" : 0.0,
 		"MORE_BARCODES" : null,
@@ -74806,7 +74842,7 @@
 		"LESS_COST_PRICE" : 0.375,
 		"LESS_BARCODES" : "00111438",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -23.0
+		"LESS_QTY" : -24.0
 	},
 	{
 		"ITEM_NAME_AR" : "مشط تقيل ",
@@ -75148,7 +75184,7 @@
 		"LESS_COST_PRICE" : 0.0729,
 		"LESS_BARCODES" : "6215950505046",
 		"LESS_RELATION" : 120,
-		"LESS_QTY" : -813.0
+		"LESS_QTY" : -818.0
 	},
 	{
 		"ITEM_NAME_AR" : "مصاص جنتل بوي 17غ كيس",
@@ -75274,7 +75310,7 @@
 		"LESS_COST_PRICE" : 0.0611,
 		"LESS_BARCODES" : "8682546521489, 8683252152158, 8683252152172",
 		"LESS_RELATION" : 150,
-		"LESS_QTY" : -3117.0
+		"LESS_QTY" : -3118.0
 	},
 	{
 		"ITEM_NAME_AR" : "مصاص مدور 30 غ",
@@ -75542,7 +75578,7 @@
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 3.08,
 		"LESS_COST_PRICE" : 2.8,
-		"LESS_BARCODES" : "6210290210773, 6210290211770, 6210290234779",
+		"LESS_BARCODES" : "6210290210773, 6210290211770, 6210290233772, 6210290234779",
 		"LESS_RELATION" : 6,
 		"LESS_QTY" : -36.0
 	},
@@ -75598,7 +75634,7 @@
 		"LESS_COST_PRICE" : 1.0613,
 		"LESS_BARCODES" : "00111501",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 8.0
+		"LESS_QTY" : 7.0
 	},
 	{
 		"ITEM_NAME_AR" : "معجنات المارعي ",
@@ -75742,7 +75778,7 @@
 		"LESS_COST_PRICE" : 1.2,
 		"LESS_BARCODES" : "8850002806047, 8850002806085",
 		"LESS_RELATION" : 6,
-		"LESS_QTY" : 52.0
+		"LESS_QTY" : 51.0
 	},
 	{
 		"ITEM_NAME_AR" : "معجون اسنان كرست ",
@@ -75814,7 +75850,7 @@
 		"LESS_COST_PRICE" : 0.9167,
 		"LESS_BARCODES" : "6920354824845, 8718951291010, 8718951288881, 8718951289987",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -144.0
+		"LESS_QTY" : -146.0
 	},
 	{
 		"ITEM_NAME_AR" : "معجون اسنان كولجيت 50غ",
@@ -76066,7 +76102,7 @@
 		"LESS_COST_PRICE" : 0.76,
 		"LESS_BARCODES" : "6210291304174",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -16.0
+		"LESS_QTY" : -17.0
 	},
 	{
 		"ITEM_NAME_AR" : "معجون مدار 800غ",
@@ -76254,7 +76290,7 @@
 		"BASE_SALE_PRICE" : 10.0,
 		"BASE_COST_PRICE" : 9.15,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 27.0,
+		"BASE_QTY" : 33.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -76264,7 +76300,7 @@
 		"LESS_COST_PRICE" : 0.7625,
 		"LESS_BARCODES" : "6214000780716, 6214000784714, 6214000779710",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -322.0
+		"LESS_QTY" : -323.0
 	},
 	{
 		"ITEM_NAME_AR" : "معطر تعلوقه ",
@@ -76552,7 +76588,7 @@
 		"LESS_COST_PRICE" : 2.1,
 		"LESS_BARCODES" : "00111333",
 		"LESS_RELATION" : 4,
-		"LESS_QTY" : -27.0
+		"LESS_QTY" : -28.0
 	},
 	{
 		"ITEM_NAME_AR" : "معطر وملين غسيل روكو 500مل ",
@@ -76696,7 +76732,7 @@
 		"LESS_COST_PRICE" : 0.4,
 		"LESS_BARCODES" : "8682214918597, 6213298041035, 6213298051034, 6213298061033",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -1614.0
+		"LESS_QTY" : -1618.0
 	},
 	{
 		"ITEM_NAME_AR" : "معكرونة 350 غ اشكال",
@@ -76768,7 +76804,7 @@
 		"LESS_COST_PRICE" : 0.7,
 		"LESS_BARCODES" : "6214942011022",
 		"LESS_RELATION" : 10,
-		"LESS_QTY" : -2328.0
+		"LESS_QTY" : -2332.0
 	},
 	{
 		"ITEM_NAME_AR" : "معكرونة الذهبية 350 غ",
@@ -77002,7 +77038,7 @@
 		"LESS_COST_PRICE" : 0.8,
 		"LESS_BARCODES" : "6213298041011, 6213298051010, 6213298061019, 6213298091016",
 		"LESS_RELATION" : 6,
-		"LESS_QTY" : -885.0
+		"LESS_QTY" : -886.0
 	},
 	{
 		"ITEM_NAME_AR" : "معكرونة وادي النيل 1كغ ",
@@ -77020,7 +77056,7 @@
 		"LESS_COST_PRICE" : 0.75,
 		"LESS_BARCODES" : "6211177203055",
 		"LESS_RELATION" : 10,
-		"LESS_QTY" : -1072.0
+		"LESS_QTY" : -1073.0
 	},
 	{
 		"ITEM_NAME_AR" : "مقشر بيبي بودر 300مل",
@@ -77272,7 +77308,7 @@
 		"LESS_COST_PRICE" : 2.75,
 		"LESS_BARCODES" : "00111182, 95487131",
 		"LESS_RELATION" : 10,
-		"LESS_QTY" : -200.0
+		"LESS_QTY" : -201.0
 	},
 	{
 		"ITEM_NAME_AR" : "مكسرات اول 500 غ",
@@ -77290,7 +77326,7 @@
 		"LESS_COST_PRICE" : 5.5,
 		"LESS_BARCODES" : "00111146, 95487130",
 		"LESS_RELATION" : 10,
-		"LESS_QTY" : -392.0
+		"LESS_QTY" : -394.0
 	},
 	{
 		"ITEM_NAME_AR" : "مكسرات مدخنة 250غ",
@@ -77584,7 +77620,7 @@
 		"ITEM_NAME_AR" : "ملح صيني 200غ احلام",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 3.0,
-		"BASE_COST_PRICE" : 2.64,
+		"BASE_COST_PRICE" : 2.55,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 1.0,
 		"MORE_SALE_PRICE" : null,
@@ -77593,10 +77629,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.1,
-		"LESS_COST_PRICE" : 0.88,
+		"LESS_COST_PRICE" : 0.85,
 		"LESS_BARCODES" : "6214852362108",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -3.0
+		"LESS_QTY" : 3.0
 	},
 	{
 		"ITEM_NAME_AR" : "ملح طعام 250غ اليرموك ",
@@ -77722,7 +77758,7 @@
 		"LESS_COST_PRICE" : 0.67,
 		"LESS_BARCODES" : "6214851402102",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -42.0
+		"LESS_QTY" : -27.0
 	},
 	{
 		"ITEM_NAME_AR" : "ملح يود لبنان 250غ",
@@ -77812,7 +77848,7 @@
 		"LESS_COST_PRICE" : 2.25,
 		"LESS_BARCODES" : "8697414940415, 8697414940453, 8697414940361, 8697414940484, 8697414940781, 8697414940590",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -109.0
+		"LESS_QTY" : -110.0
 	},
 	{
 		"ITEM_NAME_AR" : "ملطف جو بيبي بودر 350مل",
@@ -78010,7 +78046,7 @@
 		"LESS_COST_PRICE" : 2.5,
 		"LESS_BARCODES" : "6215000500007",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 9.0
+		"LESS_QTY" : 8.0
 	},
 	{
 		"ITEM_NAME_AR" : "ملكانو عجينة سمبوسك 250غ",
@@ -78928,7 +78964,7 @@
 		"LESS_COST_PRICE" : 0.8675,
 		"LESS_BARCODES" : "6210291430828",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -149.0
+		"LESS_QTY" : -150.0
 	},
 	{
 		"ITEM_NAME_AR" : "منظف ومعطر براتيك 2.5لتر ",
@@ -79162,7 +79198,7 @@
 		"LESS_COST_PRICE" : 11.5,
 		"LESS_BARCODES" : "6215000474261",
 		"LESS_RELATION" : 4,
-		"LESS_QTY" : -4.0
+		"LESS_QTY" : -5.0
 	},
 	{
 		"ITEM_NAME_AR" : "موفستوس كراميل 88 غ",
@@ -79684,7 +79720,7 @@
 		"LESS_COST_PRICE" : 3.0417,
 		"LESS_BARCODES" : "8888082117722",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -105.0
+		"LESS_QTY" : -106.0
 	},
 	{
 		"ITEM_NAME_AR" : "ميلو حبيبات ظرف السهول ",
@@ -79772,9 +79808,9 @@
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 5.25,
 		"LESS_COST_PRICE" : 4.0,
-		"LESS_BARCODES" : "8690451703098, 8696425009708, 8696425017482",
+		"LESS_BARCODES" : "8690451713721, 8690451703098, 8696425009708, 8696425017482",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : 11.0
+		"LESS_QTY" : 10.0
 	},
 	{
 		"ITEM_NAME_AR" : "نايس ويفر كيس 200غ",
@@ -79810,7 +79846,7 @@
 		"LESS_COST_PRICE" : 0.0875,
 		"LESS_BARCODES" : "6217000098027",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -7945.0
+		"LESS_QTY" : -7956.0
 	},
 	{
 		"ITEM_NAME_AR" : "نبع الشام 5 لتر",
@@ -79972,7 +80008,7 @@
 		"LESS_COST_PRICE" : 6.2,
 		"LESS_BARCODES" : "7613036600996",
 		"LESS_RELATION" : 6,
-		"LESS_QTY" : 10.0
+		"LESS_QTY" : 9.0
 	},
 	{
 		"ITEM_NAME_AR" : "نسكافيه حليبنا 80غ بلور ",
@@ -80332,7 +80368,7 @@
 		"LESS_COST_PRICE" : 0.58,
 		"LESS_BARCODES" : "6214851442184",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -33.0
+		"LESS_QTY" : -24.0
 	},
 	{
 		"ITEM_NAME_AR" : "نعنع يابس 500غ احلام ",
@@ -80458,7 +80494,7 @@
 		"LESS_COST_PRICE" : 0.1667,
 		"LESS_BARCODES" : "6970205630286, 6970259791025, 6934416431469",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -113.0
+		"LESS_QTY" : -114.0
 	},
 	{
 		"ITEM_NAME_AR" : "نكاشات اسنان ",
@@ -80481,8 +80517,8 @@
 	{
 		"ITEM_NAME_AR" : "نكهة باربيكيو 200غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
-		"BASE_SALE_PRICE" : 6.0,
-		"BASE_COST_PRICE" : 5.07,
+		"BASE_SALE_PRICE" : 8.25,
+		"BASE_COST_PRICE" : 7.74,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 3.0,
 		"MORE_SALE_PRICE" : null,
@@ -80490,11 +80526,11 @@
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
-		"LESS_SALE_PRICE" : 2.0,
-		"LESS_COST_PRICE" : 1.69,
+		"LESS_SALE_PRICE" : 2.85,
+		"LESS_COST_PRICE" : 2.58,
 		"LESS_BARCODES" : "6214852842105",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -3.0
+		"LESS_QTY" : 0.0
 	},
 	{
 		"ITEM_NAME_AR" : "نكهة جبنة 200غ احلام",
@@ -80536,16 +80572,16 @@
 		"ITEM_NAME_AR" : "نكهة كتشب 200غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 6.0,
-		"BASE_COST_PRICE" : 5.06,
+		"BASE_COST_PRICE" : 5.065,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 4.0,
+		"BASE_QTY" : 6.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 2.0,
-		"LESS_COST_PRICE" : 1.6867,
+		"LESS_COST_PRICE" : 1.6883,
 		"LESS_BARCODES" : "6214852622103",
 		"LESS_RELATION" : 3,
 		"LESS_QTY" : -10.0
@@ -80890,7 +80926,7 @@
 		"LESS_COST_PRICE" : 14.815,
 		"LESS_BARCODES" : "6210290310244, 6210290323244, 6210290304243, 6210290304244",
 		"LESS_RELATION" : 1,
-		"LESS_QTY" : -32.0
+		"LESS_QTY" : -33.0
 	},
 	{
 		"ITEM_NAME_AR" : "نورا الي 2 كغ",
@@ -81202,7 +81238,7 @@
 		"ITEM_NAME_AR" : "هال مطحون 100غ احلام ",
 		"CATEGORY_AR" : "بهارات + توابل",
 		"BASE_SALE_PRICE" : 13.25,
-		"BASE_COST_PRICE" : 12.02,
+		"BASE_COST_PRICE" : 12.96,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 6.0,
 		"MORE_SALE_PRICE" : null,
@@ -81211,10 +81247,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 4.6115,
-		"LESS_COST_PRICE" : 4.0067,
+		"LESS_COST_PRICE" : 4.32,
 		"LESS_BARCODES" : "6214851072077",
 		"LESS_RELATION" : 3,
-		"LESS_QTY" : -18.0
+		"LESS_QTY" : -15.0
 	},
 	{
 		"ITEM_NAME_AR" : "هال مطحون الدرة ",
@@ -81340,7 +81376,7 @@
 		"LESS_COST_PRICE" : 1.0,
 		"LESS_BARCODES" : "6215000202123",
 		"LESS_RELATION" : 48,
-		"LESS_QTY" : -110.0
+		"LESS_QTY" : -111.0
 	},
 	{
 		"ITEM_NAME_AR" : "هامول 400 مل ",
@@ -81502,7 +81538,7 @@
 		"LESS_COST_PRICE" : 0.75,
 		"LESS_BARCODES" : "8695077006202, 8695077088932, 8695077006189, 8695077006196",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -1360.0
+		"LESS_QTY" : -1362.0
 	},
 	{
 		"ITEM_NAME_AR" : "هايكو معطرة 120",
@@ -81754,7 +81790,7 @@
 		"LESS_COST_PRICE" : 0.557,
 		"LESS_BARCODES" : "8681820100686, 6212341204083",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -151.0
+		"LESS_QTY" : -155.0
 	},
 	{
 		"ITEM_NAME_AR" : "هنا وسط ",
@@ -82032,7 +82068,7 @@
 		"BASE_SALE_PRICE" : 15.0,
 		"BASE_COST_PRICE" : 13.5,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 6.0,
+		"BASE_QTY" : 7.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -82050,7 +82086,7 @@
 		"BASE_SALE_PRICE" : 12.0,
 		"BASE_COST_PRICE" : 11.0,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 3.0,
+		"BASE_QTY" : 6.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -82482,7 +82518,7 @@
 		"BASE_SALE_PRICE" : 1.0,
 		"BASE_COST_PRICE" : 0.66,
 		"BASE_BARCODES" : "6940524000282",
-		"BASE_QTY" : 6.0,
+		"BASE_QTY" : 5.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
@@ -82515,17 +82551,17 @@
 	{
 		"ITEM_NAME_AR" : "ورق عنب 1300غ احلام ",
 		"CATEGORY_AR" : "غذائيات",
-		"BASE_SALE_PRICE" : 39.0,
-		"BASE_COST_PRICE" : 35.5,
+		"BASE_SALE_PRICE" : 40.0,
+		"BASE_COST_PRICE" : 36.54,
 		"BASE_BARCODES" : null,
-		"BASE_QTY" : 1.0,
+		"BASE_QTY" : 2.0,
 		"MORE_SALE_PRICE" : null,
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
-		"LESS_SALE_PRICE" : 10.212,
-		"LESS_COST_PRICE" : 8.875,
+		"LESS_SALE_PRICE" : 10.5,
+		"LESS_COST_PRICE" : 9.135,
 		"LESS_BARCODES" : "6210702026305",
 		"LESS_RELATION" : 4,
 		"LESS_QTY" : -4.0
@@ -82546,7 +82582,7 @@
 		"LESS_COST_PRICE" : 6.07,
 		"LESS_BARCODES" : "6210241121332",
 		"LESS_RELATION" : 4,
-		"LESS_QTY" : -6.0
+		"LESS_QTY" : -7.0
 	},
 	{
 		"ITEM_NAME_AR" : "ورق عنب 2.8كغ بستان ",
@@ -82870,7 +82906,7 @@
 		"LESS_COST_PRICE" : 0.625,
 		"LESS_BARCODES" : "8681038054856, 8681038201113",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -120.0
+		"LESS_QTY" : -123.0
 	},
 	{
 		"ITEM_NAME_AR" : "ويفر اونكس 28غ",
@@ -82996,7 +83032,7 @@
 		"LESS_COST_PRICE" : 0.1667,
 		"LESS_BARCODES" : "8693029607019, 8693029607040, 8693029607064, 8693029607095, 8695504165526, 8695504165557, 8695504165274, 8695504165083, 8695504165090",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -2179.0
+		"LESS_QTY" : -2181.0
 	},
 	{
 		"ITEM_NAME_AR" : "ويفر توركو ",
@@ -83230,7 +83266,7 @@
 		"LESS_COST_PRICE" : 0.6458,
 		"LESS_BARCODES" : "8697439304810, 8697439305336, 8697439304834, 8697439305350, 8697439305374, 8697439304872",
 		"LESS_RELATION" : 24,
-		"LESS_QTY" : -255.0
+		"LESS_QTY" : -257.0
 	},
 	{
 		"ITEM_NAME_AR" : "ويفر لاروز 55غ",
@@ -83470,7 +83506,7 @@
 		"ITEM_NAME_AR" : "يالنجي احلام 400 غ",
 		"CATEGORY_AR" : "غذائيات",
 		"BASE_SALE_PRICE" : 20.25,
-		"BASE_COST_PRICE" : 18.3,
+		"BASE_COST_PRICE" : 18.24,
 		"BASE_BARCODES" : null,
 		"BASE_QTY" : 5.0,
 		"MORE_SALE_PRICE" : null,
@@ -83479,10 +83515,10 @@
 		"MORE_RELATION" : null,
 		"MORE_QTY" : null,
 		"LESS_SALE_PRICE" : 1.7537,
-		"LESS_COST_PRICE" : 1.525,
+		"LESS_COST_PRICE" : 1.52,
 		"LESS_BARCODES" : "6210702032177",
 		"LESS_RELATION" : 12,
-		"LESS_QTY" : -60.0
+		"LESS_QTY" : -48.0
 	},
 	{
 		"ITEM_NAME_AR" : "يالنجي درة 1900غ",
