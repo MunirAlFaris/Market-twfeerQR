@@ -55973,7 +55973,7 @@
 		"MORE_COST_PRICE" : null,
 		"MORE_BARCODES" : null,
 		"MORE_RELATION" : null,
-		"MORE_QTY" : null,
+		"MORE_QTY" : 1,
 		"LESS_SALE_PRICE" : 3.65,
 		"LESS_COST_PRICE" : 3.1667,
 		"LESS_BARCODES" : "6218051032374",
