@@ -127,3 +127,75 @@
       "category_img": "https://api.turkmeni-card.com/images/category/1600-1763216725.webp"
   }
 ]
+
+{
+    "status": "OK",
+    "data": {
+        "order_id": "ID_81feeb1db96ce53a",
+        "status": "accept",
+        "price": 0.7429348762229568,
+        "data": {
+            "playerId": "997961146"
+        },
+        "replay_api": [
+            {
+                "replay": [
+                    "تم بنجاح"
+                ]
+            }
+        ]
+    }
+}
+
+{
+    "status": "OK",
+    "data": {
+        "order_id": "ID_f1956804bf39d912",
+        "status": "accept",
+        "price": 0.7429348762229568,
+        "data": {
+            "playerId": "997961146"
+        },
+        "replay_api": [
+            {
+                "replay": [
+                    "تم بنجاح"
+                ]
+            }
+        ]
+    }
+}
+
+{
+    "status": "OK",
+    "data": [
+        {
+            "order_id": "ID_81feeb1db96ce53a",
+            "quantity": 1.92,
+            "data": {
+                "playerId": "997961146"
+            },
+            "created_at": "2026-03-30 21:29:23",
+            "product_name": "SYRIATEL",
+            "price": "0.742934876222956800",
+            "status": "accept",
+            "replay_api": [
+                "تم بنجاح"
+            ]
+        },
+        {
+            "order_id": "ID_f1956804bf39d912",
+            "quantity": 1.92,
+            "data": {
+                "playerId": "997961146"
+            },
+            "created_at": "2026-03-30 21:31:10",
+            "product_name": "SYRIATEL",
+            "price": "0.742934876222956800",
+            "status": "accept",
+            "replay_api": [
+                "تم بنجاح"
+            ]
+        }
+    ]
+}
